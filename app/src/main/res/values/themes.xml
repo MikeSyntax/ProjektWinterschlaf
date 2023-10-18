@@ -2,8 +2,14 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.ModulabschlussAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!--<item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/primary_dark_green</item>
+        <item name="colorSecondary">@color/primary_light_green</item>
+    </style>
+    <style name="Theme.ModulabschlussAndroid" parent="Base.Theme.ModulabschlussAndroid" />
+    <style name="textMiddle">
+       <item name="android:textColor">@color/primary_dark_green</item>
+        <item name="android:textSize">30sp</item>
     </style>
 
-    <style name="Theme.ModulabschlussAndroid" parent="Base.Theme.ModulabschlussAndroid" />
 </resources>
