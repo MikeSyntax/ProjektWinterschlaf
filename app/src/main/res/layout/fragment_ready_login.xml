@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.InfoFragment"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/cv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:strokeWidth="1dp"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="start">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start">
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/back" />
+
+                <TextView
+                    style="@style/textSuperSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="5dp"
+                    android:text="zurück" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Projekt Winterschlaf"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/cv_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            app:strokeWidth="1dp"
+            android:layout_marginRight="15dp"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="end">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start">
+
+                <TextView
+                    style="@style/textSuperSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="weiter" />
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:backgroundTint="@color/white"
+                    android:src="@drawable/forward" />
+
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+    </com.google.android.material.divider.MaterialDivider>
+
+    <TextView
+        style="@style/textSmall"
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="98dp"
+        android:text="Anmeldedaten eingeben"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/textSuperSmall"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:text="Zur Anmeldung geben Sie bitte Ihre Email und \ndas Passwort ein"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

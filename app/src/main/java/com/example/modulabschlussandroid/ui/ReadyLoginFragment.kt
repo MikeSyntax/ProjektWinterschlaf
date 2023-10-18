@@ -1,0 +1,28 @@
+package com.example.modulabschlussandroid.ui
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.modulabschlussandroid.R
+import com.example.modulabschlussandroid.databinding.FragmentReadyLoginBinding
+
+class ReadyLoginFragment : Fragment() {
+
+    private lateinit var binding: FragmentReadyLoginBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+       binding = FragmentReadyLoginBinding.inflate(inflater,container,false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+}

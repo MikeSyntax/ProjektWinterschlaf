@@ -11,5 +11,20 @@
        <item name="android:textColor">@color/primary_dark_green</item>
         <item name="android:textSize">30sp</item>
     </style>
+    <style name="textSmall">
+        <item name="android:textColor">@color/primary_dark_green</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="textSuperSmall">
+        <item name="android:textColor">@color/primary_dark_green</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    <style name="stroke">
+        <item name="strokeWidth">10dp</item>
+        <item name="strokeColor">@color/primary_dark_green</item>
+    </style>
+    <style name="screenBackground">
+        <item name="background">@color/primary_light_green</item>
+    </style>
 
 </resources>
