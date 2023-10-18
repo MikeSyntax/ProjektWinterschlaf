@@ -26,5 +26,10 @@
     <style name="screenBackground">
         <item name="background">@color/primary_light_green</item>
     </style>
+    <style name="shadow_light_green">
+        <item name="cornerRadius">10dp</item>
+        <item name="strokeColor">@color/primary_light_green</item>
+        <item name="strokeWidth">2dp</item>
+    </style>
 
 </resources>

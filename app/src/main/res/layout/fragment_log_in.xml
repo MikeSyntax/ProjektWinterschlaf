@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     tools:context=".ui.IntroFragment"
     android:background="@color/white">
 
@@ -34,11 +38,11 @@
 
     <Button
         android:id="@+id/btn_login"
+        style="@style/shadow_light_green"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginTop="34dp"
         android:textColor="@color/primary_light_green"
-        android:gravity="center"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,8 +50,9 @@
 
     <Button
         android:id="@+id/btn_register"
+        style="@style/shadow_light_green"
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:layout_marginTop="17dp"
         android:textColor="@color/primary_light_green"
         android:text="Registrieren"
@@ -57,14 +62,17 @@
 
     <Button
         android:id="@+id/btn_more_info"
+        style="@style/shadow_light_green"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+        android:layout_marginStart="214dp"
+        android:layout_marginTop="73dp"
         android:layout_marginEnd="80dp"
-        android:layout_marginBottom="64dp"
         android:text="Mehr Infos"
         android:textColor="@color/primary_light_green"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

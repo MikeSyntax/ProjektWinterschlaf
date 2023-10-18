@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.InfoFragment"
-    android:background="@color/white">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    tools:context=".ui.InfoFragment">
+
+
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -17,16 +24,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/cv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:backgroundTint="@color/white"
             android:elevation="0dp"
             app:strokeWidth="1dp"
-            android:backgroundTint="@color/white"
-            android:layout_gravity="start">
+            app:strokeColor="@color/primary_dark_green">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -45,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingRight="5dp"
+                    android:paddingEnd="5dp"
                     android:text="zurück" />
 
             </LinearLayout>
@@ -60,17 +67,17 @@
             android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/cv_forward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="@color/white"
             android:elevation="0dp"
             app:strokeWidth="1dp"
-            android:layout_marginRight="15dp"
-            android:backgroundTint="@color/white"
-            android:layout_gravity="end">
+            app:strokeColor="@color/primary_dark_green">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -93,18 +100,17 @@
                     android:src="@drawable/forward" />
 
 
-
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
 
 
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDivider"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:dividerColor="@color/primary_dark_green"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,8 +119,8 @@
     </com.google.android.material.divider.MaterialDivider>
 
     <TextView
-        style="@style/textSmall"
         android:id="@+id/textView4"
+        style="@style/textSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -125,9 +131,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/description"
         style="@style/textSuperSmall"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_margin="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
@@ -136,4 +143,89 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfield_user_avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Benutzername bzw. Avatar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputUserAvatar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_or"
+        style="@style/textSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:text="oder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfield_user_avatar"
+        tools:layout_editor_absoluteY="509dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfield_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_or">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputUserEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfield_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="Passwort"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfield_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputUserPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_forward"
+        style="@style/textSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+
+        android:text="Nach Eingabe bitte rechts oben auf weiter klicken, viel Spaß"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tfield_password"
+        tools:layout_editor_absoluteY="509dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/bild_parkplat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_forward" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

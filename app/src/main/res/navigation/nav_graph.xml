@@ -24,4 +24,9 @@
         android:id="@+id/readyLoginFragment"
         android:name="com.example.modulabschlussandroid.ui.ReadyLoginFragment"
         android:label="ReadyLoginFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.modulabschlussandroid.ui.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
 </navigation>
