@@ -32,34 +32,56 @@ class ReadyLoginFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Zurück Button
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()
         }
 
+        //Vorwärts Button
         binding.cvForward.setOnClickListener {
+            //Initialisieren neuer Variablen mit dem Text, welcher über die Tastatur in die Felder eingegeben wird
             val user = binding.textInputUserAvatar.text.toString()
             val authentification = binding.textInputUserPassword.text.toString()
             val userEmail = binding.textInputUserEmail.text.toString()
-            if ((userProfile.userName == user
 
-
-
-                        && userProfile.password == authentification) || (userProfile.email == userEmail && userProfile.password == authentification)) {
-                findNavController().navigate(R.id.homeFragment)
-            } else {
-                when {
-                    userProfile.userName != user -> exceptionMessage("Leider falschen Benutzernamen eingegeben")
-                    userProfile.password != authentification -> exceptionMessage("Leider falsches Passwort eingegeben")
-                    userProfile.email != userEmail -> exceptionMessage("Leider falsche Email eingegeben")
-                    else -> exceptionMessage("Da ist etwas schiefgegangen")
+            //When Bedingung erfüllt dann...
+            when {
+                (userProfile.userName == user && userProfile.password == authentification) -> {
+                    findNavController().navigate(R.id.homeFragment)
                 }
+
+               //When Bedingung erfüllt dann...
+                userProfile.email == userEmail && userProfile.password == authentification -> {
+                    findNavController().navigate(R.id.homeFragment)
+                }
+
+                //When Bedingung nicht erfüllt dann
+                userProfile.userName != user -> {
+                    exceptionMessage("Leider falschen Benutzernamen eingegeben")
+                    return@setOnClickListener
+                }
+
+                //When Bedingung nicht erfüllt dann
+                userProfile.password != authentification -> {
+                    exceptionMessage("Leider falsches Passwort eingegeben")
+                    return@setOnClickListener
+                }
+
+                //When Bedingung nicht erfüllt dann
+                userProfile.email != userEmail -> {
+                    exceptionMessage("Leider falsche Email eingegeben")
+                    return@setOnClickListener
+                }
+
+                //When alles schiefgeht dann
+                else -> exceptionMessage("Upps, das sollte nicht passieren")
             }
         }
     }
 
+    //Funktion zur Ausgabe eines Toast
     private fun exceptionMessage(message: String) {
         val duration = Toast.LENGTH_LONG
         Toast.makeText(requireContext(), message, duration).show()
     }
-
 }

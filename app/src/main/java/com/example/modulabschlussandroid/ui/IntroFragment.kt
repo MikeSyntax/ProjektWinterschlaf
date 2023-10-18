@@ -30,7 +30,7 @@ class IntroFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Variable für die Dauer des Progress
-        val timeDuration: Long = 1000
+        val timeDuration: Long = 4000
 
         //Einbinden der ProgressBar mit Parameterübergabe für die Zustände
         binding.progressBar.apply {
