@@ -10,7 +10,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    tools:context=".ui.InfoFragment">
+    tools:context=".ui.ReadyLoginFragment">
 
 
 
@@ -137,7 +137,7 @@
         android:layout_margin="16dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
-        android:text="Zur Anmeldung geben Sie bitte Ihre Email und \ndas Passwort ein"
+        android:text="Zur Anmeldung geben Sie bitte ihre Email und \ndas Passwort ein"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
