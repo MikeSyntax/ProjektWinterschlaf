@@ -100,7 +100,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity=""
                         android:layout_marginLeft="3dp"
-                        android:text="Preis" />
+                        android:text="Description" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
