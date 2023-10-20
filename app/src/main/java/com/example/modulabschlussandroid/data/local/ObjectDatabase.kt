@@ -18,9 +18,9 @@ abstract class ObjectDatabase: RoomDatabase(){
 
         fun getDatabase(context: Context) :ObjectDatabase {
 
-            synchronized(this){
+            synchronized(ObjectDatabase::class.java){
 
-                if (this::INSTANCE.isInitialized){
+                if (!::INSTANCE.isInitialized){
 
                     INSTANCE = Room.databaseBuilder(
 
@@ -28,7 +28,7 @@ abstract class ObjectDatabase: RoomDatabase(){
 
                         ObjectDatabase::class.java,
 
-                        "object_database"
+                        "Objects"
                     )
                         .build()
                 }

@@ -21,16 +21,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:backgroundTint="@color/white"
-                android:elevation="0dp"
-                app:strokeColor="@color/primary_dark_green"
-                app:strokeWidth="1dp">
+                android:backgroundTint="@color/white">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -62,17 +58,14 @@
                 android:text="Projekt Winterschlaf"
                 android:textStyle="bold" />
 
-            <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cv_forward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="15dp"
                 android:backgroundTint="@color/white"
-                android:elevation="0dp"
-                app:strokeColor="@color/primary_dark_green"
-                app:strokeWidth="1dp">
+               >
 
                 <LinearLayout
                     android:layout_width="wrap_content"

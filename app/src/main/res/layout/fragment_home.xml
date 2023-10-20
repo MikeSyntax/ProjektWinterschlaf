@@ -22,10 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:backgroundTint="@color/white"
-            android:elevation="0dp"
-            app:strokeColor="@color/primary_dark_green"
-            app:strokeWidth="1dp">
+            android:backgroundTint="@color/white">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -63,10 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="15dp"
-            android:backgroundTint="@color/white"
-            android:elevation="0dp"
-            app:strokeColor="@color/primary_dark_green"
-            app:strokeWidth="1dp">
+            android:backgroundTint="@color/white">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -133,16 +127,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_rentable_objects"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:orientation="vertical"
+        android:layout_marginLeft="20dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/description"
-        app:spanCount="2" />
+        app:spanCount="2"
+        tools:listitem="@layout/list_item_sleep"/>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

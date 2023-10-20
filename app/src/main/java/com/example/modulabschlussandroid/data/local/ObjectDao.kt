@@ -20,19 +20,23 @@ interface ObjectDao {
     suspend fun insertObject(objects: Objects)
 
     //Alle Objekte aus der Datenbank lesen mit LiveData
-    @Query("SELECT * FROM your_rental_place")
+    @Query("SELECT * FROM Objects")
     fun getALL(): LiveData<List<Objects>>
 
     //Alle Objekte in der Datenbank löschen
-    @Query("DELETE FROM your_rental_place")
-    suspend fun deleteALL(): List<Objects>
+    @Query("DELETE FROM Objects")
+    suspend fun deleteALL()
 
     //Ein über die Id ausgewähltes Löschen, die Id wird übergeben
-    @Query("DELETE FROM your_rental_place WHERE id = :id")
+    @Query("DELETE FROM Objects WHERE id = :id")
     suspend fun deleteById(id:Long)
 
     //Update der Datenbank
     @Update
     fun updateObjects(objects: Objects)
+
+    //Zählen der Einträge in der Datenbank
+    @Query("SELECT COUNT (*) FROM Objects")
+    fun countObjects(): Int
 
 }
