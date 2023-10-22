@@ -28,14 +28,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Erste Befüllung der Datenbank
     init {
         viewModelScope.launch {
-            repository.loadAllObjects()
+        repository.loadAllObjects()
         }
     }
-
-    fun loadFromDatabase(){
-        viewModelScope.launch {
-            objectListLive = repository.getAllObjects()
-        }
-    }
-
 }

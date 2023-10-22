@@ -1,6 +1,7 @@
 package com.example.modulabschlussandroid.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterObjects
+import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.FragmentHomeBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
@@ -28,16 +30,34 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val allObjects = viewModel.objectListLive
+
         val recView = binding.rvRentableObjects
+
+
+        val recViewAdapter = AdapterObjects(allObjects.value!!)
+
+
         recView.setHasFixedSize(true)
 
-        viewModel.loadFromDatabase()
-
         //Setzen des Adapter mit Observer
-        viewModel.objectListLive.observe(viewLifecycleOwner) {
+        allObjects.observe(viewLifecycleOwner) {
             //Parameter objectList(it) und ViewModel
             recView.adapter = AdapterObjects(it)
         }
 
+
+        binding.cvFavorite.setOnClickListener {
+            recViewAdapter.sortObjects(
+                allObjects.value!!.filter {
+                    it.liked
+                })
+        }
+
+        binding.cvFavorite.setOnClickListener {
+            recViewAdapter.sortObjects(
+                allObjects.value!!
+            )
+        }
     }
 }

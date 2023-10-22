@@ -10,29 +10,27 @@ class RepositoryObjects(
     private val database: ObjectDatabase
 ) {
     //Anlegen einer LiveData Variablen mit allen Items der Database
-    val objectList: LiveData<List<Objects>> = getAllObjects()
+    val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
 
     //Falls die Datenbank noch leer ist, einmal bitte alle Objekte hineinladen
-    suspend fun loadAllObjects(){
+    suspend fun loadAllObjects() {
         val data = ObjectsExampleData
         try {
-            database.objectDao.insertObject(data.object1)
-            database.objectDao.insertObject(data.object2)
-            database.objectDao.insertObject(data.object3)
-            database.objectDao.insertObject(data.object4)
-            database.objectDao.insertObject(data.object5)
-            database.objectDao.insertObject(data.object6)
-            database.objectDao.insertObject(data.object7)
-            database.objectDao.insertObject(data.object8)
-            database.objectDao.insertObject(data.object9)
-            database.objectDao.insertObject(data.object10)
-            database.objectDao.insertObject(data.object11)
-        } catch (e:Exception){
+            if (objectList == null) {
+                database.objectDao.insertObject(data.object1)
+                database.objectDao.insertObject(data.object2)
+                database.objectDao.insertObject(data.object3)
+                database.objectDao.insertObject(data.object4)
+                database.objectDao.insertObject(data.object5)
+                database.objectDao.insertObject(data.object6)
+                database.objectDao.insertObject(data.object7)
+                database.objectDao.insertObject(data.object8)
+                database.objectDao.insertObject(data.object9)
+                database.objectDao.insertObject(data.object10)
+                database.objectDao.insertObject(data.object11)
+            }
+        } catch (e: Exception) {
             Log.e("Repository", "loadAllObjects failed")
         }
-    }
-
-    fun getAllObjects(): LiveData<List<Objects>> {
-        return database.objectDao.getALL()
     }
 }

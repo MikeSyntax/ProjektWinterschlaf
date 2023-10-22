@@ -3,6 +3,7 @@ package com.example.modulabschlussandroid.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.ListItemSleepBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
@@ -10,7 +11,7 @@ import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 //Der Adapter organisiert mit Hilfe der Viewholder das Recycling der Items
 class AdapterObjects(
 
-    private val dataset: List<Objects>,
+    private var dataset: List<Objects>,
 
 ): RecyclerView.Adapter<AdapterObjects.ItemViewHolder>() {
 
@@ -36,6 +37,19 @@ class AdapterObjects(
         binding.tvPrice.text = thisObject.price.toString()
         binding.tvDescription.text = thisObject.description
 
+        if (thisObject.liked){
+            binding.btnUnliked.setImageResource(R.drawable.star_liked)
+        } else{
+            binding.btnUnliked.setImageResource(R.drawable.star_unliked)
+        }
+        binding.btnUnliked.setOnClickListener {
+            thisObject.liked = !thisObject.liked
+            if (!thisObject.liked) {
+                binding.btnUnliked.setImageResource(R.drawable.star_unliked)
+            } else {
+                binding.btnUnliked.setImageResource(R.drawable.star_liked)
+            }
+        }
     }
 
     //Hier wird die Größe der Liste bzw. die Anzahl der Items für die RecyclerView ermittelt
@@ -43,5 +57,9 @@ class AdapterObjects(
      return dataset.size
     }
 
-
+    //Änderungen werden bei Aufruf an das Dataset mitgeteilt
+    fun sortObjects (list: List<Objects>){
+        dataset = list
+        notifyDataSetChanged()
+    }
 }

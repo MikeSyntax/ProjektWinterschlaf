@@ -21,7 +21,7 @@ interface ObjectDao {
 
     //Alle Objekte aus der Datenbank lesen mit LiveData
     @Query("SELECT * FROM Objects")
-    fun getALL(): LiveData<List<Objects>>
+    fun showALL(): LiveData<List<Objects>>
 
     //Alle Objekte in der Datenbank löschen
     @Query("DELETE FROM Objects")
