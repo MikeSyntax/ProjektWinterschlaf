@@ -37,23 +37,19 @@ class DetailFragment : Fragment() {
             binding.ivDetailObject1.setImageResource(thisObject.image1Resource)
             binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
             binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
+        }
 
-            // TODO muss aus der Datenbank geholt werden
+        // TODO Liked or Unlinked
+        val thisObject = viewModel.currentObject
+        if (thisObject.value!!.liked) {
+            binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
+        } else {
             binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
-
-            // TODO Liked or Unlinked
-
-            if (thisObject.liked) {
-                binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
-            } else {
-                binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
-            }
-
-
-            binding.ivDetailLiked.setOnClickListener {
-                thisObject.liked = !thisObject.liked
-
-                if (!thisObject.liked) {
+        }
+        binding.ivDetailLiked.setOnClickListener {
+            if (thisObject.value != null) {
+                thisObject.value!!.liked = !thisObject.value!!.liked
+                if (!thisObject.value!!.liked) {
                     binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
                     viewModel.updateObjects(false)
                 } else {
@@ -62,7 +58,6 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-
 
         //Zurück zum Homescreen
         binding.cvBack.setOnClickListener {
@@ -74,10 +69,10 @@ class DetailFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.ivDetailLiked.setOnClickListener {
+        //Löschen eines Eintrags in der Datenbank und zurück navigieren
+        binding.ivDetailDelete.setOnClickListener {
             viewModel.deleteById()
+            findNavController().navigateUp()
         }
     }
-
-
 }

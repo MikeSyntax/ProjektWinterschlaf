@@ -36,17 +36,29 @@ class RepositoryObjects(
         }
     }
 
-    fun updateObject(objects: Objects) {
-        database.objectDao.updateObject(objects)
+
+    suspend fun updateObject(objects: Objects) {
+        try {
+            database.objectDao.updateObject(objects)
+        } catch (e: Exception) {
+            Log.e("Repository", "updateObject failed")
+        }
     }
 
+
     suspend fun insertObject(objects: Objects) {
-        database.objectDao.insertObject(objects)
+        try {
+            database.objectDao.insertObject(objects)
+        } catch (e: Exception) {
+            Log.e("Repository", "insertObject failed")
+        }
     }
+
 
     suspend fun deleteAll(){
         database.objectDao.deleteALL()
     }
+
 
     suspend fun deleteById(id: Long){
         try {

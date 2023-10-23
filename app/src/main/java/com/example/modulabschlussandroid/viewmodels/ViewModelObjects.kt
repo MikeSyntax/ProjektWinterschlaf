@@ -28,9 +28,9 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Erste Befüllung der Datenbank
     init {
         //Erst alle in der Datenbank löschen
-      //  viewModelScope.launch {
-      //      repository.deleteAll()
-      //  }
+       viewModelScope.launch {
+           repository.deleteAll()
+        }
         //Dann neu einfügen
         viewModelScope.launch {
         repository.loadAllObjects()
