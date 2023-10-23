@@ -3,10 +3,12 @@ package com.example.modulabschlussandroid.adapters
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.ListItemSleepBinding
+import com.example.modulabschlussandroid.ui.HomeFragmentDirections
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
 //Der Adapter organisiert mit Hilfe der Viewholder das Recycling der Items
@@ -41,48 +43,15 @@ class AdapterObjects(
         binding.ivObject.setImageResource(thisObject.image1Resource)
         binding.tvObject.text = thisObject.objectdescription
         binding.tvCity.text = thisObject.city
-        binding.tvPrice.text = thisObject.price.toString()
+        binding.tvPrice.text = "${thisObject.price.toString()}€"
         binding.tvDescription.text = thisObject.description
-        binding.ivLiked.setImageResource(R.drawable.star_unliked)
 
-        if (thisObject.liked) {
-            binding.ivLiked.setImageResource(R.drawable.star_liked)
-        } else {
-            binding.ivLiked.setImageResource(R.drawable.star_unliked)
-        }
-        binding.ivLiked.setOnClickListener {
-            thisObject.liked = !thisObject.liked
-            try {
-                if (!thisObject.liked) {
-                    binding.ivLiked.setImageResource(R.drawable.star_unliked)
-                    viewModel.updateObjects(Objects(
-                        city = thisObject.city,
-                        image1Resource = thisObject.image1Resource,
-                        image2Resource = thisObject.image2Resource,
-                        image3Resource = thisObject.image3Resource,
-                        image4Resource = thisObject.image4Resource,
-                        image5Resource = thisObject.image5Resource,
-                        description = thisObject.description,
-                        objectdescription = thisObject.objectdescription,
-                        price = thisObject.price,
-                        liked = false))
-                } else {
-                    binding.ivLiked.setImageResource(R.drawable.star_liked)
-                    viewModel.updateObjects(Objects(
-                        city = thisObject.city,
-                        image1Resource = thisObject.image1Resource,
-                        image2Resource = thisObject.image2Resource,
-                        image3Resource = thisObject.image3Resource,
-                        image4Resource = thisObject.image4Resource,
-                        image5Resource = thisObject.image5Resource,
-                        description = thisObject.description,
-                        objectdescription = thisObject.objectdescription,
-                        price = thisObject.price,
-                        liked = true))
-                }
-            } catch (e: Exception) {
-                Log.e("Adapter", "update fehlgeschlagen")
-            }
+
+        //Weiterleitung auf eine Detailseite
+        binding.cvItemObject.setOnClickListener {
+            viewModel.setCurrentObject(thisObject)
+            val navController = binding.cvItemObject.findNavController()
+            navController.navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
         }
     }
 

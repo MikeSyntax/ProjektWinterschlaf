@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
             recView.adapter = AdapterObjects(it, viewModel)
         }
 
-
         binding.cvFavorite.setOnClickListener {
             recViewAdapter?.sortObjects(
                 allObjects.value!!.filter {

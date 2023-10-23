@@ -19,15 +19,36 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Hier wird die Objekt-Liste aus dem Repository reingeholt
     var objectListLive = repository.objectList
 
+
+    //Erstellen einer LivaData mit dem aktuellen Objekt
+    private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
+    val currentObject: LiveData<Objects>
+        get() = _currentObject
+
     //Erste Befüllung der Datenbank
     init {
+        //Erst alle in der Datenbank löschen
+      //  viewModelScope.launch {
+      //      repository.deleteAll()
+      //  }
+        //Dann neu einfügen
         viewModelScope.launch {
         repository.loadAllObjects()
         }
+       //TODO hier muss unbedingt die Kontrolle stattfinden, ob die Datenbank leer ist, denn nur dann soll eingefügt werden
+
     }
 
-    fun updateObjects(objects: Objects){
-        repository.updateObject(objects)
+    fun updateObjects(liked: Boolean){
+        viewModelScope.launch {
+            val thisObjects = _currentObject.value
+            if (thisObjects != null){
+                thisObjects.liked = true
+                viewModelScope.launch {
+                    repository.updateObject(thisObjects)
+                }
+            }
+        }
     }
 
     fun insertObject(objects: Objects){
@@ -36,11 +57,23 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
+    //Anzeige des aktuellen Objektes
+    fun setCurrentObject(objects: Objects){
+        viewModelScope.launch {
+            _currentObject.postValue(objects)
+        }
+    }
+
+    //Ein einzelnes Objekt löschen
+    fun deleteById(){
+        viewModelScope.launch {
+            val thisObject = _currentObject.value
+            if (thisObject != null){
+                val id = thisObject.id
+                viewModelScope.launch{
+                     repository.deleteById(id)
+                }
+            }
+        }
+    }
 }
-
-
-
-  /*  //Erstellen einer LivaData mit dem aktuellen Objekt
-    private val _currentObject: MutableLiveData<List<Objects>> = MutableLiveData()
-    private val currentObject: LiveData<List<Objects>>
-        get() = _currentObject*/

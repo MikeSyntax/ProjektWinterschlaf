@@ -16,7 +16,9 @@ class RepositoryObjects(
     suspend fun loadAllObjects(){
         val data = ObjectsExampleData
         try {
-            if (database.objectDao.countObjects() == 0) {
+
+            //TODO die count funktioniert nicht, deshalb werden im Moment bei jeden Start weitere 11 Objekte hinzugefügt
+           // if (database.objectDao.countObjects() == 0) {
                 database.objectDao.insertObject(data.object1)
                 database.objectDao.insertObject(data.object2)
                 database.objectDao.insertObject(data.object3)
@@ -28,7 +30,7 @@ class RepositoryObjects(
                 database.objectDao.insertObject(data.object9)
                 database.objectDao.insertObject(data.object10)
                 database.objectDao.insertObject(data.object11)
-            }
+           // }
         } catch (e: Exception) {
             Log.e("Repository", "loadAllObjects failed")
         }
@@ -40,5 +42,17 @@ class RepositoryObjects(
 
     suspend fun insertObject(objects: Objects) {
         database.objectDao.insertObject(objects)
+    }
+
+    suspend fun deleteAll(){
+        database.objectDao.deleteALL()
+    }
+
+    suspend fun deleteById(id: Long){
+        try {
+        database.objectDao.deleteById(id)
+        } catch (e: Exception){
+            Log.e("Repository", "deleteById failed")
+        }
     }
 }

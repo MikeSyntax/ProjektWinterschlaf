@@ -2,6 +2,7 @@
 
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_item_object"
     android:layout_width="170dp"
     android:layout_height="170dp"
     android:layout_marginTop="5dp"
@@ -98,30 +99,12 @@
                     <TextView
                         android:id="@+id/tv_description"
                         style="@style/textSuperSmall"
-                        android:layout_width="134dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity=""
-                        android:layout_marginLeft="3dp"
+                        android:layout_marginStart="3dp"
                         android:text="Description" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_liked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="55dp"
-                        android:layout_marginRight="5dp"
-                        android:backgroundTint="@color/primary_light_green"
-                        android:src="@drawable/star_unliked"
-                        android:scaleType="center"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
