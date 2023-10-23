@@ -34,28 +34,28 @@ class HomeFragment : Fragment() {
 
         val recView = binding.rvRentableObjects
 
-
-        val recViewAdapter = AdapterObjects(allObjects.value!!)
-
+        val recViewAdapter = allObjects.value?.let { AdapterObjects(it, viewModel) }
+        //val recViewAdapter = allObjects.value!!
 
         recView.setHasFixedSize(true)
 
         //Setzen des Adapter mit Observer
         allObjects.observe(viewLifecycleOwner) {
             //Parameter objectList(it) und ViewModel
-            recView.adapter = AdapterObjects(it)
+            recView.adapter = AdapterObjects(it, viewModel)
         }
 
 
         binding.cvFavorite.setOnClickListener {
-            recViewAdapter.sortObjects(
+            recViewAdapter?.sortObjects(
                 allObjects.value!!.filter {
                     it.liked
-                })
+                }
+            )
         }
 
-        binding.cvFavorite.setOnClickListener {
-            recViewAdapter.sortObjects(
+        binding.cvHome.setOnClickListener {
+            recViewAdapter?.sortObjects(
                 allObjects.value!!
             )
         }

@@ -33,10 +33,10 @@ interface ObjectDao {
 
     //Update der Datenbank
     @Update
-    fun updateObjects(objects: Objects)
+    fun updateObject(objects: Objects)
 
     //Zählen der Einträge in der Datenbank
-    @Query("SELECT COUNT (*) FROM Objects")
+    @Query("SELECT COUNT(*) FROM Objects")
     fun countObjects(): Int
 
 }

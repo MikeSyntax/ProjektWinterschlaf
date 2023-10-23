@@ -13,11 +13,12 @@ object ObjectsExampleData {
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
-        "Leipzig",
-        "Lagerplatz",
-        55.00,
-        "Lagerplatz mit ganz viel Fläche und Stauraum"
+        "Karlsruhe",
+        "Freifläche",
+        155.00,
+        "Freifläche auf großen Gelände mit Kameraüberwachung"
     )
+
 
     val object2 = Objects(
         id = 0,

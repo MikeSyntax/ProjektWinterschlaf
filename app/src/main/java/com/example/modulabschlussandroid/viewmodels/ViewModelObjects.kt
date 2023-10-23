@@ -16,14 +16,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     private val database = ObjectDatabase.getDatabase(application)
     private val repository = RepositoryObjects(database)
 
-    //Hier wird die Objekt Liste aus dem Repository reingeholt
+    //Hier wird die Objekt-Liste aus dem Repository reingeholt
     var objectListLive = repository.objectList
-
-    //Erstellen einer LivaData mit dem aktuellen Objekt
-    private val _currentObject: MutableLiveData<List<Objects>> = MutableLiveData()
-    private val currentObject: LiveData<List<Objects>>
-        get() = _currentObject
-
 
     //Erste Befüllung der Datenbank
     init {
@@ -31,4 +25,22 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.loadAllObjects()
         }
     }
+
+    fun updateObjects(objects: Objects){
+        repository.updateObject(objects)
+    }
+
+    fun insertObject(objects: Objects){
+        viewModelScope.launch {
+            repository.insertObject(objects)
+        }
+    }
+
 }
+
+
+
+  /*  //Erstellen einer LivaData mit dem aktuellen Objekt
+    private val _currentObject: MutableLiveData<List<Objects>> = MutableLiveData()
+    private val currentObject: LiveData<List<Objects>>
+        get() = _currentObject*/

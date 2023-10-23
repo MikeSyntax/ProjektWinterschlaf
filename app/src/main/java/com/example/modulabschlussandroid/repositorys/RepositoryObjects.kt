@@ -13,10 +13,10 @@ class RepositoryObjects(
     val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
 
     //Falls die Datenbank noch leer ist, einmal bitte alle Objekte hineinladen
-    suspend fun loadAllObjects() {
+    suspend fun loadAllObjects(){
         val data = ObjectsExampleData
         try {
-            if (objectList == null) {
+            if (database.objectDao.countObjects() == 0) {
                 database.objectDao.insertObject(data.object1)
                 database.objectDao.insertObject(data.object2)
                 database.objectDao.insertObject(data.object3)
@@ -32,5 +32,13 @@ class RepositoryObjects(
         } catch (e: Exception) {
             Log.e("Repository", "loadAllObjects failed")
         }
+    }
+
+    fun updateObject(objects: Objects) {
+        database.objectDao.updateObject(objects)
+    }
+
+    suspend fun insertObject(objects: Objects) {
+        database.objectDao.insertObject(objects)
     }
 }

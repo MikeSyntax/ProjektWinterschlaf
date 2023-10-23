@@ -108,11 +108,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <ImageButton
-                        android:id="@+id/btn_unliked"
+                    <ImageView
+                        android:id="@+id/iv_liked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="41dp"
+                        android:layout_marginTop="55dp"
+                        android:layout_marginRight="5dp"
                         android:backgroundTint="@color/primary_light_green"
                         android:src="@drawable/star_unliked"
                         android:scaleType="center"
