@@ -211,36 +211,28 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="30dp"
-                        android:layout_gravity="end"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end">
 
-                        <ImageView
+                        <ImageButton
                             android:id="@+id/iv_detail_liked"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="5dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:backgroundTint="@color/primary_light_green"
-                            android:scaleType="fitStart"
-                            android:foregroundGravity="top"
                             android:src="@drawable/star_unliked"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
+                        <ImageButton
                             android:id="@+id/iv_detail_delete"
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="5dp"
-                            android:layout_marginBottom="5dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="1dp"
                             android:backgroundTint="@color/primary_light_green"
-                            android:scaleType="fitEnd"
-                            android:foregroundGravity="top"
                             android:src="@drawable/delete"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -37,24 +37,25 @@ class DetailFragment : Fragment() {
             binding.ivDetailObject1.setImageResource(thisObject.image1Resource)
             binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
             binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
-        }
-
-        // TODO Liked or Unlinked
-        val thisObject = viewModel.currentObject
-        if (thisObject.value!!.liked) {
-            binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
-        } else {
-            binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
-        }
-        binding.ivDetailLiked.setOnClickListener {
-            if (thisObject.value != null) {
-                thisObject.value!!.liked = !thisObject.value!!.liked
-                if (!thisObject.value!!.liked) {
-                    binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
-                    viewModel.updateObjects(false)
-                } else {
-                    binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
-                    viewModel.updateObjects(true)
+            // TODO Liked or Unlinked
+            //  val thisObject = viewModel.currentObject
+            if (thisObject.liked) {
+                binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
+            } else {
+                binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
+            }
+            binding.ivDetailLiked.setOnClickListener {
+                if (thisObject != null) {
+                    thisObject.liked = !thisObject.liked
+                    if (!thisObject.liked) {
+                        binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
+                        thisObject.liked = false
+                        viewModel.updateObjects(thisObject)
+                    } else {
+                        binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
+                        thisObject.liked = true
+                        viewModel.updateObjects(thisObject)
+                    }
                 }
             }
         }

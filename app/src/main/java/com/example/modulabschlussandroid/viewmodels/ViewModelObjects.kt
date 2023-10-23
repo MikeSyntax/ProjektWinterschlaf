@@ -39,17 +39,12 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     }
 
-    fun updateObjects(liked: Boolean){
+    fun updateObjects(objects: Objects){
         viewModelScope.launch {
-            val thisObjects = _currentObject.value
-            if (thisObjects != null){
-                thisObjects.liked = true
-                viewModelScope.launch {
-                    repository.updateObject(thisObjects)
+                    repository.updateObject(objects)
                 }
             }
-        }
-    }
+
 
     fun insertObject(objects: Objects){
         viewModelScope.launch {

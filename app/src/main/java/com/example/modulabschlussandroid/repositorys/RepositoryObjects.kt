@@ -55,10 +55,13 @@ class RepositoryObjects(
     }
 
 
-    suspend fun deleteAll(){
-        database.objectDao.deleteALL()
+    suspend fun deleteAll() {
+        try {
+            database.objectDao.deleteALL()
+        } catch (e: Exception) {
+            Log.e("Repository", "deleteAll failed")
+        }
     }
-
 
     suspend fun deleteById(id: Long){
         try {
