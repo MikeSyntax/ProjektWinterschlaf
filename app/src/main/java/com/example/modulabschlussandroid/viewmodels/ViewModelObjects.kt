@@ -18,7 +18,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     //Hier wird die Objekt-Liste aus dem Repository reingeholt
     var objectListLive = repository.objectList
-
+    var likedObjectsLive = repository.likedObjects
 
     //Erstellen einer LivaData mit dem aktuellen Objekt
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
@@ -28,45 +28,45 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Erste Befüllung der Datenbank
     init {
         //Erst alle in der Datenbank löschen
-       viewModelScope.launch {
-           repository.deleteAll()
-        }
+        /* viewModelScope.launch {
+             repository.deleteAll()
+          }*/
         //Dann neu einfügen
+        //TODO hier muss unbedingt die Kontrolle stattfinden, ob die Datenbank leer ist, denn nur dann soll eingefügt werden
         viewModelScope.launch {
-        repository.loadAllObjects()
+            repository.loadAllObjects()
         }
-       //TODO hier muss unbedingt die Kontrolle stattfinden, ob die Datenbank leer ist, denn nur dann soll eingefügt werden
-
     }
 
-    fun updateObjects(objects: Objects){
+
+    fun updateObjects(objects: Objects) {
         viewModelScope.launch {
-                    repository.updateObject(objects)
-                }
-            }
+            repository.updateObject(objects)
+        }
+    }
 
 
-    fun insertObject(objects: Objects){
+    fun insertObject(objects: Objects) {
         viewModelScope.launch {
             repository.insertObject(objects)
         }
     }
 
     //Anzeige des aktuellen Objektes
-    fun setCurrentObject(objects: Objects){
+    fun setCurrentObject(objects: Objects) {
         viewModelScope.launch {
             _currentObject.postValue(objects)
         }
     }
 
     //Ein einzelnes Objekt löschen
-    fun deleteById(){
+    fun deleteById() {
         viewModelScope.launch {
             val thisObject = _currentObject.value
-            if (thisObject != null){
+            if (thisObject != null) {
                 val id = thisObject.id
-                viewModelScope.launch{
-                     repository.deleteById(id)
+                viewModelScope.launch {
+                    repository.deleteById(id)
                 }
             }
         }

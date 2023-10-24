@@ -85,9 +85,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/primary_light_green"
         app:cardCornerRadius="10dp"
-        android:layout_margin="10dp"
         app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -125,7 +125,7 @@
                         android:layout_marginRight="3dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/bild_halle"/>
+                        android:src="@drawable/bild_halle" />
 
 
                     <ImageView
@@ -205,8 +205,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
                         android:layout_margin="10dp"
-                        android:layout_weight="50"
                         android:layout_marginStart="3dp"
+                        android:layout_weight="50"
                         android:text="Description" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -244,18 +244,6 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-
-
-
-
-
-
-
-
-
-
-
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"
         android:layout_width="match_parent"
@@ -263,7 +251,7 @@
         app:dividerColor="@color/primary_dark_green"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
@@ -296,8 +284,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
@@ -312,9 +300,9 @@
                             style="@style/textSuperSmall"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
                             android:gravity="center"
-                            android:text="Home" />
+                            android:text="Home"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -330,16 +318,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/star_liked" />
 
                         <TextView
@@ -363,16 +351,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/insert" />
 
                         <TextView
@@ -396,16 +384,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/chat" />
 
                         <TextView
@@ -422,24 +410,24 @@
                     android:id="@+id/cv_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
                     android:layout_marginRight="15dp"
+                    android:layout_weight="20"
                     android:backgroundTint="@color/primary_light_green"
                     app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/profile" />
 
                         <TextView

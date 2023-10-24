@@ -1,4 +1,4 @@
-package com.example.modulabschlussandroid.data
+package com.example.modulabschlussandroid.data.datamodels
 
 /* Dies ist der Konstruktor der Klasse SecretData und er erhält Parameter, welche beim Erstellen von SecretData-Objekten übergeben werden. */
 data class SecretData(

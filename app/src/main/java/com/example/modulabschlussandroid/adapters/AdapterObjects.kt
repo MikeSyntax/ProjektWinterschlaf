@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.ListItemSleepBinding
 import com.example.modulabschlussandroid.ui.HomeFragmentDirections

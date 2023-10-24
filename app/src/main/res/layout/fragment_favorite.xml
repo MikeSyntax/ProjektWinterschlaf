@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.HomeFragment">
+    tools:context=".ui.FavoriteFragment">
 
 
     <androidx.appcompat.widget.Toolbar
@@ -19,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_search"
+            android:id="@+id/cv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -35,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:backgroundTint="@color/white"
-                    android:src="@drawable/search" />
+                    android:src="@drawable/back" />
 
                 <TextView
                     style="@style/textSuperSmall"
@@ -43,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingEnd="5dp"
-                    android:text="Suche" />
+                    android:text="zurück" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -65,28 +64,7 @@
             android:backgroundTint="@color/white"
             app:strokeWidth="0dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="start">
 
-                <TextView
-                    style="@style/textSuperSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingLeft="5dp"
-                    android:text="Set   " />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:backgroundTint="@color/white"
-                    android:src="@drawable/settings" />
-
-
-            </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
 
@@ -111,38 +89,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="78dp"
-        android:text="Home"
+        android:text="Deine gespeicherten Favoriten"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/textSuperSmall"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:text="Finde jetzt Garagen, Stellplätze und Lager in deiner Nähe, sofort verfügbar ganz einfach über die Suche."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_rentable_objects"
+        android:id="@+id/rv_favorite_objects"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        app:spanCount="2"
-        tools:listitem="@layout/list_item_sleep" />
-
+        app:layout_constraintTop_toBottomOf="@id/textView4"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/favorite_item_sleep" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"
@@ -151,7 +116,7 @@
         app:dividerColor="@color/primary_dark_green"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
@@ -184,8 +149,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
@@ -194,15 +159,15 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:src="@drawable/home"
-                            app:tint="@color/white" />
+                            app:tint="@color/primary_dark_green" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
                             android:gravity="center"
-                            android:text="Home" />
+                            android:text="Home"
+                            android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -218,16 +183,17 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
+                            app:tint="@color/white"
                             android:src="@drawable/star_liked" />
 
                         <TextView
@@ -235,6 +201,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textColor="@color/white"
                             android:text="Favoriten" />
 
                     </LinearLayout>
@@ -251,16 +218,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/insert" />
 
                         <TextView
@@ -284,16 +251,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/chat" />
 
                         <TextView
@@ -310,24 +277,24 @@
                     android:id="@+id/cv_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
                     android:layout_marginRight="15dp"
+                    android:layout_weight="20"
                     android:backgroundTint="@color/primary_light_green"
                     app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/profile" />
 
                         <TextView

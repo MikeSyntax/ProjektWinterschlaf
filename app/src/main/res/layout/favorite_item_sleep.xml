@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cv_favorite_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/primary_light_green"
+        app:cardCornerRadius="10dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:strokeColor="@color/primary_dark_green"
+        app:strokeWidth="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="84dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <ImageView
+                        android:id="@+id/iv_favorite_object1"
+                        android:layout_width="85dp"
+                        android:layout_height="84dp"
+                        android:layout_marginRight="3dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bild_halle"/>
+
+
+                    <ImageView
+                        android:id="@+id/iv_favorite_object2"
+                        android:layout_width="85dp"
+                        android:layout_height="84dp"
+                        android:layout_marginRight="3dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bild_halle" />
+
+                    <ImageView
+                        android:id="@+id/iv_favorite_object3"
+                        android:layout_width="85dp"
+                        android:layout_height="84dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bild_halle" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="84dp"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tv_favorite_city"
+                            style="@style/textSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            android:text="Ort" />
+
+                        <TextView
+                            android:id="@+id/tv_favorite_object"
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            android:text="Objekt" />
+
+                        <TextView
+                            android:id="@+id/tv_favorite_price"
+                            style="@style/textSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="10dp"
+                            android:text="Preis"
+                            android:textColor="@color/white"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    app:dividerColor="@color/primary_dark_green" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <TextView
+                        android:id="@+id/tv_favorite_description"
+                        style="@style/textSmall"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_margin="10dp"
+                        android:layout_weight="50"
+                        android:layout_marginStart="3dp"
+                        android:text="Description" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="30dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="end">
+
+                        <ImageButton
+                            android:id="@+id/iv_favorite_liked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:backgroundTint="@color/primary_light_green"
+                            android:src="@drawable/star_unliked"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageButton
+                            android:id="@+id/iv_favorite_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="1dp"
+                            android:backgroundTint="@color/primary_light_green"
+                            android:src="@drawable/delete"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>

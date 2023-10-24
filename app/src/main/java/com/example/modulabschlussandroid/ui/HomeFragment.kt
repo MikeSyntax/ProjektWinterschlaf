@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterObjects
 import com.example.modulabschlussandroid.data.datamodels.Objects
@@ -34,29 +36,25 @@ class HomeFragment : Fragment() {
 
         val recView = binding.rvRentableObjects
 
-        val recViewAdapter = allObjects.value?.let { AdapterObjects(it, viewModel) }
-        //val recViewAdapter = allObjects.value!!
-
         recView.setHasFixedSize(true)
 
-        //Setzen des Adapter mit Observer
+        //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
         allObjects.observe(viewLifecycleOwner) {
             //Parameter objectList(it) und ViewModel
             recView.adapter = AdapterObjects(it, viewModel)
         }
 
+        //Zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
-            recViewAdapter?.sortObjects(
+            val navController = binding.cvFavorite.findNavController()
+            navController.navigate(HomeFragmentDirections.actionHomeFragmentToFavoriteFragment())
+
+
+         /*   recViewAdapter?.sortObjects(
                 allObjects.value!!.filter {
                     it.liked
                 }
-            )
-        }
-
-        binding.cvHome.setOnClickListener {
-            recViewAdapter?.sortObjects(
-                allObjects.value!!
-            )
+            )*/
         }
     }
 }

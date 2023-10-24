@@ -115,11 +115,11 @@
 
     <TextView
         android:id="@+id/textView4"
-        style="@style/textSmall"
+        style="@style/textMiddle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="78dp"
         android:text="Anmeldedaten eingeben"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

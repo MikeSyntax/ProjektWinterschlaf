@@ -75,5 +75,10 @@ class DetailFragment : Fragment() {
             viewModel.deleteById()
             findNavController().navigateUp()
         }
+
+        //zu den Favoriten navigieren
+        binding.cvFavorite.setOnClickListener {
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToFavoriteFragment())
+        }
     }
 }

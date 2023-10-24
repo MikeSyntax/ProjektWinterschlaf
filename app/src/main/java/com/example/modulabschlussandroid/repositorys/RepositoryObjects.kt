@@ -11,14 +11,17 @@ class RepositoryObjects(
 ) {
     //Anlegen einer LiveData Variablen mit allen Items der Database
     val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
+    val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
 
     //Falls die Datenbank noch leer ist, einmal bitte alle Objekte hineinladen
-    suspend fun loadAllObjects(){
+    suspend fun loadAllObjects() {
         val data = ObjectsExampleData
         try {
-
-            //TODO die count funktioniert nicht, deshalb werden im Moment bei jeden Start weitere 11 Objekte hinzugefügt
-           // if (database.objectDao.countObjects() == 0) {
+            //TODO
+            //Diese If Abfrage funktioniert nicht, er setzt fleißig weitere die daten in die Datenbank
+            //if(objectList.value.isNullOrEmpty()){
+            //Diese If Abfrage funktioniert auch nicht, es werden überhaupt keine Daten in die Datenbank übergeben
+           // if(countObjects() == 0){
                 database.objectDao.insertObject(data.object1)
                 database.objectDao.insertObject(data.object2)
                 database.objectDao.insertObject(data.object3)
@@ -30,13 +33,20 @@ class RepositoryObjects(
                 database.objectDao.insertObject(data.object9)
                 database.objectDao.insertObject(data.object10)
                 database.objectDao.insertObject(data.object11)
-           // }
+         //   }
         } catch (e: Exception) {
             Log.e("Repository", "loadAllObjects failed")
         }
     }
 
+    //Count Funktion aus der Dao
+    private fun countObjects():Int {
+        var count = 0
+        count = database.objectDao.countObjects()
+        return count
+    }
 
+    //Update eines Objektes mit Änderungen
     suspend fun updateObject(objects: Objects) {
         try {
             database.objectDao.updateObject(objects)
@@ -45,7 +55,7 @@ class RepositoryObjects(
         }
     }
 
-
+    //Einfügen eines Objektes
     suspend fun insertObject(objects: Objects) {
         try {
             database.objectDao.insertObject(objects)
@@ -54,7 +64,7 @@ class RepositoryObjects(
         }
     }
 
-
+    //Löschen aller Objekte
     suspend fun deleteAll() {
         try {
             database.objectDao.deleteALL()
@@ -63,10 +73,11 @@ class RepositoryObjects(
         }
     }
 
-    suspend fun deleteById(id: Long){
+    //Löschen eines einzigen Objektes mit Kennung der id
+    suspend fun deleteById(id: Long) {
         try {
-        database.objectDao.deleteById(id)
-        } catch (e: Exception){
+            database.objectDao.deleteById(id)
+        } catch (e: Exception) {
             Log.e("Repository", "deleteById failed")
         }
     }

@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.databinding.FragmentReadyLoginBinding
-import com.example.modulabschlussandroid.data.SecretData
+import com.example.modulabschlussandroid.data.datamodels.SecretData
 
 
 //
