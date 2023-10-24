@@ -21,7 +21,7 @@ class RepositoryObjects(
             //Diese If Abfrage funktioniert nicht, er setzt fleißig weitere die daten in die Datenbank
             //if(objectList.value.isNullOrEmpty()){
             //Diese If Abfrage funktioniert auch nicht, es werden überhaupt keine Daten in die Datenbank übergeben
-           // if(countObjects() == 0){
+            if(countObjects() == 0){
                 database.objectDao.insertObject(data.object1)
                 database.objectDao.insertObject(data.object2)
                 database.objectDao.insertObject(data.object3)
@@ -33,7 +33,7 @@ class RepositoryObjects(
                 database.objectDao.insertObject(data.object9)
                 database.objectDao.insertObject(data.object10)
                 database.objectDao.insertObject(data.object11)
-         //   }
+            }
         } catch (e: Exception) {
             Log.e("Repository", "loadAllObjects failed")
         }

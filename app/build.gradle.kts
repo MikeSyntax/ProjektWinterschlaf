@@ -15,8 +15,15 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        //um die neue Version in Room anzuzeigen
+        kapt {
+            arguments {
+                arg("room.schemaLocation","$projectDir/schemas")
+            }
+        }
     }
 
     buildTypes {
@@ -71,6 +78,8 @@ dependencies {
     implementation("androidx.room:room-runtime:2.5.2")
     kapt("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
+
+
 
     //Progressbar Implementierung
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")

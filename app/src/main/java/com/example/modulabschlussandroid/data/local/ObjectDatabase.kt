@@ -1,13 +1,23 @@
 package com.example.modulabschlussandroid.data.local
 
 import android.content.Context
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.modulabschlussandroid.data.datamodels.Objects
 
 
-@Database(entities = [Objects::class], version = 1)
+@Database(entities = [Objects::class], version = 2,
+    //wechselt hiermit auf die neue Version, da noch zipCode zur Datenbank hinzugefügt wurde
+    autoMigrations = [AutoMigration(from = 1, to = 2)]
+)
+
+@TypeConverters(TypeConverters::class)
+
+
+
 abstract class ObjectDatabase: RoomDatabase(){
 
     abstract val objectDao: ObjectDao

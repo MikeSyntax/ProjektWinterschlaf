@@ -1,7 +1,10 @@
 package com.example.modulabschlussandroid.data.datamodels
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 //Objekte in der Datenbank mit Änderung des Namens der Datenbank
 @Entity
@@ -19,6 +22,9 @@ data class Objects(
     var objectdescription: String,
     var price: Double,
     var description: String,
-    var liked: Boolean = false
+    var liked: Boolean = false,
+
+    @ColumnInfo(name = "zipCode", defaultValue = "76477")
+    var zipCode: String
 
 )
