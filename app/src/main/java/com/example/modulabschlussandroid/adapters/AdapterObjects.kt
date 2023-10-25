@@ -48,6 +48,11 @@ class AdapterObjects(
 
         //Weiterleitung auf eine Detailseite
         binding.cvItemObject.setOnClickListener {
+
+            //API Call GeoDaten wird gemacht
+           // viewModel.getGeoResult()
+            //Log.d("Adapter", "Api Call done")
+
             viewModel.setCurrentObject(thisObject)
             val navController = binding.cvItemObject.findNavController()
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())

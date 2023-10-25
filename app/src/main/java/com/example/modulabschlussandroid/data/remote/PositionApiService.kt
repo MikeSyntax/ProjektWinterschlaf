@@ -1,36 +1,17 @@
 package com.example.modulabschlussandroid.data.remote
 
-import com.example.modulabschlussandroid.data.datamodels.GeoCoderApi
-import com.example.modulabschlussandroid.data.datamodels.Objects
+import com.example.modulabschlussandroid.data.datamodels.Geo
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.create
 import retrofit2.http.GET
 
-const val BASE_URL = "http://api.openweathermap.org/geo/1.0/"
-
-const val API_TOKEN = "334e22b2ed48492fbbc52db74902a8e7"
-
-//Variable der Postleitzahl
-val zipCode: Objects
-    get() {
-        zipCode.zipCode
-        return zipCode
-    }
-
-const val zipCodeObject = "zipCode"
+const val BASE_URL = "https://geocoding-api.open-meteo.com/v1/"
 
 
-val client = OkHttpClient.Builder().addInterceptor {
-    chain ->
-    val request = chain.request().newBuilder()
-        .addHeader("Authorization", "Bearer")
-        .build()
-    chain.proceed(request)
-} .build()
+//TODO Der Code muss sich ändern aber wie
+const val CITY_NAME = "Karlsruhe"
 
 
 private val moshi: Moshi = Moshi.Builder()
@@ -39,18 +20,16 @@ private val moshi: Moshi = Moshi.Builder()
 
 
 private val retroFit: Retrofit = Retrofit.Builder()
-    .client(client)
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL)
     .build()
 
 
 interface GeoCoderApiService{
-    @GET("zip?zip=$zipCodeObject,DE&appid=$API_TOKEN")
-    suspend fun getGeoCode():GeoCoderApi
-
+    @GET("search?name=$CITY_NAME&count=1&language=de&format=json")
+    suspend fun getGeoCode(): Geo
 }
 
-object GeoCoderApi{
+object GeoCoderApiObject{
     val retrofitService: GeoCoderApiService by lazy { retroFit.create(GeoCoderApiService::class.java) }
 }

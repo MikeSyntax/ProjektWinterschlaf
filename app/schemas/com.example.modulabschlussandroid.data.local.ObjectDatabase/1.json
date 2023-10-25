@@ -1,12 +1,12 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 2,
-    "identityHash": "f728af4a32ad48647b921407ac776f7b",
+    "version": 1,
+    "identityHash": "7ea8fd3892fa5d94705121e2a5cedd36",
     "entities": [
       {
         "tableName": "Objects",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `image1Resource` INTEGER NOT NULL, `image2Resource` INTEGER NOT NULL, `image3Resource` INTEGER NOT NULL, `image4Resource` INTEGER NOT NULL, `image5Resource` INTEGER NOT NULL, `city` TEXT NOT NULL, `objectdescription` TEXT NOT NULL, `price` REAL NOT NULL, `description` TEXT NOT NULL, `liked` INTEGER NOT NULL, `zipCode` INTEGER NOT NULL DEFAULT 0)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `image1Resource` INTEGER NOT NULL, `image2Resource` INTEGER NOT NULL, `image3Resource` INTEGER NOT NULL, `image4Resource` INTEGER NOT NULL, `image5Resource` INTEGER NOT NULL, `city` TEXT NOT NULL, `objectdescription` TEXT NOT NULL, `price` REAL NOT NULL, `description` TEXT NOT NULL, `liked` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -73,13 +73,6 @@
             "columnName": "liked",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "zipCode",
-            "columnName": "zipCode",
-            "affinity": "INTEGER",
-            "notNull": true,
-            "defaultValue": "0"
           }
         ],
         "primaryKey": {
@@ -95,7 +88,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f728af4a32ad48647b921407ac776f7b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '7ea8fd3892fa5d94705121e2a5cedd36')"
     ]
   }
 }

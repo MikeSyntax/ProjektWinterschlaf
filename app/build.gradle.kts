@@ -21,7 +21,7 @@ android {
         //um die neue Version in Room anzuzeigen
         kapt {
             arguments {
-                arg("room.schemaLocation","$projectDir/schemas")
+                arg("room.schemaLocation", "$projectDir/schemas")
             }
         }
     }
@@ -79,8 +79,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
 
-
-
     //Progressbar Implementierung
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
+
+    //Longitude und Latitude
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }

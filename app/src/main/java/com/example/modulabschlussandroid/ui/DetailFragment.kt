@@ -37,8 +37,8 @@ class DetailFragment : Fragment() {
             binding.ivDetailObject1.setImageResource(thisObject.image1Resource)
             binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
             binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
-            // TODO Liked or Unlinked
-            //  val thisObject = viewModel.currentObject
+
+            //Hier werden die Objekte geliked und auf in der Datenbank gespeichert
             if (thisObject.liked) {
                 binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
             } else {
@@ -80,5 +80,20 @@ class DetailFragment : Fragment() {
         binding.cvFavorite.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToFavoriteFragment())
         }
+
+        binding.btnGeoData.setOnClickListener {
+            viewModel.getGeoResult()
+            Log.d("Adapter", "Api Call done")
+            addObserver()
+        }
     }
+
+
+    private fun addObserver(){
+        viewModel.geoResult.observe(viewLifecycleOwner){
+            binding.tvLatitude.text = it.results.toString()
+         //   binding.tvLongitude.text =it.lon.toString()
+        }
+    }
+
 }

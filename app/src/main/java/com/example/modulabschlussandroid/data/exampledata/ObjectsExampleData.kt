@@ -16,7 +16,9 @@ object ObjectsExampleData {
         "Karlsruhe",
         "Freifläche",
         155.00,
-        "Freifläche auf großen Gelände mit Kameraüberwachung"
+        "Freifläche auf großen Gelände mit Kameraüberwachung",
+        false,
+        76229
     )
 
 
@@ -30,7 +32,9 @@ object ObjectsExampleData {
         "Leipzig",
         "Lagerplatz",
         55.00,
-        "Lagerplatz mit ganz viel Fläche und Stauraum"
+        "Lagerplatz mit ganz viel Fläche und Stauraum",
+        false,
+        76133
     )
 
     val object3 = Objects(
@@ -43,7 +47,9 @@ object ObjectsExampleData {
         "Berlin",
         "Garage",
         25.00,
-        "Sicherer Garagenstellplatz in zentraler Lage."
+        "Sicherer Garagenstellplatz in zentraler Lage.",
+        false,
+        76229
     )
 
     val object4 = Objects(
@@ -56,7 +62,9 @@ object ObjectsExampleData {
         "Hamburg",
         "Stellplatz",
         15.00,
-        "Überdachter Stellplatz für Ihr Auto."
+        "Überdachter Stellplatz für Ihr Auto.",
+        false,
+        76185
     )
 
     val object5 = Objects(
@@ -69,7 +77,9 @@ object ObjectsExampleData {
         "München",
         "Lagerplatz",
         70.00,
-        "Großer Gewerbepark mit vielseitigen Lagermöglichkeiten."
+        "Großer Gewerbepark mit vielseitigen Lagermöglichkeiten.",
+        false,
+        76131
     )
 
     val object6 = Objects(
@@ -82,7 +92,9 @@ object ObjectsExampleData {
         "Köln",
         "Garage",
         30.00,
-        "Sichere Garage in ruhiger Nachbarschaft."
+        "Sichere Garage in ruhiger Nachbarschaft.",
+        false,
+        76187
     )
 
     val object7 = Objects(
@@ -95,7 +107,9 @@ object ObjectsExampleData {
         "Frankfurt",
         "Stellplatz",
         20.00,
-        "Zugang zu einem bequemen Stellplatz in der Innenstadt."
+        "Zugang zu einem bequemen Stellplatz in der Innenstadt.",
+        false,
+        76477
     )
 
     val object8 = Objects(
@@ -108,7 +122,9 @@ object ObjectsExampleData {
         "Düsseldorf",
         "Lagerplatz",
         60.00,
-        "Klimatisierter Lagerplatz für empfindliche Waren."
+        "Klimatisierter Lagerplatz für empfindliche Waren.",
+        false,
+        76287
     )
 
     val object9 = Objects(
@@ -121,7 +137,9 @@ object ObjectsExampleData {
         "Stuttgart",
         "Garage",
         35.00,
-        "Gemütliche Garage für Motorräder und Hobbyprojekte."
+        "Gemütliche Garage für Motorräder und Hobbyprojekte.",
+        false,
+        76327
     )
 
     val object10 = Objects(
@@ -134,7 +152,9 @@ object ObjectsExampleData {
         "Dresden",
         "Stellplatz",
         18.00,
-        "Überdachter Stellplatz für Ihr Fahrzeug."
+        "Überdachter Stellplatz für Ihr Fahrzeug.",
+        false,
+        76133
     )
 
     val object11 = Objects(
@@ -147,7 +167,9 @@ object ObjectsExampleData {
         "Nürnberg",
         "Lagerplatz",
         45.00,
-        "Praktische Lagerräume in einem gesicherten Gebäudekomplex."
+        "Praktische Lagerräume in einem gesicherten Gebäudekomplex.",
+        false,
+        76229
     )
 }
 

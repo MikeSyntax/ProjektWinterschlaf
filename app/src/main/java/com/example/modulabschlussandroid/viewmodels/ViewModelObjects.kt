@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
+import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.example.modulabschlussandroid.repositorys.RepositoryObjects
 import kotlinx.coroutines.launch
 
@@ -14,11 +15,17 @@ import kotlinx.coroutines.launch
 class ViewModelObjects(application: Application) : AndroidViewModel(application) {
 
     private val database = ObjectDatabase.getDatabase(application)
-    private val repository = RepositoryObjects(database)
+    private val repository = RepositoryObjects(database, GeoCoderApiObject)
 
     //Hier wird die Objekt-Liste aus dem Repository reingeholt
     var objectListLive = repository.objectList
     var likedObjectsLive = repository.likedObjects
+    var geoResult = repository.geoResult
+
+
+
+
+
 
     //Erstellen einer LivaData mit dem aktuellen Objekt
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
@@ -28,15 +35,31 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Erste Befüllung der Datenbank
     init {
         //Erst alle in der Datenbank löschen
-        /* viewModelScope.launch {
-             repository.deleteAll()
-          }*/
+        viewModelScope.launch {
+            repository.deleteAll()
+        }
         //Dann neu einfügen
         //TODO hier muss unbedingt die Kontrolle stattfinden, ob die Datenbank leer ist, denn nur dann soll eingefügt werden
         viewModelScope.launch {
             repository.loadAllObjects()
         }
     }
+
+
+
+
+
+    //GeoDaten der jeweiligen Objekte holen
+    fun getGeoResult() {
+        viewModelScope.launch {
+            repository.getGeoResult()
+        }
+    }
+
+
+
+
+
 
 
     fun updateObjects(objects: Objects) {
