@@ -3,7 +3,7 @@ package com.example.modulabschlussandroid.repositorys
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.modulabschlussandroid.data.datamodels.Geo
+import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
@@ -23,9 +23,6 @@ class RepositoryObjects(
     val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
 
 
-
-
-
     private val _geoResult: MutableLiveData<Geo> = MutableLiveData()
     val geoResult: LiveData<Geo>
         get () = _geoResult
@@ -38,8 +35,6 @@ class RepositoryObjects(
             Log.e("Repository", "getGeoResult API Call failed")
         }
     }
-
-
 
 
     //Falls die Datenbank noch leer ist, einmal bitte alle Objekte hineinladen

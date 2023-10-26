@@ -6,11 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
+import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
+import com.example.modulabschlussandroid.data.datamodels.apicall.Result
 import com.example.modulabschlussandroid.databinding.FragmentDetailBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
+import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment() {
 
@@ -84,16 +89,46 @@ class DetailFragment : Fragment() {
         binding.btnGeoData.setOnClickListener {
             viewModel.getGeoResult()
             Log.d("Adapter", "Api Call done")
-            addObserver()
+            geoDataExtraction()
+            geoObserver()
         }
     }
 
+    private fun geoDataExtraction() {
 
-    private fun addObserver(){
-        viewModel.geoResult.observe(viewLifecycleOwner){
-            binding.tvLatitude.text = it.results.toString()
-         //   binding.tvLongitude.text =it.lon.toString()
+        // Auf das LiveData-Objekt zugreifen
+        val geo: Geo? = viewModel.geoResult.value
+        if (geo != null) {
+        // Auf die Liste "results" zugreifen
+        val results: List<Result> = geo.results
+            // Zugriff auf die Liste "results" und können damit arbeiten
+            for (result in results) {
+                // Hier kann man auf einzelne "Result"-Objekte zugreifen, z.B. result.latitude, result.longitude, result.name, usw.
+                binding.tvLatitude.text = result.latitude.toString()
+                binding.tvLongitude.text = result.longitude.toString()
+            }
         }
     }
 
+    //Observer der GeoDaten über die Klasse Geo
+    private fun geoObserver() {
+        viewModel.geoResult.observe(viewLifecycleOwner) { geoCode ->
+            binding.tvDetailDescription.text = geoCode.results.toString()
+        }
+    }
+
+    //Observer der GeoDaten über die Klasse Result in der die richtigen Ergebnisse stehen
+    private fun resultObserver() {
+        viewModel.currentGeoData.observe(viewLifecycleOwner) {
+
+            //die aktuellen GeoDaten setzen
+            viewModel.setCurrentGeoData(it)
+
+            //die einzelnenen Textfelder mit den Daten verbinden
+            binding.tvLatitude.text = it.latitude.toString()
+            binding.tvLongitude.text = it.longitude.toString()
+            binding.tvDetailCity.text = it.name
+
+        }
+    }
 }

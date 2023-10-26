@@ -1,15 +1,18 @@
 package com.example.modulabschlussandroid.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.modulabschlussandroid.data.datamodels.Objects
+import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.example.modulabschlussandroid.repositorys.RepositoryObjects
 import kotlinx.coroutines.launch
+import com.example.modulabschlussandroid.data.datamodels.apicall.Result
 
 //Hier muss das ViewModel AndroidViewModel sein, da nur hier die Mögllichkeit besteht Daten mit zugeben
 class ViewModelObjects(application: Application) : AndroidViewModel(application) {
@@ -20,9 +23,13 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Hier wird die Objekt-Liste aus dem Repository reingeholt
     var objectListLive = repository.objectList
     var likedObjectsLive = repository.likedObjects
-    var geoResult = repository.geoResult
+    var geoResult: LiveData<Geo> = repository.geoResult
 
 
+    //Erstellen einer LiveData mit dem aktuellen GeoCode
+    private val _currentGeoData: MutableLiveData<Result> = MutableLiveData()
+    val currentGeoData: LiveData<Result>
+        get()=_currentGeoData
 
 
 
@@ -31,6 +38,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
     val currentObject: LiveData<Objects>
         get() = _currentObject
+
+
 
     //Erste Befüllung der Datenbank
     init {
@@ -79,6 +88,13 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     fun setCurrentObject(objects: Objects) {
         viewModelScope.launch {
             _currentObject.postValue(objects)
+        }
+    }
+
+    //Anzeige des aktuellen GeoCodes aus der Result Klasse
+    fun setCurrentGeoData(geoCode: Result) {
+        viewModelScope.launch {
+            _currentGeoData.postValue(geoCode)
         }
     }
 
