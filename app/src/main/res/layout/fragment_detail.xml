@@ -197,7 +197,7 @@
 
                     <TextView
                         android:id="@+id/tv_latitude"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
@@ -210,12 +210,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
                         android:text="Longitude" />
-
-                    <Button
-                        android:id="@+id/btn_geoData"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Geo"/>
 
                 </LinearLayout>
 

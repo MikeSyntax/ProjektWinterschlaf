@@ -25,7 +25,11 @@ class AdapterObjects(
     //Hier werden die ViewHolder erstellt, also die gerade sichtbaren ListItems ohne Inhalte nur das Gerüst
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val binding =
-            ListItemSleepBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ListItemSleepBinding
+                .inflate(
+                    LayoutInflater
+                        .from(parent.context), parent, false
+                )
         return ItemViewHolder(binding)
     }
 
@@ -49,10 +53,10 @@ class AdapterObjects(
         //Weiterleitung auf eine Detailseite
         binding.cvItemObject.setOnClickListener {
 
-            //API Call GeoDaten wird gemacht
-           // viewModel.getGeoResult()
-            //Log.d("Adapter", "Api Call done")
+            //API Call wird gestartet
+            viewModel.getGeoResult()
 
+            //Navigation auf das  aktuelle Objekt welches angeklickt wurde
             viewModel.setCurrentObject(thisObject)
             val navController = binding.cvItemObject.findNavController()
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
@@ -63,10 +67,10 @@ class AdapterObjects(
     override fun getItemCount(): Int {
         return dataset.size
     }
-
-    //Änderungen werden bei Aufruf an das Dataset mitgeteilt
-    fun sortObjects(list: List<Objects>) {
-        dataset = list
-        notifyDataSetChanged()
-    }
+    /*
+        //Änderungen werden bei Aufruf an das Dataset mitgeteilt
+        fun sortObjects(list: List<Objects>) {
+            dataset = list
+            notifyDataSetChanged()
+        }*/
 }

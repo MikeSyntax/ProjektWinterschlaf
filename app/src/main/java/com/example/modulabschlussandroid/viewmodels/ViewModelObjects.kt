@@ -20,19 +20,19 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     private val database = ObjectDatabase.getDatabase(application)
     private val repository = RepositoryObjects(database, GeoCoderApiObject)
 
-    //Hier wird die Objekt-Liste aus dem Repository reingeholt
+    //Hier wird die Objekt-Liste aus dem Repository eingeschleift
     var objectListLive = repository.objectList
     var likedObjectsLive = repository.likedObjects
+
+    //Hier wird die LiveData der Geo API Abfrage aus dem Repository eingeschleift
     var geoResult: LiveData<Geo> = repository.geoResult
 
-
+/*
     //Erstellen einer LiveData mit dem aktuellen GeoCode
     private val _currentGeoData: MutableLiveData<Result> = MutableLiveData()
     val currentGeoData: LiveData<Result>
         get()=_currentGeoData
-
-
-
+*/
 
     //Erstellen einer LivaData mit dem aktuellen Objekt
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
@@ -54,10 +54,6 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-
-
-
-
     //GeoDaten der jeweiligen Objekte holen
     fun getGeoResult() {
         viewModelScope.launch {
@@ -65,12 +61,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-
-
-
-
-
-
+    //Update eines bestimmten Objektes mit Daten die hinzugefügt werden sollen
     fun updateObjects(objects: Objects) {
         viewModelScope.launch {
             repository.updateObject(objects)
@@ -91,12 +82,14 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
+/*
     //Anzeige des aktuellen GeoCodes aus der Result Klasse
     fun setCurrentGeoData(geoCode: Result) {
         viewModelScope.launch {
             _currentGeoData.postValue(geoCode)
         }
     }
+ */
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {

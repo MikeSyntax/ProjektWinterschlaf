@@ -22,7 +22,7 @@ class RepositoryObjects(
     val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
     val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
 
-
+    //LiveData der GeoDaten Abfrage über einen API Call
     private val _geoResult: MutableLiveData<Geo> = MutableLiveData()
     val geoResult: LiveData<Geo>
         get () = _geoResult

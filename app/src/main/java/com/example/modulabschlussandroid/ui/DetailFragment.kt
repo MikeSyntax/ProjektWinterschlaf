@@ -43,6 +43,9 @@ class DetailFragment : Fragment() {
             binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
             binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
 
+            //Verbinden der Detailansicht mit den GeoDaten
+            geoObserver()
+
             //Hier werden die Objekte geliked und auf in der Datenbank gespeichert
             if (thisObject.liked) {
                 binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
@@ -85,50 +88,23 @@ class DetailFragment : Fragment() {
         binding.cvFavorite.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToFavoriteFragment())
         }
-
-        binding.btnGeoData.setOnClickListener {
-            viewModel.getGeoResult()
-            Log.d("Adapter", "Api Call done")
-            geoDataExtraction()
-            geoObserver()
-        }
     }
 
-    private fun geoDataExtraction() {
-
-        // Auf das LiveData-Objekt zugreifen
-        val geo: Geo? = viewModel.geoResult.value
-        if (geo != null) {
-        // Auf die Liste "results" zugreifen
-        val results: List<Result> = geo.results
-            // Zugriff auf die Liste "results" und können damit arbeiten
-            for (result in results) {
-                // Hier kann man auf einzelne "Result"-Objekte zugreifen, z.B. result.latitude, result.longitude, result.name, usw.
-                binding.tvLatitude.text = result.latitude.toString()
-                binding.tvLongitude.text = result.longitude.toString()
-            }
-        }
-    }
-
-    //Observer der GeoDaten über die Klasse Geo
+    //Einbinden der ermittelten GeoDaten
     private fun geoObserver() {
-        viewModel.geoResult.observe(viewLifecycleOwner) { geoCode ->
-            binding.tvDetailDescription.text = geoCode.results.toString()
-        }
-    }
-
-    //Observer der GeoDaten über die Klasse Result in der die richtigen Ergebnisse stehen
-    private fun resultObserver() {
-        viewModel.currentGeoData.observe(viewLifecycleOwner) {
-
-            //die aktuellen GeoDaten setzen
-            viewModel.setCurrentGeoData(it)
-
-            //die einzelnenen Textfelder mit den Daten verbinden
-            binding.tvLatitude.text = it.latitude.toString()
-            binding.tvLongitude.text = it.longitude.toString()
-            binding.tvDetailCity.text = it.name
-
+        viewModel.geoResult.observe(viewLifecycleOwner) {
+            // Auf das LiveData-Objekt zugreifen
+            val geo: Geo? = viewModel.geoResult.value
+            if (geo != null) {
+                // Auf die Liste "results" zugreifen
+                val results: List<Result> = geo.results
+                // Zugriff auf die Liste "results" und können damit arbeiten
+                for (thisGeo in results) {
+                    // Hier kann man auf einzelne "Result"-Objekte zugreifen, z.B. result.latitude, result.longitude, result.name, usw.
+                    binding.tvLatitude.text = "${thisGeo.latitude.toString()} lat"
+                    binding.tvLongitude.text = "${thisGeo.longitude.toString()} lon"
+                }
+            }
         }
     }
 }
