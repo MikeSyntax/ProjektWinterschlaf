@@ -10,7 +10,7 @@ object ObjectsExampleData {
         id = 0,
         R.drawable.bild_halle,
         R.drawable.bild_doppelgarage,
-        R.drawable.bild_parkplat,
+        R.drawable.lagerhalle,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         "Karlsruhe",
@@ -24,9 +24,9 @@ object ObjectsExampleData {
 
     val object2 = Objects(
         id = 0,
-        R.drawable.bild_halle,
+        R.drawable.lagerhalle,
         R.drawable.bild_doppelgarage,
-        R.drawable.bild_parkplat,
+        R.drawable.bild_halle,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         "Leipzig",
@@ -39,9 +39,9 @@ object ObjectsExampleData {
 
     val object3 = Objects(
         id = 0,
-        R.drawable.bild_halle,
         R.drawable.bild_doppelgarage,
-        R.drawable.bild_parkplat,
+        R.drawable.stellplatz_halle,
+        R.drawable.lagerhalle,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         "Berlin",
@@ -54,9 +54,9 @@ object ObjectsExampleData {
 
     val object4 = Objects(
         id = 0,
-        R.drawable.bild_halle,
+        R.drawable.wohnmobil_stellplatz,
         R.drawable.bild_doppelgarage,
-        R.drawable.bild_parkplat,
+        R.drawable.stellplatz_halle,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         "Hamburg",
@@ -69,9 +69,9 @@ object ObjectsExampleData {
 
     val object5 = Objects(
         id = 0,
-        R.drawable.bild_halle,
+        R.drawable.stellplatz_vermieten,
         R.drawable.bild_doppelgarage,
-        R.drawable.bild_parkplat,
+        R.drawable.bild_halle,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         "München",
@@ -84,7 +84,7 @@ object ObjectsExampleData {
 
     val object6 = Objects(
         id = 0,
-        R.drawable.bild_halle,
+        R.drawable.stellplatz_halle,
         R.drawable.bild_doppelgarage,
         R.drawable.bild_parkplat,
         R.drawable.bild_halle,
@@ -99,7 +99,7 @@ object ObjectsExampleData {
 
     val object7 = Objects(
         id = 0,
-        R.drawable.bild_halle,
+        R.drawable.lagerhalle,
         R.drawable.bild_doppelgarage,
         R.drawable.bild_parkplat,
         R.drawable.bild_halle,

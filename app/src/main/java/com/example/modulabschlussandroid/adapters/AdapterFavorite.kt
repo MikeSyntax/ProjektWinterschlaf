@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
+import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
+import com.example.modulabschlussandroid.data.datamodels.apicall.Result
 import com.example.modulabschlussandroid.databinding.FavoriteItemSleepBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 

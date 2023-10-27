@@ -22,6 +22,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     //Hier wird die Objekt-Liste aus dem Repository eingeschleift
     var objectListLive = repository.objectList
+
+    //Hier werden die gelikten Objekte aus dem Repository eingeschleift
     var likedObjectsLive = repository.likedObjects
 
     //Hier wird die LiveData der Geo API Abfrage aus dem Repository eingeschleift
@@ -38,8 +40,6 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
     val currentObject: LiveData<Objects>
         get() = _currentObject
-
-
 
     //Erste Befüllung der Datenbank
     init {
@@ -68,7 +68,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-
+    //Insert eines bestimmten Objektes mit allen Daten
     fun insertObject(objects: Objects) {
         viewModelScope.launch {
             repository.insertObject(objects)

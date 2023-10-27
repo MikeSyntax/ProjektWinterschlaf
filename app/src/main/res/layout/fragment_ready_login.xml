@@ -188,12 +188,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="Passwort"
+        app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tfield_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputUserPassword"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
