@@ -6,6 +6,7 @@ import com.example.modulabschlussandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+
     //Binding Initilisieren
     private lateinit var binding: ActivityMainBinding
 /*
@@ -20,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
 
     /*

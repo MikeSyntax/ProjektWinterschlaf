@@ -83,5 +83,5 @@ dependencies {
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
 
     //Longitude und Latitude
-    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.google.android.gms:play-services-location:19.0.1")
 }
