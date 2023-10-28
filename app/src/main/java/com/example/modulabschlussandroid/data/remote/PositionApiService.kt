@@ -20,7 +20,7 @@ import kotlin.reflect.jvm.internal.impl.resolve.constants.ConstantValueFactory
 const val BASE_URL = "https://geocoding-api.open-meteo.com/v1/"
 
 //TODO Der Städtename muss sich ändern aber wie
-const val CITY_NAME = "Karlsruhe"
+const val CITY_NAME = "Berlin"
 
 const val API_KEY = ""
 

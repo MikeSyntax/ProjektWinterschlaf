@@ -50,7 +50,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         //Dann neu einfügen
         //TODO hier muss unbedingt die Kontrolle stattfinden, ob die Datenbank leer ist, denn nur dann soll eingefügt werden
         viewModelScope.launch {
-            repository.loadAllObjects()
+                repository.loadAllObjects()
         }
     }
 

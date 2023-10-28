@@ -36,15 +36,17 @@ class RepositoryObjects(
         }
     }
 
-
     //Falls die Datenbank noch leer ist, einmal bitte alle Objekte hineinladen
     suspend fun loadAllObjects() {
         val data = ObjectsExampleData
         try {
             //TODO
             //Diese If Abfrage funktioniert nicht, er setzt fleißig weitere die daten in die Datenbank
+
             //if(objectList.value.isNullOrEmpty()){
+
             //Diese If Abfrage funktioniert auch nicht, es werden überhaupt keine Daten in die Datenbank übergeben
+
              //if(countObjects() == 0){
                 database.objectDao.insertObject(data.object1)
                 database.objectDao.insertObject(data.object2)
