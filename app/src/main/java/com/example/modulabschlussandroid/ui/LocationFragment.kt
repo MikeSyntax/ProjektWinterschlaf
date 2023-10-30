@@ -25,41 +25,49 @@ class LocationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-       binding = FragmentLocationBinding.inflate(inflater,container,false)
+        binding = FragmentLocationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
-
-
+        fusedLocationProviderClient = LocationServices
+            .getFusedLocationProviderClient(requireContext())
         binding.button.setOnClickListener {
-        fetchLocation()
+            location()
         }
     }
 
-    private fun fetchLocation() {
+    private fun location() {
         val task: Task<Location> = fusedLocationProviderClient.lastLocation
-
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION
             )
             != PackageManager.PERMISSION_GRANTED && ActivityCompat
-                .checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION)
+                .checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION
+                )
             != PackageManager.PERMISSION_GRANTED
         ) {
-            ActivityCompat.requestPermissions(this.requireActivity(), arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 101)
-
+            ActivityCompat.requestPermissions(
+                this.requireActivity(),
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                105
+            )
             return
         }
         task.addOnSuccessListener {
-            if (it != null){
-                binding.tvLatitude.text = it.latitude.toString()
-                binding.tvLongitude.text = it.longitude.toString()
-                Toast.makeText(requireContext(),"${it.latitude} ${it.longitude}", Toast.LENGTH_SHORT).show()
+            if (it != null) {
+                binding.tvLatitude.text = "${it.latitude.toString()} lat"
+                binding.tvLongitude.text = "${it.longitude.toString()} lon"
+                Toast.makeText(
+                    requireContext(),
+                    "${it.latitude} ${it.longitude}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

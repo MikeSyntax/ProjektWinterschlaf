@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
+import com.example.modulabschlussandroid.adapters.AdapterFavorite
 import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
 import com.example.modulabschlussandroid.data.datamodels.apicall.Result
 import com.example.modulabschlussandroid.databinding.FragmentDetailBinding
@@ -34,7 +35,10 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Observer des aktuellen angeklickten Objekts
         viewModel.currentObject.observe(viewLifecycleOwner) { thisObject ->
+
+        //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
             binding.tvDetailCity.text = thisObject.city
             binding.tvDetailDescription.text = thisObject.description
             binding.tvDetailObject.text = thisObject.objectdescription
@@ -87,6 +91,11 @@ class DetailFragment : Fragment() {
         //zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToFavoriteFragment())
+        }
+
+        //Entfernung zum Ziel messen
+        binding.tvDistance.setOnClickListener {
+            findNavController().navigate(R.id.locationFragment)
         }
     }
 

@@ -32,14 +32,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val allObjects = viewModel.objectListLive
+        val objectList = viewModel.objectList
 
         val recView = binding.rvRentableObjects
 
         recView.setHasFixedSize(true)
 
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
-        allObjects.observe(viewLifecycleOwner) {
+        objectList.observe(viewLifecycleOwner) {
             //Parameter objectList(it) und ViewModel
             recView.adapter = AdapterObjects(it, viewModel)
         }

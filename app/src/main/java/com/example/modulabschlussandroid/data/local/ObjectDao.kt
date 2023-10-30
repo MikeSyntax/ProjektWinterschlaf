@@ -24,7 +24,7 @@ interface ObjectDao {
     fun showALL(): LiveData<List<Objects>>
 
     //Alle Objekte mit liked=true aus der Datenbank lesen mit LiveDate
-    @Query("SELECT * FROM Objects WHERE liked=1")
+    @Query("SELECT * FROM Objects WHERE liked = 1")
     fun showALLLikedObjects(): LiveData<List<Objects>>
 
     //Alle Objekte in der Datenbank löschen
@@ -42,5 +42,4 @@ interface ObjectDao {
     //Zählen der Einträge in der Datenbank
     @Query("SELECT COUNT (*) FROM Objects")
     fun countObjects(): Int
-
 }

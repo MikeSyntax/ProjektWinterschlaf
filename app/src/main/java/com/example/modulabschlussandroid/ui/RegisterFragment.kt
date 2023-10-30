@@ -9,13 +9,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
+import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentRegisterBinding
-import com.example.modulabschlussandroid.data.datamodels.SecretData
+
 
 class RegisterFragment : Fragment() {
 
     // Erstellen einer Liste users aus der Klasse SecretData
-    private var userProfile = SecretData()
+    private var userProfile = PersonalData()
 
     //Binding initialisieren
     private lateinit var binding: FragmentRegisterBinding
@@ -52,6 +53,7 @@ class RegisterFragment : Fragment() {
                 userProfile.userName = binding.textInputUserAvatar.text.toString()
                 userProfile.email = binding.textInputUserEmail.text.toString()
                 userProfile.password = binding.textInputUserPassword.text.toString()
+                userProfile.loggedIn = true
                 findNavController().navigate(R.id.homeFragment)
                 //andernfalls
             } else {

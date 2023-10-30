@@ -53,8 +53,9 @@ class AdapterObjects(
         //Weiterleitung auf eine Detailseite
         binding.cvItemObject.setOnClickListener {
 
-            //API Call wird gestartet
-            viewModel.getGeoResult()
+            //API Call wird gestartet mit Übergabe der Stadt
+            val city: String = thisObject.city
+            viewModel.getGeoResult(city)
 
             //Navigation auf das  aktuelle Objekt welches angeklickt wurde
             viewModel.setCurrentObject(thisObject)

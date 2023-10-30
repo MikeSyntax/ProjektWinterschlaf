@@ -10,13 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
-
+import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentIntroBinding
 
 
 class IntroFragment : Fragment() {
     private lateinit var binding: FragmentIntroBinding
 
+    private var userProfile = PersonalData()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +60,12 @@ class IntroFragment : Fragment() {
 
     //Funktion zu Navigation auf die gewünschte Seite
     private fun navigate() {
-        findNavController().navigate(R.id.logInFragment)
+        //Falls eingeloggt, weiterleitung zum HomeScreen
+        if (userProfile.loggedIn) {
+            findNavController().navigate(R.id.homeFragment)
+        //Falls nicht eingeloggt, dann direct zum LoginScreen
+        } else {
+            findNavController().navigate(R.id.logInFragment)
+        }
     }
 }
