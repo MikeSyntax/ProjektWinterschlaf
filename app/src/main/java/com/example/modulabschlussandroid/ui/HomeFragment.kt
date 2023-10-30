@@ -48,13 +48,11 @@ class HomeFragment : Fragment() {
         binding.cvFavorite.setOnClickListener {
             val navController = binding.cvFavorite.findNavController()
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToFavoriteFragment())
+        }
 
-
-         /*   recViewAdapter?.sortObjects(
-                allObjects.value!!.filter {
-                    it.liked
-                }
-            )*/
+        //zu den Favoriten navigieren
+        binding.cvProfile.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment2())
         }
     }
 }

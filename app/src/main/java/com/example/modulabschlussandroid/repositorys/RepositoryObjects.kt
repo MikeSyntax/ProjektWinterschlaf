@@ -10,6 +10,8 @@ import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.example.modulabschlussandroid.data.remote.LocationApiObject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 
 class RepositoryObjects(
@@ -25,12 +27,6 @@ class RepositoryObjects(
 
     val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
 
-    /*
-    //Anlegen einer LiveData Variablen mit allen Items der Database
-    private val _objectList: MutableLiveData<List<Objects>> = MutableLiveData()
-    val objectList: LiveData<List<Objects>>
-        get() = _objectList
-    */
 //Geliked Objects==========================================================================================
 
     val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
@@ -41,15 +37,10 @@ class RepositoryObjects(
     val geoResult: LiveData<Geo>
         get() = _geoResult
 
-    //LiveData der GeoDaten Abfrage über einen API Call
-    /* private val _geoResult: MutableLiveData<Location> = MutableLiveData()
-     val geoResult: LiveData<Location>
-         get () = _geoResult*/
-
     //API Call starten
-    suspend fun getGeoResult(city : String) {
+    suspend fun getGeoResult(city: String) {
         try {
-            val geo = api.retrofitService.getGeoCode(city,1,"de","json")
+            val geo = api.retrofitService.getGeoCode(city, 1, "de", "json")
             _geoResult.value = geo
             //   _geoResult.value = api2.retrofitService2.getLocationCode()
         } catch (e: Exception) {
@@ -62,17 +53,7 @@ class RepositoryObjects(
     suspend fun loadAllObjects() {
         val data = ObjectsExampleData
         try {
-       /*     //objectList muss zuerst angeschaut werden bzw. geprüft ob leer
-            _objectList.value = database.objectDao.showALL().value
-            Log.e(
-                "Repository",
-                "Database Anfang vor if Bedingung - ${database.objectDao.showALL().value}"
-            )
-            if (objectList.value.isNullOrEmpty()) {
-                Log.e("Repository", "if Bedingung erfüllt")*/
-
-                //Diese If Abfrage funktioniert auch nicht, es werden überhaupt keine Daten in die Datenbank übergeben
-               // if (countObjects() == 0){
+            if (countObjects() == 0) {
                 database.objectDao.insertObject(data.object1)
                 database.objectDao.insertObject(data.object2)
                 database.objectDao.insertObject(data.object3)
@@ -84,32 +65,20 @@ class RepositoryObjects(
                 database.objectDao.insertObject(data.object9)
                 database.objectDao.insertObject(data.object10)
                 database.objectDao.insertObject(data.object11)
-
-         /*       Log.e(
-                    "Repository",
-                    "Datenbank nach dem inserten - ${database.objectDao.showALL().value}"
-                )
-                //Nach dem inserten wird die Datenbank nochmal aktualisiert auf den Wert
-                _objectList.value = database.objectDao.showALL().value
-                Log.e(
-                    "Repository",
-                    "Database Ende if Bedingung - ${database.objectDao.showALL().value}"
-                )*/
-
-            //}
+            }
         } catch (e: Exception) {
             Log.e("Repository", "$e loadAllObjects failed")
         }
     }
 
-    //Count Funktion aus der Dao
-    fun countObjects(): Int {
-        return try {
-            var count = 0
-            count = database.objectDao.countObjects()
-            count
+    //Count Funktion aus der Dao mit Context Rückgabe als Returnwert und Suspend als Coroutine
+    private suspend fun countObjects(): Int = withContext(Dispatchers.IO) {
+        try {
+            val count = database.objectDao.countObjects()
+            return@withContext count
         } catch (e: Exception) {
             Log.e("Repository", " $e - count Objects failed")
+            return@withContext 0
         }
     }
 
@@ -131,14 +100,6 @@ class RepositoryObjects(
         }
     }
 
-    //Löschen aller Objekte
-    suspend fun deleteAll() {
-        try {
-            database.objectDao.deleteALL()
-        } catch (e: Exception) {
-            Log.e("Repository", "deleteAll failed")
-        }
-    }
 
     //Löschen eines einzigen Objektes mit Kennung der id
     suspend fun deleteById(id: Long) {
@@ -146,6 +107,15 @@ class RepositoryObjects(
             database.objectDao.deleteById(id)
         } catch (e: Exception) {
             Log.e("Repository", "deleteById failed")
+        }
+    }
+
+    //Löschen aller Objekte
+    suspend fun deleteAll() {
+        try {
+            database.objectDao.deleteALL()
+        } catch (e: Exception) {
+            Log.e("Repository", "deleteAll failed")
         }
     }
 }

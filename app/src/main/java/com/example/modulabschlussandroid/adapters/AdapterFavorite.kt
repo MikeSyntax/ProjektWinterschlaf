@@ -2,31 +2,35 @@ package com.example.modulabschlussandroid.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
 import com.example.modulabschlussandroid.data.datamodels.apicall.Result
 import com.example.modulabschlussandroid.databinding.FavoriteItemSleepBinding
+import com.example.modulabschlussandroid.ui.DetailFragment
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
 class AdapterFavorite(
 
     private val dataset: List<Objects>,
-    private val viewModel: ViewModelObjects
+    private val viewModel: ViewModelObjects,
 
-): RecyclerView.Adapter<AdapterFavorite.ItemViewHolder>() {
+) : RecyclerView.Adapter<AdapterFavorite.ItemViewHolder>() {
 
-    inner class ItemViewHolder(val binding: FavoriteItemSleepBinding):
-            RecyclerView.ViewHolder(binding.root)
+    inner class ItemViewHolder(val binding: FavoriteItemSleepBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-      val binding = FavoriteItemSleepBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-    return ItemViewHolder(binding)
+        val binding =
+            FavoriteItemSleepBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ItemViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-       return dataset.size
+        return dataset.size
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

@@ -24,8 +24,8 @@ data class Objects(
     var description: String,
     var liked: Boolean = false,
 
-    @ColumnInfo(name = "zipCode", defaultValue = "0")
-    var zipCode: Int
+  //  @ColumnInfo(name = "zipCode", defaultValue = "0")
+    var zipCode: String
 
 
 )

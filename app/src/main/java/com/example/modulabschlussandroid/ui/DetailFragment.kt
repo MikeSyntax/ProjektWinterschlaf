@@ -93,6 +93,11 @@ class DetailFragment : Fragment() {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToFavoriteFragment())
         }
 
+        //zu den Favoriten navigieren
+        binding.cvProfile.setOnClickListener {
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToProfileFragment())
+        }
+
         //Entfernung zum Ziel messen
         binding.tvDistance.setOnClickListener {
             findNavController().navigate(R.id.locationFragment)
@@ -100,7 +105,7 @@ class DetailFragment : Fragment() {
     }
 
     //Einbinden der ermittelten GeoDaten
-    private fun geoObserver() {
+     fun geoObserver() {
         viewModel.geoResult.observe(viewLifecycleOwner) {
             // Auf das LiveData-Objekt zugreifen
             val geo: Geo? = viewModel.geoResult.value

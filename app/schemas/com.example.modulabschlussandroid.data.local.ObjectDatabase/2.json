@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "f728af4a32ad48647b921407ac776f7b",
+    "identityHash": "1908b7ebd925d83f4145434f50358e85",
     "entities": [
       {
         "tableName": "Objects",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `image1Resource` INTEGER NOT NULL, `image2Resource` INTEGER NOT NULL, `image3Resource` INTEGER NOT NULL, `image4Resource` INTEGER NOT NULL, `image5Resource` INTEGER NOT NULL, `city` TEXT NOT NULL, `objectdescription` TEXT NOT NULL, `price` REAL NOT NULL, `description` TEXT NOT NULL, `liked` INTEGER NOT NULL, `zipCode` INTEGER NOT NULL DEFAULT 0)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `image1Resource` INTEGER NOT NULL, `image2Resource` INTEGER NOT NULL, `image3Resource` INTEGER NOT NULL, `image4Resource` INTEGER NOT NULL, `image5Resource` INTEGER NOT NULL, `city` TEXT NOT NULL, `objectdescription` TEXT NOT NULL, `price` REAL NOT NULL, `description` TEXT NOT NULL, `liked` INTEGER NOT NULL, `zipCode` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -77,9 +77,8 @@
           {
             "fieldPath": "zipCode",
             "columnName": "zipCode",
-            "affinity": "INTEGER",
-            "notNull": true,
-            "defaultValue": "0"
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -90,12 +89,50 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "PersonalData",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userName` TEXT NOT NULL, `email` TEXT NOT NULL, `password` TEXT NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userName`))",
+        "fields": [
+          {
+            "fieldPath": "userName",
+            "columnName": "userName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "password",
+            "columnName": "password",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "loggedIn",
+            "columnName": "loggedIn",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "userName"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f728af4a32ad48647b921407ac776f7b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1908b7ebd925d83f4145434f50358e85')"
     ]
   }
 }

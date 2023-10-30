@@ -53,6 +53,11 @@ class FavoriteFragment : Fragment() {
 
         }
 
+        //zu den Favoriten navigieren
+        binding.cvProfile.setOnClickListener {
+            findNavController().navigate(FavoriteFragmentDirections.actionFavoriteFragmentToProfileFragment())
+        }
+
         //Mit dem zurückButton zurück navigieren
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()

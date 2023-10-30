@@ -33,13 +33,6 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     var geoResult: LiveData<Geo> = repository.geoResult
     //var geoResult: LiveData<Location> = repository.geoResult
 
-/*
-    //Erstellen einer LiveData mit dem aktuellen GeoCode
-    private val _currentGeoData: MutableLiveData<Result> = MutableLiveData()
-    val currentGeoData: LiveData<Result>
-        get()=_currentGeoData
-*/
-
     //Erstellen einer LivaData mit dem aktuellen Objekt
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
     val currentObject: LiveData<Objects>
@@ -47,13 +40,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     //Erste Befüllung der Datenbank
     init {
-        //Erst alle in der Datenbank löschen
-       /* viewModelScope.launch {
-            repository.deleteAll()
-        }*/
-        //Dann neu einfügen
-
-        //TODO hier muss unbedingt die Kontrolle stattfinden, ob die Datenbank leer ist, denn nur dann soll eingefügt werden
+        //Prüfen ob die Datenbank leer ist, denn nur dann soll eingefügt werden
         viewModelScope.launch {
                 repository.loadAllObjects()
         }
@@ -86,15 +73,6 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
             _currentObject.postValue(objects)
         }
     }
-
-/*
-    //Anzeige des aktuellen GeoCodes aus der Result Klasse
-    fun setCurrentGeoData(geoCode: Result) {
-        viewModelScope.launch {
-            _currentGeoData.postValue(geoCode)
-        }
-    }
- */
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {

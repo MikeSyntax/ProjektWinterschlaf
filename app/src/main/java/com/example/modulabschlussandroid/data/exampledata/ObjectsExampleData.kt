@@ -18,7 +18,7 @@ object ObjectsExampleData {
         155.00,
         "Freifläche auf großen Gelände mit Kameraüberwachung",
         false,
-        76229
+        "76229"
     )
 
 
@@ -34,7 +34,7 @@ object ObjectsExampleData {
         55.00,
         "Lagerplatz mit ganz viel Fläche und Stauraum",
         false,
-        76133
+        "76133"
     )
 
     val object3 = Objects(
@@ -49,7 +49,7 @@ object ObjectsExampleData {
         25.00,
         "Sicherer Garagenstellplatz in zentraler Lage.",
         false,
-        76229
+        "76229"
     )
 
     val object4 = Objects(
@@ -64,7 +64,7 @@ object ObjectsExampleData {
         15.00,
         "Überdachter Stellplatz für Ihr Auto.",
         false,
-        76185
+        "76185"
     )
 
     val object5 = Objects(
@@ -79,7 +79,7 @@ object ObjectsExampleData {
         70.00,
         "Großer Gewerbepark mit vielseitigen Lagermöglichkeiten.",
         false,
-        76131
+        "76131"
     )
 
     val object6 = Objects(
@@ -94,7 +94,7 @@ object ObjectsExampleData {
         30.00,
         "Sichere Garage in ruhiger Nachbarschaft.",
         false,
-        76187
+        "76187"
     )
 
     val object7 = Objects(
@@ -109,7 +109,7 @@ object ObjectsExampleData {
         20.00,
         "Zugang zu einem bequemen Stellplatz in der Innenstadt.",
         false,
-        76477
+        "76477"
     )
 
     val object8 = Objects(
@@ -124,7 +124,7 @@ object ObjectsExampleData {
         60.00,
         "Klimatisierter Lagerplatz für empfindliche Waren.",
         false,
-        76287
+        "76287"
     )
 
     val object9 = Objects(
@@ -139,7 +139,7 @@ object ObjectsExampleData {
         35.00,
         "Gemütliche Garage für Motorräder und Hobbyprojekte.",
         false,
-        76327
+        "76327"
     )
 
     val object10 = Objects(
@@ -154,7 +154,7 @@ object ObjectsExampleData {
         18.00,
         "Überdachter Stellplatz für Ihr Fahrzeug.",
         false,
-        76133
+        "76133"
     )
 
     val object11 = Objects(
@@ -169,153 +169,6 @@ object ObjectsExampleData {
         45.00,
         "Praktische Lagerräume in einem gesicherten Gebäudekomplex.",
         false,
-        76229
+        "76229"
     )
 }
-
-
-
-
-
-
-   //So würde eine Liste aussehen
-    /*val objectsList = listOf(
-
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Leipzig",
-            "Lagerplatz",
-            55.00,
-            "Lagerplatz mit ganz viel Fläche und Stauraum"
-        ),
-
-
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Leipzig",
-            "Lagerplatz",
-            55.00,
-            "Lagerplatz mit ganz viel Fläche und Stauraum"
-        ),
-
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Berlin",
-            "Garage",
-            25.00,
-            "Sicherer Garagenstellplatz in zentraler Lage."
-        ),
-
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Hamburg",
-            "Stellplatz",
-            15.00,
-            "Überdachter Stellplatz für Ihr Auto."
-        ),
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "München",
-            "Lagerplatz",
-            70.00,
-            "Großer Gewerbepark mit vielseitigen Lagermöglichkeiten."
-        ),
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Köln",
-            "Garage",
-            30.00,
-            "Sichere Garage in ruhiger Nachbarschaft."
-        ),
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Frankfurt",
-            "Stellplatz",
-            20.00,
-            "Zugang zu einem bequemen Stellplatz in der Innenstadt."
-        ),
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Düsseldorf",
-            "Lagerplatz",
-            60.00,
-            "Klimatisierter Lagerplatz für empfindliche Waren."
-        ),
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Stuttgart",
-            "Garage",
-            35.00,
-            "Gemütliche Garage für Motorräder und Hobbyprojekte."
-        ),
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Dresden",
-            "Stellplatz",
-            18.00,
-            "Überdachter Stellplatz für Ihr Fahrzeug."
-        ),
-        Objects(
-            id = 0,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            R.drawable.bild_halle,
-            "Nürnberg",
-            "Lagerplatz",
-            45.00,
-            "Praktische Lagerräume in einem gesicherten Gebäudekomplex."
-        )
-    )
-}*/

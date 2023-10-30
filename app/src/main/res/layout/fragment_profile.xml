@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_search"
+            android:id="@+id/cv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
@@ -35,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:backgroundTint="@color/white"
-                    android:src="@drawable/search" />
+                    android:src="@drawable/back" />
 
                 <TextView
                     style="@style/textSuperSmall"
@@ -43,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingEnd="5dp"
-                    android:text="Suche" />
+                    android:text="zurück" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -57,7 +56,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_settings"
+            android:id="@+id/cv_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -76,14 +75,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:text="Set   " />
+                    android:text="editieren" />
 
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:backgroundTint="@color/white"
-                    android:src="@drawable/settings" />
+                    android:src="@drawable/forward" />
 
 
             </LinearLayout>
@@ -107,42 +106,51 @@
     <TextView
         android:id="@+id/textView4"
         style="@style/textMiddle"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="78dp"
-        android:text="Home"
+        android:text="Profil"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/description"
-        style="@style/textSuperSmall"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:text="Finde jetzt Garagen, Stellplätze und Lager in deiner Nähe, sofort verfügbar ganz einfach über die Suche."
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="4dp"
+        android:src="@drawable/projekt_winterschlaf_logo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_rentable_objects"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginLeft="20dp"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+    <TextView
+        android:id="@+id/tv_log"
+        style="@style/textSuperSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="16dp"
+        android:text="Eingeloggt als :"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        app:spanCount="2"
-        tools:listitem="@layout/list_item_sleep" />
+        app:layout_constraintTop_toBottomOf="@+id/materialDividerTop" />
 
+
+    <TextView
+        android:id="@+id/tv_logged_username"
+        style="@style/textSuperSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="16dp"
+        android:text="logged userName"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_log" />
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"
@@ -194,13 +202,13 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:src="@drawable/home"
-                            app:tint="@color/white" />
+                            app:tint="@color/primary_dark_green" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
+                            android:textColor="@color/primary_dark_green"
                             android:gravity="center"
                             android:text="Home" />
 
@@ -328,13 +336,15 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="@color/white"
                             android:layout_gravity="center"
-                            android:src="@drawable/profile" />
+                            android:src="@drawable/profile"
+                            app:tint="@color/white" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
+                            android:textColor="@color/white"
                             android:text=" Profil " />
 
                     </LinearLayout>
