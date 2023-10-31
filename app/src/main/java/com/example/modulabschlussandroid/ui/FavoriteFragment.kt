@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterFavorite
-import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
-import com.example.modulabschlussandroid.data.datamodels.apicall.Result
 import com.example.modulabschlussandroid.databinding.FragmentFavoriteBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 

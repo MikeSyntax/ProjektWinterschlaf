@@ -1,7 +1,6 @@
 package com.example.modulabschlussandroid.data.remote
 
-import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
-import com.example.modulabschlussandroid.data.datamodels.apicall.Location
+import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Location
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -18,7 +17,7 @@ const val ZIP_CODE = "76477"
 const val API_KEY2 = "248358c1a32881e0e7ddbffec8c8658c"
 
 //Falls eine Api Token gebraucht wird, muss ein Client gesetzt werden
-private val client = OkHttpClient
+private val client1 = OkHttpClient
     //der Builder nimmt den Token und erlaubt uns die Anfrage zu stellen
     .Builder()
     //Eine Kette an Anfragen die wir stellen wollen
@@ -40,7 +39,7 @@ private val moshi: Moshi = Moshi.Builder()
 
 
 private val retroFit: Retrofit = Retrofit.Builder()
-    .client(client)
+    .client(client1)
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL2)
     .build()

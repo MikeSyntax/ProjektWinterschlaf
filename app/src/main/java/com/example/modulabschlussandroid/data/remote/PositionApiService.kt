@@ -1,6 +1,6 @@
 package com.example.modulabschlussandroid.data.remote
 
-import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
+import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit

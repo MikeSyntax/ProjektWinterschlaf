@@ -1,4 +1,4 @@
-package com.example.modulabschlussandroid.data.datamodels.apicall
+package com.example.modulabschlussandroid.data.datamodels.apicall.geo
 
 data class Location(
     val country: String?,

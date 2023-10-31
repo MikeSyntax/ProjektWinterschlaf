@@ -3,18 +3,16 @@ package com.example.modulabschlussandroid.repositorys
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
+import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
-import com.example.modulabschlussandroid.data.datamodels.apicall.Location
+import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
+import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
-import com.example.modulabschlussandroid.data.remote.LocationApiObject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
-
+//Repository Pattern nur eine Datenquelle für die ganze App um immer die gleichen Daten zu haben====
 class RepositoryObjects(
 
     //Verbindung zur Datenbank
@@ -22,7 +20,11 @@ class RepositoryObjects(
 
     //Verbindung zum Objekt in der PositionApiService
     private val api: GeoCoderApiObject,
-    //private val api2: LocationApiObject
+    //private val api2: LocationApiObject,
+
+    //Verbindung zum Objekt in der DistanceApiService
+    private val apiDistance: DistanceApiObject
+
 ) {
 //LiveData ObjectList===============================================================================
 
@@ -51,6 +53,23 @@ class RepositoryObjects(
             Log.e("Repository", "$e - getGeoResult API Call failed")
         }
     }
+//DistanceApiData===========================================================================================
+
+    //LiveData der DistanceData Abfrage über einen Api Call
+    private val _distanceData: MutableLiveData<DistanceMatrix> = MutableLiveData()
+    val distanceData: LiveData<DistanceMatrix>
+        get () = _distanceData
+
+    suspend fun getDistanceData(origins: String, destinations: String,) {
+        try {
+            val data = apiDistance.retrofitService3.getDistance(origins, destinations)
+            Log.d("success Repository", "$destinations für Ziel, $origins für Start")
+            _distanceData.value = data
+        } catch (e: Exception) {
+            Log.e("Repository", "$e - getDistance API Call failed")
+        }
+    }
+
 //Datenbank anlegen=================================================================================
 
     //Falls die Datenbank noch leer ist, einmal bitte alle Objekte hineinladen

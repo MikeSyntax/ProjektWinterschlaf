@@ -1,4 +1,4 @@
-package com.example.modulabschlussandroid.data.datamodels.apicall
+package com.example.modulabschlussandroid.data.datamodels.apicall.geo
 
 
 //Hier mussten ? dahinter, da manchmal keine Daten angegeben sind
