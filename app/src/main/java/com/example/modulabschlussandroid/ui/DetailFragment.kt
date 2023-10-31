@@ -68,9 +68,15 @@ class DetailFragment : Fragment() {
 
 
             binding.btnGetDistance.setOnClickListener {
+
+//TODO  der Button muss in den Ursprungszustand beim Verlassen der Seite gesetzt werden
+// und die anzeige der Gesamtkilometer erfolgt erst beim zweiten Klick auf den Butten
                 location()
                 viewModel.getDistanceData("$lat1,$lon1", "$lat2,$lon2")
-                Log.d("success Knöpfchen für Distance Anzeige", "$lon1, Longitude1 Start und $lon2 Longitude 2 Ziel")
+                Log.d(
+                    "success Knöpfchen für Distance Anzeige",
+                    "$lon1, Longitude1 Start und $lon2 Longitude 2 Ziel"
+                )
             }
 
 
@@ -129,36 +135,36 @@ class DetailFragment : Fragment() {
             findNavController().navigate(R.id.locationFragment)
         }
     }
-/*
-    private fun distanceObserver() {
-        viewModel.distanceData.observe(viewLifecycleOwner) {
-            //auf das LiveData zugreifen
-            val data: DistanceMatrix? = viewModel.distanceData.value
-            if (data != null) {
-                val results: List<Row>? = data.rows
-                if (results != null){
-                    val deeperResults: List<Element>? = results.
-                }
-                for (thisDistance in results!!) {
-                    binding.tvDistance.text = thisDistance.text
+
+    /*
+        private fun distanceObserver() {
+            viewModel.distanceData.observe(viewLifecycleOwner) {
+                //auf das LiveData zugreifen
+                val data: DistanceMatrix? = viewModel.distanceData.value
+                if (data != null) {
+                    val results: List<Row>? = data.rows
+                    if (results != null){
+                        val deeperResults: List<Element>? = results.
+                    }
+                    for (thisDistance in results!!) {
+                        binding.tvDistance.text = thisDistance.text
 
 
-                    /* val results: String = data.status.toString()
-                     for (thisDistance in results){
-                         binding.tvDistance.text = "${thisDistance.} km"*/
+                        /* val results: String = data.status.toString()
+                         for (thisDistance in results){
+                             binding.tvDistance.text = "${thisDistance.} km"*/
+                    }
                 }
             }
         }
-    }
-*/
+    */
     private fun distanceObserver() {
         viewModel.distanceData.observe(viewLifecycleOwner) {
-                //Einbinden der DistanceMatrix Klasse
+            //Einbinden der DistanceMatrix Klasse
                 distanceMatrix: DistanceMatrix? ->
-                Log.d("success Detail", "$distanceMatrix distanceObserver für die Api der Entfernung")
+            Log.d("success Detail", "$distanceMatrix distanceObserver für die Api der Entfernung")
             //von der distanceMatrix über rows-Klasse zur element-Klasse bis zum Ziel distance-Klasse und dort das Textfeld mit den Kilometern
-            distanceMatrix?.rows?.firstOrNull()?.elements?.firstOrNull()?.distance?.text?.let{
-                    distanceText ->
+            distanceMatrix?.rows?.firstOrNull()?.elements?.firstOrNull()?.distance?.text?.let { distanceText ->
                 //Verbinden des Textfeldes auf dem Button mit der Kilometerangabe
                 binding.btnGetDistance.text = "$distanceText km bis zu Ziel"
             }

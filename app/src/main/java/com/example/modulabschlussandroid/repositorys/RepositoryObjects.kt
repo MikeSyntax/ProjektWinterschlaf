@@ -58,9 +58,9 @@ class RepositoryObjects(
     //LiveData der DistanceData Abfrage über einen Api Call
     private val _distanceData: MutableLiveData<DistanceMatrix> = MutableLiveData()
     val distanceData: LiveData<DistanceMatrix>
-        get () = _distanceData
+        get() = _distanceData
 
-    suspend fun getDistanceData(origins: String, destinations: String,) {
+    suspend fun getDistanceData(origins: String, destinations: String) {
         try {
             val data = apiDistance.retrofitService3.getDistance(origins, destinations)
             Log.d("success Repository", "$destinations für Ziel, $origins für Start")
@@ -130,15 +130,16 @@ class RepositoryObjects(
             Log.e("Repository", "deleteAll failed")
         }
     }
-//======================================================================================================
+
+    //======================================================================================================
 //Update eines Objektes mit Änderungen
-suspend fun updatePersonalData(personalData: PersonalData) {
-    try {
-        database.userDataDao.updateUser(personalData)
-    } catch (e: Exception) {
-        Log.e("Repository", "updateObject failed")
+    suspend fun updatePersonalData(personalData: PersonalData) {
+        try {
+            database.userDataDao.updateUser(personalData)
+        } catch (e: Exception) {
+            Log.e("Repository", "updateObject failed")
+        }
     }
-}
 
     suspend fun insertPersonalData(personalData: PersonalData) {
         try {

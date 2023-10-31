@@ -1,23 +1,14 @@
 package com.example.modulabschlussandroid.adapters
 
-import android.content.pm.PackageManager
-import android.location.Location
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.app.ActivityCompat
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.ListItemSleepBinding
 import com.example.modulabschlussandroid.ui.HomeFragmentDirections
-import com.example.modulabschlussandroid.ui.lat1
-import com.example.modulabschlussandroid.ui.lon1
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.Task
 
 //Der Adapter organisiert mit Hilfe der Viewholder das Recycling der Items
 class AdapterObjects(
@@ -26,8 +17,6 @@ class AdapterObjects(
     private var viewModel: ViewModelObjects
 
 ) : RecyclerView.Adapter<AdapterObjects.ItemViewHolder>() {
-
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
     //Hier wird die View umfasst und der Listeneintrag dargestellt
     inner class ItemViewHolder(val binding: ListItemSleepBinding) :
@@ -46,9 +35,6 @@ class AdapterObjects(
 
     //Hier werden die ViewHolder also die leeren Gerüste mit Daten befüllt
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-
-        fusedLocationProviderClient = LocationServices
-            .getFusedLocationProviderClient(requireContext())
 
         //Ein bestimmtes Objekt an einer bestimmten Position
         val thisObject = dataset[position]
@@ -82,46 +68,6 @@ class AdapterObjects(
     override fun getItemCount(): Int {
         return dataset.size
     }
-
-
-    private fun location() {
-        val task: Task<Location> = fusedLocationProviderClient.lastLocation
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat
-                .checkSelfPermission(
-                    requireContext(),
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this.requireActivity(),
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                101
-            )
-            return
-        }
-        task.addOnSuccessListener {
-            Log.d("success SuccessListener", "${it.longitude} Start Longitude")
-            if (it != null) {
-                //Hier werden die Koordinaten des eigenen Standortes in die Variablen gespeichert für Entfernungsabfrage
-                lat1 = it.latitude.toString()
-                lon1 = it.longitude.toString()
-
-                Toast.makeText(
-                    requireContext(),
-                    "Ziel Koordinaten \n${it.latitude} ${it.longitude}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-    }
-
-
-
     /*
         //Änderungen werden bei Aufruf an das Dataset mitgeteilt
         fun sortObjects(list: List<Objects>) {

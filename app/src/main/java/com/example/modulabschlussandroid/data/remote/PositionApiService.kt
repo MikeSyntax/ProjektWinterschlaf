@@ -27,10 +27,15 @@ interface GeoCoderApiService {
     @GET("search")
     // retrofit2 ein Paket, das zu der Retrofit-Bibliothek gehört, die normalerweise für die Erstellung von HTTP-Anfragen in Android-Anwendungen verwendet wird.
     // Das @retrofit2.http.Query ist eine Annotation aus diesem Paket und wird verwendet, um Abfrageparameter für HTTP-Anfragen zu deklarieren.
-    suspend fun getGeoCode(@retrofit2.http.Query("name") city: String, @retrofit2.http.Query("count") count: Int, @retrofit2.http.Query("language") language: String, @retrofit2.http.Query("format") format: String): Geo
+    suspend fun getGeoCode(
+        @retrofit2.http.Query("name") city: String,
+        @retrofit2.http.Query("count") count: Int,
+        @retrofit2.http.Query("language") language: String,
+        @retrofit2.http.Query("format") format: String
+    ): Geo
 }
 
 //Erstellen eines Objektes
-object GeoCoderApiObject{
+object GeoCoderApiObject {
     val retrofitService: GeoCoderApiService by lazy { retroFit.create(GeoCoderApiService::class.java) }
 }

@@ -43,19 +43,19 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     init {
         //Prüfen ob die Datenbank leer ist, denn nur dann soll eingefügt werden
         viewModelScope.launch {
-                repository.loadAllObjects()
+            repository.loadAllObjects()
         }
     }
 
     //GeoDaten der jeweiligen Objekte holen
-    fun getGeoResult(city : String) {
+    fun getGeoResult(city: String) {
         viewModelScope.launch {
             repository.getGeoResult(city)
         }
     }
 
     //DistanceDaten der übergebenen Koordinaten
-    fun getDistanceData(origins: String, destinations: String){
+    fun getDistanceData(origins: String, destinations: String) {
         viewModelScope.launch {
             repository.getDistanceData(origins, destinations)
         }
