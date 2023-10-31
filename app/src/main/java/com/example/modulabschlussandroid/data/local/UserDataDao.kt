@@ -28,4 +28,6 @@ interface UserDataDao {
         @Query("SELECT * FROM PersonalData WHERE loggedIn = 1")
         fun logInStatusUser(): LiveData<PersonalData>
 
+
+
     }

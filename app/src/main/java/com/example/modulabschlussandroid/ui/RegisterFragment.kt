@@ -53,7 +53,7 @@ class RegisterFragment : Fragment() {
                 userProfile.userName = binding.textInputUserAvatar.text.toString()
                 userProfile.email = binding.textInputUserEmail.text.toString()
                 userProfile.password = binding.textInputUserPassword.text.toString()
-                userProfile.loggedIn = true
+                logStat = true
                 findNavController().navigate(R.id.homeFragment)
                 //andernfalls
             } else {

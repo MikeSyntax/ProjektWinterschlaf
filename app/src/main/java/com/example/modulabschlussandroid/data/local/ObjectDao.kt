@@ -41,5 +41,5 @@ interface ObjectDao {
 
     //Zählen der Einträge in der Datenbank
     @Query("SELECT COUNT (*) FROM Objects")
-    fun countObjects(): Int
+    suspend fun countObjects(): Int
 }

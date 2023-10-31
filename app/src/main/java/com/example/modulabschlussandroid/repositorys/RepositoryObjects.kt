@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.modulabschlussandroid.data.datamodels.apicall.Geo
 import com.example.modulabschlussandroid.data.datamodels.Objects
+import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.data.datamodels.apicall.Location
 import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
@@ -23,15 +24,18 @@ class RepositoryObjects(
     private val api: GeoCoderApiObject,
     //private val api2: LocationApiObject
 ) {
-//LiveData ObjectList==========================================================================================
+//LiveData ObjectList===============================================================================
 
+    //Alle Objekte in der Datenbank als LiveData anzeigen
     val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
 
-//Geliked Objects==========================================================================================
+//Geliked Objects===================================================================================
 
+    //Alle favorisierten Objekte in der Datenbank als LiveData anzeigen
     val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
 
-//GEOdata==========================================================================================
+//GEOdata===========================================================================================
+
     //LiveData der GeoDaten Abfrage über einen API Call
     private val _geoResult: MutableLiveData<Geo> = MutableLiveData()
     val geoResult: LiveData<Geo>
@@ -47,13 +51,13 @@ class RepositoryObjects(
             Log.e("Repository", "$e - getGeoResult API Call failed")
         }
     }
-//Datenbank anlegen==========================================================================================
+//Datenbank anlegen=================================================================================
 
     //Falls die Datenbank noch leer ist, einmal bitte alle Objekte hineinladen
     suspend fun loadAllObjects() {
         val data = ObjectsExampleData
         try {
-            if (countObjects() == 0) {
+            if (database.objectDao.countObjects() == 0) {
                 database.objectDao.insertObject(data.object1)
                 database.objectDao.insertObject(data.object2)
                 database.objectDao.insertObject(data.object3)
@@ -68,17 +72,6 @@ class RepositoryObjects(
             }
         } catch (e: Exception) {
             Log.e("Repository", "$e loadAllObjects failed")
-        }
-    }
-
-    //Count Funktion aus der Dao mit Context Rückgabe als Returnwert und Suspend als Coroutine
-    private suspend fun countObjects(): Int = withContext(Dispatchers.IO) {
-        try {
-            val count = database.objectDao.countObjects()
-            return@withContext count
-        } catch (e: Exception) {
-            Log.e("Repository", " $e - count Objects failed")
-            return@withContext 0
         }
     }
 
@@ -118,4 +111,22 @@ class RepositoryObjects(
             Log.e("Repository", "deleteAll failed")
         }
     }
+//======================================================================================================
+//Update eines Objektes mit Änderungen
+suspend fun updatePersonalData(personalData: PersonalData) {
+    try {
+        database.userDataDao.updateUser(personalData)
+    } catch (e: Exception) {
+        Log.e("Repository", "updateObject failed")
+    }
+}
+
+    suspend fun insertPersonalData(personalData: PersonalData) {
+        try {
+            database.userDataDao.insertUserData(personalData)
+        } catch (e: Exception) {
+            Log.e("Repository", "updateObject failed")
+        }
+    }
+
 }

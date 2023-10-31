@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-const val BASE_URL2 = "http://api.openweathermap.org/geo/1.0/"
+const val BASE_URL2 = "https://api.openweathermap.org/geo/1.0/"
 
 //TODO Der Städtename muss sich ändern aber wie
 const val ZIP_CODE = "76477"

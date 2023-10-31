@@ -55,7 +55,7 @@ class LocationFragment : Fragment() {
             ActivityCompat.requestPermissions(
                 this.requireActivity(),
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                105
+                101
             )
             return
         }

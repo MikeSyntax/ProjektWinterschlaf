@@ -8,14 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentReadyLoginBinding
 
 
+    var logStat: Boolean = false
 //
 class ReadyLoginFragment() : Fragment() {
 
@@ -23,7 +22,6 @@ class ReadyLoginFragment() : Fragment() {
 
     // Erstellen einer Instanz userProfile aus der Klasse SecretData als LiveData
     private var userProfile =  PersonalData()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,14 +49,14 @@ class ReadyLoginFragment() : Fragment() {
             //When Bedingung erfüllt dann...
             when {
                 (userProfile.userName == user && userProfile.password == authentification) -> {
-                    userProfile.loggedIn = true
+                    logStat = true
                     Log.e("ReadyLogin", "Login Name Passwort")
                     findNavController().navigate(R.id.homeFragment)
                 }
 
                //When Bedingung erfüllt dann...
                 userProfile.email == userEmail && userProfile.password == authentification -> {
-                    userProfile.loggedIn = true
+                    logStat = true
                     Log.e("ReadyLogin", "Login Email Passwort")
                     findNavController().navigate(R.id.homeFragment)
                 }

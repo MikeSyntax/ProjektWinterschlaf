@@ -43,7 +43,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingEnd="5dp"
-                    android:text="Suche" />
+                    android:text="@string/search" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
