@@ -49,7 +49,6 @@ class AdapterObjects(
         binding.tvPrice.text = "${thisObject.price.toString()}€"
         binding.tvDescription.text = thisObject.description
 
-
         //Weiterleitung auf eine Detailseite
         binding.cvItemObject.setOnClickListener {
 

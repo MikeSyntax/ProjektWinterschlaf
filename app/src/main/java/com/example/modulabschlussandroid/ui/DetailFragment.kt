@@ -3,6 +3,7 @@ package com.example.modulabschlussandroid.ui
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -51,6 +52,7 @@ class DetailFragment : Fragment() {
             .getFusedLocationProviderClient(requireContext())
         //Observer des aktuellen angeklickten Objekts
         viewModel.currentObject.observe(viewLifecycleOwner) { thisObject ->
+            binding.btnGetDistance.text = "Entfernung zum Ziel"
 
             //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
             binding.tvDetailCity.text = thisObject.city
@@ -60,13 +62,13 @@ class DetailFragment : Fragment() {
             binding.ivDetailObject1.setImageResource(thisObject.image1Resource)
             binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
             binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
-
             //Verbinden der Detailansicht mit den GeoDaten
             geoObserver()
             //Verbinden der Detailansicht mit den Distance Daten
             distanceObserver()
 
-
+            //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt
+            // und die aktuellen Koordinaten werden an die zweite Api übergebenk um die Entfernung darzustellen
             binding.btnGetDistance.setOnClickListener {
 
 //TODO  der Button muss in den Ursprungszustand beim Verlassen der Seite gesetzt werden
@@ -79,14 +81,12 @@ class DetailFragment : Fragment() {
                 )
             }
 
-
             //Hier werden die Objekte geliked und auf in der Datenbank gespeichert
             if (thisObject.liked) {
                 binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
             } else {
                 binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
             }
-
 
             binding.ivDetailLiked.setOnClickListener {
                 if (thisObject != null) {
@@ -106,11 +106,13 @@ class DetailFragment : Fragment() {
 
         //Zurück zum Homescreen
         binding.cvBack.setOnClickListener {
+            binding.btnGetDistance.text = "Entfernung zum Ziel"
             findNavController().navigateUp()
         }
 
         //Zurück zum Homescreen
         binding.cvHome.setOnClickListener {
+            binding.btnGetDistance.text = "Entfernung zum Ziel"
             findNavController().navigateUp()
         }
 
@@ -122,42 +124,17 @@ class DetailFragment : Fragment() {
 
         //zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
+            binding.btnGetDistance.text = "Entfernung zum Ziel"
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToFavoriteFragment())
         }
 
         //zu den Favoriten navigieren
         binding.cvProfile.setOnClickListener {
+            binding.btnGetDistance.text = "Entfernung zum Ziel"
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToProfileFragment())
-        }
-
-        //Entfernung zum Ziel messen
-        binding.tvDistance.setOnClickListener {
-            findNavController().navigate(R.id.locationFragment)
         }
     }
 
-    /*
-        private fun distanceObserver() {
-            viewModel.distanceData.observe(viewLifecycleOwner) {
-                //auf das LiveData zugreifen
-                val data: DistanceMatrix? = viewModel.distanceData.value
-                if (data != null) {
-                    val results: List<Row>? = data.rows
-                    if (results != null){
-                        val deeperResults: List<Element>? = results.
-                    }
-                    for (thisDistance in results!!) {
-                        binding.tvDistance.text = thisDistance.text
-
-
-                        /* val results: String = data.status.toString()
-                         for (thisDistance in results){
-                             binding.tvDistance.text = "${thisDistance.} km"*/
-                    }
-                }
-            }
-        }
-    */
     private fun distanceObserver() {
         viewModel.distanceData.observe(viewLifecycleOwner) {
             //Einbinden der DistanceMatrix Klasse
@@ -166,11 +143,14 @@ class DetailFragment : Fragment() {
             //von der distanceMatrix über rows-Klasse zur element-Klasse bis zum Ziel distance-Klasse und dort das Textfeld mit den Kilometern
             distanceMatrix?.rows?.firstOrNull()?.elements?.firstOrNull()?.distance?.text?.let { distanceText ->
                 //Verbinden des Textfeldes auf dem Button mit der Kilometerangabe
-                binding.btnGetDistance.text = "$distanceText km bis zu Ziel"
+                binding.btnGetDistance.text = "$distanceText bis zum Ziel"
+                //Handler zum zurücksetzten des Buttons
+                Handler().postDelayed({
+                    binding.btnGetDistance.text = "Entfernung zum Ziel"
+                },5000)
             }
         }
     }
-
 
     //Einbinden der ermittelten GeoDaten
     private fun geoObserver() {
@@ -194,6 +174,9 @@ class DetailFragment : Fragment() {
         }
     }
 
+    // über den fusedLocation Manager wird der eigene Standort ermittelt,
+    // hier in diesem Fall wird der letzte also lastLocation ermittelt,
+    // und das funktioniert erst wenn man auf Google Maps seinen eigenen Standort kurz festlegt
     private fun location() {
         val task: Task<Location> = fusedLocationProviderClient.lastLocation
         if (ActivityCompat.checkSelfPermission(
@@ -229,5 +212,4 @@ class DetailFragment : Fragment() {
             }
         }
     }
-
 }
