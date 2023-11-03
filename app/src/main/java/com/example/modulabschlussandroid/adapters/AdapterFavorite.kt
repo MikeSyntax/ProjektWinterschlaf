@@ -43,6 +43,7 @@ class AdapterFavorite(
         binding.tvFavoriteDescription.text = favoriteObjects.description
         binding.tvFavoriteObject.text = favoriteObjects.objectdescription
         binding.tvFavoritePrice.text = favoriteObjects.price.toString()
+        binding.tvDistance.text = "PLZ ${favoriteObjects.zipCode}"
 
         if (favoriteObjects.liked) {
             binding.ivFavoriteLiked.setImageResource(R.drawable.star_liked)

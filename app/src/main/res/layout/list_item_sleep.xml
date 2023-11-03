@@ -5,8 +5,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_item_object"
-    android:layout_width="170dp"
-    android:layout_height="170dp"
+    android:layout_width="184dp"
+    android:layout_height="184dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
     android:backgroundTint="@color/primary_light_green"
@@ -30,7 +30,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
+                android:layout_height="90dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,15 +39,15 @@
 
                 <ImageView
                     android:id="@+id/iv_object"
-                    android:layout_width="85dp"
-                    android:layout_height="84dp"
+                    android:layout_width="92dp"
+                    android:layout_height="90dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
                     android:src="@drawable/bild_halle" />
 
                 <LinearLayout
-                    android:layout_width="85dp"
-                    android:layout_height="84dp"
+                    android:layout_width="92dp"
+                    android:layout_height="90dp"
                     android:orientation="vertical"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -58,8 +58,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:textStyle="bold"
                         android:layout_marginEnd="10dp"
-                        android:text="Ort" />
+                        android:text="@string/item_city" />
 
                     <TextView
                         android:id="@+id/tv_object"
@@ -68,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:layout_marginEnd="10dp"
-                        android:text="Objekt" />
+                        android:text="@string/item_objekt" />
 
                     <TextView
                         android:id="@+id/tv_price"
@@ -77,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:layout_marginEnd="10dp"
-                        android:text="Preis"
+                        android:text="@string/item_price"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -88,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:layout_marginEnd="10dp"
-                        android:text="Entfernung"
+                        android:text="@string/item_zip_code"
                         android:textColor="@color/primary_dark_green" />
                 </LinearLayout>
 
@@ -101,7 +102,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="84dp"
+                android:layout_height="90dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -114,8 +115,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity=""
-                        android:layout_marginStart="3dp"
-                        android:text="Description" />
+                        android:layout_margin="5dp"
+                        android:text="@string/item_description" />
 
 
             </LinearLayout>

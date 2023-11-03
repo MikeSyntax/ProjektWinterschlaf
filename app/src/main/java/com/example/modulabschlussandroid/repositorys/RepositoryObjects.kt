@@ -36,11 +36,35 @@ class RepositoryObjects(
     //Alle favorisierten Objekte in der Datenbank als LiveData anzeigen
     val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
 
-//Postleitzahlensuche Objects===================================================================================
+//Postleitzahlensuche Objekte als LiveData===================================================================================
 
     private var _zipObjects: MutableLiveData<List<Objects>> = MutableLiveData()
     val zipObjects: LiveData<List<Objects>>
         get() = _zipObjects
+
+//Funktion für die Schnellsuche über Postleitzahl=====================================================
+
+    //Anzeige aller Objekte mit einer bestimmten Postleitzahl
+    fun getZipCodeObject(zip: String) {
+        try {
+            //Die Objekt Liste wird nach Zahlen gefilter, welche über die Suche eingegeben werden
+            val zipResults = objectList.value?.filter {
+                it.zipCode.contains(zip)
+            }
+            if (zipResults == null) {
+                _zipObjects.value = emptyList()
+            } else {
+                _zipObjects.value = zipResults!!
+            }
+            Log.d(
+                "success Repo",
+                "$zip input Text - ${_zipObjects.value} zipObjects - $zipResults zipObjects"
+            )
+        } catch (e: Exception) {
+            Log.e("Repository", "getZipCodeObject failed")
+            _zipObjects.value = emptyList()
+        }
+    }
 
 //GEOdata===========================================================================================
 
@@ -127,25 +151,6 @@ class RepositoryObjects(
             Log.e("Repository", "deleteById failed")
         }
     }
-//Funktion für die Schnellsuche über Postleitzahl=====================================================
-
-    //Anzeige aller Objekte mit einer bestimmten Postleitzahl
-    fun getZipCodeObject(zip: String) {
-        try {
-            val zipResults = objectList.value?.filter {
-                it.zipCode.contains(zip)
-            }
-            if (zipResults == null){
-                _zipObjects.value = emptyList()
-            } else {
-                _zipObjects.value = zipResults!!
-            }
-            Log.d("success Repo", "$zip input Text - ${_zipObjects.value} zipObjects - $zipResults zipObjects")
-        } catch (e: Exception) {
-            Log.e("Repository", "getZipCodeObject failed")
-            _zipObjects.value = emptyList()
-        }
-    }
 
     //Löschen aller Objekte
     suspend fun deleteAll() {
@@ -157,7 +162,8 @@ class RepositoryObjects(
     }
 
 //======================================================================================================
-//Update eines Objektes mit Änderungen
+
+    //Update eines Objektes mit Änderungen
     suspend fun updatePersonalData(personalData: PersonalData) {
         try {
             database.userDataDao.updateUser(personalData)
@@ -173,5 +179,4 @@ class RepositoryObjects(
             Log.e("Repository", "updateObject failed")
         }
     }
-
 }

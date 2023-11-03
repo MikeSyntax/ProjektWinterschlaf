@@ -48,6 +48,7 @@ class AdapterObjects(
         binding.tvCity.text = thisObject.city
         binding.tvPrice.text = "${thisObject.price.toString()}€"
         binding.tvDescription.text = thisObject.description
+        binding.tvDistance.text = "PLZ ${thisObject.zipCode}"
 
         //Weiterleitung auf eine Detailseite
         binding.cvItemObject.setOnClickListener {

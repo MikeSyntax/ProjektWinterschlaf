@@ -8,4 +8,17 @@
     <string name="close_app">App schließen?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
+    <string name="HomeIntro">Finde jetzt Garagen, Stellplätze und Lager in deiner Nähe, sofort verfügbar ganz einfach über die Suche.</string>
+    <string name="item_description">Description for Object Item</string>
+    <string name="item_city">Ort</string>
+    <string name="item_objekt">Objekt</string>
+    <string name="item_price">Preis</string>
+    <string name="item_zip_code">Postleitzahl</string>
+    <string name="favorite_zip_code">Postleitzahl</string>
+    <string name="favorite_latitude">Latitude</string>
+    <string name="favorite_longitude">Longitude</string>
+    <string name="favorite_description">Description</string>
+    <string name="favorite_price">Preis</string>
+    <string name="favorite_object">Objekt</string>
+    <string name="favorite_city">Ort</string>
 </resources>

@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Dieser Abschnitt unterbindet ein zurücksringen auf den Login Screen
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val builder = AlertDialog.Builder(requireContext())
@@ -43,6 +44,8 @@ class HomeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
+//Aufbau der Ansicht, Objekte und Design erstellen================================================================================
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,35 +55,51 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+//Beginn der Ansicht und befüllen=================================================================================
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Live Date mit Objekten
         val objectList = viewModel.objectList
 
+        //RecyclerView
         val recView = binding.rvRentableObjects
 
+        //feste Größe für die Performance
         recView.setHasFixedSize(true)
+
+//LiveData Objekte überwachen=================================================================================
 
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
         objectList.observe(viewLifecycleOwner) {
             //Parameter objectList(it) und ViewModel
             recView.adapter = AdapterObjects(it, viewModel)
         }
-//NEU
+
+//Gefilterte Objekte überwachen=================================================================================
+
+        //NEU Schnellsuche alle gefilterten Objekte landen in dieser List
         viewModel.zipObjects.observe(
-            viewLifecycleOwner){
+            viewLifecycleOwner
+        ) {
             recView.adapter = AdapterObjects(it, viewModel)
             Log.d("success Home", "$it zipObjects")
         }
-//NEU
+
+//Suchtext überwachen=================================================================================
+
+        //NEU Schnellsuche der Inputtext wird weitergegeben bis zur Objekt Dao Funktion
         viewModel.inputText.observe(
-            viewLifecycleOwner) {
+            viewLifecycleOwner
+        ) {
             viewModel.getZipCodeObject(it)
             Log.d("success Home", "$it input Text")
         }
 
+//Für die Suche einen TextchangedListener=================================================================================
 
-//NEU
+        //NEU Schnellsuche für die Postleitzahl
         binding.textInputEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {}

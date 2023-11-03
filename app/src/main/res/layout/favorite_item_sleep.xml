@@ -43,7 +43,7 @@
                         android:id="@+id/iv_favorite_object1"
                         android:layout_width="85dp"
                         android:layout_height="84dp"
-                        android:layout_marginRight="3dp"
+                        android:layout_marginEnd="3dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/bild_halle"/>
@@ -53,7 +53,7 @@
                         android:id="@+id/iv_favorite_object2"
                         android:layout_width="85dp"
                         android:layout_height="84dp"
-                        android:layout_marginRight="3dp"
+                        android:layout_marginEnd="3dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/bild_halle" />
@@ -80,7 +80,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
-                            android:text="Ort" />
+                            android:text="@string/favorite_city" />
 
                         <TextView
                             android:id="@+id/tv_favorite_object"
@@ -89,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
-                            android:text="Objekt" />
+                            android:text="@string/favorite_object" />
 
                         <TextView
                             android:id="@+id/tv_favorite_price"
@@ -98,7 +98,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
-                            android:text="Preis"
+                            android:text="@string/favorite_price"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -117,30 +117,30 @@
                     android:orientation="horizontal"
                     android:layout_margin="5dp">
 
+                    <TextView
+                        android:id="@+id/tv_distance"
+                        android:layout_marginEnd="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="30"
+                        android:text="@string/favorite_zip_code" />
 
                     <TextView
                         android:id="@+id/tv_latitude"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="30"
-                        android:text="Latitude" />
+                        android:text="@string/favorite_latitude" />
 
                     <TextView
                         android:id="@+id/tv_longitude"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="30"
-                        android:text="Longitude" />
+                        android:text="@string/favorite_longitude" />
 
-                    <TextView
-                        android:id="@+id/tv_distance"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="30"
-                        android:text="Entfernung in km" />
 
 
                 </LinearLayout>
@@ -164,7 +164,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="50"
                         android:layout_marginStart="3dp"
-                        android:text="Description" />
+                        android:text="@string/favorite_description" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="30dp"

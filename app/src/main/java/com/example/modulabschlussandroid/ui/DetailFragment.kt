@@ -71,6 +71,7 @@ class DetailFragment : Fragment() {
             binding.ivDetailObject1.setImageResource(thisObject.image1Resource)
             binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
             binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
+            binding.tvDistance.text = "PLZ ${thisObject.zipCode}"
 
             //Verbinden der Detailansicht mit den GeoDaten für das Ziel
             geoObserver() //Ziel
