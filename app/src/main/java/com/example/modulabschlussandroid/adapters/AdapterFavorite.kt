@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.FavoriteItemSleepBinding
+import com.example.modulabschlussandroid.ui.DetailFragment
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
 class AdapterFavorite(

@@ -1,10 +1,12 @@
 package com.example.modulabschlussandroid.viewmodels
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
@@ -27,12 +29,20 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Hier werden die gelikten Objekte aus dem Repository eingeschleift
     var likedObjectsLive = repository.likedObjects
 
+
+    var zipObjects = repository.zipObjects
+
     //Hier wird die LiveData der Geo API Abfrage aus dem Repository eingeschleift
     var geoResult: LiveData<Geo> = repository.geoResult
     //var geoResult: LiveData<Location> = repository.geoResult
 
     //Hier wird die LiveData der Distance Api Abfrage aus dem Repository eingeschleift
     var distanceData: LiveData<DistanceMatrix> = repository.distanceData
+
+    private val _inputText = MutableLiveData<String>()
+    val inputText: LiveData<String>
+        get() = _inputText
+
 
     //Erstellen einer LivaData mit dem aktuellen Objekt
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
@@ -81,6 +91,19 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
             _currentObject.postValue(objects)
         }
     }
+
+    //Für die Suche auf der Home wird hier der Text aus dem LiveData übergeben
+    fun updateInputText(text: String) {
+        _inputText.value = text
+    }
+
+    fun getZipCodeObject(zip: String) {
+        viewModelScope.launch {
+            repository.getZipCodeObject(zip)
+            Log.d("success ViewModel", "$zip input Text")
+        }
+    }
+
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {

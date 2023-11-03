@@ -104,17 +104,52 @@
 
     </com.google.android.material.divider.MaterialDivider>
 
-    <TextView
-        android:id="@+id/textView4"
-        style="@style/textMiddle"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/ll_search"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:orientation="horizontal"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="78dp"
-        android:text="Home"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/materialDividerTop"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/textMiddle"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:layout_weight="50"
+            android:maxLines="1"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="50"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopStart="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:textAlignment="textEnd"
+                android:hint="Schnellsuche PLZ"
+                android:maxLength="5"
+                android:textSize="15sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/description"
@@ -127,7 +162,7 @@
         android:text="Finde jetzt Garagen, Stellplätze und Lager in deiner Nähe, sofort verfügbar ganz einfach über die Suche."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/ll_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_rentable_objects"

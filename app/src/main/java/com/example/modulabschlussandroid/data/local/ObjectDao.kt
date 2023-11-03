@@ -23,6 +23,10 @@ interface ObjectDao {
     @Query("SELECT * FROM Objects")
     fun showALL(): LiveData<List<Objects>>
 
+    //Alle Objekte aus der Datenbank nach Postleitzahl lesen
+    @Query("SELECT * FROM Objects WHERE zipCode = :zip")
+    fun getZipCodeObject(zip: String): LiveData<List<Objects>>
+
     //Alle Objekte mit liked=true aus der Datenbank lesen mit LiveDate
     @Query("SELECT * FROM Objects WHERE liked = 1")
     fun showALLLikedObjects(): LiveData<List<Objects>>
