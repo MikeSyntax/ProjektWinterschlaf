@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -48,17 +47,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+
+    <TextView
+        android:id="@+id/tv_please_register"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="21dp"
+        android:gravity="center_horizontal"
+        android:layout_marginEnd="90dp"
+        android:text="Noch keinen Account, hier registrieren"
+        android:textColor="@color/primary_dark_green"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
     <Button
         android:id="@+id/btn_register"
         style="@style/shadow_light_green"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:layout_marginTop="17dp"
-        android:textColor="@color/primary_light_green"
         android:text="Registrieren"
+        android:textColor="@color/primary_light_green"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_please_register" />
 
     <Button
         android:id="@+id/btn_more_info"
@@ -66,11 +81,12 @@
         android:layout_width="wrap_content"
         android:layout_height="55dp"
         android:layout_marginStart="214dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="80dp"
         android:text="Mehr Infos"
         android:textColor="@color/primary_light_green"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 

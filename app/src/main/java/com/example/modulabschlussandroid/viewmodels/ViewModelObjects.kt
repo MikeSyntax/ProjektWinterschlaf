@@ -15,6 +15,7 @@ import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.example.modulabschlussandroid.repositorys.RepositoryObjects
 import kotlinx.coroutines.launch
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
+//Hier wird die View Ebene gebaut
 
 //Hier muss das ViewModel AndroidViewModel sein, da nur hier die Mögllichkeit besteht Daten mit zugeben
 class ViewModelObjects(application: Application) : AndroidViewModel(application) {

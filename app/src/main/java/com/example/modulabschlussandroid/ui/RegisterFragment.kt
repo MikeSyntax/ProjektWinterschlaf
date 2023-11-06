@@ -1,5 +1,6 @@
 package com.example.modulabschlussandroid.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class RegisterFragment : Fragment() {
@@ -18,12 +20,14 @@ class RegisterFragment : Fragment() {
     // Erstellen einer Liste users aus der Klasse SecretData
     private var userProfile = PersonalData()
 
-    //Binding initialisieren
-    private lateinit var binding: FragmentRegisterBinding
-
     //zur Prüfung der Passworteingabe mit Sonderzeichen und Zahlen
     private var validPassword = false
 
+    //Binding initialisieren
+    private lateinit var binding: FragmentRegisterBinding
+
+//NEU
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +41,67 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//NEU Firebase Authentification ====================================================================
+        firebaseAuth = FirebaseAuth.getInstance()
+        binding.cvForward.setOnClickListener {
+            //Variablen für die Eingaben
+            val email = binding.textInputUserEmail.text.toString()
+            val password = binding.textInputUserPassword.text.toString()
+            val confirm = binding.textInputUserSecondPassword.text.toString()
+            //Prüfung der Eingaben
+            if (email.isNotEmpty() && password.isNotEmpty() && confirm.isNotEmpty()) {
+                if (password == confirm) {
+                    firebaseAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                               val navController = findNavController()
+                                navController.navigate(RegisterFragmentDirections.actionRegisterFragmentToReadyLoginFragment())
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    it.exception.toString(),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                } else {
+                    Toast.makeText(requireContext(), "Password Is Not Matching", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Empty Fields Are Not Allowed", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
         //Zurück navigieren auf die letzte Seite
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()
@@ -45,7 +110,7 @@ class RegisterFragment : Fragment() {
         binding.cvForward.setOnClickListener {
             //überprüfen der Passworteingabe mit Sonderzeichen und Groß und klein, dann wird die Variabel validPassword auf true gesetzt und kann so in der if Abfrage genu
 // TODO  // checkPasswordForLengthAndPassThrough()
-            Log.e("cvForwardClickListener","passThrough")
+            Log.e("cvForwardClickListener", "passThrough")
             //Wenn alle Methoden nicht true sind,
             if (!checkInputName() && !checkEmail() && (!checkInputPassword() /*&& validPassword*/)) {
                 exceptionMessage("Registrierung erfolgreich")
@@ -111,31 +176,31 @@ class RegisterFragment : Fragment() {
         return false
     }
 
-  /*  private fun checkPasswordForLengthAndPassThrough(): Boolean {
+      private fun checkPasswordForLengthAndPassThrough(): Boolean {
 
-        val password = binding.textInputUserPassword
-        val passwordPattern =
-            "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=,.-_ß/]).{8,}$".toRegex()
-        password.addTextChangedListener(object : TextWatcher {
+          val password = binding.textInputUserPassword
+          val passwordPattern =
+              "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=,.-_ß/]).{8,}$".toRegex()
+          password.addTextChangedListener(object : TextWatcher {
 
-            override fun afterTextChanged(newText: Editable?){
-                val password = newText.toString()
-                val isValidPassword = passwordPattern.matches(password)
+              override fun afterTextChanged(newText: Editable?){
+                  val password = newText.toString()
+                  val isValidPassword = passwordPattern.matches(password)
 
-                if (isValidPassword) {
-                    //bei richtiger Eingabe wird das validPasswort auf true gesetzt und kann so in der obigen Anfrage genutuzt werden
-                   validPassword = true
+                  if (isValidPassword) {
+                      //bei richtiger Eingabe wird das validPasswort auf true gesetzt und kann so in der obigen Anfrage genutuzt werden
+                     validPassword = true
 
-                } else {
-                    exceptionMessage("Passwort muss aus Groß- und Kleinschreibung, Zahlen und Sonderzeichen bestehen")
+                  } else {
+                      exceptionMessage("Passwort muss aus Groß- und Kleinschreibung, Zahlen und Sonderzeichen bestehen")
 
-                }
-            }
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
-        return false
-    }*/
-}
+                  }
+              }
+              override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+              }
+              override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+              }
+          })
+          return false}
+
+ */

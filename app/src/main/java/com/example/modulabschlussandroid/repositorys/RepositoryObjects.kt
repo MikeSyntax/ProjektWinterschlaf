@@ -36,13 +36,14 @@ class RepositoryObjects(
     //Alle favorisierten Objekte in der Datenbank als LiveData anzeigen
     val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
 
-//Postleitzahlensuche Objekte als LiveData===================================================================================
+//Postleitzahlensuche Objekte als LiveData==========================================================
 
-    private var _zipObjects: MutableLiveData<List<Objects>> = MutableLiveData()
-    val zipObjects: LiveData<List<Objects>>
+    //Nullable LiveData der _zipObjects
+    private var _zipObjects: MutableLiveData<List<Objects>?> = MutableLiveData()
+    val zipObjects: LiveData<List<Objects>?>
         get() = _zipObjects
 
-//Funktion für die Schnellsuche über Postleitzahl=====================================================
+//Funktion für die Schnellsuche über Postleitzahl===================================================
 
     //Anzeige aller Objekte mit einer bestimmten Postleitzahl
     fun getZipCodeObject(zip: String) {
@@ -54,7 +55,7 @@ class RepositoryObjects(
             if (zipResults == null) {
                 _zipObjects.value = emptyList()
             } else {
-                _zipObjects.value = zipResults!!
+                _zipObjects.value = zipResults
             }
             Log.d(
                 "success Repo",
@@ -83,7 +84,7 @@ class RepositoryObjects(
             Log.e("Repository", "$e - getGeoResult API Call failed")
         }
     }
-//DistanceApiData===========================================================================================
+//DistanceApiData===================================================================================
 
     //LiveData der DistanceData Abfrage über einen Api Call
     private val _distanceData: MutableLiveData<DistanceMatrix> = MutableLiveData()
@@ -161,7 +162,7 @@ class RepositoryObjects(
         }
     }
 
-//======================================================================================================
+//==================================================================================================
 
     //Update eines Objektes mit Änderungen
     suspend fun updatePersonalData(personalData: PersonalData) {

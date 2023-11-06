@@ -21,4 +21,5 @@
     <string name="favorite_price">Preis</string>
     <string name="favorite_object">Objekt</string>
     <string name="favorite_city">Ort</string>
+    <string name="no_account_register">Noch keinen Account, hier registrieren</string>
 </resources>

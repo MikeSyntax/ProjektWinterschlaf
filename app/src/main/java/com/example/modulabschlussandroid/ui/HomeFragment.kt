@@ -26,7 +26,8 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Dieser Abschnitt unterbindet ein zurücksringen auf den Login Screen
+//Dieser Abschnitt unterbindet ein zurücksringen auf den Login Screen===============================
+
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 val builder = AlertDialog.Builder(requireContext())
@@ -44,7 +45,7 @@ class HomeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
-//Aufbau der Ansicht, Objekte und Design erstellen================================================================================
+//Aufbau der Ansicht, Objekte und Design erstellen==================================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,10 +53,11 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        //Returned immer das oberste Element
         return binding.root
     }
 
-//Beginn der Ansicht und befüllen=================================================================================
+//Beginn der Ansicht und befüllen===================================================================
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -69,35 +71,32 @@ class HomeFragment : Fragment() {
         //feste Größe für die Performance
         recView.setHasFixedSize(true)
 
-//LiveData Objekte überwachen=================================================================================
+//LiveData Objekte überwachen=======================================================================
 
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
-        objectList.observe(viewLifecycleOwner) {
+        objectList.observe(viewLifecycleOwner) { objects ->
             //Parameter objectList(it) und ViewModel
-            recView.adapter = AdapterObjects(it, viewModel)
+            recView.adapter = AdapterObjects(objects, viewModel)
         }
 
-//Gefilterte Objekte überwachen=================================================================================
+//Gefilterte Objekte überwachen=====================================================================
 
         //NEU Schnellsuche alle gefilterten Objekte landen in dieser List
-        viewModel.zipObjects.observe(
-            viewLifecycleOwner
-        ) {
-            recView.adapter = AdapterObjects(it, viewModel)
-            Log.d("success Home", "$it zipObjects")
+        viewModel.zipObjects.observe(viewLifecycleOwner) { objectSearch ->
+            //Parameter objectList(it) nullable und ViewModel
+            recView.adapter = AdapterObjects(objectSearch!!, viewModel)
+            Log.d("success Home", "$objectSearch zipObjects für Suche")
         }
 
-//Suchtext überwachen=================================================================================
+//Suchtext überwachen===============================================================================
 
         //NEU Schnellsuche der Inputtext wird weitergegeben bis zur Objekt Dao Funktion
-        viewModel.inputText.observe(
-            viewLifecycleOwner
-        ) {
-            viewModel.getZipCodeObject(it)
-            Log.d("success Home", "$it input Text")
+        viewModel.inputText.observe(viewLifecycleOwner) { textInput ->
+            viewModel.getZipCodeObject(textInput)
+            Log.d("success Home", "$textInput input Text")
         }
 
-//Für die Suche einen TextchangedListener=================================================================================
+//Für die Suche einen TextchangedListener===========================================================
 
         //NEU Schnellsuche für die Postleitzahl
         binding.textInputEditText.addTextChangedListener(object : TextWatcher {
