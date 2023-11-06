@@ -22,4 +22,6 @@
     <string name="favorite_object">Objekt</string>
     <string name="favorite_city">Ort</string>
     <string name="no_account_register">Noch keinen Account, hier registrieren</string>
+    <string name="title">Projekt Winterschlaf</string>
+    <string name="forward">weiter</string>
 </resources>

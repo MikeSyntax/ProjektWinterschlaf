@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.databinding.FragmentLogInBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class LogInFragment : Fragment() {
 
     private lateinit var binding: FragmentLogInBinding
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,5 +42,13 @@ class LogInFragment : Fragment() {
 
     }
 
-
+//Falls der User noch immer eingeloggte ist, wird direkt zum Homescreen weitergeleitet==============
+    override fun onStart() {
+        super.onStart()
+        firebaseAuth = FirebaseAuth.getInstance()
+        if (firebaseAuth.currentUser != null){
+            val navController = findNavController()
+            navController.navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
+        }
+    }
 }
