@@ -34,8 +34,8 @@ class DetailFragment : Fragment() {
     //für die Weitergabe der Koordinaten an den Distance Api Call
     private var lat1: String = ""
     private var lon1: String = ""
-     var lat2: String = ""
-     var lon2: String = ""
+    private var lat2: String = ""
+    private var lon2: String = ""
 
     private var _textDistance: MutableLiveData<String> = MutableLiveData()
     val textDistance: LiveData<String>

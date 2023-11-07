@@ -38,18 +38,37 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//Übergabe und Ermittlung des aktuellen Users=======================================================
+//Übergabe und Ermittlung des aktuellen User Email =================================================
 
-//NEU Update den aktuellen User
+//NEU Update den aktuellen UserEmail
         viewModel.updateCurrentUser()
 
 //NEU Zeige die aktuelle Email des eingeloggten Users
-        val currentUserEmail = viewModel.currentUserEmail.value
+        val currentUserId = viewModel.currentUserId.value
 
 //NEU Überwache den aktuellen User
-        viewModel.currentUserEmail.observe(viewLifecycleOwner){
-        //Zeige falls eingeloggt den Usernamen
-        binding.tvLoggedUsername.text = currentUserEmail
+        viewModel.currentUserId.observe(viewLifecycleOwner){
+            //Zeige falls eingeloggt den Usernamen
+            binding.tvLoggedUsername.text = currentUserId
+        }
+
+//Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
+
+//NEU Update aller User Daten aus dem Firestore
+        viewModel.updateUser(currentUserId.toString())
+
+//NEU Zeige die aktuellen Daten des eingeloggten Users
+        val currentUser = viewModel.currentUser
+
+//NEU Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore
+        currentUser.observe(viewLifecycleOwner){user ->
+            binding.tvUserName.text = user.userName
+            binding.tvUserCity.text = user.cityName
+            binding.tvUserCountInserted.text = user.countInsertedItems.toString()
+            binding.tvUserItemsDone.text = user.itemsDone.toString()
+            binding.tvUserRealName.text = user.name
+            binding.tvUserRealPreName.text = user.preName
+
         }
 
 //Verschiedene Klicklistener========================================================================

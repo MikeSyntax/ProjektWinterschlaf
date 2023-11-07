@@ -17,9 +17,6 @@ import com.example.modulabschlussandroid.databinding.FragmentIntroBinding
 class IntroFragment : Fragment() {
     private lateinit var binding: FragmentIntroBinding
 
-    //Einbinden der PersonalData
-    private var userProfile = PersonalData()
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,13 +58,6 @@ class IntroFragment : Fragment() {
 
     //Funktion zu Navigation auf die gewünschte Seite
     private fun navigate() {
-
-        //Falls eingeloggt, weiterleitung zum HomeScreen
-        if (userProfile.loggedIn) {
-            findNavController().navigate(R.id.homeFragment)
-        //Falls nicht eingeloggt, dann direct zum LoginScreen
-        } else {
             findNavController().navigate(R.id.logInFragment)
-        }
     }
 }

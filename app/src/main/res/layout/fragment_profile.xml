@@ -9,6 +9,7 @@
 
 
     <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.13"
@@ -189,6 +190,88 @@
             app:layout_constraintTop_toBottomOf="@+id/cv_profile_image"
             />
 
+
+    <LinearLayout
+        android:id="@+id/ll_personal_data"
+        android:layout_width="380dp"
+        android:layout_height="419dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_logged_username">
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_zipCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_countInserted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_itemsDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_real_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_real_preName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_registered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_streetName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_streetNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+        <TextView
+            android:id="@+id/tv_user_telNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"/>
+
+
+
+
+
+    </LinearLayout>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"

@@ -17,12 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 
 class RegisterFragment : Fragment() {
 
-    // Erstellen einer Liste users aus der Klasse SecretData
-    private var userProfile = PersonalData()
-
-    //zur Prüfung der Passworteingabe mit Sonderzeichen und Zahlen
-    private var validPassword = false
-
     //Binding initialisieren
     private lateinit var binding: FragmentRegisterBinding
 

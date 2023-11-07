@@ -1,28 +1,17 @@
 package com.example.modulabschlussandroid.ui
 
-import android.app.Person
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.modulabschlussandroid.R
-import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentReadyLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
-
-var logStat: Boolean = false
-
 //
 class ReadyLoginFragment() : Fragment() {
-
-    // Erstellen einer Instanz userProfile aus der Klasse SecretData als LiveData
-    private var userProfile = PersonalData()
 
     private lateinit var binding: FragmentReadyLoginBinding
 

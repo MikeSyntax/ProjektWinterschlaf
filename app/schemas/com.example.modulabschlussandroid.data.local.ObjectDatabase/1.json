@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d6ee846853e0f7fd55c58dde379cfdcc",
+    "identityHash": "a7f9df1358308f484d65b53432f22651",
     "entities": [
       {
         "tableName": "Objects",
@@ -224,8 +224,68 @@
       },
       {
         "tableName": "PersonalData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userName` TEXT NOT NULL, `email` TEXT NOT NULL, `password` TEXT NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userName`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT NOT NULL, `countInsertedItems` INTEGER NOT NULL, `itemsDone` INTEGER NOT NULL, `name` TEXT NOT NULL, `preName` TEXT NOT NULL, `registered` TEXT NOT NULL, `streetName` TEXT NOT NULL, `streetNumber` TEXT NOT NULL, `telNumber` TEXT NOT NULL, `userName` TEXT NOT NULL, `zipCode` TEXT NOT NULL, `showTelNumber` INTEGER NOT NULL, `showStreet` INTEGER NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
         "fields": [
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cityName",
+            "columnName": "cityName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "countInsertedItems",
+            "columnName": "countInsertedItems",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemsDone",
+            "columnName": "itemsDone",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "preName",
+            "columnName": "preName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "registered",
+            "columnName": "registered",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "streetName",
+            "columnName": "streetName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "streetNumber",
+            "columnName": "streetNumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "telNumber",
+            "columnName": "telNumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
           {
             "fieldPath": "userName",
             "columnName": "userName",
@@ -233,15 +293,21 @@
             "notNull": true
           },
           {
-            "fieldPath": "email",
-            "columnName": "email",
+            "fieldPath": "zipCode",
+            "columnName": "zipCode",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "password",
-            "columnName": "password",
-            "affinity": "TEXT",
+            "fieldPath": "showTelNumber",
+            "columnName": "showTelNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "showStreet",
+            "columnName": "showStreet",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -254,7 +320,7 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "userName"
+            "userId"
           ]
         },
         "indices": [],
@@ -264,7 +330,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd6ee846853e0f7fd55c58dde379cfdcc')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a7f9df1358308f484d65b53432f22651')"
     ]
   }
 }

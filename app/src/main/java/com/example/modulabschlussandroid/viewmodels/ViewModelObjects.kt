@@ -31,8 +31,11 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Hier werden die gelikten Objekte aus dem Repository eingeschleift
     var likedObjectsLive = repository.likedObjects
 
-    //Hier werden die Userdaten aus dem Repository übergeben
-    var currentUserEmail = repository.currentUserEmail
+    //Hier werden die Userdaten aber nur die Email aus dem Repository übergeben
+    var currentUserId = repository.currentUserId
+
+    //Hier werden die User aus dem Repository übergeben
+    var currentUser = repository.currentUser
 
     //Hier werden die Postleitzahlen Objekte aus dem Repository übergeben
     var zipObjects = repository.zipObjects
@@ -109,10 +112,16 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-//NEU Update des aktuellen Users
+//NEU Update der aktuellen Usersemail  TODO!!!!!!!!!
     fun updateCurrentUser(){
-        repository.showCurrentUser().toString()
+        repository.showCurrentUserId()
     }
+
+//NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
+    fun updateUser(id: String){
+        repository.updateCurrentUserFromFirestore(id)
+    }
+
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {
