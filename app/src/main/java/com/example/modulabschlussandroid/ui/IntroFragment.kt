@@ -38,11 +38,11 @@ class IntroFragment : Fragment() {
             //Die ProgressBar soll sich ganz schließen also 100% und das in der Dauer der Variablen
             setProgressWithAnimation(100f, timeDuration)
             //Größe der ProgressBar in Float
-            progressBarWidth = 5f
+            progressBarWidth = 10f
             //Farbe
             progressBarColor = Color.GREEN
             //Größe des Hintergrundes der ProgressBar in Float
-            backgroundProgressBarWidth = 10f
+            backgroundProgressBarWidth = 5f
             //Farbe
             backgroundProgressBarColor = Color.DKGRAY
         }

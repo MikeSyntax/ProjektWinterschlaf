@@ -7,25 +7,28 @@
     android:background="@color/white"
     tools:context=".ui.HomeFragment">
 
-
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:alpha="0.13"
         android:scaleType="centerCrop"
         android:src="@drawable/image_background"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primary_light_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/primary_light_green"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
@@ -131,18 +134,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         app:cardCornerRadius="50dp"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/primary_light_green"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView4">
+        app:layout_constraintTop_toBottomOf="@id/textView4"
+        app:strokeColor="@color/primary_light_green"
+        app:strokeWidth="2dp">
 
 
-    <ImageView
-        android:id="@+id/iv_profile_image"
-        style="@style/shadow_light_green"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/projekt_winterschlaf_logo" />
+        <ImageView
+            android:id="@+id/iv_profile_image"
+            style="@style/shadow_light_green"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/projekt_winterschlaf_logo" />
 
     </com.google.android.material.card.MaterialCardView>
 
@@ -150,9 +153,10 @@
         android:id="@+id/cv_logout"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/materialDividerTop"
         app:strokeWidth="0dp">
 
@@ -176,99 +180,162 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <TextView
+        android:id="@+id/tv_logged_username"
+        style="@style/textSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/user_name"
+        android:textColor="@color/primary_dark_green"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_profile_image" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_logout">
+
         <TextView
-            android:id="@+id/tv_logged_username"
+            android:id="@+id/tv_user_real_preName"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="Vorname" />
+
+        <TextView
+            android:id="@+id/tv_user_real_name"
             style="@style/textSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginStart="16dp"
-            android:text="@string/user_name"
-            android:textColor="@color/primary_dark_green"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cv_profile_image"
-            />
+            android:layout_marginStart="5dp"
+            android:text="Nachname" />
 
 
-    <LinearLayout
-        android:id="@+id/ll_personal_data"
-        android:layout_width="380dp"
-        android:layout_height="419dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_logged_username">
-
-        <TextView
-            android:id="@+id/tv_user_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Username"/>
-
-        <TextView
-            android:id="@+id/tv_user_real_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nachname"/>
-
-        <TextView
-            android:id="@+id/tv_user_real_preName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vorname"/>
-
-
-        <TextView
-            android:id="@+id/tv_user_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Stadt"/>
+        app:layout_constraintTop_toBottomOf="@+id/ll_name">
 
         <TextView
             android:id="@+id/tv_user_zipCode"
-            android:layout_width="match_parent"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Postleitzahl"/>
+            android:layout_gravity="start"
+            android:text="Postleitzahl" />
+
+        <TextView
+            android:id="@+id/tv_user_city"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="5dp"
+            android:text="Stadt" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_street"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_city">
 
         <TextView
             android:id="@+id/tv_user_streetName"
-            android:layout_width="match_parent"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Straße"/>
+            android:layout_gravity="start"
+            android:text="Straße" />
 
         <TextView
             android:id="@+id/tv_user_streetNumber"
-            android:layout_width="match_parent"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hausnummer"/>
+            android:layout_gravity="end"
+            android:layout_marginStart="5dp"
+            android:text="Hausnummer" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_tel_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_street">
 
         <TextView
             android:id="@+id/tv_user_telNumber"
-            android:layout_width="match_parent"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Telefonnummer"/>
+            android:layout_gravity="end"
+            android:text="Telefonnummer" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/ll_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom">
 
         <TextView
             android:id="@+id/tv_user_countInserted"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Anzahl aktueller Inserate"/>
+            android:layout_gravity="start"
+            android:layout_marginRight="5dp"
+            android:text="Anzahl aktueller Inserate" />
 
         <TextView
             android:id="@+id/tv_user_itemsDone"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="erledigte Inserate"/>
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:text="erledigte Inserate" />
 
         <TextView
             android:id="@+id/tv_user_registered"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="registriert am"/>
+            android:layout_gravity="end"
+            android:layout_marginRight="5dp"
+            android:text="registriert am" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"
@@ -277,7 +344,7 @@
         app:dividerColor="@color/primary_dark_green"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
@@ -310,8 +377,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
@@ -326,9 +393,9 @@
                             style="@style/textSuperSmall"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/primary_dark_green"
                             android:gravity="center"
-                            android:text="Home" />
+                            android:text="Home"
+                            android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -344,16 +411,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/star_liked" />
 
                         <TextView
@@ -377,16 +444,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/insert" />
 
                         <TextView
@@ -410,16 +477,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/chat" />
 
                         <TextView
@@ -436,24 +503,24 @@
                     android:id="@+id/cv_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
                     android:layout_marginRight="15dp"
+                    android:layout_weight="20"
                     android:backgroundTint="@color/primary_light_green"
                     app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/profile"
                             app:tint="@color/white" />
 
@@ -462,8 +529,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:textColor="@color/white"
-                            android:text=" Profil " />
+                            android:text=" Profil "
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
 

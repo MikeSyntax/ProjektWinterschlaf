@@ -46,12 +46,6 @@ class ProfileFragment : Fragment() {
 //NEU Zeige die aktuelle Email des eingeloggten Users
         val currentUserId = viewModel.currentUserId.value
 
-//NEU Überwache den aktuellen User
-        viewModel.currentUserId.observe(viewLifecycleOwner){
-            //Zeige falls eingeloggt den Usernamen
-            binding.tvUserName.text = currentUserId
-        }
-
 //Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
 
 //NEU Update aller User Daten aus dem Firestore
@@ -70,10 +64,9 @@ class ProfileFragment : Fragment() {
             binding.tvUserStreetNumber.text = user.streetNumber
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
-            binding.tvUserCountInserted.text = user.countInsertedItems.toString()
-            binding.tvUserItemsDone.text = user.itemsDone.toString()
-            binding.tvUserRegistered.text = user.registered
-
+            binding.tvUserCountInserted.text = "Anzeigen online ${user.countInsertedItems.toString()}"
+            binding.tvUserItemsDone.text = "Bisherige Anzeigen ${user.itemsDone.toString()}"
+            binding.tvUserRegistered.text = "Registriert seit ${user.registered}"
         }
 
 //Verschiedene Klicklistener========================================================================

@@ -61,12 +61,12 @@ class RepositoryObjects(
 
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
     fun updateCurrentUserFromFirestore(id: String) {
-        Log.d("success Repo", "$id User Id wird für den Firestore übergeben")
+        Log.d("success Repo", "$id User Id ready for input FireStore")
         fireStoreDatabase = Firebase.firestore
         fireStoreDatabase.collection("user").document(id)
             .get()
             .addOnSuccessListener { thisUser ->
-                Log.e("Repository Firestore", "Übergabe Firestore failed")
+                Log.d("Repository Firestore", "SuccesListener FireStore done")
                 _currentUser.value = PersonalData(
                     thisUser.id,
                     thisUser.data?.get("cityName").toString(),
