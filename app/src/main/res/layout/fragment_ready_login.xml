@@ -113,55 +113,25 @@
     <TextView
         android:id="@+id/textView4"
         style="@style/textMiddle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="78dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
         android:text="Anmeldedaten eingeben"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+       app:layout_constraintTop_toBottomOf="@+id/materialDivider"/>
 
     <TextView
         android:id="@+id/description"
-        style="@style/textSuperSmall"
+        style="@style/textSmall"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="100dp"
         android:layout_margin="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:text="Zur Anmeldung geben Sie bitte ihre Email und \ndas Passwort ein"
+        android:text="Zur Anmeldung bitte deine Email und \ndein Passwort eingeben, falls Du noch keinen Account hast, gehe bitte zurück und registriere dich zuerst"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfield_user_avatar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:hint="Benutzername bzw. ID eingeben"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputUserAvatar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tv_or"
-        style="@style/textSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-        android:text="oder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfield_user_avatar"
-        tools:layout_editor_absoluteY="509dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tfield_email"
@@ -171,7 +141,7 @@
         android:hint="Email eingeben"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_or">
+        app:layout_constraintTop_toBottomOf="@+id/description">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputUserEmail"
@@ -201,10 +171,9 @@
         android:id="@+id/tv_forward"
         style="@style/textSmall"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="25dp"
-
-        android:text="Nach Eingabe bitte rechts oben auf weiter klicken, viel Spaß"
+        android:layout_height="70dp"
+        android:layout_margin="16dp"
+        android:text="Nach Eingabe bitte rechts oben auf \nweiter klicken, viel Spaß"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tfield_password"
@@ -215,13 +184,14 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="25dp"
         android:gravity="center_horizontal"
         android:text="@string/no_account_register"
         android:textColor="@color/primary_dark_green"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_forward" />
 
@@ -229,11 +199,12 @@
         android:id="@+id/imageView2"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/bild_parkplat"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_forward" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_please_register" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

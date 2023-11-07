@@ -8,6 +8,15 @@
     tools:context=".ui.HomeFragment">
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.13"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_background"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,6 +24,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/primary_light_green"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.card.MaterialCardView
@@ -22,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/primary_light_green"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -33,7 +43,6 @@
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/back" />
 
                 <TextView
@@ -52,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Projekt Winterschlaf"
+            android:text="@string/title"
             android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
@@ -61,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="15dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/primary_light_green"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -81,7 +90,6 @@
                     android:layout_width="30dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/white"
                     android:src="@drawable/forward" />
 
 
@@ -109,48 +117,78 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="78dp"
+        android:layout_marginTop="16dp"
         android:text="Profil"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_profile_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="50dp"
+        app:strokeWidth="2dp"
+        app:strokeColor="@color/primary_light_green"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView4">
+
 
     <ImageView
+        android:id="@+id/iv_profile_image"
+        style="@style/shadow_light_green"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginStart="16dp"
+        android:src="@drawable/projekt_winterschlaf_logo" />
 
-        android:layout_marginTop="4dp"
-        android:src="@drawable/projekt_winterschlaf_logo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    </com.google.android.material.card.MaterialCardView>
 
-    <TextView
-        android:id="@+id/tv_log"
-        style="@style/textSuperSmall"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_logout"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Eingeloggt als :"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialDividerTop" />
+        app:layout_constraintTop_toBottomOf="@+id/materialDividerTop"
+        app:strokeWidth="0dp">
 
+        <TextView
+            android:id="@+id/tv_log"
+            style="@style/textSuperSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="5dp"
+            android:text="@string/logout_text"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tv_logged_username"
-        style="@style/textSuperSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="16dp"
-        android:text="logged userName"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_log" />
+        <ImageView
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="5dp"
+            android:src="@drawable/logout" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_logged_username"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="16dp"
+            android:text="@string/user_name"
+            android:textColor="@color/primary_dark_green"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv_profile_image"
+            />
+
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"

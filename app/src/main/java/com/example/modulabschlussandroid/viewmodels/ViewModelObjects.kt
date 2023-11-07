@@ -15,9 +15,10 @@ import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.example.modulabschlussandroid.repositorys.RepositoryObjects
 import kotlinx.coroutines.launch
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
-//Hier wird die View Ebene gebaut
+//Hier wird die View Ebene gebaut aus der MVVM
 
 //Hier muss das ViewModel AndroidViewModel sein, da nur hier die Mögllichkeit besteht Daten mit zugeben
+
 class ViewModelObjects(application: Application) : AndroidViewModel(application) {
 
     private val database = ObjectDatabase.getDatabase(application)
@@ -30,7 +31,10 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Hier werden die gelikten Objekte aus dem Repository eingeschleift
     var likedObjectsLive = repository.likedObjects
 
+    //Hier werden die Userdaten aus dem Repository übergeben
+    var currentUserEmail = repository.currentUserEmail
 
+    //Hier werden die Postleitzahlen Objekte aus dem Repository übergeben
     var zipObjects = repository.zipObjects
 
     //Hier wird die LiveData der Geo API Abfrage aus dem Repository eingeschleift
@@ -40,10 +44,10 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Hier wird die LiveData der Distance Api Abfrage aus dem Repository eingeschleift
     var distanceData: LiveData<DistanceMatrix> = repository.distanceData
 
+    //Eingegebener Text für die Suche als LiveData
     private val _inputText = MutableLiveData<String>()
     val inputText: LiveData<String>
         get() = _inputText
-
 
     //Erstellen einer LivaData mit dem aktuellen Objekt
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
@@ -105,6 +109,10 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
+//NEU Update des aktuellen Users
+    fun updateCurrentUser(){
+        repository.showCurrentUser().toString()
+    }
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {

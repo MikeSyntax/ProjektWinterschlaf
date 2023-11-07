@@ -59,11 +59,10 @@ class DetailFragment : Fragment() {
 
         //Observer des aktuellen angeklickten Objekts
         viewModel.currentObject.observe(viewLifecycleOwner) { thisObject ->
-            //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
-
+            //Setzen der errechneten Entfernung zwischen Start und Ziel
             _textDistance.value = "Entfernung zum Ziel"
             binding.btnGetDistance.text = textDistance.value
-
+            //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
             binding.tvDetailCity.text = thisObject.city
             binding.tvDetailDescription.text = thisObject.description
             binding.tvDetailObject.text = thisObject.objectdescription
@@ -137,6 +136,7 @@ class DetailFragment : Fragment() {
         }
     }
 
+    //Einbinden der ermittelten Entfernung zwischen Start und Ziel
     private fun distanceObserver() {
         viewModel.distanceData.observe(viewLifecycleOwner) {
             //Einbinden der DistanceMatrix Klasse
@@ -152,7 +152,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    //Einbinden der ermittelten GeoDaten
+    //Einbinden der ermittelten GeoDaten des Ziels
     private fun geoObserver() {
         viewModel.geoResult.observe(viewLifecycleOwner) {
             // Auf das LiveData-Objekt zugreifen
@@ -174,7 +174,7 @@ class DetailFragment : Fragment() {
         }
     }
 
-    // über den fusedLocation Manager wird der eigene Standort ermittelt,
+    // über den fusedLocation Manager wird der eigene Standort ermittelt also der Startpunkt,
     // hier in diesem Fall wird der letzte also lastLocation ermittelt,
     // und das funktioniert erst wenn man auf Google Maps seinen eigenen Standort kurz festlegt
     private fun location() {

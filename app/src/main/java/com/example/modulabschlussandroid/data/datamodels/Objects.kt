@@ -20,29 +20,30 @@ data class Objects(
     val image5Resource: Int,
 
 
-    //Beschreibung, Überschrift, Preis, Like,
+    //Stadt
     var city: String,
     var doneCityChoice: Boolean = false,
-
+    //Überschrift/Titel
     var objectdescription: String,
     var doneObjectDescriptionChoice: Boolean = false,
-
+    //Preis
     var price: Double,
     var donePriceChoice: Boolean = false,
-
+    //Beschreibung
     var description: String,
     var doneDescriptionChoice: Boolean = false,
 
 
     //@ColumnInfo(name = "zipCode", defaultValue = "0")
+    //Postleitzahl
     var zipCode: String,
     var doneZipCodeChoice:  Boolean = false,
-
+    //Favorit
     var liked: Boolean = false,
 
 
     //Kategorien
-    var doneCategoryChoice: Boolean = false,
+    var doneCategoryChoice: Boolean = false,                //Kategorie bestätigt
     var garage: Boolean = false,                            //Garage
     var parkingSpot: Boolean = false,                       //Parkplatz
     var parkingSpace: Boolean = false,                      //Stellplatz

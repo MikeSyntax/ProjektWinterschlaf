@@ -45,7 +45,7 @@ class IntroFragment : Fragment() {
             //Farbe
             progressBarColor = Color.GREEN
             //Größe des Hintergrundes der ProgressBar in Float
-            backgroundProgressBarWidth = 5f
+            backgroundProgressBarWidth = 10f
             //Farbe
             backgroundProgressBarColor = Color.DKGRAY
         }

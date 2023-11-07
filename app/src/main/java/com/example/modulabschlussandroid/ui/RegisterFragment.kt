@@ -73,6 +73,11 @@ class RegisterFragment : Fragment() {
                     .show()
             }
         }
+
+        //Zurück navigieren auf die letzte Seite
+        binding.cvBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 }
 
@@ -102,10 +107,7 @@ class RegisterFragment : Fragment() {
 
 
 /*
-        //Zurück navigieren auf die letzte Seite
-        binding.cvBack.setOnClickListener {
-            findNavController().navigateUp()
-        }
+
         //bei Klicken auf den Button bzw. auf die Cardview prüfe ...
         binding.cvForward.setOnClickListener {
             //überprüfen der Passworteingabe mit Sonderzeichen und Groß und klein, dann wird die Variabel validPassword auf true gesetzt und kann so in der if Abfrage genu

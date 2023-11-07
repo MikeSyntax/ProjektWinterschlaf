@@ -11,8 +11,11 @@ import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
+import kotlinx.coroutines.delay
+import com.google.firebase.auth.FirebaseAuth
 
 //Repository Pattern nur eine Datenquelle für die ganze App um immer die gleichen Daten zu haben====
+//Das Repository ist das Modell von MVVM
 class RepositoryObjects(
 
     //Verbindung zur Datenbank
@@ -42,6 +45,25 @@ class RepositoryObjects(
     private var _zipObjects: MutableLiveData<List<Objects>?> = MutableLiveData()
     val zipObjects: LiveData<List<Objects>?>
         get() = _zipObjects
+
+//den aktuellen User zurückgeben====================================================================
+
+    private lateinit var firebaseAuth: FirebaseAuth
+    //Live Data des aktuellen Users
+    private var _currentUserEmail: MutableLiveData<String> = MutableLiveData()
+    val currentUserEmail: LiveData<String>
+        get() = _currentUserEmail
+
+    //Update des aktuellen Users
+    fun showCurrentUser():String {
+        firebaseAuth = FirebaseAuth.getInstance()
+        val user = firebaseAuth.currentUser?.email.toString()
+        Log.d(
+            "success Repo", "$user User set - ${_currentUserEmail.value} currentUser in firebase"
+        )
+       _currentUserEmail.value = user
+        return currentUserEmail.value.toString()
+    }
 
 //Funktion für die Schnellsuche über Postleitzahl===================================================
 
