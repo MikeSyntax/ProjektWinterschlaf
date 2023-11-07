@@ -6,14 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
-import com.example.modulabschlussandroid.data.datamodels.UserData
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.google.firebase.Firebase
-import kotlinx.coroutines.delay
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -57,8 +55,8 @@ class RepositoryObjects(
     private lateinit var fireStoreDatabase: FirebaseFirestore
 
     //LiveData für den aktuellen user und alle Daten über den User
-    private var _currentUser: MutableLiveData<UserData> = MutableLiveData()
-    val currentUser: LiveData<UserData>
+    private var _currentUser: MutableLiveData<PersonalData> = MutableLiveData()
+    val currentUser: LiveData<PersonalData>
         get() = _currentUser
 
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
@@ -68,9 +66,8 @@ class RepositoryObjects(
         fireStoreDatabase.collection("user").document(id)
             .get()
             .addOnSuccessListener { thisUser ->
-                Log.d("success Repo", "${thisUser.id} User set in firestore")
                 Log.e("Repository Firestore", "Übergabe Firestore failed")
-                _currentUser.value = UserData(
+                _currentUser.value = PersonalData(
                     thisUser.id,
                     thisUser.data?.get("cityName").toString(),
                     thisUser.data?.get("countInsertedItems").toString().toInt(),
@@ -85,7 +82,7 @@ class RepositoryObjects(
                     thisUser.data?.get("zipCode").toString()
                 )
                 Log.e("Repo", " User Data set failed in firestore")
-            }
+            }.addOnFailureListener { Log.e("Repo","$it") }
     }
 
 

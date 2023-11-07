@@ -211,61 +211,61 @@
             android:id="@+id/tv_user_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Stadt"/>
 
         <TextView
             android:id="@+id/tv_user_zipCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Postleitzahl"/>
 
         <TextView
             android:id="@+id/tv_user_countInserted"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Anzahl aktueller Inserate"/>
 
         <TextView
             android:id="@+id/tv_user_itemsDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="erledigte Inserate"/>
 
         <TextView
             android:id="@+id/tv_user_real_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Nachname"/>
 
         <TextView
             android:id="@+id/tv_user_real_preName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Vorname"/>
 
         <TextView
             android:id="@+id/tv_user_registered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="registriert am"/>
 
         <TextView
             android:id="@+id/tv_user_streetName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Straße"/>
 
         <TextView
             android:id="@+id/tv_user_streetNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Hausnummer"/>
 
         <TextView
             android:id="@+id/tv_user_telNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username"/>
+            android:text="Telefonnummer"/>
 
 
 

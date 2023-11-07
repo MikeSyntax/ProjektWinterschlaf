@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
 //Übergabe und Ermittlung des aktuellen User Email =================================================
 
 //NEU Update den aktuellen UserEmail
-        viewModel.updateCurrentUser()
+        viewModel.updateCurrentUserId()
 
 //NEU Zeige die aktuelle Email des eingeloggten Users
         val currentUserId = viewModel.currentUserId.value
@@ -60,7 +60,7 @@ class ProfileFragment : Fragment() {
 //NEU Zeige die aktuellen Daten des eingeloggten Users
         val currentUser = viewModel.currentUser
 
-//NEU Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore
+//NEU Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore======================
         currentUser.observe(viewLifecycleOwner){user ->
             binding.tvUserName.text = user.userName
             binding.tvUserCity.text = user.cityName
@@ -68,6 +68,11 @@ class ProfileFragment : Fragment() {
             binding.tvUserItemsDone.text = user.itemsDone.toString()
             binding.tvUserRealName.text = user.name
             binding.tvUserRealPreName.text = user.preName
+            binding.tvUserRegistered.text = user.registered
+            binding.tvUserStreetName.text = user.streetName
+            binding.tvUserStreetNumber.text = user.streetNumber
+            binding.tvUserTelNumber.text = user.telNumber
+            binding.tvUserZipCode.text = user.zipCode
 
         }
 

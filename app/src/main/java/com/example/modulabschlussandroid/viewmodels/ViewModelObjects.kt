@@ -113,7 +113,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
 //NEU Update der aktuellen Usersemail  TODO!!!!!!!!!
-    fun updateCurrentUser(){
+    fun updateCurrentUserId(){
         repository.showCurrentUserId()
     }
 
