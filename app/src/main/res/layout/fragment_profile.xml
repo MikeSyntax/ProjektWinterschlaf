@@ -208,30 +208,6 @@
             android:text="Username"/>
 
         <TextView
-            android:id="@+id/tv_user_city"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Stadt"/>
-
-        <TextView
-            android:id="@+id/tv_user_zipCode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Postleitzahl"/>
-
-        <TextView
-            android:id="@+id/tv_user_countInserted"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Anzahl aktueller Inserate"/>
-
-        <TextView
-            android:id="@+id/tv_user_itemsDone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="erledigte Inserate"/>
-
-        <TextView
             android:id="@+id/tv_user_real_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -243,11 +219,18 @@
             android:layout_height="wrap_content"
             android:text="Vorname"/>
 
+
         <TextView
-            android:id="@+id/tv_user_registered"
+            android:id="@+id/tv_user_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="registriert am"/>
+            android:text="Stadt"/>
+
+        <TextView
+            android:id="@+id/tv_user_zipCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postleitzahl"/>
 
         <TextView
             android:id="@+id/tv_user_streetName"
@@ -267,9 +250,23 @@
             android:layout_height="wrap_content"
             android:text="Telefonnummer"/>
 
+        <TextView
+            android:id="@+id/tv_user_countInserted"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Anzahl aktueller Inserate"/>
 
+        <TextView
+            android:id="@+id/tv_user_itemsDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="erledigte Inserate"/>
 
-
+        <TextView
+            android:id="@+id/tv_user_registered"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="registriert am"/>
 
     </LinearLayout>
 
