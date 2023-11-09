@@ -20,7 +20,7 @@ class RegisterFragment : Fragment() {
     //Binding initialisieren
     private lateinit var binding: FragmentRegisterBinding
 
-//NEU
+    //NEU
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
@@ -48,7 +48,7 @@ class RegisterFragment : Fragment() {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
-                               val navController = findNavController()
+                                val navController = findNavController()
                                 navController.navigate(RegisterFragmentDirections.actionRegisterFragmentToReadyLoginFragment())
                             } else {
                                 Toast.makeText(
@@ -74,30 +74,6 @@ class RegisterFragment : Fragment() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*

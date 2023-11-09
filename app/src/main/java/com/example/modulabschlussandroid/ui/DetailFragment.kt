@@ -3,13 +3,11 @@ package com.example.modulabschlussandroid.ui
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
@@ -88,20 +86,20 @@ class DetailFragment : Fragment() {
 
             //Hier werden die Objekte geliked und auf in der Datenbank gespeichert
             if (thisObject.liked) {
-                binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
+                binding.ivDetailLiked.setImageResource(R.drawable.star_like)
             } else {
-                binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
+                binding.ivDetailLiked.setImageResource(R.drawable.star_unlike)
             }
 
             binding.ivDetailLiked.setOnClickListener {
                 if (thisObject != null) {
                     thisObject.liked = !thisObject.liked
                     if (!thisObject.liked) {
-                        binding.ivDetailLiked.setImageResource(R.drawable.star_unliked)
+                        binding.ivDetailLiked.setImageResource(R.drawable.star_unlike)
                         thisObject.liked = false
                         viewModel.updateObjects(thisObject)
                     } else {
-                        binding.ivDetailLiked.setImageResource(R.drawable.star_liked)
+                        binding.ivDetailLiked.setImageResource(R.drawable.star_like)
                         thisObject.liked = true
                         viewModel.updateObjects(thisObject)
                     }
@@ -133,6 +131,11 @@ class DetailFragment : Fragment() {
         //zu den Favoriten navigieren
         binding.cvProfile.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToProfileFragment())
+        }
+
+        //zum inserieren navigieren
+        binding.cvInsert.setOnClickListener {
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToInsertFragment())
         }
     }
 

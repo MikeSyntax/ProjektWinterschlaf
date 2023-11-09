@@ -2,6 +2,7 @@ package com.example.modulabschlussandroid.data.datamodels
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.firebase.Timestamp
 
 /* Dies ist der Konstruktor der Klasse SecretData und er erhält Parameter, welche beim Erstellen von SecretData-Objekten übergeben werden. */
 @Entity
@@ -23,6 +24,9 @@ data class PersonalData(
     var showTelNumber: Boolean = false,
     var showStreet: Boolean = false,
     var loggedIn: Boolean = false,
+
+    //Zeit von Firebase
+    //var time: Timestamp
 
     //var email: String = "mustermann@web.de",
     //var password: String = "1234",

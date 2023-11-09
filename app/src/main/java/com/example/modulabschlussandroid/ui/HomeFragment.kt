@@ -113,9 +113,14 @@ class HomeFragment : Fragment() {
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToFavoriteFragment())
         }
 
-        //zu den Favoriten navigieren
+        //zum eigenen Profil navigieren
         binding.cvProfile.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment2())
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToProfileFragment())
+        }
+
+        //zum inserieren navigieren
+        binding.cvInsert.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInsertFragment())
         }
     }
 }

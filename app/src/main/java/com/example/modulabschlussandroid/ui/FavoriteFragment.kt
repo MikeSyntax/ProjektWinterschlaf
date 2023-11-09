@@ -58,5 +58,10 @@ class FavoriteFragment : Fragment() {
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        //zum inserieren navigieren
+        binding.cvInsert.setOnClickListener {
+            findNavController().navigate(FavoriteFragmentDirections.actionFavoriteFragmentToInsertFragment())
+        }
     }
 }

@@ -279,7 +279,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:backgroundTint="@color/primary_light_green"
-                            android:src="@drawable/star_unliked"
+                            android:src="@drawable/star_unlike"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -387,7 +387,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:backgroundTint="@color/white"
-                            android:src="@drawable/star_liked" />
+                            android:src="@drawable/star_like" />
 
                         <TextView
                             style="@style/textSuperSmall"

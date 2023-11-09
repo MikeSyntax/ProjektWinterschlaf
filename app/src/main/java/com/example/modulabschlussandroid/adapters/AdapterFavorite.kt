@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.FavoriteItemSleepBinding
-import com.example.modulabschlussandroid.ui.DetailFragment
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
 class AdapterFavorite(
@@ -46,19 +45,19 @@ class AdapterFavorite(
         binding.tvDistance.text = "PLZ ${favoriteObjects.zipCode}"
 
         if (favoriteObjects.liked) {
-            binding.ivFavoriteLiked.setImageResource(R.drawable.star_liked)
+            binding.ivFavoriteLiked.setImageResource(R.drawable.star_like)
         } else {
-            binding.ivFavoriteLiked.setImageResource(R.drawable.star_unliked)
+            binding.ivFavoriteLiked.setImageResource(R.drawable.star_unlike)
         }
         binding.ivFavoriteLiked.setOnClickListener {
             if (favoriteObjects != null) {
                 favoriteObjects.liked = !favoriteObjects.liked
                 if (!favoriteObjects.liked) {
-                    binding.ivFavoriteLiked.setImageResource(R.drawable.star_unliked)
+                    binding.ivFavoriteLiked.setImageResource(R.drawable.star_unlike)
                     favoriteObjects.liked = false
                     viewModel.updateObjects(favoriteObjects)
                 } else {
-                    binding.ivFavoriteLiked.setImageResource(R.drawable.star_liked)
+                    binding.ivFavoriteLiked.setImageResource(R.drawable.star_like)
                     favoriteObjects.liked = true
                     viewModel.updateObjects(favoriteObjects)
                 }

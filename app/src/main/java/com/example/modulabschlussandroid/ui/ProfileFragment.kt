@@ -81,6 +81,11 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToFavoriteFragment())
         }
 
+        //zum inserieren navigieren
+        binding.cvInsert.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToInsertFragment())
+        }
+
         //zurück zur vorhergehenden Seite navigieren
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()

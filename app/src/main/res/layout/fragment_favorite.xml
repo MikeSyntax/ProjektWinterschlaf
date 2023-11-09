@@ -194,7 +194,7 @@
                             android:layout_gravity="center"
                             android:backgroundTint="@color/white"
                             app:tint="@color/white"
-                            android:src="@drawable/star_liked" />
+                            android:src="@drawable/star_like" />
 
                         <TextView
                             style="@style/textSuperSmall"

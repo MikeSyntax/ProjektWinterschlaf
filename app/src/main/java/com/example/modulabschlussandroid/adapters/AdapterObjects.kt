@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.ListItemSleepBinding
 import com.example.modulabschlussandroid.ui.HomeFragmentDirections
@@ -49,6 +50,11 @@ class AdapterObjects(
         binding.tvPrice.text = "${thisObject.price.toString()}€"
         binding.tvDescription.text = thisObject.description
         binding.tvDistance.text = "PLZ ${thisObject.zipCode}"
+
+      //  if (thisObject.liked){
+       //     binding.cvItemObject.str
+       // }
+
 
         //Weiterleitung auf eine Detailseite
         binding.cvItemObject.setOnClickListener {

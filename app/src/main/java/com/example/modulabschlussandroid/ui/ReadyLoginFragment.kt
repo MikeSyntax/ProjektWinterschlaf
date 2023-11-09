@@ -15,7 +15,7 @@ class ReadyLoginFragment() : Fragment() {
 
     private lateinit var binding: FragmentReadyLoginBinding
 
-//NEU
+    //NEU
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ class ReadyLoginFragment() : Fragment() {
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             val navController = findNavController()
-                                navController.navigate(ReadyLoginFragmentDirections.actionReadyLoginFragmentToHomeFragment())
+                            navController.navigate(ReadyLoginFragmentDirections.actionReadyLoginFragmentToHomeFragment())
                         } else {
                             Toast.makeText(
                                 requireContext(),
@@ -63,30 +63,6 @@ class ReadyLoginFragment() : Fragment() {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*
