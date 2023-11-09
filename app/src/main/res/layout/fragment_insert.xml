@@ -5,21 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.InsertFragment">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:alpha="0.13"
-        android:scaleType="centerCrop"
-        android:src="@drawable/image_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <androidx.appcompat.widget.Toolbar
+       <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -300,6 +286,14 @@
                 android:src="@drawable/edit" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:alpha="0.13"
+            android:scaleType="centerCrop"
+            android:src="@drawable/image_background" />
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
@@ -543,7 +537,7 @@
            android:layout_width="300dp"
            android:layout_height="300dp"
            android:backgroundTint="@color/primary_dark_green"
-           android:visibility="visible"
+           android:visibility="invisible"
            app:layout_constraintBottom_toBottomOf="parent"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintStart_toStartOf="parent"
