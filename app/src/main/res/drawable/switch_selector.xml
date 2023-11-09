@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <layer-list>
+            <!-- Farbe wenn der Switch eingeschaltet ist -->
+            <item android:drawable="@color/white"/>
+        </layer-list>
+    </item>
+
+    <item android:state_checked="false">
+        <layer-list>
+            <!-- Farbe wenn der Switch ausgeschaltet ist -->
+            <item android:drawable="@color/primary_light_green"/>
+        </layer-list>
+    </item>
+
+</selector>
