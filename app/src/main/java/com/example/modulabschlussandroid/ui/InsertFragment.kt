@@ -55,17 +55,20 @@ class InsertFragment : Fragment() {
         //Erstellen eines Objektes der Object Klasse
         myObject = Objects()
 
-        //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern
+//Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
             showCategorieDialog(uId)
         }
-
+//Übergabe der Uid als Parameter um die Postleitzahl unter Uid des Users zu speichern===============
         binding.cvZipCode.setOnClickListener {
-            val message: String = "Postleitzahl eingeben"
             showZipCodeDialog(uId)
         }
+//Übergabe der Uid als Parameter um die Stadt unter Uid des Users zu speichern======================
+        binding.cvCity.setOnClickListener {
+            showCityDialog(uId)
+        }
 
-
+//Bottom Nav BAR ===================================================================================
         //Zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
             val navController = binding.cvFavorite.findNavController()
@@ -88,17 +91,12 @@ class InsertFragment : Fragment() {
         }
     }
 
-    fun zipCode(){
-        val zipCode = binding.editZipCode
-        if (zipCode == null) {
-            binding.zipCodeEdit.setImageResource(R.drawable.done)
-        }
-    }
-
 //Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
     private fun showCategorieDialog(Uid: String) {
         //Objekt dialog erstellen
         val dialog = Dialog(requireContext())
+    //Auswahl kürzerer Name
+    var categoryChoice = myObject.doneCategoryChoice
         //Erstellen der View
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -137,12 +135,12 @@ class InsertFragment : Fragment() {
                 barnSwitch.isChecked || openSpaceSwitch.isChecked || yardSwitch.isChecked
             ) {
                 //die Kategoriewahl wird auf true gesetzt und der Daumen hoch wird angezeigt
-                myObject.doneCategoryChoice = true
+                categoryChoice = true
                 binding.categoriesEdit.setImageResource(R.drawable.done)
                 binding.tvCategories.text = "Kategorien erledigt"
             } else {
                 //die Kategoriewahl wird auf false gesetzt und der Edit Stift wird angezeigt
-                myObject.doneCategoryChoice = false
+                categoryChoice = false
                 binding.categoriesEdit.setImageResource(R.drawable.edit)
                 binding.tvCategories.text = "Wähle eine Kategorie"
             }
@@ -157,6 +155,8 @@ class InsertFragment : Fragment() {
     private fun showZipCodeDialog(Uid: String) {
         //Objekt zipCodeDialog erstellen
         val zipCodeDialog = Dialog(requireContext())
+    //Auswahl kürzerer Name
+    var zipCodeChoice = myObject.doneZipCodeChoice
         //Erstellen der View
         zipCodeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         zipCodeDialog.setCancelable(false)
@@ -164,22 +164,61 @@ class InsertFragment : Fragment() {
         zipCodeDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien============================
         val saveBtn: Button = zipCodeDialog.findViewById(R.id.btn_save)
-        val text: TextView = zipCodeDialog.findViewById(R.id.edit_text_zipcode)
+        val textMessage: TextView = zipCodeDialog.findViewById(R.id.edit_text_zipcode)
 //Beim Klicken des Speichern Buttons auf dem Postleitzahlen Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Postleitzahl ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
-           if (text.text.isNotEmpty()){
-            binding.editZipCode.text = text.text
+           if (textMessage.text.isNotEmpty()){
+            binding.editZipCode.text = "Postleitzahl ${textMessage.text}"
             binding.zipCodeEdit.setImageResource(R.drawable.done)
+               zipCodeChoice = true
            } else {
+               binding.editZipCode.text = "Wähle eine Postleitzahl"
                binding.zipCodeEdit.setImageResource(R.drawable.edit)
+               zipCodeChoice = false
+
            }
             //Dialog ausblenden
             zipCodeDialog.dismiss()
         }
         //Dialog anzeigen
         zipCodeDialog.show()
+    }
+
+    //Dialog Feld Eingabe für die Stadt=============================================================
+    private fun showCityDialog(Uid: String) {
+        //Objekt cityDialog erstellen
+        val cityDialog = Dialog(requireContext())
+        //Auswahl kürzerer Name
+        var cityChoice = myObject.doneCityChoice
+        //Erstellen der View
+        cityDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        cityDialog.setCancelable(false)
+        cityDialog.setContentView(R.layout.city_dialog)
+        cityDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+//Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=================================
+        val saveBtn: Button = cityDialog.findViewById(R.id.btn_save)
+        val textMessage: TextView = cityDialog.findViewById(R.id.edit_text_city)
+//Beim Klicken des Speichern Buttons auf dem Städtenamen Dialog, werden folgende Einstelunngen übernommen...
+        saveBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
+            //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
+            if (textMessage.text.isNotEmpty()){
+                binding.editCity.text = "Stadt ${textMessage.text}"
+                binding.cityEdit.setImageResource(R.drawable.done)
+                cityChoice = true
+            } else {
+                binding.editCity.text = "Wähle eine Stadt"
+                binding.cityEdit.setImageResource(R.drawable.edit)
+                cityChoice = false
+
+            }
+            //Dialog ausblenden
+            cityDialog.dismiss()
+        }
+        //Dialog anzeigen
+        cityDialog.show()
     }
 //==================================================================================================
 }

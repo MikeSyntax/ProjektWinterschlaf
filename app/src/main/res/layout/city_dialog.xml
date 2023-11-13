@@ -10,7 +10,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_popUp_zipcode"
+            android:id="@+id/cv_popUp_city"
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/primary_dark_green"
@@ -51,15 +51,15 @@
                         android:weightSum="10">
 
                         <EditText
-                            android:id="@+id/edit_text_zipcode"
+                            android:id="@+id/edit_text_city"
                             style="@style/textSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:maxLength="5"
-                            android:hint="Postleitzahl eingeben"
+                            android:maxLength="20"
+                            android:hint="Stadt eingeben"
                             android:text=""
                             android:textColor="@color/primary_dark_green" />
                     </LinearLayout>
