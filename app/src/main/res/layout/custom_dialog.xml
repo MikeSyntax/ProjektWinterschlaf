@@ -61,6 +61,14 @@
                             android:text="Garage"
                             android:textColor="@color/primary_dark_green" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_garage"
                             android:layout_width="wrap_content"
@@ -75,6 +83,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -103,6 +112,14 @@
                             android:paddingStart="16dp"
                             android:text="Hallenstellplatz" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_camperParkingInside"
                             android:layout_width="wrap_content"
@@ -117,6 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -143,7 +161,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Stellplatz aussen" />
+                            android:text="Aussenstellplatz" />
+
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
 
                         <Switch
                             android:id="@+id/switch_camperParkingOutside"
@@ -159,6 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -187,6 +214,14 @@
                             android:paddingStart="16dp"
                             android:text="Parkplatz" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_parkingSpot"
                             android:layout_width="wrap_content"
@@ -201,6 +236,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -231,6 +267,14 @@
                             android:paddingStart="16dp"
                             android:text="Tiefgarage" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_undergroundParking"
                             android:layout_width="wrap_content"
@@ -245,6 +289,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -273,6 +318,14 @@
                             android:paddingStart="16dp"
                             android:text="Carport" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_carport"
                             android:layout_width="wrap_content"
@@ -287,6 +340,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -315,6 +369,14 @@
                             android:paddingStart="16dp"
                             android:text="Lager" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_storage"
                             android:layout_width="wrap_content"
@@ -329,6 +391,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -357,6 +420,14 @@
                             android:paddingStart="16dp"
                             android:text="Lagerhalle" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_storageHall"
                             android:layout_width="wrap_content"
@@ -371,6 +442,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -399,6 +471,14 @@
                             android:paddingStart="16dp"
                             android:text="Lagerraum" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_storageRoom"
                             android:layout_width="wrap_content"
@@ -413,6 +493,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -441,6 +522,14 @@
                             android:paddingStart="16dp"
                             android:text="Lagerbox" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_storageBox"
                             android:layout_width="wrap_content"
@@ -455,6 +544,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -483,6 +573,14 @@
                             android:paddingStart="16dp"
                             android:text="Container" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_container"
                             android:layout_width="wrap_content"
@@ -497,6 +595,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -525,6 +624,14 @@
                             android:paddingStart="16dp"
                             android:text="Keller" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_basement"
                             android:layout_width="wrap_content"
@@ -539,6 +646,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -567,6 +675,14 @@
                             android:paddingStart="16dp"
                             android:text="Scheune" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_barn"
                             android:layout_width="wrap_content"
@@ -581,6 +697,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -609,6 +726,14 @@
                             android:paddingStart="16dp"
                             android:text="Freifläche" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_openSpace"
                             android:layout_width="wrap_content"
@@ -623,6 +748,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
@@ -651,6 +777,14 @@
                             android:paddingStart="16dp"
                             android:text="Hof" />
 
+                        <TextView
+                            style="@style/textSuperSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="off"
+                            android:textColor="@color/primary_dark_green" />
+
                         <Switch
                             android:id="@+id/switch_yard"
                             android:layout_width="wrap_content"
@@ -665,13 +799,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:text="on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

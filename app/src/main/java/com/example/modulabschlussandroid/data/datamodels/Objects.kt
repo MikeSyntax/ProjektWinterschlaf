@@ -13,30 +13,30 @@ data class Objects(
     var id: Long = 0,
 
     //Bilder 1-5
-    var image1Resource: Int,
-    var image2Resource: Int,
-    var image3Resource: Int,
-    val image4Resource: Int,
-    val image5Resource: Int,
+    var image1Resource: Int = 0,        //Default
+    var image2Resource: Int = 0,        //Default
+    var image3Resource: Int = 0,        //Default
+    val image4Resource: Int = 0,        //Default
+    val image5Resource: Int = 0,        //Default
 
 
     //Stadt
-    var city: String,
+    var city: String = "",
     var doneCityChoice: Boolean = false,
     //Überschrift/Titel
-    var objectdescription: String,
+    var objectdescription: String = "",
     var doneObjectDescriptionChoice: Boolean = false,
     //Preis
-    var price: Double,
+    var price: Double = 0.0,
     var donePriceChoice: Boolean = false,
     //Beschreibung
-    var description: String,
+    var description: String = "",
     var doneDescriptionChoice: Boolean = false,
 
 
     //@ColumnInfo(name = "zipCode", defaultValue = "0")
     //Postleitzahl
-    var zipCode: String,
+    var zipCode: String = "",
     var doneZipCodeChoice:  Boolean = false,
     //Favorit
     var liked: Boolean = false,

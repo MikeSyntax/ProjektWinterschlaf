@@ -9,6 +9,7 @@
         android:backgroundTint="@color/primary_light_green"
         app:cardCornerRadius="10dp"
         android:layout_margin="10dp"
+        app:cardElevation="5dp"
         app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

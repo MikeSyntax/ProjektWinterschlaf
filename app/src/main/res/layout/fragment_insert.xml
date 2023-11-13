@@ -99,7 +99,7 @@
         android:layout_gravity="start"
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary_light_green"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView4"
@@ -108,18 +108,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:padding="4dp"
             android:weightSum="10">
 
             <TextView
                 android:id="@+id/tv_categories"
                 style="@style/textSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:textAlignment="textStart"
-
+                android:layout_height="45dp"
+                android:textAlignment="viewStart"
                 android:layout_weight="9"
                 android:paddingStart="16dp"
+                android:paddingTop="11dp"
                 android:text="1 - Kategorien auswählen"
                />
 
@@ -128,6 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="13dp"
                 android:src="@drawable/edit" />
 
 
@@ -142,7 +143,7 @@
         android:layout_gravity="start"
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary_light_green"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_categories"
@@ -151,26 +152,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:padding="4dp"
             android:weightSum="10">
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_zipCode"
                 style="@style/textSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="45dp"
+                android:textAlignment="viewStart"
                 android:layout_weight="9"
                 android:paddingStart="16dp"
-                android:maxLength="50"
-                android:hint="2 - Postleitzahl hinzufügen"
-                android:text=""/>
+                android:paddingTop="11dp"
+                android:text="2 - Postleitzahl hinzufügen"
+                />
 
             <ImageView
                 android:id="@+id/zipCode_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="13dp"
                 android:src="@drawable/edit" />
 
         </LinearLayout>
@@ -184,7 +186,7 @@
         android:layout_gravity="start"
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary_light_green"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_zipCode"
@@ -193,26 +195,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:padding="4dp"
             android:weightSum="10">
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_city"
                 style="@style/textSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="45dp"
+                android:textAlignment="viewStart"
                 android:layout_weight="9"
                 android:paddingStart="16dp"
-                android:maxLength="50"
-                android:hint="3 - Stadt hinzufügen"
-                android:text=""/>
+                android:paddingTop="11dp"
+                android:text="3 - Stadt hinzufügen" />
 
             <ImageView
                 android:id="@+id/street_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="13dp"
                 android:src="@drawable/edit" />
 
         </LinearLayout>
@@ -226,7 +228,7 @@
         android:layout_gravity="start"
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary_light_green"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_city"
@@ -235,26 +237,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:padding="4dp"
             android:weightSum="10">
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_title"
                 style="@style/textSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="45dp"
+                android:textAlignment="viewStart"
                 android:layout_weight="9"
                 android:paddingStart="16dp"
-                android:maxLength="120"
-                android:hint="4 - Überschrift hinzufügen"
-                android:text=""/>
+                android:paddingTop="11dp"
+                android:text="4 - Überschrift hinzufügen" />
 
             <ImageView
                 android:id="@+id/title_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="13dp"
                 android:src="@drawable/edit" />
 
         </LinearLayout>
@@ -268,7 +270,7 @@
         android:layout_gravity="start"
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary_light_green"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_title"
@@ -277,26 +279,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:padding="4dp"
             android:weightSum="10">
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_description"
                 style="@style/textSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="45dp"
+                android:textAlignment="viewStart"
                 android:layout_weight="9"
                 android:paddingStart="16dp"
-                android:maxLength="445"
-                android:hint="5 - Beschreibung hinzufügen"
-                android:text=""/>
+                android:paddingTop="11dp"
+                android:text="5 - Beschreibung hinzufügen" />
 
             <ImageView
                 android:id="@+id/description_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="13dp"
                 android:src="@drawable/edit" />
 
         </LinearLayout>
@@ -318,7 +320,7 @@
         android:layout_gravity="start"
         android:layout_margin="16dp"
         android:backgroundTint="@color/primary_light_green"
-        app:cardElevation="8dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_description"
@@ -327,26 +329,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="3dp"
+            android:padding="4dp"
             android:weightSum="10">
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_price"
                 style="@style/textSmall"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="45dp"
+                android:textAlignment="viewStart"
                 android:layout_weight="9"
                 android:paddingStart="16dp"
-                android:maxLength="4"
-                android:hint="6 - Preis hinzufügen"
-                android:text=""/>
+                android:paddingTop="11dp"
+                android:text="6 - Preis hinzufügen" />
 
             <ImageView
                 android:id="@+id/price_edit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingTop="13dp"
                 android:src="@drawable/edit" />
 
         </LinearLayout>
@@ -373,7 +375,7 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
-            app:cardElevation="8dp"
+            app:cardElevation="0dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -409,7 +411,7 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
-            app:cardElevation="8dp"
+            app:cardElevation="0dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -445,7 +447,7 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
-            app:cardElevation="8dp"
+            app:cardElevation="0dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -481,7 +483,7 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
-            app:cardElevation="8dp"
+            app:cardElevation="0dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -516,7 +518,7 @@
             android:layout_gravity="start"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
-            app:cardElevation="8dp"
+            app:cardElevation="0dp"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -555,6 +557,7 @@
            android:textColor="@color/primary_light_green"
            android:textSize="20sp"
            android:visibility="visible"
+           android:elevation="5dp"
            app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom"
            app:layout_constraintEnd_toEndOf="parent"
            app:layout_constraintHorizontal_bias="0.951"

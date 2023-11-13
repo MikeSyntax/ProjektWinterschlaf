@@ -41,29 +41,25 @@ class RegisterFragment : Fragment() {
             //Variablen für die Eingaben
             val email = binding.textInputUserEmail.text.toString()
             val password = binding.textInputUserPassword.text.toString()
-            val confirm = binding.textInputUserSecondPassword.text.toString()
+            val passConfirmation = binding.textInputUserSecondPassword.text.toString()
             //Prüfung der Eingaben
-            if (email.isNotEmpty() && password.isNotEmpty() && confirm.isNotEmpty()) {
-                if (password == confirm) {
+            if (email.isNotEmpty() && password.isNotEmpty() && passConfirmation.isNotEmpty()) {
+                if (password == passConfirmation) {
                     firebaseAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener {
                             if (it.isSuccessful) {
                                 val navController = findNavController()
                                 navController.navigate(RegisterFragmentDirections.actionRegisterFragmentToReadyLoginFragment())
                             } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    it.exception.toString(),
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(requireContext(), it.exception.toString(), Toast.LENGTH_SHORT).show()
                             }
                         }
                 } else {
-                    Toast.makeText(requireContext(), "Password Is Not Matching", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "Passwörter stimmen nicht überein", Toast.LENGTH_SHORT)
                         .show()
                 }
             } else {
-                Toast.makeText(requireContext(), "Empty Fields Are Not Allowed", Toast.LENGTH_SHORT)
+                Toast.makeText(requireContext(), "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT)
                     .show()
             }
         }
