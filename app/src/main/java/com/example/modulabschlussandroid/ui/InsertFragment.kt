@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -56,6 +57,16 @@ class InsertFragment : Fragment() {
         //Erstellen eines Objektes der Object Klasse
         myObject = Objects()
 
+
+/* //kürzere Variable für die Auwahl der Zustände der einzelnen Felder im InsertFragment
+    private var categoryChoice = myObject.doneCategoryChoice
+    private var zipCodeChoice = myObject.doneZipCodeChoice
+    private var cityChoice = myObject.doneCityChoice
+    private var titelChoice = myObject.doneObjectDescriptionChoice
+    private var descriptionChoice = myObject.doneDescriptionChoice
+    private var priceChoice = myObject.donePriceChoice*/
+
+
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
             showCategorieDialog(uId)
@@ -74,9 +85,14 @@ class InsertFragment : Fragment() {
             showTitleDialog(uId)
         }
 
-        //Übergabe der Uid als Parameter um die Beschreibung unter Uid des Users zu speichern======================
+//Übergabe der Uid als Parameter um die Beschreibung unter Uid des Users zu speichern===============
         binding.cvDescription.setOnClickListener {
             showDescriptionDialog(uId)
+        }
+
+//Übergabe der Uid als Parameter um die Preis unter Uid des Users zu speichern======================
+        binding.cvPrice.setOnClickListener {
+            showPriceDialog(uId)
         }
 
 //Bottom Nav BAR ===================================================================================
@@ -106,8 +122,6 @@ class InsertFragment : Fragment() {
     private fun showCategorieDialog(Uid: String) {
         //Objekt dialog erstellen
         val dialog = Dialog(requireContext())
-        //Auswahl kürzerer Name
-        var categoryChoice = myObject.doneCategoryChoice
         //Erstellen der View
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -146,12 +160,14 @@ class InsertFragment : Fragment() {
                 barnSwitch.isChecked || openSpaceSwitch.isChecked || yardSwitch.isChecked
             ) {
                 //die Kategoriewahl wird auf true gesetzt und der Daumen hoch wird angezeigt
-                categoryChoice = true
+                myObject.doneCategoryChoice = true
                 binding.categoriesEdit.setImageResource(R.drawable.done)
                 binding.tvCategories.text = "Kategorien erledigt"
+                //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
+                showFloationActionButton()
             } else {
                 //die Kategoriewahl wird auf false gesetzt und der Edit Stift wird angezeigt
-                categoryChoice = false
+                myObject.doneCategoryChoice = false
                 binding.categoriesEdit.setImageResource(R.drawable.edit)
                 binding.tvCategories.text = "Wähle eine Kategorie"
             }
@@ -166,8 +182,6 @@ class InsertFragment : Fragment() {
     private fun showZipCodeDialog(Uid: String) {
         //Objekt zipCodeDialog erstellen
         val zipCodeDialog = Dialog(requireContext())
-        //Auswahl kürzerer Name
-        var zipCodeChoice = myObject.doneZipCodeChoice
         //Erstellen der View
         zipCodeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         zipCodeDialog.setCancelable(false)
@@ -192,13 +206,15 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Postleitzahl ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                binding.editZipCode.text = "Postleitzahl ${textMessage.text}"
+                myObject.doneZipCodeChoice = true
+                binding.editZipCode.text = "Postleitzahl: ${textMessage.text}"
                 binding.zipCodeEdit.setImageResource(R.drawable.done)
-                zipCodeChoice = true
+                //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
+                showFloationActionButton()
             } else {
+                myObject.doneZipCodeChoice = false
                 binding.editZipCode.text = "Wähle eine Postleitzahl"
                 binding.zipCodeEdit.setImageResource(R.drawable.edit)
-                zipCodeChoice = false
             }
             //Dialog ausblenden
             zipCodeDialog.dismiss()
@@ -211,8 +227,6 @@ class InsertFragment : Fragment() {
     private fun showCityDialog(Uid: String) {
         //Objekt cityDialog erstellen
         val cityDialog = Dialog(requireContext())
-        //Auswahl kürzerer Name
-        var cityChoice = myObject.doneCityChoice
         //Erstellen der View
         cityDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         cityDialog.setCancelable(false)
@@ -238,13 +252,15 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                binding.editCity.text = "Stadt ${textMessage.text}"
+                myObject.doneCityChoice = true
+                binding.editCity.text = "Stadt: ${textMessage.text}"
                 binding.cityEdit.setImageResource(R.drawable.done)
-                cityChoice = true
+                //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
+                showFloationActionButton()
             } else {
+                myObject.doneCityChoice = false
                 binding.editCity.text = "Wähle eine Stadt"
                 binding.cityEdit.setImageResource(R.drawable.edit)
-                cityChoice = false
             }
             //Dialog ausblenden
             cityDialog.dismiss()
@@ -253,19 +269,17 @@ class InsertFragment : Fragment() {
         cityDialog.show()
     }
 
-//Dialog Feld Eingabe für die Stadt=================================================================
+//Dialog Feld Eingabe für die Titel=================================================================
     private fun showTitleDialog(Uid: String) {
         //Objekt TitelDialog erstellen
         val titelDialog = Dialog(requireContext())
-        //Auswahl kürzerer Name
-        var titelChoice = myObject.doneObjectDescriptionChoice
         //Erstellen der View
         titelDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         titelDialog.setCancelable(false)
         titelDialog.setContentView(R.layout.titel_dialog)
         titelDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=========================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Überschrift===================
         val saveBtn: Button = titelDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = titelDialog.findViewById(R.id.edit_text_titel)
 
@@ -279,18 +293,20 @@ class InsertFragment : Fragment() {
             inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
         }
 
-        //Beim Klicken des Speichern Buttons auf dem Städtenamen Dialog, werden folgende Einstelunngen übernommen...
+        //Beim Klicken des Speichern Buttons auf dem Überschrift Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
-            //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
+            //Wenn ein Überschrift ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                binding.editTitle.text = "Überschrift ${textMessage.text}"
+                myObject.doneObjectDescriptionChoice = true
+                binding.editTitle.text = "Überschrift: ${textMessage.text}"
                 binding.titleEdit.setImageResource(R.drawable.done)
-                titelChoice = true
+                //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
+                showFloationActionButton()
             } else {
+                myObject.doneObjectDescriptionChoice = false
                 binding.editTitle.text = "Wähle eine Überschrift"
                 binding.titleEdit.setImageResource(R.drawable.edit)
-                titelChoice = false
             }
             //Dialog ausblenden
             titelDialog.dismiss()
@@ -299,19 +315,17 @@ class InsertFragment : Fragment() {
         titelDialog.show()
     }
 
-    //Dialog Feld Eingabe für die Stadt=================================================================
+//Dialog Feld Eingabe für die Beschreibung==========================================================
     private fun showDescriptionDialog(Uid: String) {
-        //Objekt TitelDialog erstellen
+        //Objekt descriptionDialog erstellen
         val descriptionDialog = Dialog(requireContext())
-        //Auswahl kürzerer Name
-        var descriptionChoice = myObject.doneDescriptionChoice
         //Erstellen der View
         descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         descriptionDialog.setCancelable(false)
         descriptionDialog.setContentView(R.layout.description_dialog)
         descriptionDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=========================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Beschreibung==================
         val saveBtn: Button = descriptionDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = descriptionDialog.findViewById(R.id.edit_text_description)
 
@@ -325,18 +339,20 @@ class InsertFragment : Fragment() {
             inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
         }
 
-        //Beim Klicken des Speichern Buttons auf dem Städtenamen Dialog, werden folgende Einstelunngen übernommen...
+        //Beim Klicken des Speichern Buttons auf dem Beschreibung Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
-            //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
+            //Wenn eine Beschreibung ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                binding.editDescription.text = "Beschreibung ${textMessage.text}"
+                myObject.doneDescriptionChoice = true
+                binding.editDescription.text = "Beschreibung: ${textMessage.text}"
                 binding.descriptionEdit.setImageResource(R.drawable.done)
-                descriptionChoice = true
+                //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
+                showFloationActionButton()
             } else {
+                myObject.doneDescriptionChoice = false
                 binding.editDescription.text = "Wähle eine Beschreibung"
                 binding.descriptionEdit.setImageResource(R.drawable.edit)
-                descriptionChoice = false
             }
             //Dialog ausblenden
             descriptionDialog.dismiss()
@@ -344,5 +360,66 @@ class InsertFragment : Fragment() {
         //Dialog anzeigen
         descriptionDialog.show()
     }
+
+//Dialog Feld Eingabe für die Preis=================================================================
+    private fun showPriceDialog(Uid: String) {
+        //Objekt PriceDialog erstellen
+        val priceDialog = Dialog(requireContext())
+        //Erstellen der View
+        priceDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        priceDialog.setCancelable(false)
+        priceDialog.setContentView(R.layout.price_dialog)
+        priceDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Preis=========================
+        val saveBtn: Button = priceDialog.findViewById(R.id.btn_save)
+        val textMessage: TextView = priceDialog.findViewById(R.id.edit_text_price)
+
+        //Um eine Tastatur einzublenden
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
+        textMessage.requestFocus()
+        //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
+        lifecycleScope.launch {
+            delay(200)
+            inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
+        }
+
+        //Beim Klicken des Speichern Buttons auf dem Preis Dialog, werden folgende Einstelunngen übernommen...
+        saveBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
+            //Wenn eine Preis ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
+            if (textMessage.text.isNotEmpty()) {
+                myObject.donePriceChoice = true
+                binding.editPrice.text = "Preis: ${textMessage.text}"
+                binding.priceEdit.setImageResource(R.drawable.done)
+                //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
+                showFloationActionButton()
+            } else {
+                myObject.donePriceChoice = false
+                binding.editPrice.text = "Wähle einen Preis"
+                binding.priceEdit.setImageResource(R.drawable.edit)
+            }
+            //Dialog ausblenden
+            priceDialog.dismiss()
+        }
+        //Dialog anzeigen
+        priceDialog.show()
+    }
+
+//Der Floating Action Button soll sichtbar werden, sobald alle Felder ausgefüllt sind
+    private fun showFloationActionButton(){
+        if (
+            myObject.doneCategoryChoice && myObject.doneZipCodeChoice && myObject.doneCityChoice && myObject.doneObjectDescriptionChoice && myObject.doneDescriptionChoice && myObject.donePriceChoice
+            ){
+            binding.btnFloatingAction.isVisible = true
+        }
+    }
+
+
+    //TODO TODO TODO
+//Das erstellte Objekt soll an die Firebase Datenbank gesendet werden
+    //private fun sendItemToFirebase(){
+   // }
 //==================================================================================================
 }
