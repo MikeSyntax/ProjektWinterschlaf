@@ -2,6 +2,7 @@ package com.example.modulabschlussandroid.ui
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,12 +12,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
@@ -24,6 +28,8 @@ import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.FragmentInsertBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.w3c.dom.Text
 
 class InsertFragment : Fragment() {
@@ -34,7 +40,7 @@ class InsertFragment : Fragment() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    private lateinit var myObject : Objects
+    private lateinit var myObject: Objects
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -91,12 +97,12 @@ class InsertFragment : Fragment() {
         }
     }
 
-//Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
+    //Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
     private fun showCategorieDialog(Uid: String) {
         //Objekt dialog erstellen
         val dialog = Dialog(requireContext())
-    //Auswahl kürzerer Name
-    var categoryChoice = myObject.doneCategoryChoice
+        //Auswahl kürzerer Name
+        var categoryChoice = myObject.doneCategoryChoice
         //Erstellen der View
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
@@ -107,7 +113,8 @@ class InsertFragment : Fragment() {
         val saveBtn: Button = dialog.findViewById(R.id.btn_save)
         val garageSwitch: Switch = dialog.findViewById(R.id.switch_garage)
         val camperParkingInsideSwitch: Switch = dialog.findViewById(R.id.switch_camperParkingInside)
-        val camperParkingOutsideSwitch: Switch = dialog.findViewById(R.id.switch_camperParkingOutside)
+        val camperParkingOutsideSwitch: Switch =
+            dialog.findViewById(R.id.switch_camperParkingOutside)
         val parkingSpotSwitch: Switch = dialog.findViewById(R.id.switch_parkingSpot)
         val undergroundParkingSwitch: Switch = dialog.findViewById(R.id.switch_undergroundParking)
         val carportSwitch: Switch = dialog.findViewById(R.id.switch_carport)
@@ -151,12 +158,12 @@ class InsertFragment : Fragment() {
         dialog.show()
     }
 
-//Dialog Feld Eingabe für die Postleitzahl==========================================================
+    //Dialog Feld Eingabe für die Postleitzahl==========================================================
     private fun showZipCodeDialog(Uid: String) {
         //Objekt zipCodeDialog erstellen
         val zipCodeDialog = Dialog(requireContext())
-    //Auswahl kürzerer Name
-    var zipCodeChoice = myObject.doneZipCodeChoice
+        //Auswahl kürzerer Name
+        var zipCodeChoice = myObject.doneZipCodeChoice
         //Erstellen der View
         zipCodeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         zipCodeDialog.setCancelable(false)
@@ -165,20 +172,31 @@ class InsertFragment : Fragment() {
 //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien============================
         val saveBtn: Button = zipCodeDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = zipCodeDialog.findViewById(R.id.edit_text_zipcode)
+
+        //Um eine Tastatur einzublenden
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
+        textMessage.requestFocus()
+        //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
+        lifecycleScope.launch {
+            delay(200)
+        inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
+        }
+
 //Beim Klicken des Speichern Buttons auf dem Postleitzahlen Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Postleitzahl ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
-           if (textMessage.text.isNotEmpty()){
-            binding.editZipCode.text = "Postleitzahl ${textMessage.text}"
-            binding.zipCodeEdit.setImageResource(R.drawable.done)
-               zipCodeChoice = true
-           } else {
-               binding.editZipCode.text = "Wähle eine Postleitzahl"
-               binding.zipCodeEdit.setImageResource(R.drawable.edit)
-               zipCodeChoice = false
+            if (textMessage.text.isNotEmpty()) {
+                binding.editZipCode.text = "Postleitzahl ${textMessage.text}"
+                binding.zipCodeEdit.setImageResource(R.drawable.done)
+                zipCodeChoice = true
+            } else {
+                binding.editZipCode.text = "Wähle eine Postleitzahl"
+                binding.zipCodeEdit.setImageResource(R.drawable.edit)
+                zipCodeChoice = false
 
-           }
+            }
             //Dialog ausblenden
             zipCodeDialog.dismiss()
         }
@@ -204,7 +222,7 @@ class InsertFragment : Fragment() {
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
-            if (textMessage.text.isNotEmpty()){
+            if (textMessage.text.isNotEmpty()) {
                 binding.editCity.text = "Stadt ${textMessage.text}"
                 binding.cityEdit.setImageResource(R.drawable.done)
                 cityChoice = true
