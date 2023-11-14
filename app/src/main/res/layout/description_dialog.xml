@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_popUp_description"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/primary_dark_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/white"
+                    android:text="Speichern"
+                    android:textColor="@color/primary_dark_green"
+                    android:textSize="20sp"
+                    app:strokeColor="@color/primary_light_green"
+                    app:strokeWidth="2dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/shadow_light_green"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:backgroundTint="@color/primary_light_green">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="3dp"
+                        android:weightSum="10">
+
+                        <EditText
+                            android:id="@+id/edit_text_description"
+                            style="@style/textSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="9"
+                            android:paddingStart="16dp"
+                            android:maxLength="20"
+                            android:hint="Beschreibung eingeben"
+                            android:text=""
+                            android:textColor="@color/primary_dark_green" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

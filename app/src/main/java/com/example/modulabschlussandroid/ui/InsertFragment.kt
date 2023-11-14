@@ -1,12 +1,10 @@
 package com.example.modulabschlussandroid.ui
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +15,6 @@ import android.widget.Button
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
@@ -30,7 +26,6 @@ import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 class InsertFragment : Fragment() {
 
@@ -74,6 +69,16 @@ class InsertFragment : Fragment() {
             showCityDialog(uId)
         }
 
+//Übergabe der Uid als Parameter um die Titel unter Uid des Users zu speichern======================
+        binding.cvTitle.setOnClickListener {
+            showTitleDialog(uId)
+        }
+
+        //Übergabe der Uid als Parameter um die Beschreibung unter Uid des Users zu speichern======================
+        binding.cvDescription.setOnClickListener {
+            showDescriptionDialog(uId)
+        }
+
 //Bottom Nav BAR ===================================================================================
         //Zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
@@ -97,7 +102,7 @@ class InsertFragment : Fragment() {
         }
     }
 
-    //Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
+//Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
     private fun showCategorieDialog(Uid: String) {
         //Objekt dialog erstellen
         val dialog = Dialog(requireContext())
@@ -109,12 +114,11 @@ class InsertFragment : Fragment() {
         dialog.setContentView(R.layout.custom_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-//Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien============================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien====================
         val saveBtn: Button = dialog.findViewById(R.id.btn_save)
         val garageSwitch: Switch = dialog.findViewById(R.id.switch_garage)
         val camperParkingInsideSwitch: Switch = dialog.findViewById(R.id.switch_camperParkingInside)
-        val camperParkingOutsideSwitch: Switch =
-            dialog.findViewById(R.id.switch_camperParkingOutside)
+        val camperParkingOutsideSwitch: Switch = dialog.findViewById(R.id.switch_camperParkingOutside)
         val parkingSpotSwitch: Switch = dialog.findViewById(R.id.switch_parkingSpot)
         val undergroundParkingSwitch: Switch = dialog.findViewById(R.id.switch_undergroundParking)
         val carportSwitch: Switch = dialog.findViewById(R.id.switch_carport)
@@ -129,7 +133,7 @@ class InsertFragment : Fragment() {
         val yardSwitch: Switch = dialog.findViewById(R.id.switch_yard)
 
 
-//Beim Klicken des Speichern Buttons auf dem Kategorien Dialog, werden folgende Einstelunngen übernommen...
+        //Beim Klicken des Speichern Buttons auf dem Kategorien Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //    binding.editDescription.text = tvMessage.text as Editable?
@@ -158,7 +162,7 @@ class InsertFragment : Fragment() {
         dialog.show()
     }
 
-    //Dialog Feld Eingabe für die Postleitzahl==========================================================
+//Dialog Feld Eingabe für die Postleitzahl==========================================================
     private fun showZipCodeDialog(Uid: String) {
         //Objekt zipCodeDialog erstellen
         val zipCodeDialog = Dialog(requireContext())
@@ -169,7 +173,7 @@ class InsertFragment : Fragment() {
         zipCodeDialog.setCancelable(false)
         zipCodeDialog.setContentView(R.layout.zipcode_dialog)
         zipCodeDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien============================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien====================
         val saveBtn: Button = zipCodeDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = zipCodeDialog.findViewById(R.id.edit_text_zipcode)
 
@@ -183,7 +187,7 @@ class InsertFragment : Fragment() {
         inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
         }
 
-//Beim Klicken des Speichern Buttons auf dem Postleitzahlen Dialog, werden folgende Einstelunngen übernommen...
+        //Beim Klicken des Speichern Buttons auf dem Postleitzahlen Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Postleitzahl ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
@@ -195,7 +199,6 @@ class InsertFragment : Fragment() {
                 binding.editZipCode.text = "Wähle eine Postleitzahl"
                 binding.zipCodeEdit.setImageResource(R.drawable.edit)
                 zipCodeChoice = false
-
             }
             //Dialog ausblenden
             zipCodeDialog.dismiss()
@@ -204,7 +207,7 @@ class InsertFragment : Fragment() {
         zipCodeDialog.show()
     }
 
-    //Dialog Feld Eingabe für die Stadt=============================================================
+//Dialog Feld Eingabe für die Stadt=================================================================
     private fun showCityDialog(Uid: String) {
         //Objekt cityDialog erstellen
         val cityDialog = Dialog(requireContext())
@@ -215,10 +218,22 @@ class InsertFragment : Fragment() {
         cityDialog.setCancelable(false)
         cityDialog.setContentView(R.layout.city_dialog)
         cityDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=================================
+
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=========================
         val saveBtn: Button = cityDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = cityDialog.findViewById(R.id.edit_text_city)
-//Beim Klicken des Speichern Buttons auf dem Städtenamen Dialog, werden folgende Einstelunngen übernommen...
+
+        //Um eine Tastatur einzublenden
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
+        textMessage.requestFocus()
+        //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
+        lifecycleScope.launch {
+            delay(200)
+            inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
+        }
+
+        //Beim Klicken des Speichern Buttons auf dem Städtenamen Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
@@ -230,13 +245,104 @@ class InsertFragment : Fragment() {
                 binding.editCity.text = "Wähle eine Stadt"
                 binding.cityEdit.setImageResource(R.drawable.edit)
                 cityChoice = false
-
             }
             //Dialog ausblenden
             cityDialog.dismiss()
         }
         //Dialog anzeigen
         cityDialog.show()
+    }
+
+//Dialog Feld Eingabe für die Stadt=================================================================
+    private fun showTitleDialog(Uid: String) {
+        //Objekt TitelDialog erstellen
+        val titelDialog = Dialog(requireContext())
+        //Auswahl kürzerer Name
+        var titelChoice = myObject.doneObjectDescriptionChoice
+        //Erstellen der View
+        titelDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        titelDialog.setCancelable(false)
+        titelDialog.setContentView(R.layout.titel_dialog)
+        titelDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=========================
+        val saveBtn: Button = titelDialog.findViewById(R.id.btn_save)
+        val textMessage: TextView = titelDialog.findViewById(R.id.edit_text_titel)
+
+        //Um eine Tastatur einzublenden
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
+        textMessage.requestFocus()
+        //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
+        lifecycleScope.launch {
+            delay(200)
+            inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
+        }
+
+        //Beim Klicken des Speichern Buttons auf dem Städtenamen Dialog, werden folgende Einstelunngen übernommen...
+        saveBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
+            //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
+            if (textMessage.text.isNotEmpty()) {
+                binding.editTitle.text = "Überschrift ${textMessage.text}"
+                binding.titleEdit.setImageResource(R.drawable.done)
+                titelChoice = true
+            } else {
+                binding.editTitle.text = "Wähle eine Überschrift"
+                binding.titleEdit.setImageResource(R.drawable.edit)
+                titelChoice = false
+            }
+            //Dialog ausblenden
+            titelDialog.dismiss()
+        }
+        //Dialog anzeigen
+        titelDialog.show()
+    }
+
+    //Dialog Feld Eingabe für die Stadt=================================================================
+    private fun showDescriptionDialog(Uid: String) {
+        //Objekt TitelDialog erstellen
+        val descriptionDialog = Dialog(requireContext())
+        //Auswahl kürzerer Name
+        var descriptionChoice = myObject.doneDescriptionChoice
+        //Erstellen der View
+        descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        descriptionDialog.setCancelable(false)
+        descriptionDialog.setContentView(R.layout.description_dialog)
+        descriptionDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=========================
+        val saveBtn: Button = descriptionDialog.findViewById(R.id.btn_save)
+        val textMessage: TextView = descriptionDialog.findViewById(R.id.edit_text_description)
+
+        //Um eine Tastatur einzublenden
+        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
+        textMessage.requestFocus()
+        //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
+        lifecycleScope.launch {
+            delay(200)
+            inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
+        }
+
+        //Beim Klicken des Speichern Buttons auf dem Städtenamen Dialog, werden folgende Einstelunngen übernommen...
+        saveBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
+            //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
+            if (textMessage.text.isNotEmpty()) {
+                binding.editDescription.text = "Beschreibung ${textMessage.text}"
+                binding.descriptionEdit.setImageResource(R.drawable.done)
+                descriptionChoice = true
+            } else {
+                binding.editDescription.text = "Wähle eine Beschreibung"
+                binding.descriptionEdit.setImageResource(R.drawable.edit)
+                descriptionChoice = false
+            }
+            //Dialog ausblenden
+            descriptionDialog.dismiss()
+        }
+        //Dialog anzeigen
+        descriptionDialog.show()
     }
 //==================================================================================================
 }
