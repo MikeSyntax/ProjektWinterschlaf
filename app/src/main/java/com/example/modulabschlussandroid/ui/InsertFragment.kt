@@ -151,58 +151,57 @@ class InsertFragment : Fragment() {
         val openSpaceSwitch: Switch = dialog.findViewById(R.id.switch_openSpace)
         val yardSwitch: Switch = dialog.findViewById(R.id.switch_yard)
 
-        if (garageSwitch.isChecked) {
-            myObject.garage = true
-        }
-        if (camperParkingInsideSwitch.isChecked) {
-            myObject.camperParkingInside = true
-        }
-        if (camperParkingOutsideSwitch.isChecked) {
-            myObject.camperParkingOutside = true
-        }
-        if (parkingSpotSwitch.isChecked) {
-            myObject.parkingSpot= true
-        }
-        if (undergroundParkingSwitch.isChecked) {
-            myObject.underGroundParking = true
-        }
-        if (carportSwitch.isChecked) {
-            myObject.carport = true
-        }
-        if (storageSwitch.isChecked) {
-            myObject.storage = true
-        }
-        if (storageHallSwitch.isChecked) {
-            myObject.storageHall = true
-        }
-        if (storageRoomSwitch.isChecked) {
-            myObject.storageRoom = true
-        }
-        if (storageBoxSwitch.isChecked) {
-            myObject.storageBox = true
-        }
-        if (containerSwitch.isChecked) {
-            myObject.container = true
-        }
-        if (basementSwitch.isChecked) {
-            myObject.basement = true
-        }
-        if (barnSwitch.isChecked) {
-            myObject.barn = true
-        }
-        if (openSpaceSwitch.isChecked) {
-            myObject.openSpace = true
-        }
-        if (yardSwitch.isChecked) {
-            myObject.yard = true
-        }
 
         //Beim Klicken des Speichern Buttons auf dem Kategorien Dialog, werden folgende Einstelunngen übernommen...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
-            //    binding.editDescription.text = tvMessage.text as Editable?
+            //Für die Übergabe an die Firebase Realtime Datenbank werden hier die Kategorien gesetzt
+            if (garageSwitch.isChecked) {
+                myObject.garage = true
+            }
+            if (camperParkingInsideSwitch.isChecked) {
+                myObject.camperParkingInside = true
+            }
+            if (camperParkingOutsideSwitch.isChecked) {
+                myObject.camperParkingOutside = true
+            }
+            if (parkingSpotSwitch.isChecked) {
+                myObject.parkingSpot= true
+            }
+            if (undergroundParkingSwitch.isChecked) {
+                myObject.underGroundParking = true
+            }
+            if (carportSwitch.isChecked) {
+                myObject.carport = true
+            }
+            if (storageSwitch.isChecked) {
+                myObject.storage = true
+            }
+            if (storageHallSwitch.isChecked) {
+                myObject.storageHall = true
+            }
+            if (storageRoomSwitch.isChecked) {
+                myObject.storageRoom = true
+            }
+            if (storageBoxSwitch.isChecked) {
+                myObject.storageBox = true
+            }
+            if (containerSwitch.isChecked) {
+                myObject.container = true
+            }
+            if (basementSwitch.isChecked) {
+                myObject.basement = true
+            }
+            if (barnSwitch.isChecked) {
+                myObject.barn = true
+            }
+            if (openSpaceSwitch.isChecked) {
+                myObject.openSpace = true
+            }
+            if (yardSwitch.isChecked) {
+                myObject.yard = true
+            }
             //Wenn einer der ganzen Kategorien ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
-
             if (garageSwitch.isChecked || camperParkingInsideSwitch.isChecked || camperParkingOutsideSwitch.isChecked ||
                 parkingSpotSwitch.isChecked || undergroundParkingSwitch.isChecked || carportSwitch.isChecked ||
                 storageSwitch.isChecked || storageHallSwitch.isChecked || storageRoomSwitch.isChecked ||
