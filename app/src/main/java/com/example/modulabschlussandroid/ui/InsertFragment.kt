@@ -516,17 +516,21 @@ class InsertFragment : Fragment() {
 
         //Object von der Database bauen
         database = Firebase.database
+
         //und eine Reference setzten in der Kategorie myObjects
         val ref = database.getReference("objectsOnline")
         Log.d("InsertFragment", "Reference $ref")
+
         //Hier wird jedesmal wenn es aufgerufen wird eine Id gesetzt
         val objectId = ref.push().key
         Log.d("InsertFragment", "objectId $objectId")
+
         //Das in der Datenbank zu setzende myObject
         val objectOnline = MyObject(objectId!!, uId, zipCode, city, title, description, price, garage, parkingSpot, parkingSpace,
             camperParkingInside, camperParkingOutside, underGroundParking, storage, storageHall, storageRoom, storageBox,
             container, carport, basement, openSpace, barn, yard)
         Log.d("InsertFragment", "myObject $objectOnline")
+
         //hier wird in der Database das Objekt gesetzt bzw. erschaffen und noch ein CompleteListener zum überprüfen
         ref.child(objectId).setValue(objectOnline)
             //Erfolgreich???

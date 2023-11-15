@@ -1,12 +1,14 @@
 package com.example.modulabschlussandroid.viewmodels
 
+import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
@@ -15,10 +17,11 @@ import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.example.modulabschlussandroid.repositorys.RepositoryObjects
 import kotlinx.coroutines.launch
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
-//Hier wird die View Ebene gebaut aus der MVVM
+import com.google.firebase.Firebase
+import com.google.firebase.database.database
 
+//Hier im ViewModel wird die View Ebene gebaut aus der MVVM
 //Hier muss das ViewModel AndroidViewModel sein, da nur hier die Mögllichkeit besteht Daten mit zugeben
-
 class ViewModelObjects(application: Application) : AndroidViewModel(application) {
 
     private val database = ObjectDatabase.getDatabase(application)
@@ -134,5 +137,9 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
                 }
             }
         }
+    }
+
+    fun loadMyObjectFromFirebaseDatabase(){
+
     }
 }

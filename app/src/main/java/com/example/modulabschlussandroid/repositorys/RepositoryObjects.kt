@@ -81,7 +81,7 @@ class RepositoryObjects(
                     thisUser.data?.get("userName").toString(),
                     thisUser.data?.get("zipCode").toString()
                 )
-                Log.e("Repo", " User Data set failed in firestore")
+               // Log.e("Repo", " User Data set failed in firestore")
             }.addOnFailureListener { Log.e("Repo","$it") }
     }
 
