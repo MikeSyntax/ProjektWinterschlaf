@@ -1,10 +1,12 @@
 package com.example.modulabschlussandroid.ui
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,15 +18,19 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
+import com.example.modulabschlussandroid.data.datamodels.MyObject
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.FragmentInsertBinding
-import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
+import com.google.android.play.core.integrity.e
+import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.database
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -32,11 +38,15 @@ class InsertFragment : Fragment() {
 
     private lateinit var binding: FragmentInsertBinding
 
-    private val viewModel: ViewModelObjects by activityViewModels()
+    //private val viewModel: ViewModelObjects by activityViewModels()
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    private lateinit var myObject: Objects
+    private lateinit var thisObject: Objects
+
+    private lateinit var myObject: MyObject
+
+    private lateinit var dbRef: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,16 +65,18 @@ class InsertFragment : Fragment() {
         //Erstellen der Uid aus der Authentication
         val uId: String = firebaseAuth.uid.toString()
         //Erstellen eines Objektes der Object Klasse
-        myObject = Objects()
+        thisObject = Objects()
+        //Erstellen eines Objektes der MyObject Klasse für die Firebase Datenbank mit den abrufbaren Objekten
+        myObject = MyObject()
 
 
-/* //kürzere Variable für die Auwahl der Zustände der einzelnen Felder im InsertFragment
-    private var categoryChoice = myObject.doneCategoryChoice
-    private var zipCodeChoice = myObject.doneZipCodeChoice
-    private var cityChoice = myObject.doneCityChoice
-    private var titelChoice = myObject.doneObjectDescriptionChoice
-    private var descriptionChoice = myObject.doneDescriptionChoice
-    private var priceChoice = myObject.donePriceChoice*/
+        /* //kürzere Variable für die Auwahl der Zustände der einzelnen Felder im InsertFragment
+            private var categoryChoice = myObject.doneCategoryChoice
+            private var zipCodeChoice = myObject.doneZipCodeChoice
+            private var cityChoice = myObject.doneCityChoice
+            private var titelChoice = myObject.doneObjectDescriptionChoice
+            private var descriptionChoice = myObject.doneDescriptionChoice
+            private var priceChoice = myObject.donePriceChoice*/
 
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
@@ -95,6 +107,10 @@ class InsertFragment : Fragment() {
             showPriceDialog(uId)
         }
 
+        binding.btnFloatingAction.setOnClickListener {
+            saveItemToDatabase()
+        }
+
 //Bottom Nav BAR ===================================================================================
         //Zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
@@ -118,7 +134,8 @@ class InsertFragment : Fragment() {
         }
     }
 
-//Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
+    //Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private fun showCategorieDialog(Uid: String) {
         //Objekt dialog erstellen
         val dialog = Dialog(requireContext())
@@ -132,7 +149,8 @@ class InsertFragment : Fragment() {
         val saveBtn: Button = dialog.findViewById(R.id.btn_save)
         val garageSwitch: Switch = dialog.findViewById(R.id.switch_garage)
         val camperParkingInsideSwitch: Switch = dialog.findViewById(R.id.switch_camperParkingInside)
-        val camperParkingOutsideSwitch: Switch = dialog.findViewById(R.id.switch_camperParkingOutside)
+        val camperParkingOutsideSwitch: Switch =
+            dialog.findViewById(R.id.switch_camperParkingOutside)
         val parkingSpotSwitch: Switch = dialog.findViewById(R.id.switch_parkingSpot)
         val undergroundParkingSwitch: Switch = dialog.findViewById(R.id.switch_undergroundParking)
         val carportSwitch: Switch = dialog.findViewById(R.id.switch_carport)
@@ -160,14 +178,14 @@ class InsertFragment : Fragment() {
                 barnSwitch.isChecked || openSpaceSwitch.isChecked || yardSwitch.isChecked
             ) {
                 //die Kategoriewahl wird auf true gesetzt und der Daumen hoch wird angezeigt
-                myObject.doneCategoryChoice = true
+                thisObject.doneCategoryChoice = true
                 binding.categoriesEdit.setImageResource(R.drawable.done)
                 binding.tvCategories.text = "Kategorien erledigt"
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
                 showFloationActionButton()
             } else {
                 //die Kategoriewahl wird auf false gesetzt und der Edit Stift wird angezeigt
-                myObject.doneCategoryChoice = false
+                thisObject.doneCategoryChoice = false
                 binding.categoriesEdit.setImageResource(R.drawable.edit)
                 binding.tvCategories.text = "Wähle eine Kategorie"
             }
@@ -178,7 +196,7 @@ class InsertFragment : Fragment() {
         dialog.show()
     }
 
-//Dialog Feld Eingabe für die Postleitzahl==========================================================
+    //Dialog Feld Eingabe für die Postleitzahl==========================================================
     private fun showZipCodeDialog(Uid: String) {
         //Objekt zipCodeDialog erstellen
         val zipCodeDialog = Dialog(requireContext())
@@ -192,13 +210,14 @@ class InsertFragment : Fragment() {
         val textMessage: TextView = zipCodeDialog.findViewById(R.id.edit_text_zipcode)
 
         //Um eine Tastatur einzublenden
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
         textMessage.requestFocus()
         //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
         lifecycleScope.launch {
             delay(200)
-        inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
+            inputMethodManager.showSoftInput(textMessage, InputMethodManager.SHOW_IMPLICIT)
         }
 
         //Beim Klicken des Speichern Buttons auf dem Postleitzahlen Dialog, werden folgende Einstelunngen übernommen...
@@ -206,13 +225,15 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Postleitzahl ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                myObject.doneZipCodeChoice = true
-                binding.editZipCode.text = "Postleitzahl: ${textMessage.text}"
+                thisObject.doneZipCodeChoice = true
+                binding.editZipCode.text = textMessage.text
                 binding.zipCodeEdit.setImageResource(R.drawable.done)
+                //Für die Firebase datenbank
+                myObject.zipCode = binding.editZipCode.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
                 showFloationActionButton()
             } else {
-                myObject.doneZipCodeChoice = false
+                thisObject.doneZipCodeChoice = false
                 binding.editZipCode.text = "Wähle eine Postleitzahl"
                 binding.zipCodeEdit.setImageResource(R.drawable.edit)
             }
@@ -223,7 +244,7 @@ class InsertFragment : Fragment() {
         zipCodeDialog.show()
     }
 
-//Dialog Feld Eingabe für die Stadt=================================================================
+    //Dialog Feld Eingabe für die Stadt=================================================================
     private fun showCityDialog(Uid: String) {
         //Objekt cityDialog erstellen
         val cityDialog = Dialog(requireContext())
@@ -238,7 +259,8 @@ class InsertFragment : Fragment() {
         val textMessage: TextView = cityDialog.findViewById(R.id.edit_text_city)
 
         //Um eine Tastatur einzublenden
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
         textMessage.requestFocus()
         //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
@@ -252,13 +274,15 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Stadt ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                myObject.doneCityChoice = true
-                binding.editCity.text = "Stadt: ${textMessage.text}"
+                thisObject.doneCityChoice = true
+                binding.editCity.text = textMessage.text
                 binding.cityEdit.setImageResource(R.drawable.done)
+                //Für die Firebase datenbank
+                myObject.city = binding.editCity.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
                 showFloationActionButton()
             } else {
-                myObject.doneCityChoice = false
+                thisObject.doneCityChoice = false
                 binding.editCity.text = "Wähle eine Stadt"
                 binding.cityEdit.setImageResource(R.drawable.edit)
             }
@@ -269,7 +293,7 @@ class InsertFragment : Fragment() {
         cityDialog.show()
     }
 
-//Dialog Feld Eingabe für die Titel=================================================================
+    //Dialog Feld Eingabe für die Titel=================================================================
     private fun showTitleDialog(Uid: String) {
         //Objekt TitelDialog erstellen
         val titelDialog = Dialog(requireContext())
@@ -284,7 +308,8 @@ class InsertFragment : Fragment() {
         val textMessage: TextView = titelDialog.findViewById(R.id.edit_text_titel)
 
         //Um eine Tastatur einzublenden
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
         textMessage.requestFocus()
         //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
@@ -298,13 +323,15 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn ein Überschrift ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                myObject.doneObjectDescriptionChoice = true
-                binding.editTitle.text = "Überschrift: ${textMessage.text}"
+                thisObject.doneObjectDescriptionChoice = true
+                binding.editTitle.text = textMessage.text
                 binding.titleEdit.setImageResource(R.drawable.done)
+                //Für die Firebase datenbank
+                myObject.title = binding.editTitle.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
                 showFloationActionButton()
             } else {
-                myObject.doneObjectDescriptionChoice = false
+                thisObject.doneObjectDescriptionChoice = false
                 binding.editTitle.text = "Wähle eine Überschrift"
                 binding.titleEdit.setImageResource(R.drawable.edit)
             }
@@ -315,7 +342,7 @@ class InsertFragment : Fragment() {
         titelDialog.show()
     }
 
-//Dialog Feld Eingabe für die Beschreibung==========================================================
+    //Dialog Feld Eingabe für die Beschreibung==========================================================
     private fun showDescriptionDialog(Uid: String) {
         //Objekt descriptionDialog erstellen
         val descriptionDialog = Dialog(requireContext())
@@ -330,7 +357,8 @@ class InsertFragment : Fragment() {
         val textMessage: TextView = descriptionDialog.findViewById(R.id.edit_text_description)
 
         //Um eine Tastatur einzublenden
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
         textMessage.requestFocus()
         //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
@@ -344,13 +372,15 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Beschreibung ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                myObject.doneDescriptionChoice = true
-                binding.editDescription.text = "Beschreibung: ${textMessage.text}"
+                thisObject.doneDescriptionChoice = true
+                binding.editDescription.text = textMessage.text
                 binding.descriptionEdit.setImageResource(R.drawable.done)
+                //Für die Firebase datenbank
+                myObject.description = binding.editDescription.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
                 showFloationActionButton()
             } else {
-                myObject.doneDescriptionChoice = false
+                thisObject.doneDescriptionChoice = false
                 binding.editDescription.text = "Wähle eine Beschreibung"
                 binding.descriptionEdit.setImageResource(R.drawable.edit)
             }
@@ -361,7 +391,7 @@ class InsertFragment : Fragment() {
         descriptionDialog.show()
     }
 
-//Dialog Feld Eingabe für die Preis=================================================================
+    //Dialog Feld Eingabe für die Preis=================================================================
     private fun showPriceDialog(Uid: String) {
         //Objekt PriceDialog erstellen
         val priceDialog = Dialog(requireContext())
@@ -376,7 +406,8 @@ class InsertFragment : Fragment() {
         val textMessage: TextView = priceDialog.findViewById(R.id.edit_text_price)
 
         //Um eine Tastatur einzublenden
-        val inputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         //Ermöglicht das direkte Schreiben im Eingabefeld ohne erst reinzuklicken
         textMessage.requestFocus()
         //kleine Zeitverzögerung damit die Tastatur aufgebaut werden kann
@@ -390,13 +421,15 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Wenn eine Preis ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (textMessage.text.isNotEmpty()) {
-                myObject.donePriceChoice = true
-                binding.editPrice.text = "Preis: ${textMessage.text}"
+                thisObject.donePriceChoice = true
+                binding.editPrice.text = textMessage.text
                 binding.priceEdit.setImageResource(R.drawable.done)
+                //Für die Firebase datenbank
+                myObject.price = binding.editPrice.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
                 showFloationActionButton()
             } else {
-                myObject.donePriceChoice = false
+                thisObject.donePriceChoice = false
                 binding.editPrice.text = "Wähle einen Preis"
                 binding.priceEdit.setImageResource(R.drawable.edit)
             }
@@ -407,19 +440,71 @@ class InsertFragment : Fragment() {
         priceDialog.show()
     }
 
-//Der Floating Action Button soll sichtbar werden, sobald alle Felder ausgefüllt sind
-    private fun showFloationActionButton(){
+    //Der Floating Action Button soll sichtbar werden, sobald alle Felder ausgefüllt sind
+    private fun showFloationActionButton() {
         if (
-            myObject.doneCategoryChoice && myObject.doneZipCodeChoice && myObject.doneCityChoice && myObject.doneObjectDescriptionChoice && myObject.doneDescriptionChoice && myObject.donePriceChoice
-            ){
+            thisObject.doneCategoryChoice && thisObject.doneZipCodeChoice && thisObject.doneCityChoice && thisObject.doneObjectDescriptionChoice && thisObject.doneDescriptionChoice && thisObject.donePriceChoice
+        ) {
             binding.btnFloatingAction.isVisible = true
         }
     }
 
 
     //TODO TODO TODO
-//Das erstellte Objekt soll an die Firebase Datenbank gesendet werden
-    //private fun sendItemToFirebase(){
-   // }
+//Das erstellte Objekt soll an die Firebase Datenbank gesendet werden===============================
+    private fun saveItemToDatabase() {
+        //Alle Usereingaben werden durch trim bearbeitet und unnötige User Leerzeichen entfernt
+        val userId: String = firebaseAuth.uid.toString()
+        val zipCode: String = myObject.zipCode!!.trim()
+        val city: String = myObject.city!!.trim()
+        val title: String = myObject.title!!.trim()
+        val description: String = myObject.description!!.trim()
+        val price: String = myObject.price!!.trim()
+
+        /*   //Instanz der Database mit dem Reference Pfad objectsOnline, indem alle Items abgespeichert werden sollen
+           dbRef = FirebaseDatabase.getInstance().getReference("objectsOnline")
+           Log.d("Insert", "dbRef $dbRef")
+           //Neue Id erstellen
+           val objectId = dbRef.push().key!!
+           Log.d("InsertFragment", "Reference $objectId")
+           //Übergabe aller für die Objekte benötigten Angaben
+           val objectOnline = MyObject(objectId, userId, zipCode, city, title, description, price)
+           Log.d("InsertFragment", "Objekte $objectOnline")
+           //Zugriff Datenbank und erstellen eines neuen Eintrages
+           dbRef.child(objectId).setValue(objectOnline)
+               //Erfolgreich???
+               .addOnCompleteListener {
+                   Log.d("insertFragment","Data inserted successfully")
+               //Fehler???
+               }.addOnFailureListener {
+                   Log.e("insertFragment", "inserted failed $it")
+               }*/
+
+
+        //Object von der Database bauen
+        val database = Firebase.database
+        //und eine Reference setzten in der Kategorie myObjects
+        val ref = database.getReference("myObjects")
+        Log.d("InsertFragment", "Reference $ref")
+        //Hier wird jedesmal wenn es aufgerufen wird eine Id gesetzt
+        val objectId = ref.push().key
+        Log.d("InsertFragment", "objectId $objectId")
+        //Das in der Datenbank zu setzende myObject
+        val myObject = MyObject(objectId!!, userId, zipCode, city, title, description, price)
+        Log.d("InsertFragment", "myObject $myObject")
+        //hier wird in der Database das Objekt gesetzt bzw. erschaffen und noch ein CompleteListener zum überprüfen
+        ref.child(objectId).setValue(myObject)
+            //Erfolgreich???
+            .addOnCompleteListener {
+                Log.d("insertFragment", "Data inserted successfully")
+                //Fehler???
+            }.addOnFailureListener {
+                Log.e("insertFragment", "inserted failed $it")
+            }
+
+
+    }
 //==================================================================================================
 }
+
+
