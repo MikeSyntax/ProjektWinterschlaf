@@ -89,8 +89,8 @@ class RepositoryObjects(
     }
 
     //Auslesen der Datenbank von Firebase
-    fun readDatabase(uId: String):Advertisement{
-        firebaseRepository.readDatabase(uId)
+    fun readDatabase():Advertisement{
+        firebaseRepository.readDatabase()
         return Advertisement()
     }
 

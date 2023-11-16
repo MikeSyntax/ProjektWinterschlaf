@@ -76,13 +76,7 @@ class ProfileFragment : Fragment() {
             binding.tvUserRegistered.text = "Registriert seit ${user.registered}"
 
 //NEU nur zur Probe mit der Firebase Database Abfrage verbunden
-        //    val objectID: String = "-NjHj3V8FzEZdpo8_jj2"
-       //     readDatabase(objectID)
-            viewModel.readDatabase(uId.toString()).city = binding.tvCity.text.toString()
-            viewModel.readDatabase(uId.toString()).title = binding.tvObject.text.toString()
-            viewModel.readDatabase(uId.toString()).price = binding.tvPrice.text.toString()
-
-
+            viewModel.readDatabase()
         }
 
 //Verschiedene Klicklistener========================================================================

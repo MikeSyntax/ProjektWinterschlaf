@@ -135,8 +135,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
     //Auslesen der Datenbank von Firebase
-    fun readDatabase(uId: String):Advertisement{
-        repository.readDatabase(uId)
+    fun readDatabase():Advertisement{
+        repository.readDatabase()
         return Advertisement()
     }
 

@@ -33,11 +33,11 @@ class RepositoryFirebase(
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
     fun updateCurrentUserFromFirestore(uId: String) {
         fireStoreDatabase = Firebase.firestore
-        Log.d("success Repo", "$uId User Id ready for input FireStore")
+        Log.d("Firebase Repo Store", "$uId User Id ready for input FireStore")
         fireStoreDatabase.collection("user").document(uId)
             .get()
             .addOnSuccessListener { thisUser ->
-                Log.d("Repository Firestore", "SuccesListener FireStore done")
+                Log.d("Firebase Repo Store", "SuccesListener FireStore done")
                 _currentUser.value = PersonalData(
                     thisUser.id,
                     thisUser.data?.get("cityName").toString(),
@@ -53,7 +53,7 @@ class RepositoryFirebase(
                     thisUser.data?.get("zipCode").toString()
                 )
                 // Log.e("Repo", " User Data set failed in firestore")
-            }.addOnFailureListener { Log.e("Repo", "$it") }
+            }.addOnFailureListener { Log.e("Firebase Repo Store", "$it") }
     }
 //Firebase Authentication===========================================================================
 
@@ -68,9 +68,9 @@ class RepositoryFirebase(
     //Update des aktuellen Users
     fun showCurrentUserId(): String {
         val user = firebaseAuth.currentUser?.uid.toString()
-        Log.d("success Repo", "$user User-Id in firebase Auth")
+        Log.d("Firebase Repo Auth", "$user User-Id in firebase Auth")
         _uId.value = user
-        Log.d("success Repo", "$currentUser User-Id in firebase Auth")
+        Log.d("Firebase Repo Auth", "$currentUser User-Id in firebase Auth")
         return uId.value.toString()
     }
 
@@ -87,48 +87,45 @@ class RepositoryFirebase(
 
         //und eine Reference setzten in der Kategorie myObjects
         val ref = database.getReference("objectsOnline")
-        Log.d("InsertFragment", "Reference $ref")
+        Log.d("Firebase Repo Data", "Reference $ref")
 
         //Hier wird jedesmal wenn es aufgerufen wird eine Id gesetzt
         val objectId = ref.push().key
-        Log.d("InsertFragment", "objectId $objectId")
+        Log.d("Firebase Repo Data", "objectId $objectId")
 
         //hier wird in der Database das Objekt gesetzt bzw. erschaffen und noch ein CompleteListener zum überprüfen
         ref.child(objectId!!).setValue(advertisement)
             //Erfolgreich???
             .addOnSuccessListener {
-                Log.d("insertFragment", "Data inserted successfully")
+                Log.d("Firebase Repo Data", "Data inserted successfully")
                 //Fehler???
             }.addOnFailureListener {
-                Log.e("insertFragment", "inserted failed $it")
+                Log.e("Firebase Repo Data", "inserted failed $it")
             }
     }
 
     //NEU
-    fun readDatabase(uId: String): Advertisement {
+    fun readDatabase(): Advertisement {
         //Counter für die Anzeigen welche der User gerade online hat
         var count: Int = 0
         //und eine Reference setzten in der Kategorie objectsOnline
         val ref = database.getReference("objectsOnline")
+        Log.d("Firebase Repo Data", "Reference $ref")
 //TODO TODO TODO Wieviele Anzeigen dieses Users muss noch gemacht werden
 //Abfrage wieviele Anzeigen im Moment online sind
         val result = ref.get().addOnSuccessListener {
-            // Log.d("Profile", "Anzahl Kinder ${it.childrenCount}")
+            Log.d("Firebase Repo Data", "Anzahl Kinder ${it.childrenCount}")
             it.childrenCount
         }
         // count = result.toString().toInt()
         ref.get().addOnSuccessListener {
-            if (it.exists()) {
-                //UserID aus dem Database auslesen und mit der eingeloggten Person vergleichen
-                val thisUser = it.child("userId").value
-                //Nur wenn beide gleich sind diese Ausführungen starten
-                if (thisUser == uId) {
+            Log.d("Firebase Repo Data", "Success $it")
                     for (snapshot in it.children) {
-                        Log.d("Profile", "Alle id´s ${snapshot.child("objectId").value}")
+                        Log.d("Firebase Repo Data Schleife", "Alle id´s ${snapshot.child("objectId").value}")
                         Advertisement(snapshot)
                     }
-                }
-            }
+        }.addOnFailureListener {
+            Log.d("Firebase Repo Data", "Error $it")
         }
         return Advertisement()
     }
