@@ -51,11 +51,6 @@ class AdapterObjects(
         binding.tvDescription.text = thisObject.description
         binding.tvDistance.text = "PLZ ${thisObject.zipCode}"
 
-      //  if (thisObject.liked){
-       //     binding.cvItemObject.str
-       // }
-
-
         //Weiterleitung auf eine Detailseite
         binding.cvItemObject.setOnClickListener {
 
@@ -74,10 +69,4 @@ class AdapterObjects(
     override fun getItemCount(): Int {
         return dataset.size
     }
-    /*
-        //Änderungen werden bei Aufruf an das Dataset mitgeteilt
-        fun sortObjects(list: List<Objects>) {
-            dataset = list
-            notifyDataSetChanged()
-        }*/
 }

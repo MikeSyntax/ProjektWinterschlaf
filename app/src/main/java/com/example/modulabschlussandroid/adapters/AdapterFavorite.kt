@@ -13,7 +13,7 @@ class AdapterFavorite(
     private val dataset: List<Objects>,
     private val viewModel: ViewModelObjects,
 
-) : RecyclerView.Adapter<AdapterFavorite.ItemViewHolder>() {
+    ) : RecyclerView.Adapter<AdapterFavorite.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: FavoriteItemSleepBinding) :
         RecyclerView.ViewHolder(binding.root)

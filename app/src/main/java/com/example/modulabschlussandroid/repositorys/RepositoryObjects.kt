@@ -3,6 +3,7 @@ package com.example.modulabschlussandroid.repositorys
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
@@ -13,6 +14,7 @@ import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
@@ -29,7 +31,6 @@ class RepositoryObjects(
 
     //Verbindung zum Objekt in der DistanceApiService
     private val apiDistance: DistanceApiObject,
-
 
     ) {
 //LiveData ObjectList===============================================================================
@@ -49,60 +50,48 @@ class RepositoryObjects(
     val zipObjects: LiveData<List<Objects>?>
         get() = _zipObjects
 
-//Firebase Database====================================================================
+//Firebase Firestore Userdaten (Name Adresse Benutzer usw.==========================================
 
-    //Verbindung zum Firestore
-    private lateinit var fireStoreDatabase: FirebaseFirestore
+    //Verbindung zum Firebase Repository
+    private val firebaseRepository = RepositoryFirebase()
 
-    //LiveData für den aktuellen user und alle Daten über den User
-    private var _currentUser: MutableLiveData<PersonalData> = MutableLiveData()
-    val currentUser: LiveData<PersonalData>
-        get() = _currentUser
+    //LiveData des aktuellen Users
+    var currentUser = firebaseRepository.currentUser
 
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
-    fun updateCurrentUserFromFirestore(id: String) {
-        Log.d("success Repo", "$id User Id ready for input FireStore")
-        fireStoreDatabase = Firebase.firestore
-        fireStoreDatabase.collection("user").document(id)
-            .get()
-            .addOnSuccessListener { thisUser ->
-                Log.d("Repository Firestore", "SuccesListener FireStore done")
-                _currentUser.value = PersonalData(
-                    thisUser.id,
-                    thisUser.data?.get("cityName").toString(),
-                    thisUser.data?.get("countInsertedItems").toString().toInt(),
-                    thisUser.data?.get("itemsDone").toString().toInt(),
-                    thisUser.data?.get("name").toString(),
-                    thisUser.data?.get("preName").toString(),
-                    thisUser.data?.get("registered").toString(),
-                    thisUser.data?.get("streetName").toString(),
-                    thisUser.data?.get("streetNumber").toString(),
-                    thisUser.data?.get("telNumber").toString(),
-                    thisUser.data?.get("userName").toString(),
-                    thisUser.data?.get("zipCode").toString()
-                )
-               // Log.e("Repo", " User Data set failed in firestore")
-            }.addOnFailureListener { Log.e("Repo","$it") }
+    fun updateCurrentUserFromFirestore(uId: String) {
+       firebaseRepository.updateCurrentUserFromFirestore(uId)
     }
 
 
-//den aktuellen User zurückgeben====================================================================
+//Firebase Authentication User ID (integer) ========================================================
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    //Live Data des aktuellen Users dessen Id
+    var uId = firebaseRepository.uId
 
-    //Live Data des aktuellen Users
-    private var _currentUserId: MutableLiveData<String> = MutableLiveData()
-    val currentUserId: LiveData<String>
-        get() = _currentUserId
-
-    //Update des aktuellen Users
+    //Funktion um den aktuellen User anhand seiner Id zu identifizieren aus der Authentication
     fun showCurrentUserId(): String {
-        firebaseAuth = FirebaseAuth.getInstance()
-        val user = firebaseAuth.currentUser?.uid.toString()
-        Log.d("success Repo", "$user User-Id in firebase Auth")
-        _currentUserId.value = user
-        Log.d("success Repo", "$currentUser User-Id in firebase Auth")
-        return currentUserId.value.toString()
+       firebaseRepository.showCurrentUserId()
+        return uId.value.toString()
+    }
+
+    //Ausloggen des aktuellen Users
+    fun signOutUser(){
+        //Ausloggen
+       firebaseRepository.signOutUser()
+    }
+
+//Firebase Database ================================================================================
+
+    //Inserieren eines neuen Advertisments (Objekt)
+    fun saveItemToDatabase(advertisement: Advertisement) {
+        firebaseRepository.saveItemToDatabase(advertisement)
+    }
+
+    //Auslesen der Datenbank von Firebase
+    fun readDatabase(uId: String):Advertisement{
+        firebaseRepository.readDatabase(uId)
+        return Advertisement()
     }
 
 //Funktion für die Schnellsuche über Postleitzahl===================================================

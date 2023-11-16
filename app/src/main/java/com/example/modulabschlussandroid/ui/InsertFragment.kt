@@ -18,13 +18,15 @@ import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
-import com.example.modulabschlussandroid.data.datamodels.MyObject
+import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.FragmentInsertBinding
+import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -34,15 +36,13 @@ import kotlinx.coroutines.launch
 
 class InsertFragment : Fragment() {
 
-    private lateinit var binding: FragmentInsertBinding
+    private val viewModel: ViewModelObjects by activityViewModels()
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var binding: FragmentInsertBinding
 
     private lateinit var thisObject: Objects
 
-    private lateinit var myObject: MyObject
-
-    private lateinit var database: FirebaseDatabase
+    private lateinit var advertisement: Advertisement
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,14 +56,12 @@ class InsertFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Erstellen eines Objektes der Firebase Authentication
-        firebaseAuth = FirebaseAuth.getInstance()
         //Erstellen der Uid aus der Authentication
-        val uId: String = firebaseAuth.uid.toString()
+        val uId: String = viewModel.uId.toString()
         //Erstellen eines Objektes der Object Klasse
         thisObject = Objects()
         //Erstellen eines Objektes der MyObject Klasse für die Firebase Datenbank mit den abrufbaren Objekten
-        myObject = MyObject()
+        advertisement = Advertisement()
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
@@ -92,9 +90,18 @@ class InsertFragment : Fragment() {
         binding.cvPrice.setOnClickListener {
             showPriceDialog(uId)
         }
-//
+
+//Inserieren eines neuen Advertisements bzw. einer neuen Anzeige ===================================
         binding.btnFloatingAction.setOnClickListener {
-            saveItemToDatabase(uId)
+            //Auslesen der Eingabefelder ( die Switches der Kategoriefelder, werden in der nächsten Funktion gesetzt
+            advertisement.userId = uId
+            advertisement.zipCode = binding.editZipCode.text.toString()
+            advertisement.city = binding.editCity.text.toString()
+            advertisement.title = binding.editTitle.text.toString()
+            advertisement.description = binding.editDescription.text.toString()
+            advertisement.price = binding.editPrice.text.toString()
+            //Aufruf der Funktion aus dem Firebase Repository
+            viewModel.saveItemToDatabase(advertisement)
         }
 
 //Bottom Nav BAR ===================================================================================
@@ -120,19 +127,19 @@ class InsertFragment : Fragment() {
         }
     }
 
+//Beginn der Dialogfelder zum Inserieren einer neuen Anzeig=========================================
     //Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private fun showCategorieDialog(Uid: String) {
+    private fun showCategorieDialog(uId: String) {
         //Objekt dialog erstellen
         val dialog = Dialog(requireContext())
-        val uId: String = Uid
         //Erstellen der View
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
         dialog.setContentView(R.layout.custom_dialog)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien====================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien
         val saveBtn: Button = dialog.findViewById(R.id.btn_save)
         val garageSwitch: Switch = dialog.findViewById(R.id.switch_garage)
         val camperParkingInsideSwitch: Switch = dialog.findViewById(R.id.switch_camperParkingInside)
@@ -157,49 +164,49 @@ class InsertFragment : Fragment() {
             Toast.makeText(requireContext(), "Eingabe übernommen", Toast.LENGTH_SHORT).show()
             //Für die Übergabe an die Firebase Realtime Datenbank werden hier die Kategorien gesetzt
             if (garageSwitch.isChecked) {
-                myObject.garage = true
+                advertisement.garage = true
             }
             if (camperParkingInsideSwitch.isChecked) {
-                myObject.camperParkingInside = true
+                advertisement.camperParkingInside = true
             }
             if (camperParkingOutsideSwitch.isChecked) {
-                myObject.camperParkingOutside = true
+                advertisement.camperParkingOutside = true
             }
             if (parkingSpotSwitch.isChecked) {
-                myObject.parkingSpot= true
+                advertisement.parkingSpot = true
             }
             if (undergroundParkingSwitch.isChecked) {
-                myObject.underGroundParking = true
+                advertisement.underGroundParking = true
             }
             if (carportSwitch.isChecked) {
-                myObject.carport = true
+                advertisement.carport = true
             }
             if (storageSwitch.isChecked) {
-                myObject.storage = true
+                advertisement.storage = true
             }
             if (storageHallSwitch.isChecked) {
-                myObject.storageHall = true
+                advertisement.storageHall = true
             }
             if (storageRoomSwitch.isChecked) {
-                myObject.storageRoom = true
+                advertisement.storageRoom = true
             }
             if (storageBoxSwitch.isChecked) {
-                myObject.storageBox = true
+                advertisement.storageBox = true
             }
             if (containerSwitch.isChecked) {
-                myObject.container = true
+                advertisement.container = true
             }
             if (basementSwitch.isChecked) {
-                myObject.basement = true
+                advertisement.basement = true
             }
             if (barnSwitch.isChecked) {
-                myObject.barn = true
+                advertisement.barn = true
             }
             if (openSpaceSwitch.isChecked) {
-                myObject.openSpace = true
+                advertisement.openSpace = true
             }
             if (yardSwitch.isChecked) {
-                myObject.yard = true
+                advertisement.yard = true
             }
             //Wenn einer der ganzen Kategorien ausgewählt wurde, dann ersetzen den Bleistift mit dem DaumenHoch mit Feld 1
             if (garageSwitch.isChecked || camperParkingInsideSwitch.isChecked || camperParkingOutsideSwitch.isChecked ||
@@ -213,7 +220,7 @@ class InsertFragment : Fragment() {
                 binding.categoriesEdit.setImageResource(R.drawable.done)
                 binding.tvCategories.text = "Kategorien erledigt"
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
-                showFloationActionButton(uId)
+                showFloationActionButton()
             } else {
                 //die Kategoriewahl wird auf false gesetzt und der Edit Stift wird angezeigt
                 thisObject.doneCategoryChoice = false
@@ -237,7 +244,7 @@ class InsertFragment : Fragment() {
         zipCodeDialog.setCancelable(false)
         zipCodeDialog.setContentView(R.layout.zipcode_dialog)
         zipCodeDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien====================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien
         val saveBtn: Button = zipCodeDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = zipCodeDialog.findViewById(R.id.edit_text_zipcode)
 
@@ -261,9 +268,9 @@ class InsertFragment : Fragment() {
                 binding.editZipCode.text = textMessage.text
                 binding.zipCodeEdit.setImageResource(R.drawable.done)
                 //Für die Firebase datenbank
-                myObject.zipCode = binding.editZipCode.text.toString()
+                advertisement.zipCode = binding.editZipCode.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
-                showFloationActionButton(uId)
+                showFloationActionButton()
             } else {
                 thisObject.doneZipCodeChoice = false
                 binding.editZipCode.text = "Wähle eine Postleitzahl"
@@ -287,7 +294,7 @@ class InsertFragment : Fragment() {
         cityDialog.setContentView(R.layout.city_dialog)
         cityDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Stadt=========================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Stadt
         val saveBtn: Button = cityDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = cityDialog.findViewById(R.id.edit_text_city)
 
@@ -311,9 +318,9 @@ class InsertFragment : Fragment() {
                 binding.editCity.text = textMessage.text
                 binding.cityEdit.setImageResource(R.drawable.done)
                 //Für die Firebase datenbank
-                myObject.city = binding.editCity.text.toString()
+                advertisement.city = binding.editCity.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
-                showFloationActionButton(uId)
+                showFloationActionButton()
             } else {
                 thisObject.doneCityChoice = false
                 binding.editCity.text = "Wähle eine Stadt"
@@ -337,7 +344,7 @@ class InsertFragment : Fragment() {
         titelDialog.setContentView(R.layout.titel_dialog)
         titelDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Überschrift===================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Überschrift
         val saveBtn: Button = titelDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = titelDialog.findViewById(R.id.edit_text_titel)
 
@@ -361,9 +368,9 @@ class InsertFragment : Fragment() {
                 binding.editTitle.text = textMessage.text
                 binding.titleEdit.setImageResource(R.drawable.done)
                 //Für die Firebase datenbank
-                myObject.title = binding.editTitle.text.toString()
+                advertisement.title = binding.editTitle.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
-                showFloationActionButton(uId)
+                showFloationActionButton()
             } else {
                 thisObject.doneObjectDescriptionChoice = false
                 binding.editTitle.text = "Wähle eine Überschrift"
@@ -387,7 +394,7 @@ class InsertFragment : Fragment() {
         descriptionDialog.setContentView(R.layout.description_dialog)
         descriptionDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Beschreibung==================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Beschreibung
         val saveBtn: Button = descriptionDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = descriptionDialog.findViewById(R.id.edit_text_description)
 
@@ -411,9 +418,9 @@ class InsertFragment : Fragment() {
                 binding.editDescription.text = textMessage.text
                 binding.descriptionEdit.setImageResource(R.drawable.done)
                 //Für die Firebase datenbank
-                myObject.description = binding.editDescription.text.toString()
+                advertisement.description = binding.editDescription.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
-                showFloationActionButton(uId)
+                showFloationActionButton()
             } else {
                 thisObject.doneDescriptionChoice = false
                 binding.editDescription.text = "Wähle eine Beschreibung"
@@ -437,7 +444,7 @@ class InsertFragment : Fragment() {
         priceDialog.setContentView(R.layout.price_dialog)
         priceDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //Initialisieren aller Switch´s und Button auf dem Dialog der Preis=========================
+        //Initialisieren aller Switch´s und Button auf dem Dialog der Preis
         val saveBtn: Button = priceDialog.findViewById(R.id.btn_save)
         val textMessage: TextView = priceDialog.findViewById(R.id.edit_text_price)
 
@@ -461,9 +468,9 @@ class InsertFragment : Fragment() {
                 binding.editPrice.text = textMessage.text
                 binding.priceEdit.setImageResource(R.drawable.done)
                 //Für die Firebase datenbank
-                myObject.price = binding.editPrice.text.toString()
+                advertisement.price = binding.editPrice.text.toString()
                 //Anzeige des Floating Action Buttons sobald alle Textfelder ausgefüllt sind
-                showFloationActionButton(uId)
+                showFloationActionButton()
             } else {
                 thisObject.donePriceChoice = false
                 binding.editPrice.text = "Wähle einen Preis"
@@ -477,69 +484,17 @@ class InsertFragment : Fragment() {
     }
 
     //Der Floating Action Button soll sichtbar werden, sobald alle Felder ausgefüllt sind
-    private fun showFloationActionButton(uId: String) {
+    private fun showFloationActionButton() {
         if (
-            thisObject.doneCategoryChoice && thisObject.doneZipCodeChoice && thisObject.doneCityChoice && thisObject.doneObjectDescriptionChoice && thisObject.doneDescriptionChoice && thisObject.donePriceChoice
+            thisObject.doneCategoryChoice &&
+            thisObject.doneZipCodeChoice &&
+            thisObject.doneCityChoice &&
+            thisObject.doneObjectDescriptionChoice &&
+            thisObject.doneDescriptionChoice &&
+            thisObject.donePriceChoice
         ) {
             binding.btnFloatingAction.isVisible = true
         }
-    }
-
-
-    //TODO TODO TODO
-//Das erstellte Objekt soll an die Firebase Datenbank gesendet werden===============================
-    private fun saveItemToDatabase(uId: String) {
-        //Alle Usereingaben werden durch trim bearbeitet und unnötige User Leerzeichen entfernt
-        val zipCode: String = myObject.zipCode!!.trim()
-        val city: String = myObject.city!!.trim()
-        val title: String = myObject.title!!.trim()
-        val description: String = myObject.description!!.trim()
-        val price: String = myObject.price!!.trim()
-        //Kategorienauswahl durch den User
-        val garage: Boolean = myObject.garage                               //Garage
-        val parkingSpot: Boolean = myObject.parkingSpot                     //Parkplatz
-        val parkingSpace: Boolean = myObject.parkingSpace                   //Stellplatz
-        val camperParkingInside: Boolean = myObject.camperParkingInside     //Wohnmobil Stellplatz innen
-        val camperParkingOutside: Boolean = myObject.camperParkingOutside   //Wohnmobil Stellplatz außen
-        val underGroundParking: Boolean = myObject.underGroundParking       //Tiefgarage
-        val storage: Boolean = myObject.storage                             //Lager
-        val storageHall: Boolean = myObject.storageHall                     //Lagerhalle
-        val storageRoom: Boolean = myObject.storageRoom                     //Lagerraum
-        val storageBox: Boolean = myObject.storageBox                       //Lagerbox
-        val container: Boolean = myObject.container                         //Container
-        val carport: Boolean = myObject.carport                             //Carport
-        val basement: Boolean = myObject.basement                           //Keller
-        val openSpace: Boolean = myObject.openSpace                         //Freifläche
-        val barn: Boolean = myObject.barn                                   //Scheune
-        val yard: Boolean = myObject.yard                                   //Hof
-
-
-        //Object von der Database bauen
-        database = Firebase.database
-
-        //und eine Reference setzten in der Kategorie myObjects
-        val ref = database.getReference("objectsOnline")
-        Log.d("InsertFragment", "Reference $ref")
-
-        //Hier wird jedesmal wenn es aufgerufen wird eine Id gesetzt
-        val objectId = ref.push().key
-        Log.d("InsertFragment", "objectId $objectId")
-
-        //Das in der Datenbank zu setzende myObject
-        val objectOnline = MyObject(objectId!!, uId, zipCode, city, title, description, price, garage, parkingSpot, parkingSpace,
-            camperParkingInside, camperParkingOutside, underGroundParking, storage, storageHall, storageRoom, storageBox,
-            container, carport, basement, openSpace, barn, yard)
-        Log.d("InsertFragment", "myObject $objectOnline")
-
-        //hier wird in der Database das Objekt gesetzt bzw. erschaffen und noch ein CompleteListener zum überprüfen
-        ref.child(objectId).setValue(objectOnline)
-            //Erfolgreich???
-            .addOnSuccessListener {
-                Log.d("insertFragment", "Data inserted successfully")
-                //Fehler???
-            }.addOnFailureListener {
-                Log.e("insertFragment", "inserted failed $it")
-            }
     }
 //==================================================================================================
 }

@@ -1,24 +1,22 @@
 package com.example.modulabschlussandroid.viewmodels
 
-import android.annotation.SuppressLint
 import android.app.Application
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
+import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
+import com.example.modulabschlussandroid.repositorys.RepositoryFirebase
 import com.example.modulabschlussandroid.repositorys.RepositoryObjects
 import kotlinx.coroutines.launch
-import com.example.modulabschlussandroid.data.remote.DistanceApiObject
-import com.google.firebase.Firebase
-import com.google.firebase.database.database
+
 
 //Hier im ViewModel wird die View Ebene gebaut aus der MVVM
 //Hier muss das ViewModel AndroidViewModel sein, da nur hier die Mögllichkeit besteht Daten mit zugeben
@@ -35,7 +33,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     var likedObjectsLive = repository.likedObjects
 
     //Hier werden die Userdaten aber nur die Email aus dem Repository übergeben
-    var currentUserId = repository.currentUserId
+    var uId = repository.uId
 
     //Hier werden die User aus dem Repository übergeben
     var currentUser = repository.currentUser
@@ -121,10 +119,26 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
 //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
-    fun updateUser(id: String){
-        repository.updateCurrentUserFromFirestore(id)
+    fun updateUser(uId: String){
+        repository.updateCurrentUserFromFirestore(uId)
     }
 
+    //Ausloggen des aktuellen Users
+    fun signOutUser(){
+        //Ausloggen
+        repository.signOutUser()
+    }
+
+    //Inserieren eines neuen Advertisments (Objekt)
+    fun saveItemToDatabase(advertisement: Advertisement) {
+        repository.saveItemToDatabase(advertisement)
+    }
+
+    //Auslesen der Datenbank von Firebase
+    fun readDatabase(uId: String):Advertisement{
+        repository.readDatabase(uId)
+        return Advertisement()
+    }
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {
@@ -137,9 +151,5 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
                 }
             }
         }
-    }
-
-    fun loadMyObjectFromFirebaseDatabase(){
-
     }
 }
