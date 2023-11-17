@@ -134,6 +134,13 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.saveItemToDatabase(advertisement)
     }
 
+    //Counter für alle Anzeigen online==================================================================
+
+    val countAdvertises = repository.countAdvertises
+    fun countAdvertises(){
+        repository.countAdvertises()
+    }
+
     //Auslesen der Datenbank von Firebase
     fun readDatabase():Advertisement{
         repository.readDatabase()

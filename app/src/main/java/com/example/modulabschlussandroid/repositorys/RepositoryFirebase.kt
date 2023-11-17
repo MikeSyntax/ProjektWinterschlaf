@@ -1,7 +1,6 @@
 package com.example.modulabschlussandroid.repositorys
 
 import android.util.Log
-import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
@@ -9,7 +8,6 @@ import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
@@ -57,21 +55,15 @@ class RepositoryFirebase(
     }
 //Firebase Authentication===========================================================================
 
-//den aktuellen User zurückgeben
-
-
-    //Live Data des aktuellen Users
+    //Live Data des aktuellen Users Id
     private var _uId: MutableLiveData<String> = MutableLiveData()
     val uId: LiveData<String>
         get() = _uId
 
-    //Update des aktuellen Users
-    fun showCurrentUserId(): String {
-        val user = firebaseAuth.currentUser?.uid.toString()
-        Log.d("Firebase Repo Auth", "$user User-Id in firebase Auth")
-        _uId.value = user
-        Log.d("Firebase Repo Auth", "$currentUser User-Id in firebase Auth")
-        return uId.value.toString()
+    //Update der aktuellen Users Id
+    fun showCurrentUserId(){
+        val user = firebaseAuth.currentUser?.uid
+        _uId.value = user.toString()
     }
 
     //Ausloggen des aktuellen Users
@@ -87,43 +79,51 @@ class RepositoryFirebase(
 
         //und eine Reference setzten in der Kategorie myObjects
         val ref = database.getReference("objectsOnline")
-        Log.d("Firebase Repo Data", "Reference $ref")
+       // Log.d("Firebase Repo Data", "Reference $ref")
 
         //Hier wird jedesmal wenn es aufgerufen wird eine Id gesetzt
         val objectId = ref.push().key
-        Log.d("Firebase Repo Data", "objectId $objectId")
+       // Log.d("Firebase Repo Data", "objectId $objectId")
 
         //hier wird in der Database das Objekt gesetzt bzw. erschaffen und noch ein CompleteListener zum überprüfen
         ref.child(objectId!!).setValue(advertisement)
             //Erfolgreich???
             .addOnSuccessListener {
-                Log.d("Firebase Repo Data", "Data inserted successfully")
+              //  Log.d("Firebase Repo Data", "Data inserted successfully")
                 //Fehler???
             }.addOnFailureListener {
-                Log.e("Firebase Repo Data", "inserted failed $it")
+             //   Log.e("Firebase Repo Data", "inserted failed $it")
             }
     }
 
-    //NEU
+//Abfrage in der Firebase Database wieviele Anzeigen im Moment online sind==========================
+
+    //LiveData für den aktuellen user und alle Daten über den User
+    private var _countAdvertises: MutableLiveData<String> = MutableLiveData()
+    val countAdvertises: LiveData<String>
+        get() = _countAdvertises
+
+    //Funktion zur Abfrage der aktuellen UserAnzeigen
+    fun countAdvertises() {
+        //und eine Reference setzten in der Kategorie objectsOnline
+        val ref = database.getReference("objectsOnline")
+        ref.get().addOnSuccessListener {
+                    _countAdvertises.postValue("Inserate online ${it.childrenCount}")
+        }
+    }
+
+//Abfrage in der Firebase Database und erstellen eines Advertisments aller Anzeigen online==========
+
     fun readDatabase(): Advertisement {
-        //Counter für die Anzeigen welche der User gerade online hat
-        var count: Int = 0
         //und eine Reference setzten in der Kategorie objectsOnline
         val ref = database.getReference("objectsOnline")
         Log.d("Firebase Repo Data", "Reference $ref")
-//TODO TODO TODO Wieviele Anzeigen dieses Users muss noch gemacht werden
-//Abfrage wieviele Anzeigen im Moment online sind
-        val result = ref.get().addOnSuccessListener {
-            Log.d("Firebase Repo Data", "Anzahl Kinder ${it.childrenCount}")
-            it.childrenCount
-        }
-        // count = result.toString().toInt()
         ref.get().addOnSuccessListener {
-            Log.d("Firebase Repo Data", "Success $it")
-                    for (snapshot in it.children) {
-                        Log.d("Firebase Repo Data Schleife", "Alle id´s ${snapshot.child("objectId").value}")
-                        Advertisement(snapshot)
-                    }
+            //Log.d("Firebase Repo Data", "Success $it")
+            for (snapshot in it.children) {
+                //Log.d("Firebase Repo Data Schleife", "Alle id´s ${snapshot.child("objectId").value}")
+                Advertisement(snapshot)
+            }
         }.addOnFailureListener {
             Log.d("Firebase Repo Data", "Error $it")
         }

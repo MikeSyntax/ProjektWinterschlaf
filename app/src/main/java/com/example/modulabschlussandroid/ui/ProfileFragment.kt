@@ -71,14 +71,23 @@ class ProfileFragment : Fragment() {
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
             binding.tvUserCountInserted.text =
-                "Anzeigen online ${user.countInsertedItems.toString()}"
-            binding.tvUserItemsDone.text = "Bisherige Anzeigen ${user.itemsDone.toString()}"
+                "Inserate online ${user.countInsertedItems.toString()}"
+            binding.tvUserItemsDone.text = "Bisherige Inserate ${user.itemsDone.toString()}"
             binding.tvUserRegistered.text = "Registriert seit ${user.registered}"
 
-//NEU nur zur Probe mit der Firebase Database Abfrage verbunden
+//NEU nur zur Probe mit der Firebase Database Abfrage verbunden=====================================
             viewModel.readDatabase()
+            //Anzahl aller Anzeigen online
+            viewModel.countAdvertises()
+
+           // binding.tvUserCountInserted.text = viewModel.countAdvertises.value
         }
 
+        val countAdvertises = viewModel.countAdvertises
+
+        countAdvertises.observe(viewLifecycleOwner){
+            binding.tvUserCountInserted.text = it
+        }
 //Verschiedene Klicklistener========================================================================
 
         //zum HomeScreen navigieren

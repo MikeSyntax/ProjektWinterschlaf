@@ -33,6 +33,7 @@ class RepositoryObjects(
     private val apiDistance: DistanceApiObject,
 
     ) {
+
 //LiveData ObjectList===============================================================================
 
     //Alle Objekte in der Datenbank als LiveData anzeigen
@@ -55,6 +56,11 @@ class RepositoryObjects(
     //Verbindung zum Firebase Repository
     private val firebaseRepository = RepositoryFirebase()
 
+    val countAdvertises = firebaseRepository.countAdvertises
+    fun countAdvertises(){
+        firebaseRepository.countAdvertises()
+    }
+
     //LiveData des aktuellen Users
     var currentUser = firebaseRepository.currentUser
 
@@ -62,7 +68,6 @@ class RepositoryObjects(
     fun updateCurrentUserFromFirestore(uId: String) {
        firebaseRepository.updateCurrentUserFromFirestore(uId)
     }
-
 
 //Firebase Authentication User ID (integer) ========================================================
 
