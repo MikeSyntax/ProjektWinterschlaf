@@ -57,7 +57,7 @@ class InsertFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Erstellen der Uid aus der Authentication
-        val uId: String = viewModel.uId.toString()
+        val uId = viewModel.uId.value.toString()
         //Erstellen eines Objektes der Object Klasse
         thisObject = Objects()
         //Erstellen eines Objektes der MyObject Klasse für die Firebase Datenbank mit den abrufbaren Objekten
@@ -95,6 +95,7 @@ class InsertFragment : Fragment() {
         binding.btnFloatingAction.setOnClickListener {
             //Auslesen der Eingabefelder ( die Switches der Kategoriefelder, werden in der nächsten Funktion gesetzt
             advertisement.userId = uId
+            Log.d("Insert", "UserId $uId")
             advertisement.zipCode = binding.editZipCode.text.toString()
             advertisement.city = binding.editCity.text.toString()
             advertisement.title = binding.editTitle.text.toString()

@@ -116,6 +116,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 //NEU Update der aktuellen Usersemail  TODO!!!!!!!!!
     fun updateCurrentUserId(){
         repository.showCurrentUserId()
+    Log.d("viewModel", "User Id $uId")
     }
 
 //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
@@ -146,6 +147,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.readDatabase()
         return Advertisement()
     }
+    val allAdvertises = repository.allAdvertises
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {

@@ -75,9 +75,10 @@ class RepositoryObjects(
     var uId = firebaseRepository.uId
 
     //Funktion um den aktuellen User anhand seiner Id zu identifizieren aus der Authentication
-    fun showCurrentUserId(): String {
+    fun showCurrentUserId(){
        firebaseRepository.showCurrentUserId()
-        return uId.value.toString()
+        Log.d("Repo Objects", "User Id ${uId.value}")
+
     }
 
     //Ausloggen des aktuellen Users
@@ -88,16 +89,19 @@ class RepositoryObjects(
 
 //Firebase Database ================================================================================
 
+
+
     //Inserieren eines neuen Advertisments (Objekt)
     fun saveItemToDatabase(advertisement: Advertisement) {
         firebaseRepository.saveItemToDatabase(advertisement)
     }
 
     //Auslesen der Datenbank von Firebase
-    fun readDatabase():Advertisement{
+    fun readDatabase(){
         firebaseRepository.readDatabase()
-        return Advertisement()
     }
+
+    val allAdvertises = firebaseRepository.allAdvertises
 
 //Funktion für die Schnellsuche über Postleitzahl===================================================
 

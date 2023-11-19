@@ -322,135 +322,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_tel_number" />
 
-
-    <com.google.android.material.card.MaterialCardView
-
-        android:id="@+id/cv_item_object"
-        android:layout_width="184dp"
-        android:layout_height="184dp"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/primary_light_green"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_my_advertises"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        app:cardCornerRadius="10dp"
-        android:visibility="invisible"
-        app:cardElevation="5dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/ll_status"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/materialDividerMiddle"
-        app:strokeColor="@color/primary_dark_green"
-        app:strokeWidth="2dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <ImageView
-                        android:id="@+id/iv_object"
-                        android:layout_width="92dp"
-                        android:layout_height="90dp"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/bild_halle" />
-
-                    <LinearLayout
-                        android:layout_width="92dp"
-                        android:layout_height="90dp"
-                        android:orientation="vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            android:id="@+id/tv_city"
-                            style="@style/textSuperSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/item_city"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tv_object"
-                            style="@style/textSuperSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/item_objekt" />
-
-                        <TextView
-                            android:id="@+id/tv_price"
-                            style="@style/textSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/item_price"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tv_distance"
-                            style="@style/textSuperSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/item_zip_code"
-                            android:textColor="@color/primary_dark_green" />
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    app:dividerColor="@color/primary_dark_green" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <TextView
-                        android:id="@+id/tv_description"
-                        style="@style/textSuperSmall"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity=""
-                        android:layout_margin="5dp"
-                        android:text="@string/item_description" />
-
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+        app:spanCount="2"
+        tools:listitem="@layout/list_item_sleep" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_status"
@@ -467,7 +352,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginRight="5dp"
-            android:text="Anzahl aktueller Inserate" />
+            android:text="Meine Inserate 0" />
 
         <TextView
             android:id="@+id/tv_user_itemsDone"
@@ -475,7 +360,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="5dp"
-            android:text="erledigte Inserate" />
+            android:text="Bisherige Inserate 2" />
 
         <TextView
             android:id="@+id/tv_user_registered"
@@ -483,7 +368,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginRight="5dp"
-            android:text="registriert am" />
+            android:text="registriert seit 2022" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

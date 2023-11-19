@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import okhttp3.internal.cache.DiskLruCache
 
 class RepositoryFirebase(
 
@@ -31,7 +32,6 @@ class RepositoryFirebase(
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
     fun updateCurrentUserFromFirestore(uId: String) {
         fireStoreDatabase = Firebase.firestore
-        Log.d("Firebase Repo Store", "$uId User Id ready for input FireStore")
         fireStoreDatabase.collection("user").document(uId)
             .get()
             .addOnSuccessListener { thisUser ->
@@ -57,7 +57,7 @@ class RepositoryFirebase(
 
     //Live Data des aktuellen Users Id
     private var _uId: MutableLiveData<String> = MutableLiveData()
-    val uId: LiveData<String>
+    val uId: MutableLiveData<String>
         get() = _uId
 
     //Update der aktuellen Users Id
@@ -114,20 +114,28 @@ class RepositoryFirebase(
 
 //Abfrage in der Firebase Database und erstellen eines Advertisments aller Anzeigen online==========
 
-    fun readDatabase(): Advertisement {
+
+    private var _allAdvertises: MutableLiveData<List<Advertisement>> = MutableLiveData()
+    val allAdvertises: LiveData<List<Advertisement>>
+        get () = _allAdvertises
+
+
+    fun readDatabase(): List<Advertisement>? {
         //und eine Reference setzten in der Kategorie objectsOnline
         val ref = database.getReference("objectsOnline")
-        Log.d("Firebase Repo Data", "Reference $ref")
+        //Log.d("Firebase Repo Data", "Reference $ref")
         ref.get().addOnSuccessListener {
             //Log.d("Firebase Repo Data", "Success $it")
             for (snapshot in it.children) {
                 //Log.d("Firebase Repo Data Schleife", "Alle id´s ${snapshot.child("objectId").value}")
-                Advertisement(snapshot)
+               val advertise = Advertisement(snapshot)
+                _allAdvertises.value = listOf(advertise)
+                Log.d("Firebase Repo Data Schleife", "Alle id´s ${allAdvertises.value}")
             }
         }.addOnFailureListener {
-            Log.d("Firebase Repo Data", "Error $it")
+            //Log.d("Firebase Repo Data", "Error $it")
         }
-        return Advertisement()
+        return allAdvertises.value
     }
 }
 //==================================================================================================
