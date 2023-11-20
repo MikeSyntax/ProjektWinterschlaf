@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 
-@Database(entities = [Objects::class, PersonalData::class], version = 1,
+@Database(entities = [Objects::class, PersonalData::class], version = 2,
 //@Database(entities = [Objects::class], version = 1,
     //wechselt hiermit auf die neue Version, da noch zipCode zur Datenbank hinzugefügt wurde
     // autoMigrations = [AutoMigration(from = 2, to = 3)]
@@ -40,7 +40,7 @@ abstract class ObjectDatabase: RoomDatabase(){
                         "Objects"
                     )
                         //Hier wird die komplette Datenbank zurückgesetzt, falls sich in der Struktur etwas verändert hat
-                     //   .fallbackToDestructiveMigration()
+                       //.fallbackToDestructiveMigration()
                         .build()
                 }
                 return INSTANCE

@@ -26,8 +26,8 @@
 
 
     <style name="stroke">
-        <item name="strokeWidth">10dp</item>
-        <item name="strokeColor">@color/primary_dark_green</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">@color/primary_light_green</item>
     </style>
 
 

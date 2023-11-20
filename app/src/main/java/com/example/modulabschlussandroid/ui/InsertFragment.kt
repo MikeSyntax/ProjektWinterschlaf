@@ -95,7 +95,7 @@ class InsertFragment : Fragment() {
         binding.btnFloatingAction.setOnClickListener {
             //Auslesen der Eingabefelder ( die Switches der Kategoriefelder, werden in der nächsten Funktion gesetzt
             advertisement.userId = uId
-            Log.d("Insert", "UserId $uId")
+           // Log.d("Insert", "UserId $uId")
             advertisement.zipCode = binding.editZipCode.text.toString()
             advertisement.city = binding.editCity.text.toString()
             advertisement.title = binding.editTitle.text.toString()

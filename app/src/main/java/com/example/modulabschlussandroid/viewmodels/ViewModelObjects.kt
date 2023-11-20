@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
+import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
@@ -113,10 +114,14 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-//NEU Update der aktuellen Usersemail  TODO!!!!!!!!!
+//NEU Update der aktuellen User Id  TODO!!!!!!!!!
     fun updateCurrentUserId(){
         repository.showCurrentUserId()
     Log.d("viewModel", "User Id $uId")
+    }
+
+    fun newUserDataFirstSignIn(uId: String, personalData: PersonalData){
+        repository.newUserDataFirstSignIn(uId, personalData)
     }
 
 //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================

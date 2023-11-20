@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "1908b7ebd925d83f4145434f50358e85",
+    "identityHash": "701612cd3fe644f72047518e319936d1",
     "entities": [
       {
         "tableName": "Objects",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `image1Resource` INTEGER NOT NULL, `image2Resource` INTEGER NOT NULL, `image3Resource` INTEGER NOT NULL, `image4Resource` INTEGER NOT NULL, `image5Resource` INTEGER NOT NULL, `city` TEXT NOT NULL, `objectdescription` TEXT NOT NULL, `price` REAL NOT NULL, `description` TEXT NOT NULL, `liked` INTEGER NOT NULL, `zipCode` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `image1Resource` INTEGER NOT NULL, `image2Resource` INTEGER NOT NULL, `image3Resource` INTEGER NOT NULL, `image4Resource` INTEGER NOT NULL, `image5Resource` INTEGER NOT NULL, `city` TEXT NOT NULL, `doneCityChoice` INTEGER NOT NULL, `objectdescription` TEXT NOT NULL, `doneObjectDescriptionChoice` INTEGER NOT NULL, `price` REAL NOT NULL, `donePriceChoice` INTEGER NOT NULL, `description` TEXT NOT NULL, `doneDescriptionChoice` INTEGER NOT NULL, `zipCode` TEXT NOT NULL, `doneZipCodeChoice` INTEGER NOT NULL, `liked` INTEGER NOT NULL, `doneCategoryChoice` INTEGER NOT NULL, `garage` INTEGER NOT NULL, `parkingSpot` INTEGER NOT NULL, `parkingSpace` INTEGER NOT NULL, `camperParkingInside` INTEGER NOT NULL, `camperParkingOutside` INTEGER NOT NULL, `underGroundParking` INTEGER NOT NULL, `storage` INTEGER NOT NULL, `storageHall` INTEGER NOT NULL, `storageRoom` INTEGER NOT NULL, `storageBox` INTEGER NOT NULL, `container` INTEGER NOT NULL, `carport` INTEGER NOT NULL, `basement` INTEGER NOT NULL, `openSpace` INTEGER NOT NULL, `barn` INTEGER NOT NULL, `yard` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -51,9 +51,21 @@
             "notNull": true
           },
           {
+            "fieldPath": "doneCityChoice",
+            "columnName": "doneCityChoice",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "objectdescription",
             "columnName": "objectdescription",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "doneObjectDescriptionChoice",
+            "columnName": "doneObjectDescriptionChoice",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -63,9 +75,33 @@
             "notNull": true
           },
           {
+            "fieldPath": "donePriceChoice",
+            "columnName": "donePriceChoice",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "description",
             "columnName": "description",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "doneDescriptionChoice",
+            "columnName": "doneDescriptionChoice",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "zipCode",
+            "columnName": "zipCode",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "doneZipCodeChoice",
+            "columnName": "doneZipCodeChoice",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -75,9 +111,105 @@
             "notNull": true
           },
           {
-            "fieldPath": "zipCode",
-            "columnName": "zipCode",
-            "affinity": "TEXT",
+            "fieldPath": "doneCategoryChoice",
+            "columnName": "doneCategoryChoice",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "garage",
+            "columnName": "garage",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parkingSpot",
+            "columnName": "parkingSpot",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "parkingSpace",
+            "columnName": "parkingSpace",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "camperParkingInside",
+            "columnName": "camperParkingInside",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "camperParkingOutside",
+            "columnName": "camperParkingOutside",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "underGroundParking",
+            "columnName": "underGroundParking",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "storage",
+            "columnName": "storage",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "storageHall",
+            "columnName": "storageHall",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "storageRoom",
+            "columnName": "storageRoom",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "storageBox",
+            "columnName": "storageBox",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "container",
+            "columnName": "container",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "carport",
+            "columnName": "carport",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "basement",
+            "columnName": "basement",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "openSpace",
+            "columnName": "openSpace",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "barn",
+            "columnName": "barn",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "yard",
+            "columnName": "yard",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -92,24 +224,90 @@
       },
       {
         "tableName": "PersonalData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userName` TEXT NOT NULL, `email` TEXT NOT NULL, `password` TEXT NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userName`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT, `countInsertedItems` TEXT, `itemsDone` TEXT, `name` TEXT, `preName` TEXT, `registered` TEXT, `streetName` TEXT, `streetNumber` TEXT, `telNumber` TEXT, `userName` TEXT, `zipCode` TEXT, `showTelNumber` INTEGER NOT NULL, `showStreet` INTEGER NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
         "fields": [
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cityName",
+            "columnName": "cityName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "countInsertedItems",
+            "columnName": "countInsertedItems",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "itemsDone",
+            "columnName": "itemsDone",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "preName",
+            "columnName": "preName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "registered",
+            "columnName": "registered",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "streetName",
+            "columnName": "streetName",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "streetNumber",
+            "columnName": "streetNumber",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "telNumber",
+            "columnName": "telNumber",
+            "affinity": "TEXT",
+            "notNull": false
+          },
           {
             "fieldPath": "userName",
             "columnName": "userName",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "zipCode",
+            "columnName": "zipCode",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "showTelNumber",
+            "columnName": "showTelNumber",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "email",
-            "columnName": "email",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "password",
-            "columnName": "password",
-            "affinity": "TEXT",
+            "fieldPath": "showStreet",
+            "columnName": "showStreet",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -122,7 +320,7 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "userName"
+            "userId"
           ]
         },
         "indices": [],
@@ -132,7 +330,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1908b7ebd925d83f4145434f50358e85')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '701612cd3fe644f72047518e319936d1')"
     ]
   }
 }

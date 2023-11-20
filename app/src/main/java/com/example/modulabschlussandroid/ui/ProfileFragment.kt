@@ -76,24 +76,20 @@ class ProfileFragment : Fragment() {
 
         //Adapter setzten und mit LiveData überwachen
         viewModel.allAdvertises.observe(viewLifecycleOwner){
-            recView.adapter = AdapterProfile(it)
-        }
-
-
-        /*
-        //Adapter setzen
-        val adapter = AdapterProfile(listOf(Advertisement()))
-        //Überwachen der allAdvertises, falls neue Inserate aufgegeben werden
-        viewModel.allAdvertises.observe(viewLifecycleOwner) {
-            binding.rvMyAdvertises.adapter = adapter
+            val adapter = AdapterProfile(it)
             adapter.update(it)
-        }*/
+            recView.adapter = adapter
+            if (viewModel.allAdvertises.value?.size != null){
+            binding.tvCountMyObjects.text = "online (${viewModel.allAdvertises.value?.size.toString()})"
+            }
+        }
 
         //Anzahl aller Anzeigen online
         viewModel.countAdvertises()
 
         val countAdvertises = viewModel.countAdvertises
 
+        //Live Data überwachen und die aktuelle Anzahl der Inserate anzeigen
         countAdvertises.observe(viewLifecycleOwner) {
             binding.tvUserCountInserted.text = it
         }
@@ -117,6 +113,10 @@ class ProfileFragment : Fragment() {
         //zurück zur vorhergehenden Seite navigieren
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.cvEdit.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
         }
 
         //Ausloggen mit Wartevorgang und Toast Bestätigung bevor die Weiterleitung beginnt

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ui.ProfileFragment">
+    tools:context=".ui.EditProfileFragment">
 
     <ImageView
         android:id="@+id/imageView3"
@@ -69,7 +69,7 @@
             android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_edit"
+            android:id="@+id/cv_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingLeft="5dp"
-                    android:text="editieren" />
+                    android:text="speichern" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -118,11 +118,11 @@
     <TextView
         android:id="@+id/textView4"
         style="@style/textMiddle"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Profil"
+        android:text="Profil bearbeiten"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -149,241 +149,105 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_logout"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:backgroundTint="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/materialDividerTop"
-        app:strokeWidth="0dp">
-
-        <TextView
-            android:id="@+id/tv_log"
-            style="@style/textSuperSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_margin="5dp"
-            android:text="@string/logout_text"
-            android:textSize="18sp" />
-
-        <ImageView
-            android:id="@+id/btn_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="5dp"
-            android:src="@drawable/logout" />
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <TextView
-        android:id="@+id/tv_logged_username"
-        style="@style/textSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/user_name"
-        android:textColor="@color/primary_dark_green"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_profile_image" />
-
-
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_name"
+        android:id="@+id/ll_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_logout">
-
-        <TextView
-            android:id="@+id/tv_user_real_preName"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Vorname" />
-
-        <TextView
-            android:id="@+id/tv_user_real_name"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="5dp"
-            android:text="Nachname" />
-
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_city"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_name">
-
-        <TextView
-            android:id="@+id/tv_user_zipCode"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Postleitzahl" />
-
-        <TextView
-            android:id="@+id/tv_user_city"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="5dp"
-            android:text="Stadt" />
-
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_street"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_city">
-
-        <TextView
-            android:id="@+id/tv_user_streetName"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="Straße" />
-
-        <TextView
-            android:id="@+id/tv_user_streetNumber"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginStart="5dp"
-            android:text="Hausnummer" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_tel_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_street">
-
-        <TextView
-            android:id="@+id/tv_user_telNumber"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Telefonnummer" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <TextView
-        android:id="@+id/my_objects"
-        style="@style/textSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="16dp"
-        android:text="Meine Inserate"
-        app:layout_constraintBottom_toTopOf="@+id/materialDividerMiddle"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_count_myObjects"
-        style="@style/textSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="16dp"
-        android:text="0"
-        app:layout_constraintBottom_toTopOf="@+id/materialDividerMiddle"
-        app:layout_constraintStart_toEndOf="@id/my_objects" />
-
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/materialDividerMiddle"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="30dp"
-        app:dividerColor="@color/primary_dark_green"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_tel_number" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_my_advertises"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="50dp"
+        android:weightSum="10"
         android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/ll_status"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/materialDividerMiddle"
-        app:spanCount="2"
-        tools:listitem="@layout/list_item_sleep" />
+        app:layout_constraintTop_toBottomOf="@id/cv_profile_image">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom">
 
-        <TextView
-            android:id="@+id/tv_user_countInserted"
+        <EditText
+            android:id="@+id/tv_logged_username"
+            style="@style/textSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginRight="5dp"
-            android:text="Meine Inserate 0" />
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="@string/user_name"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
 
-        <TextView
-            android:id="@+id/tv_user_itemsDone"
+        <EditText
+            android:id="@+id/tv_prename"
+            style="@style/textSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="5dp"
-            android:text="Bisherige Inserate 2" />
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="Vorname"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
 
-        <TextView
-            android:id="@+id/tv_user_registered"
+        <EditText
+            android:id="@+id/tv_name"
+            style="@style/textSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginRight="5dp"
-            android:text="registriert seit 2022" />
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="Nachname"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
 
+        <EditText
+            android:id="@+id/tv_zipCode"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="Postleitzahl"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/tv_city"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="Ortsname"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/tv_streetname"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="Straße"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/tv_streetnumber"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="Hausnummer"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
+
+        <EditText
+            android:id="@+id/tv_phone_number"
+            style="@style/textSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:hint="Telefonnummer"
+            android:textColor="@color/primary_dark_green"
+            android:textStyle="italic" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"
@@ -398,6 +262,7 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -589,5 +454,19 @@
         </com.google.android.material.bottomappbar.BottomAppBar>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <Button
+        android:id="@+id/btn_save"
+        style="@style/stroke"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:layout_marginStart="30dp"
+        android:backgroundTint="@color/primary_dark_green"
+        android:textColor="@color/primary_light_green"
+        android:layout_marginEnd="30dp"
+        android:text="@string/save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,6 +69,10 @@ class RepositoryObjects(
        firebaseRepository.updateCurrentUserFromFirestore(uId)
     }
 
+    fun newUserDataFirstSignIn(uId: String, personalData: PersonalData){
+        firebaseRepository.newUserDataFirstSignIn(uId, personalData)
+    }
+
 //Firebase Authentication User ID (integer) ========================================================
 
     //Live Data des aktuellen Users dessen Id
