@@ -558,40 +558,6 @@
         app:strokeColor="@color/primary_light_green"
         app:strokeWidth="2dp" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/tv_user_countInserted"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginRight="5dp"
-            android:text="Anzahl aktueller Inserate" />
-
-        <TextView
-            android:id="@+id/tv_user_itemsDone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginRight="5dp"
-            android:text="erledigte Inserate" />
-
-        <TextView
-            android:id="@+id/tv_user_registered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginRight="5dp"
-            android:text="registriert am" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.divider.MaterialDivider
         android:id="@+id/materialDividerBottom"

@@ -62,8 +62,6 @@ class ProfileFragment : Fragment() {
             binding.tvUserStreetNumber.text = user.streetNumber
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
-            binding.tvUserCountInserted.text =
-                "Inserate online ${user.countInsertedItems}"
             binding.tvUserItemsDone.text = "Bisherige Inserate ${user.itemsDone}"
             binding.tvUserRegistered.text = "Registriert seit ${user.registered}"
         }

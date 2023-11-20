@@ -143,9 +143,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
     //Auslesen der Datenbank von Firebase
-    fun readDatabase():Advertisement{
+    fun readDatabase(){
         repository.readDatabase()
-        return Advertisement()
     }
     val allAdvertises = repository.allAdvertises
 

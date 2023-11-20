@@ -114,28 +114,38 @@ class RepositoryFirebase(
 
 //Abfrage in der Firebase Database und erstellen eines Advertisments aller Anzeigen online==========
 
-
+    //Live Data für die ausgelesenenen Advertisments
     private var _allAdvertises: MutableLiveData<List<Advertisement>> = MutableLiveData()
     val allAdvertises: LiveData<List<Advertisement>>
         get () = _allAdvertises
 
 
-    fun readDatabase(): List<Advertisement>? {
+    fun readDatabase() {
+        //Leere Liste für die Advertises
+         val advertise: MutableList<Advertisement> =  mutableListOf()
         //und eine Reference setzten in der Kategorie objectsOnline
         val ref = database.getReference("objectsOnline")
         //Log.d("Firebase Repo Data", "Reference $ref")
+        //bekomme einen SuccessListener für jeden ....
         ref.get().addOnSuccessListener {
             //Log.d("Firebase Repo Data", "Success $it")
+            //For Schleife also für jedes children in der Datenbank...
             for (snapshot in it.children) {
                 //Log.d("Firebase Repo Data Schleife", "Alle id´s ${snapshot.child("objectId").value}")
-               val advertise = Advertisement(snapshot)
-                _allAdvertises.value = listOf(advertise)
+               //Füge dieses ausgelesene der advertise Lise hinzu
+                advertise.add(Advertisement(snapshot))
+                //filtere die Liste nach der UserId und füge die in Übereinstimmung der neuen Liste hinzu
+                val filteredAds = advertise.filter {myAds ->
+                    //vergleiche die Ids
+                    myAds.userId == uId.value
+                }
+                //die gefilterte Liste mit dem Live Data setzen
+                _allAdvertises.value = filteredAds
                 Log.d("Firebase Repo Data Schleife", "Alle id´s ${allAdvertises.value}")
             }
         }.addOnFailureListener {
             //Log.d("Firebase Repo Data", "Error $it")
         }
-        return allAdvertises.value
     }
 }
 //==================================================================================================
