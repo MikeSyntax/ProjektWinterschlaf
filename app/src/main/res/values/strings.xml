@@ -23,7 +23,7 @@
     <string name="forward">weiter</string>
     <string name="register_text">Zur Registrierung bitte deine Email und zweimal das gewünschte Passwort eingeben. Das Passwort sollte mindestens aus 8 Zeichen bestehen.</string>
     <string name="logout_text">Ausloggen :</string>
-    <string name="user_name">Benutzername</string>
+    <string name="user_name">Benutzername eingeben</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save">Speichern</string>

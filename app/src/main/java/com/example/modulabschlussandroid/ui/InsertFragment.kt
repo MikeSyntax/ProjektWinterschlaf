@@ -65,30 +65,30 @@ class InsertFragment : Fragment() {
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
-            showCategorieDialog(uId)
+            showCategorieDialog()
         }
 //Übergabe der Uid als Parameter um die Postleitzahl unter Uid des Users zu speichern===============
         binding.cvZipCode.setOnClickListener {
-            showZipCodeDialog(uId)
+            showZipCodeDialog()
         }
 //Übergabe der Uid als Parameter um die Stadt unter Uid des Users zu speichern======================
         binding.cvCity.setOnClickListener {
-            showCityDialog(uId)
+            showCityDialog()
         }
 
 //Übergabe der Uid als Parameter um die Titel unter Uid des Users zu speichern======================
         binding.cvTitle.setOnClickListener {
-            showTitleDialog(uId)
+            showTitleDialog()
         }
 
 //Übergabe der Uid als Parameter um die Beschreibung unter Uid des Users zu speichern===============
         binding.cvDescription.setOnClickListener {
-            showDescriptionDialog(uId)
+            showDescriptionDialog()
         }
 
 //Übergabe der Uid als Parameter um die Preis unter Uid des Users zu speichern======================
         binding.cvPrice.setOnClickListener {
-            showPriceDialog(uId)
+            showPriceDialog()
         }
 
 //Inserieren eines neuen Advertisements bzw. einer neuen Anzeige ===================================
@@ -131,7 +131,7 @@ class InsertFragment : Fragment() {
 //Beginn der Dialogfelder zum Inserieren einer neuen Anzeig=========================================
     //Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
     @SuppressLint("UseSwitchCompatOrMaterialCode")
-    private fun showCategorieDialog(uId: String) {
+    private fun showCategorieDialog() {
         //Objekt dialog erstellen
         val dialog = Dialog(requireContext())
         //Erstellen der View
@@ -236,10 +236,9 @@ class InsertFragment : Fragment() {
     }
 
     //Dialog Feld Eingabe für die Postleitzahl==========================================================
-    private fun showZipCodeDialog(Uid: String) {
+    private fun showZipCodeDialog() {
         //Objekt zipCodeDialog erstellen
         val zipCodeDialog = Dialog(requireContext())
-        val uId: String = Uid
         //Erstellen der View
         zipCodeDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         zipCodeDialog.setCancelable(false)
@@ -285,10 +284,10 @@ class InsertFragment : Fragment() {
     }
 
     //Dialog Feld Eingabe für die Stadt=================================================================
-    private fun showCityDialog(Uid: String) {
+    private fun showCityDialog() {
         //Objekt cityDialog erstellen
         val cityDialog = Dialog(requireContext())
-        val uId: String = Uid
+
         //Erstellen der View
         cityDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         cityDialog.setCancelable(false)
@@ -335,10 +334,9 @@ class InsertFragment : Fragment() {
     }
 
     //Dialog Feld Eingabe für die Titel=================================================================
-    private fun showTitleDialog(Uid: String) {
+    private fun showTitleDialog() {
         //Objekt TitelDialog erstellen
         val titelDialog = Dialog(requireContext())
-        val uId: String = Uid
         //Erstellen der View
         titelDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         titelDialog.setCancelable(false)
@@ -385,10 +383,9 @@ class InsertFragment : Fragment() {
     }
 
     //Dialog Feld Eingabe für die Beschreibung==========================================================
-    private fun showDescriptionDialog(Uid: String) {
+    private fun showDescriptionDialog() {
         //Objekt descriptionDialog erstellen
         val descriptionDialog = Dialog(requireContext())
-        val uId: String = Uid
         //Erstellen der View
         descriptionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         descriptionDialog.setCancelable(false)
@@ -435,10 +432,9 @@ class InsertFragment : Fragment() {
     }
 
     //Dialog Feld Eingabe für die Preis=================================================================
-    private fun showPriceDialog(Uid: String) {
+    private fun showPriceDialog() {
         //Objekt PriceDialog erstellen
         val priceDialog = Dialog(requireContext())
-        val uId: String = Uid
         //Erstellen der View
         priceDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         priceDialog.setCancelable(false)

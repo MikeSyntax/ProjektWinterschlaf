@@ -1,6 +1,10 @@
 package com.example.modulabschlussandroid.ui
 
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,19 +13,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterObjects
+import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentHomeBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: ViewModelObjects by activityViewModels()
+    private lateinit var personalData: PersonalData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,12 +79,22 @@ class HomeFragment : Fragment() {
         //Live Date mit Objekten
         val objectList = viewModel.objectList
 
+        //Um zu erkennen ob der User neu ist, wird  hier abgefragt ob in der Profilseite
+        // bei dem Namen noch nichts steht, und dann öffnet sich das Dialogfenster
+        //Instanz der Personal Data
+        personalData = PersonalData()
+
+
         //RecyclerView
         val recView = binding.rvRentableObjects
 
         //feste Größe für die Performance
         recView.setHasFixedSize(true)
 
+        if (personalData.name == null){
+            Log.d("home", "personal data = ${personalData.name}")
+            showNewUser()
+        }
 //LiveData Objekte überwachen=======================================================================
 
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
@@ -122,5 +146,31 @@ class HomeFragment : Fragment() {
         binding.cvInsert.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToInsertFragment())
         }
+    }
+
+
+
+    //Dialog Feld Eingabe für die Preis=================================================================
+    private fun showNewUser() {
+        //Objekt newUserDialog erstellen
+        val newUserDialog = Dialog(requireContext())
+        //Erstellen der View
+        newUserDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        newUserDialog.setCancelable(false)
+        newUserDialog.setContentView(R.layout.newuser_dialog)
+        newUserDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        //Initialisieren des Dialogs und Button für die Weiterleitung zum Profil Edit
+        val saveBtn: Button = newUserDialog.findViewById(R.id.btn_save)
+        //Beim Klicken des Speichern Buttons wird der User falls auf das EditProfilFragment weitergeleitet...
+        saveBtn.setOnClickListener {
+            Toast.makeText(requireContext(), "Viel Spaß", Toast.LENGTH_SHORT).show()
+           val navController = findNavController()
+            navController.navigate(R.id.editProfileFragment)
+            //Dialog ausblenden
+            newUserDialog.dismiss()
+        }
+        //Dialog anzeigen
+        newUserDialog.show()
     }
 }

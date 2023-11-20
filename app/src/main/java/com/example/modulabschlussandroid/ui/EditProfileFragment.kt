@@ -55,23 +55,8 @@ class EditProfileFragment : Fragment() {
             findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
         }
 
-        //zum speichern der Userdaten cvSave klicken
-        binding.cvSave.setOnClickListener {
-
-            //alle Edittexte werden ausgelesen und als personal Data gespeichert und im Profil Fragment angezeigt
-            personalData.userId = uId!!
-            personalData.name = binding.tvName.text.toString()
-            personalData.preName = binding.tvPrename.text.toString()
-            personalData.userName = binding.tvLoggedUsername.text.toString()
-            personalData.zipCode = binding.tvZipCode.text.toString()
-            personalData.cityName = binding.tvCity.text.toString()
-            personalData.streetName = binding.tvStreetname.text.toString()
-            personalData.streetNumber = binding.tvStreetnumber.text.toString()
-            personalData.telNumber = binding.tvPhoneNumber.text.toString()
-
-            //Aufruf der Funktion zum speichern aus dem FirebaseRepository
-            viewModel.newUserDataFirstSignIn(uId!!, personalData)
-            findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+        binding.cvBack.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }
