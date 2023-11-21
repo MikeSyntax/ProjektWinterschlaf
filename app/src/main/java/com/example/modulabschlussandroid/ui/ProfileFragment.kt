@@ -40,7 +40,6 @@ class ProfileFragment : Fragment() {
 
 //NEU Zeige die aktuelle Id des eingeloggten Users
         viewModel.showCurrentUserId()
-        val uId = viewModel.uId
 
 //Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
 

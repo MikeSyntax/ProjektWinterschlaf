@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: ViewModelObjects by activityViewModels()
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +76,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //Intanz des Firestores erstellen
+        firestore = FirebaseFirestore.getInstance()
 
         //Live Date mit Objekten
         val objectList = viewModel.objectList
@@ -156,11 +160,19 @@ class HomeFragment : Fragment() {
 
         //Initialisieren des Dialogs und Button für die Weiterleitung zum Profil Edit
         val saveBtn: Button = newUserDialog.findViewById(R.id.btn_save)
+        val exitBtn: Button = newUserDialog.findViewById((R.id.btn_exit))
         //Beim Klicken des Speichern Buttons wird der User falls auf das EditProfilFragment weitergeleitet...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Viel Spaß", Toast.LENGTH_SHORT).show()
             val navController = findNavController()
             navController.navigate(R.id.editProfileFragment)
+            //Dialog ausblenden
+            newUserDialog.dismiss()
+        }
+        //Exit Button zum Verlassen des Dialog Fensters
+        exitBtn.setOnClickListener {
+            val navController = findNavController()
+            navController.navigate(R.id.profileFragment)
             //Dialog ausblenden
             newUserDialog.dismiss()
         }
@@ -170,15 +182,26 @@ class HomeFragment : Fragment() {
 
     //Falls der User neu ist, zeige den Dialog für die Datenerfassung
     private fun checkUserDataComplete() {
+        //zuerst die User Id aktualisieren
+        viewModel.showCurrentUserId()
+        //Intanz der uId erstellen
         val uId = viewModel.uId
-        val fireStoreDatabase = FirebaseFirestore.getInstance()
-        fireStoreDatabase.collection("user")
+        //Abfrage Firestore
+        firestore.collection("user")
+            //ob dieses Document mit der Id
             .document(uId.value.toString())
+            //suchen
             .get()
+            //Listener
             .addOnCompleteListener { task ->
+                //Abfrage erfolgreich
                 if (task.isSuccessful) {
+                    //Resultat der Abfrage
                     val document = task.result
+                    Log.d("success Home", "uId ${uId.value} task result ${task.result}")
+                    //wenn diese Id bzw. dieses Document NICHT existiert
                     if (!document.exists()) {
+                        // dann zeige den Dialog für die User Daten vervollständigung
                         showNewUserDialog()
                     }
                 }

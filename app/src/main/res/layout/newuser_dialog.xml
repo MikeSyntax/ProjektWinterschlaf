@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,28 +17,25 @@
             app:strokeColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
-
                 <com.google.android.material.card.MaterialCardView
                     style="@style/shadow_light_green"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-
                     android:backgroundTint="@color/primary_light_green">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="3dp"
+                        android:orientation="vertical"
                         android:weightSum="10">
 
                         <TextView
@@ -53,22 +49,34 @@
                             android:textStyle="bold"
                             android:text="Herzlich Willkommen bei Projekt Winterschlaf.\n\nDu musst zuerst deine Daten im Profil ergänzen.\n\nKlicke auf den Button \n-Verstanden -"
                             android:textColor="@color/primary_dark_green" />
+
+                        <Button
+                            android:id="@+id/btn_save"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="20dp"
+                            android:backgroundTint="@color/white"
+                            android:text="Verstanden"
+                            android:layout_weight="1"
+                            android:textColor="@color/primary_dark_green"
+                            android:textSize="20sp"
+                            app:strokeColor="@color/primary_dark_green"
+                            app:strokeWidth="2dp" />
+
+                        <Button
+                            android:id="@+id/btn_exit"
+                            android:layout_width="25dp"
+                            android:layout_height="30dp"
+                            android:layout_weight="1"
+                            android:padding="0dp"
+                            android:text="X"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:backgroundTint="@color/primary_dark_green"
+                            />
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
-                <Button
-                    android:id="@+id/btn_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_margin="20dp"
-
-                    android:backgroundTint="@color/white"
-                    android:text="Verstanden"
-                    android:textColor="@color/primary_dark_green"
-                    android:textSize="20sp"
-                    app:strokeColor="@color/primary_light_green"
-                    app:strokeWidth="2dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

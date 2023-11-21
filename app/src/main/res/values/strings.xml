@@ -18,7 +18,6 @@
     <string name="favorite_price">Preis</string>
     <string name="favorite_object">Objekt</string>
     <string name="favorite_city">Ort</string>
-    <string name="no_account_register">Noch keinen Account, hier registrieren</string>
     <string name="title">Projekt Winterschlaf</string>
     <string name="forward">weiter</string>
     <string name="register_text">Zur Registrierung bitte deine Email und zweimal das gewünschte Passwort eingeben. Das Passwort sollte mindestens aus 8 Zeichen bestehen.</string>

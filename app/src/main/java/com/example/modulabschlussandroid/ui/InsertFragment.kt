@@ -105,6 +105,9 @@ class InsertFragment : Fragment() {
             advertisement.price = binding.editPrice.text.toString()
             //Aufruf der Funktion aus dem Firebase Repository
             viewModel.saveItemToDatabase(advertisement)
+            //Nach dem Inserieren erfolgt die Weiterleitung zur Profilseite
+            val navController = binding.btnFloatingAction.findNavController()
+            navController.navigate(InsertFragmentDirections.actionInsertFragmentToProfileFragment())
         }
 
 //Bottom Nav BAR ===================================================================================
