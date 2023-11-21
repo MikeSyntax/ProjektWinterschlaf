@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: ViewModelObjects by activityViewModels()
-    private lateinit var personalData: PersonalData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,15 +76,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val fireStoreDatabase = FirebaseFirestore.getInstance()
         //Live Date mit Objekten
         val objectList = viewModel.objectList
-
-        //Um zu erkennen ob der User neu ist, wird  hier abgefragt ob in der Profilseite
-        // bei dem Namen noch nichts steht, und dann öffnet sich das Dialogfenster
-
-        //Instanz der Personal Data
-        personalData = PersonalData()
 
         //RecyclerView
         val recView = binding.rvRentableObjects
@@ -93,19 +85,9 @@ class HomeFragment : Fragment() {
         //feste Größe für die Performance
         recView.setHasFixedSize(true)
 
-        val uId = viewModel.uId
-
-
-
-
-
-        //Falls der User neu ist, zeige den Dialog für die Datenerfassung
-        if (personalData.name == null){
-            showNewUser()
-        }
-
-
-
+        //Um zu erkennen ob der User neu ist, wird  hier abgefragt ob in der Profilseite
+        // bei dem Namen noch nichts steht, und dann öffnet sich das Dialogfenster
+        checkUserDataComplete()
 
 
 //LiveData Objekte überwachen=======================================================================
@@ -163,7 +145,7 @@ class HomeFragment : Fragment() {
 
 
     //Dialog Feld Eingabe für die Preis=================================================================
-    private fun showNewUser() {
+    private fun showNewUserDialog() {
         //Objekt newUserDialog erstellen
         val newUserDialog = Dialog(requireContext())
         //Erstellen der View
@@ -184,5 +166,22 @@ class HomeFragment : Fragment() {
         }
         //Dialog anzeigen
         newUserDialog.show()
+    }
+
+    //Falls der User neu ist, zeige den Dialog für die Datenerfassung
+    private fun checkUserDataComplete() {
+        val uId = viewModel.uId
+        val fireStoreDatabase = FirebaseFirestore.getInstance()
+        fireStoreDatabase.collection("user")
+            .document(uId.value.toString())
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val document = task.result
+                    if (!document.exists()) {
+                        showNewUserDialog()
+                    }
+                }
+            }
     }
 }
