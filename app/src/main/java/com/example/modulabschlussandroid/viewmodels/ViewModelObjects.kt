@@ -115,18 +115,20 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
 //NEU Update der aktuellen User Id  TODO!!!!!!!!!
-    fun updateCurrentUserId(){
+    fun showCurrentUserId(){
         repository.showCurrentUserId()
-    Log.d("viewModel", "User Id $uId")
+    Log.d("viewModel", "User Id ${uId.value}")
     }
 
-    fun newUserDataFirstSignIn(uId: String, personalData: PersonalData){
-        repository.newUserDataFirstSignIn(uId, personalData)
+    //Neuer User muss erst seine Benutzerdaten eingeben
+    fun newUserDataFirstSignIn(personalData: PersonalData){
+        //Aufruf der Funktion einen neuen User anzulegen
+        repository.newUserDataFirstSignIn(personalData)
     }
 
 //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
-    fun updateUser(uId: String){
-        repository.updateCurrentUserFromFirestore(uId)
+    fun updateUser(){
+        repository.updateCurrentUserFromFirestore()
     }
 
     //Ausloggen des aktuellen Users
@@ -148,10 +150,10 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
     //Auslesen der Datenbank von Firebase
+    val allAdvertises = repository.allAdvertises
     fun readDatabase(){
         repository.readDatabase()
     }
-    val allAdvertises = repository.allAdvertises
 
     //Ein einzelnes Objekt löschen
     fun deleteById() {

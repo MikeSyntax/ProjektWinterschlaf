@@ -56,12 +56,14 @@ class InsertFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.showCurrentUserId()
         //Erstellen der Uid aus der Authentication
-        val uId = viewModel.uId.value.toString()
+        val uId = viewModel.uId
         //Erstellen eines Objektes der Object Klasse
         thisObject = Objects()
         //Erstellen eines Objektes der MyObject Klasse für die Firebase Datenbank mit den abrufbaren Objekten
         advertisement = Advertisement()
+
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
@@ -94,7 +96,7 @@ class InsertFragment : Fragment() {
 //Inserieren eines neuen Advertisements bzw. einer neuen Anzeige ===================================
         binding.btnFloatingAction.setOnClickListener {
             //Auslesen der Eingabefelder ( die Switches der Kategoriefelder, werden in der nächsten Funktion gesetzt
-            advertisement.userId = uId
+            advertisement.userId = uId.value
            // Log.d("Insert", "UserId $uId")
             advertisement.zipCode = binding.editZipCode.text.toString()
             advertisement.city = binding.editCity.text.toString()

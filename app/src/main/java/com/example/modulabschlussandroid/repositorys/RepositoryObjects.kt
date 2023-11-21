@@ -65,12 +65,12 @@ class RepositoryObjects(
     var currentUser = firebaseRepository.currentUser
 
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
-    fun updateCurrentUserFromFirestore(uId: String) {
-       firebaseRepository.updateCurrentUserFromFirestore(uId)
+    fun updateCurrentUserFromFirestore() {
+       firebaseRepository.updateCurrentUserFromFirestore()
     }
 
-    fun newUserDataFirstSignIn(uId: String, personalData: PersonalData){
-        firebaseRepository.newUserDataFirstSignIn(uId, personalData)
+    fun newUserDataFirstSignIn(personalData: PersonalData){
+        firebaseRepository.newUserDataFirstSignIn(personalData)
     }
 
 //Firebase Authentication User ID (integer) ========================================================
@@ -121,12 +121,9 @@ class RepositoryObjects(
             } else {
                 _zipObjects.value = zipResults
             }
-            Log.d(
-                "success Repo",
-                "$zip input Text - ${_zipObjects.value} zipObjects - $zipResults zipObjects"
-            )
+            //Log.d("success Repo", "$zip input Text - ${_zipObjects.value} zipObjects - $zipResults zipObjects")
         } catch (e: Exception) {
-            Log.e("Repository", "getZipCodeObject failed")
+           // Log.e("Repository", "getZipCodeObject failed")
             _zipObjects.value = emptyList()
         }
     }
@@ -145,7 +142,7 @@ class RepositoryObjects(
             _geoResult.value = geo
             //   _geoResult.value = api2.retrofitService2.getLocationCode()
         } catch (e: Exception) {
-            Log.e("Repository", "$e - getGeoResult API Call failed")
+            //Log.e("Repository", "$e - getGeoResult API Call failed")
         }
     }
 //DistanceApiData===================================================================================
@@ -158,10 +155,10 @@ class RepositoryObjects(
     suspend fun getDistanceData(origins: String, destinations: String) {
         try {
             val data = apiDistance.retrofitService3.getDistance(origins, destinations)
-            Log.d("success Repository", "$destinations für Ziel, $origins für Start")
+            //Log.d("success Repository", "$destinations für Ziel, $origins für Start")
             _distanceData.value = data
         } catch (e: Exception) {
-            Log.e("Repository", "$e - getDistance API Call failed")
+           // Log.e("Repository", "$e - getDistance API Call failed")
         }
     }
 
@@ -185,7 +182,7 @@ class RepositoryObjects(
                 database.objectDao.insertObject(data.object11)
             }
         } catch (e: Exception) {
-            Log.e("Repository", "$e loadAllObjects failed")
+           // Log.e("Repository", "$e loadAllObjects failed")
         }
     }
 
@@ -194,7 +191,7 @@ class RepositoryObjects(
         try {
             database.objectDao.updateObject(objects)
         } catch (e: Exception) {
-            Log.e("Repository", "updateObject failed")
+           // Log.e("Repository", "updateObject failed")
         }
     }
 
@@ -203,7 +200,7 @@ class RepositoryObjects(
         try {
             database.objectDao.insertObject(objects)
         } catch (e: Exception) {
-            Log.e("Repository", "insertObject failed")
+          //  Log.e("Repository", "insertObject failed")
         }
     }
 
@@ -213,7 +210,7 @@ class RepositoryObjects(
         try {
             database.objectDao.deleteById(id)
         } catch (e: Exception) {
-            Log.e("Repository", "deleteById failed")
+           // Log.e("Repository", "deleteById failed")
         }
     }
 
@@ -222,7 +219,7 @@ class RepositoryObjects(
         try {
             database.objectDao.deleteALL()
         } catch (e: Exception) {
-            Log.e("Repository", "deleteAll failed")
+          //  Log.e("Repository", "deleteAll failed")
         }
     }
 
@@ -233,7 +230,7 @@ class RepositoryObjects(
         try {
             database.userDataDao.updateUser(personalData)
         } catch (e: Exception) {
-            Log.e("Repository", "updateObject failed")
+           // Log.e("Repository", "updateObject failed")
         }
     }
 
@@ -241,7 +238,7 @@ class RepositoryObjects(
         try {
             database.userDataDao.insertUserData(personalData)
         } catch (e: Exception) {
-            Log.e("Repository", "updateObject failed")
+           // Log.e("Repository", "updateObject failed")
         }
     }
 }

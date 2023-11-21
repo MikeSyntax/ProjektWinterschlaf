@@ -11,37 +11,29 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_popUp_titel"
-            android:layout_width="300dp"
+            android:layout_width="320dp"
             android:layout_height="match_parent"
             android:backgroundTint="@color/primary_dark_green"
+            app:strokeWidth="10dp"
+            app:strokeColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/btn_save"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/white"
-                    android:text="Verstanden"
-                    android:textColor="@color/primary_dark_green"
-                    android:textSize="20sp"
-                    app:strokeColor="@color/primary_light_green"
-                    app:strokeWidth="2dp" />
+
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/shadow_light_green"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_margin="20dp"
+
                     android:backgroundTint="@color/primary_light_green">
 
                     <LinearLayout
@@ -55,13 +47,28 @@
                             style="@style/textSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
+                            android:textAlignment="center"
                             android:layout_weight="10"
-                            android:paddingStart="16dp"
-                            android:text="Herzlich Willkommen bei Projekt Winterschlaf.\n\nDu musst zuerst deine Daten im Profil ergänzen.\n\nKlicke auf den Button - Verstanden -"
+                            android:padding="16dp"
+                            android:textStyle="bold"
+                            android:text="Herzlich Willkommen bei Projekt Winterschlaf.\n\nDu musst zuerst deine Daten im Profil ergänzen.\n\nKlicke auf den Button \n-Verstanden -"
                             android:textColor="@color/primary_dark_green" />
                     </LinearLayout>
+
                 </com.google.android.material.card.MaterialCardView>
+                <Button
+                    android:id="@+id/btn_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="20dp"
+
+                    android:backgroundTint="@color/white"
+                    android:text="Verstanden"
+                    android:textColor="@color/primary_dark_green"
+                    android:textSize="20sp"
+                    app:strokeColor="@color/primary_light_green"
+                    app:strokeWidth="2dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

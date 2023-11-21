@@ -28,6 +28,7 @@ import com.example.modulabschlussandroid.adapters.AdapterObjects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentHomeBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -76,14 +77,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val fireStoreDatabase = FirebaseFirestore.getInstance()
         //Live Date mit Objekten
         val objectList = viewModel.objectList
 
         //Um zu erkennen ob der User neu ist, wird  hier abgefragt ob in der Profilseite
         // bei dem Namen noch nichts steht, und dann öffnet sich das Dialogfenster
+
         //Instanz der Personal Data
         personalData = PersonalData()
-
 
         //RecyclerView
         val recView = binding.rvRentableObjects
@@ -91,10 +93,21 @@ class HomeFragment : Fragment() {
         //feste Größe für die Performance
         recView.setHasFixedSize(true)
 
+        val uId = viewModel.uId
+
+
+
+
+
+        //Falls der User neu ist, zeige den Dialog für die Datenerfassung
         if (personalData.name == null){
-            Log.d("home", "personal data = ${personalData.name}")
             showNewUser()
         }
+
+
+
+
+
 //LiveData Objekte überwachen=======================================================================
 
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
@@ -149,7 +162,6 @@ class HomeFragment : Fragment() {
     }
 
 
-
     //Dialog Feld Eingabe für die Preis=================================================================
     private fun showNewUser() {
         //Objekt newUserDialog erstellen
@@ -165,7 +177,7 @@ class HomeFragment : Fragment() {
         //Beim Klicken des Speichern Buttons wird der User falls auf das EditProfilFragment weitergeleitet...
         saveBtn.setOnClickListener {
             Toast.makeText(requireContext(), "Viel Spaß", Toast.LENGTH_SHORT).show()
-           val navController = findNavController()
+            val navController = findNavController()
             navController.navigate(R.id.editProfileFragment)
             //Dialog ausblenden
             newUserDialog.dismiss()
