@@ -2,7 +2,6 @@ package com.example.modulabschlussandroid.ui
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,8 @@ class EditProfileFragment : Fragment() {
 
     private val viewModel: ViewModelObjects by activityViewModels()
 
+    private lateinit var personalData: PersonalData
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,26 +33,27 @@ class EditProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Objekt der personal Data erstellen
-        val personalData = PersonalData()
+        personalData = PersonalData()
 
         //NEU Zeige die aktuelle Id des eingeloggten Users
         viewModel.showCurrentUserId()
 
 //Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
 
-//Update aller User Daten aus dem Firestore
+        //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
 
-//Zeige die aktuellen Daten des eingeloggten Users
+        //Zeige die aktuellen Daten des eingeloggten Users
         val currentUser = viewModel.currentUser
-
-//Mit der Firebase Database Abfrage verbunden=====================================
 
         //Objekt der User Id erstellen
         val uId = viewModel.uId
 
+//Mit der Firebase Database Abfrage verbunden=======================================================
+
         //zum speichern der Userdaten btnSave klicken
         binding.btnSave.setOnClickListener {
+            //Aktualisieren der UserId und anzeigen
             viewModel.showCurrentUserId()
             //alle Edittexte werden ausgelesen und als personal Data gespeichert und im Profil Fragment angezeigt
             personalData.userId = uId.value.toString()

@@ -1,17 +1,15 @@
 package com.example.modulabschlussandroid.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.adapters.AdapterProfile
-import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.databinding.FragmentProfileBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import kotlinx.coroutines.delay
@@ -38,18 +36,16 @@ class ProfileFragment : Fragment() {
 
 //Übergabe und Ermittlung des aktuellen User =======================================================
 
-//NEU Zeige die aktuelle Id des eingeloggten Users
+        //Zeige die aktuelle Id des eingeloggten Users
         viewModel.showCurrentUserId()
 
-//Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
-
-//NEU Update aller User Daten aus dem Firestore
+        //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
 
-//NEU Zeige die aktuellen Daten des eingeloggten Users
+        //Zeige die aktuellen Daten des eingeloggten Users mit LiveData
         val currentUser = viewModel.currentUser
 
-//NEU Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore======================
+//Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore==========================
         currentUser.observe(viewLifecycleOwner) { user ->
             viewModel.updateCurrentUserFromFirestore()
 
@@ -64,7 +60,7 @@ class ProfileFragment : Fragment() {
             binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
         }
 
-//NEU nur zur Probe mit der Firebase Database Abfrage verbunden=====================================
+//Setzen des Adapter im Profil Fragment mit Anzeige meiner Inserte und Anzahl online================
 
         val recView = binding.rvMyAdvertises
         recView.setHasFixedSize(true)
@@ -73,21 +69,23 @@ class ProfileFragment : Fragment() {
         viewModel.readDatabase()
 
         //Adapter setzten und mit LiveData überwachen
-        viewModel.allAdvertises.observe(viewLifecycleOwner){
+        viewModel.allAdvertises.observe(viewLifecycleOwner) {
             val adapter = AdapterProfile(it)
             adapter.update(it)
             recView.adapter = adapter
-            if (viewModel.allAdvertises.value?.size != null){
-            binding.tvCountMyObjects.text = "online (${viewModel.allAdvertises.value?.size.toString()})"
+            //Anzeige der Anzahl meiner online Inserate
+            if (viewModel.allAdvertises.value?.size != null) {
+                binding.tvCountMyObjects.text =
+                    "online (${viewModel.allAdvertises.value?.size.toString()})"
             }
         }
 
-        //Anzahl aller Anzeigen online
+//Live Data überwachen und die aktuelle Anzahl der Inserate anzeigen================================
         viewModel.countAdvertises()
 
+        //Anzahl aller Anzeigen online mit LiveData
         val countAdvertises = viewModel.countAdvertises
 
-        //Live Data überwachen und die aktuelle Anzahl der Inserate anzeigen
         countAdvertises.observe(viewLifecycleOwner) {
             binding.tvUserCountInserted.text = it
         }
@@ -130,62 +128,4 @@ class ProfileFragment : Fragment() {
             }
         }
     }
-
-    /*
-        //NEU
-        private fun readDatabase(objectID: String) {
-            //Counter für die Anzeigen welche der User gerade online hat
-            var count: Int = 0
-            //Objekt der Authentification bauen
-            firebaseAuth = FirebaseAuth.getInstance()
-            //Object von der Database bauen
-            database = Firebase.database
-            //und eine Reference setzten in der Kategorie objectsOnline
-            val ref = database.getReference("objectsOnline")
-
-    //NEU===============================================================================================
-            val result = ref.get().addOnSuccessListener {
-                Log.d("Profile", "Anzahl Kinder ${it.childrenCount}")
-                it.childrenCount
-            }
-            ref.get().addOnSuccessListener {
-                for (snapshot in it.children) {
-                    Log.d("Profile", "Alle id´s ${snapshot.child("objectId").value}")
-                    Advertisement(snapshot)
-                }
-            }
-    //==================================================================================================
-
-            //Lies aus der objectsOnline alle Daten des Users mit der uId
-            ref.child(objectID).get().addOnSuccessListener {
-                if (it.exists()) {
-                    //UserID aus dem Database auslesen und mit der eingeloggten Person vergleichen
-                    val thisUser = it.child("userId").value
-                    //Nur wenn beide gleich sind diese Ausführungen starten
-                    if (thisUser == firebaseAuth.uid) {
-                        //zuerst die Cardview einblenden
-                        binding.cvItemObject.isVisible = true
-                        //Zähler für die online Anzeigen erhöhen
-                        count++
-                        Log.d("Profile", "Reading successfully $it")
-                        //Auslesen der Datenbank mit dem jeweiligen Pfad
-                        val city = it.child("city").value
-                        val description = it.child("description").value
-                        val price = it.child("price").value
-                        val title = it.child("title").value
-                        val zipCode = it.child("zipCode").value
-                        binding.tvCity.text = city.toString()
-                        binding.tvPrice.text = price.toString()
-                        binding.tvObject.text = title.toString()
-                        binding.tvDistance.text = zipCode.toString()
-                        binding.tvDescription.text = description.toString()
-                        binding.tvUserCountInserted.text = "Anzeigen online ${count.toString()}"
-                    }
-                } else {
-                    Log.d("Profile", "Diese Id existiert nicht")
-                }
-            }.addOnFailureListener {
-                Log.d("Profile", "Daten lesen failed $it")
-            }
-        }*/
 }
