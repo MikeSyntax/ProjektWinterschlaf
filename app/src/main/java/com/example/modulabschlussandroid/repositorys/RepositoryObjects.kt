@@ -1,22 +1,19 @@
 package com.example.modulabschlussandroid.repositorys
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
-import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
+import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
-import com.google.firebase.Firebase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
+import com.google.android.gms.tasks.Task
 
 //Repository Pattern nur eine Datenquelle für die ganze App um immer die gleichen Daten zu haben====
 //Das Repository ist das Modell von MVVM
@@ -77,6 +74,19 @@ class RepositoryObjects(
 
     //Live Data des aktuellen Users dessen Id
     var uId = firebaseRepository.uId
+
+    fun login(email: String, password: String, context: Context): Task<String> {
+         return firebaseRepository.login(email, password, context)
+    }
+
+    fun register(
+        email: String,
+        password: String,
+        passConfirmation: String,
+        context: Context
+    ): Task<String> {
+        return firebaseRepository.register(email,password,passConfirmation,context)
+    }
 
     //Funktion um den aktuellen User anhand seiner Id zu identifizieren aus der Authentication
     fun showCurrentUserId(){

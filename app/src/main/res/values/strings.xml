@@ -26,4 +26,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="save">Speichern</string>
+    <string name="back">zurück</string>
+    <string name="title_register">Registrierung der Anmeldedaten</string>
+    <string name="input_email">Email eingeben</string>
+    <string name="input_password">Passwort eingeben</string>
+    <string name="input_password_confirm">Passwort wiederholen</string>
+    <string name="tv_forward">Nach Eingabe bitte rechts oben auf weiter klicken, viel Spaß</string>
 </resources>

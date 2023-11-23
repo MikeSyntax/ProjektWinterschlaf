@@ -8,11 +8,24 @@
     android:background="@color/white"
     tools:context=".ui.HomeFragment">
 
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.13"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primary_light_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/primary_light_green"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -62,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginEnd="15dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/primary_light_green"
             app:strokeWidth="0dp">
 
             <LinearLayout
@@ -110,10 +123,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:orientation="horizontal"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/materialDividerTop"
         tools:layout_editor_absoluteX="16dp">
 
@@ -122,9 +135,9 @@
             style="@style/textMiddle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Home"
             android:layout_weight="50"
             android:maxLines="1"
+            android:text="Home"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -133,18 +146,18 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="50"
-            app:boxCornerRadiusTopEnd="20dp"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
             app:boxCornerRadiusTopStart="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:textAlignment="textEnd"
                 android:hint="Schnellsuche PLZ"
                 android:maxLength="5"
+                android:textAlignment="textEnd"
                 android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -188,7 +201,7 @@
         app:dividerColor="@color/primary_dark_green"
         app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout"
@@ -221,8 +234,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
@@ -237,9 +250,9 @@
                             style="@style/textSuperSmall"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/white"
                             android:gravity="center"
-                            android:text="Home" />
+                            android:text="Home"
+                            android:textColor="@color/white" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -255,16 +268,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/star_like" />
 
                         <TextView
@@ -288,16 +301,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/insert" />
 
                         <TextView
@@ -321,16 +334,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/chat" />
 
                         <TextView
@@ -347,24 +360,24 @@
                     android:id="@+id/cv_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
                     android:layout_marginRight="15dp"
+                    android:layout_weight="20"
                     android:backgroundTint="@color/primary_light_green"
                     app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
                         android:layout_margin="5dp"
+                        android:gravity="center"
                         android:orientation="vertical">
 
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:backgroundTint="@color/white"
                             android:layout_gravity="center"
+                            android:backgroundTint="@color/white"
                             android:src="@drawable/profile" />
 
                         <TextView

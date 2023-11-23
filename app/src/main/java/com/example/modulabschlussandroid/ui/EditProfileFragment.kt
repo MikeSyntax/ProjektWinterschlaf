@@ -34,6 +34,19 @@ class EditProfileFragment : Fragment() {
         //Objekt der personal Data erstellen
         val personalData = PersonalData()
 
+        //NEU Zeige die aktuelle Id des eingeloggten Users
+        viewModel.showCurrentUserId()
+
+//Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
+
+//Update aller User Daten aus dem Firestore
+        viewModel.updateUser()
+
+//Zeige die aktuellen Daten des eingeloggten Users
+        val currentUser = viewModel.currentUser
+
+//Mit der Firebase Database Abfrage verbunden=====================================
+
         //Objekt der User Id erstellen
         val uId = viewModel.uId
 
@@ -42,10 +55,11 @@ class EditProfileFragment : Fragment() {
             viewModel.showCurrentUserId()
             //alle Edittexte werden ausgelesen und als personal Data gespeichert und im Profil Fragment angezeigt
             personalData.userId = uId.value.toString()
-           // Log.d("editProfile", "uId ${uId.value} personalData ${personalData.userId}")
-            personalData.name = binding.tvName.text.toString()
-            personalData.preName = binding.tvPrename.text.toString()
+            // Log.d("editProfile", "uId ${uId.value} personalData ${personalData.userId}")
+
             personalData.userName = binding.tvLoggedUsername.text.toString()
+            personalData.preName = binding.tvPrename.text.toString()
+            personalData.name = binding.tvName.text.toString()
             personalData.zipCode = binding.tvZipCode.text.toString()
             personalData.cityName = binding.tvCity.text.toString()
             personalData.streetName = binding.tvStreetname.text.toString()
@@ -61,3 +75,98 @@ class EditProfileFragment : Fragment() {
         }
     }
 }
+
+
+
+
+
+/*
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //Objekt der personal Data erstellen
+        val personalData = PersonalData()
+
+        //NEU Zeige die aktuelle Id des eingeloggten Users
+        viewModel.showCurrentUserId()
+
+//Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
+
+//NEU Update aller User Daten aus dem Firestore
+        viewModel.updateUser()
+
+//NEU Zeige die aktuellen Daten des eingeloggten Users
+        val currentUser = viewModel.currentUser
+
+//NEU nur zur Probe mit der Firebase Database Abfrage verbunden=====================================
+
+
+        //Objekt der User Id erstellen
+        val uId = viewModel.uId
+
+        //zum speichern der Userdaten btnSave klicken
+        binding.btnSave.setOnClickListener {
+            viewModel.showCurrentUserId()
+            //alle Edittexte werden ausgelesen und als personal Data gespeichert und im Profil Fragment angezeigt
+            personalData.userId = uId.value.toString()
+            // Log.d("editProfile", "uId ${uId.value} personalData ${personalData.userId}")
+
+            if (binding.tvLoggedUsername.text != null) {
+                personalData.userName = binding.tvLoggedUsername.text.toString()
+            } else {
+                currentUser.value?.userName
+                Log.d("edit", "eingabe ${personalData.userName} und gespeichert ${currentUser.value?.userName} ")
+            }
+
+            if (binding.tvPrename.text != null) {
+                personalData.preName = binding.tvPrename.text.toString()
+            } else {
+                currentUser.value?.preName
+            }
+
+            if (binding.tvName.text != null){
+            personalData.name = binding.tvName.text.toString()
+            } else {
+                currentUser.value?.name
+            }
+
+            if (binding.tvZipCode.text != null){
+            personalData.zipCode = binding.tvZipCode.text.toString()
+            } else {
+                currentUser.value?.zipCode
+            }
+
+            if (binding.tvCity.text != null){
+                personalData.zipCode = binding.tvCity.text.toString()
+            } else {
+                currentUser.value?.cityName
+            }
+
+            if (binding.tvStreetname.text != null){
+                personalData.zipCode = binding.tvStreetname.text.toString()
+            } else {
+                currentUser.value?.streetName
+            }
+
+            if (binding.tvStreetnumber.text != null){
+                personalData.zipCode = binding.tvStreetnumber.text.toString()
+            } else {
+                currentUser.value?.streetNumber
+            }
+
+            if (binding.tvPhoneNumber.text != null){
+                personalData.zipCode = binding.tvPhoneNumber.text.toString()
+            } else {
+                currentUser.value?.telNumber
+            }
+
+            //Aufruf der Funktion zum speichern aus dem FirebaseRepository
+            viewModel.newUserDataFirstSignIn(personalData)
+            findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+        }
+
+        binding.cvBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+}*/

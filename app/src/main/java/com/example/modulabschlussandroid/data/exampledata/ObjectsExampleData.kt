@@ -10,7 +10,7 @@ object ObjectsExampleData {
         id = 0,
         R.drawable.bild_halle,
         R.drawable.bild_doppelgarage,
-        R.drawable.lagerhalle,
+        R.drawable.bild_parkplat,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         "Karlsruhe",

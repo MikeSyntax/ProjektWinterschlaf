@@ -8,7 +8,6 @@
     tools:context=".ui.ProfileFragment">
 
     <ImageView
-        android:id="@+id/imageView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha="0.13"
@@ -155,8 +154,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
         android:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialDividerTop"
         app:strokeWidth="0dp">
 
@@ -354,8 +353,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom">
+        app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/tv_user_countInserted"
@@ -382,7 +381,6 @@
             android:text="registriert seit 2022" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
     <com.google.android.material.divider.MaterialDivider

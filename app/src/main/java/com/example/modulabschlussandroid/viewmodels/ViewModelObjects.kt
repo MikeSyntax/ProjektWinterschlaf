@@ -1,6 +1,7 @@
 package com.example.modulabschlussandroid.viewmodels
 
 import android.app.Application
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -14,8 +15,8 @@ import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
-import com.example.modulabschlussandroid.repositorys.RepositoryFirebase
 import com.example.modulabschlussandroid.repositorys.RepositoryObjects
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.launch
 
 
@@ -129,6 +130,14 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
     fun updateUser(){
         repository.updateCurrentUserFromFirestore()
+    }
+
+    fun login(email: String, password: String, context: Context): Task<String> {
+       return repository.login(email, password, context)
+    }
+
+    fun register(email: String, password: String, passConfirmation: String, context: Context): Task<String> {
+        return repository.register(email,password,passConfirmation,context)
     }
 
     //Ausloggen des aktuellen Users

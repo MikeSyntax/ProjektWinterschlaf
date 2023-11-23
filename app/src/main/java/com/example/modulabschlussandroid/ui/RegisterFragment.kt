@@ -1,18 +1,14 @@
 package com.example.modulabschlussandroid.ui
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.modulabschlussandroid.R
-import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentRegisterBinding
-import com.google.firebase.auth.FirebaseAuth
+import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
 
 class RegisterFragment : Fragment() {
@@ -20,8 +16,7 @@ class RegisterFragment : Fragment() {
     //Binding initialisieren
     private lateinit var binding: FragmentRegisterBinding
 
-    //NEU
-    private lateinit var firebaseAuth: FirebaseAuth
+    private val viewModel: ViewModelObjects by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,31 +31,15 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 //NEU Firebase Authentification ====================================================================
-        firebaseAuth = FirebaseAuth.getInstance()
+
         binding.cvForward.setOnClickListener {
             //Variablen für die Eingaben
             val email = binding.textInputUserEmail.text.toString()
             val password = binding.textInputUserPassword.text.toString()
             val passConfirmation = binding.textInputUserSecondPassword.text.toString()
-            //Prüfung der Eingaben
-            if (email.isNotEmpty() && password.isNotEmpty() && passConfirmation.isNotEmpty()) {
-                if (password == passConfirmation) {
-                    firebaseAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                val navController = findNavController()
-                                navController.navigate(RegisterFragmentDirections.actionRegisterFragmentToReadyLoginFragment())
-                            } else {
-                                Toast.makeText(requireContext(), it.exception.toString(), Toast.LENGTH_SHORT).show()
-                            }
-                        }
-                } else {
-                    Toast.makeText(requireContext(), "Passwörter stimmen nicht überein", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            } else {
-                Toast.makeText(requireContext(), "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT)
-                    .show()
+            viewModel.register(email, password, passConfirmation, requireContext()).addOnSuccessListener {
+                val navController = findNavController()
+                navController.navigate(RegisterFragmentDirections.actionRegisterFragmentToReadyLoginFragment())
             }
         }
 

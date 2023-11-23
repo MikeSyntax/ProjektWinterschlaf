@@ -37,7 +37,7 @@ class AdapterProfile(
         binding.tvCity.text = myAdvertisement.city
         binding.tvPrice.text = myAdvertisement.price
         binding.tvDescription.text = myAdvertisement.description
-        binding.tvDistance.text = myAdvertisement.zipCode
+        binding.tvDistance.text = "PLZ ${myAdvertisement.zipCode}"
     }
 
     fun update(list: List<Advertisement>){
