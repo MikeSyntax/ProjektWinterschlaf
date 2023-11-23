@@ -44,14 +44,14 @@ class ProfileFragment : Fragment() {
 //Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
 
 //NEU Update aller User Daten aus dem Firestore
-        viewModel.updateUser()
+        viewModel.updateCurrentUserFromFirestore()
 
 //NEU Zeige die aktuellen Daten des eingeloggten Users
         val currentUser = viewModel.currentUser
 
 //NEU Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore======================
         currentUser.observe(viewLifecycleOwner) { user ->
-
+            viewModel.updateCurrentUserFromFirestore()
 
             binding.tvLoggedUsername.text = user.userName
             binding.tvUserRealName.text = user.name
@@ -61,8 +61,7 @@ class ProfileFragment : Fragment() {
             binding.tvUserStreetNumber.text = user.streetNumber
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
-            binding.tvUserItemsDone.text = "Bisherige Inserate ${user.itemsDone}"
-            binding.tvUserRegistered.text = "Registriert seit ${user.registered}"
+            binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
         }
 
 //NEU nur zur Probe mit der Firebase Database Abfrage verbunden=====================================

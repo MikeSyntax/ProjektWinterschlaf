@@ -40,7 +40,7 @@ class EditProfileFragment : Fragment() {
 //Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
 
 //Update aller User Daten aus dem Firestore
-        viewModel.updateUser()
+        viewModel.updateCurrentUserFromFirestore()
 
 //Zeige die aktuellen Daten des eingeloggten Users
         val currentUser = viewModel.currentUser
@@ -65,6 +65,7 @@ class EditProfileFragment : Fragment() {
             personalData.streetName = binding.tvStreetname.text.toString()
             personalData.streetNumber = binding.tvStreetnumber.text.toString()
             personalData.telNumber = binding.tvPhoneNumber.text.toString()
+
             //Aufruf der Funktion zum speichern aus dem FirebaseRepository
             viewModel.newUserDataFirstSignIn(personalData)
             findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())

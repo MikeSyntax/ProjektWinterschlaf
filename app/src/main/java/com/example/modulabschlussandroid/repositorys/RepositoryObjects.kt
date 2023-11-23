@@ -103,7 +103,10 @@ class RepositoryObjects(
 
 //Firebase Database ================================================================================
 
-
+    //Anzahl bisheriger Anzeigen erhöhen
+    fun addCounterForAdvertises(personalData: PersonalData){
+        firebaseRepository.addCounterForAdvertises(personalData)
+    }
 
     //Inserieren eines neuen Advertisments (Objekt)
     fun saveItemToDatabase(advertisement: Advertisement) {

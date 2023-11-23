@@ -25,6 +25,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
+import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentInsertBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import com.google.firebase.Firebase
@@ -43,6 +44,8 @@ class InsertFragment : Fragment() {
     private lateinit var thisObject: Objects
 
     private lateinit var advertisement: Advertisement
+
+    private lateinit var personalData: PersonalData
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +66,8 @@ class InsertFragment : Fragment() {
         thisObject = Objects()
         //Erstellen eines Objektes der MyObject Klasse für die Firebase Datenbank mit den abrufbaren Objekten
         advertisement = Advertisement()
+        //Erstellen eines Objektes der PersonalData Klasse
+        personalData = PersonalData()
 
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
@@ -103,8 +108,16 @@ class InsertFragment : Fragment() {
             advertisement.title = binding.editTitle.text.toString()
             advertisement.description = binding.editDescription.text.toString()
             advertisement.price = binding.editPrice.text.toString()
+
+            //Aufruf der Funktion für den Counter aller Inserate +1 also 2+1 = bisherige Inserate3
+            viewModel.addCounterForAdvertises(personalData)
+
             //Aufruf der Funktion aus dem Firebase Repository
             viewModel.saveItemToDatabase(advertisement)
+
+            //Den User Updaten nach der Änderung
+            viewModel.updateCurrentUserFromFirestore()
+
             //Nach dem Inserieren erfolgt die Weiterleitung zur Profilseite
             val navController = binding.btnFloatingAction.findNavController()
             navController.navigate(InsertFragmentDirections.actionInsertFragmentToProfileFragment())

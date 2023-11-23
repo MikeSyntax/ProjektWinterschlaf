@@ -128,7 +128,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
 //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
-    fun updateUser(){
+    fun updateCurrentUserFromFirestore(){
         repository.updateCurrentUserFromFirestore()
     }
 
@@ -153,11 +153,18 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     //Counter für alle Anzeigen online==================================================================
 
+    //Anzahl meiner bisheriger Anzeigen erhöhen
+    fun addCounterForAdvertises(personalData: PersonalData){
+        repository.addCounterForAdvertises(personalData)
+    }
+
+    //Zählen meiner jetzigen Inserate, die online sind
     val countAdvertises = repository.countAdvertises
     fun countAdvertises(){
         repository.countAdvertises()
     }
 
+    //Zählen aller Inserate die von allen Usern gerade online sind
     //Auslesen der Datenbank von Firebase
     val allAdvertises = repository.allAdvertises
     fun readDatabase(){

@@ -10,7 +10,7 @@ data class PersonalData(
     var userId: String = "",
     var cityName: String? = null,
     var countInsertedItems: String? = null,
-    var itemsDone: String? = null,
+    var itemsDone: String? = "0",
     var name: String? = null,
     var preName: String? = null,
     var registered: String? = null,
