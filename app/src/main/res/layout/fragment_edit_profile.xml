@@ -134,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:maxLength="20"
             android:hint="@string/user_name"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
@@ -145,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:maxLength="20"
             android:hint="Vorname eingeben"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
@@ -156,6 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:maxLength="20"
             android:hint="Nachname eingeben"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
@@ -167,6 +170,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:maxLength="5"
+            android:inputType="number"
             android:hint="Postleitzahl eingeben"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
@@ -178,6 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:maxLength="25"
             android:hint="Ortsname eingeben"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
@@ -189,6 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:maxLength="25"
             android:hint="Straße eingeben"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
@@ -200,6 +207,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+
+            android:maxLength="4"
             android:hint="Hausnummer eingeben"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
@@ -211,6 +220,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            android:maxLength="20"
+            android:inputType="phone"
             android:hint="Telefonnummer eingeben"
             android:textColor="@color/primary_dark_green"
             android:textStyle="italic" />
