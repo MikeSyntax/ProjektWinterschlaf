@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.databinding.FragmentLogInBinding
+import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -15,6 +17,7 @@ class LogInFragment : Fragment() {
 
     private lateinit var binding: FragmentLogInBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private val viewModel: ViewModelObjects by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +43,27 @@ class LogInFragment : Fragment() {
             findNavController().navigate(R.id.registerFragment)
         }
 
+        //Ist der aktuelle User noch eingeloggt?
+        viewModel.currentAppUserLogged()
+        //Prüfung ob ein User eingeloggt ist, falls ja dann erfolgt die Weiterleitung
+        viewModel.currentAppUser.observe(viewLifecycleOwner) {
+            if (it == "success") {
+                val navController = findNavController()
+                navController.navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
+            }
+        }
     }
+}
 
+
+
+
+
+
+
+
+
+/*
 //Falls der User noch immer eingeloggte ist, wird direkt zum Homescreen weitergeleitet==============
     override fun onStart() {
         super.onStart()
@@ -50,5 +72,4 @@ class LogInFragment : Fragment() {
             val navController = findNavController()
             navController.navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
         }
-    }
-}
+    }*/

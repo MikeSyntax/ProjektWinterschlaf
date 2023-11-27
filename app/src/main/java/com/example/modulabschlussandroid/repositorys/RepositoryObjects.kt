@@ -61,6 +61,15 @@ class RepositoryObjects(
     //LiveData des aktuellen Users
     var currentUser = firebaseRepository.currentUser
 
+
+    //LiveData des aktuellen Users ob er eingeloggt ist oder nicht
+    var currentAppUser = firebaseRepository.currentAppUser
+
+    //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData
+    fun currentAppUserLogged(){
+        firebaseRepository.currentAppUserLogged()
+    }
+
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
     fun updateCurrentUserFromFirestore() {
        firebaseRepository.updateCurrentUserFromFirestore()
