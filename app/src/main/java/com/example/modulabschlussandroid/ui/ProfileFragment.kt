@@ -65,18 +65,20 @@ class ProfileFragment : Fragment() {
         val recView = binding.rvMyAdvertises
         recView.setHasFixedSize(true)
 
-        //Datenbank auslesen
-        viewModel.readDatabase()
+//Datenbank auslesen um die Zahl der Inserate des eingeloggten Users anzuzeigen=====================
+
+        //Funktion für die Zahl aller Inserate des eingeloggten Users
+        viewModel.checkDatabaseForMyAds()
 
         //Adapter setzten und mit LiveData überwachen
-        viewModel.allAdvertises.observe(viewLifecycleOwner) {
+        viewModel.allMyAdvertises.observe(viewLifecycleOwner) {
             val adapter = AdapterProfile(it)
             adapter.update(it)
             recView.adapter = adapter
             //Anzeige der Anzahl meiner online Inserate
-            if (viewModel.allAdvertises.value?.size != null) {
+            if (viewModel.allMyAdvertises.value?.size != null) {
                 binding.tvCountMyObjects.text =
-                    "online (${viewModel.allAdvertises.value?.size.toString()})"
+                    "online (${viewModel.allMyAdvertises.value?.size.toString()})"
             }
         }
 

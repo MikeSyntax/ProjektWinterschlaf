@@ -101,6 +101,10 @@ class RepositoryObjects(
        firebaseRepository.signOutUser()
     }
 
+    fun checkUserDataComplete(uId: String) :Task<String>{
+       return firebaseRepository.checkUserDataComplete(uId)
+    }
+
 //Firebase Database ================================================================================
 
     //Anzahl bisheriger Anzeigen erhöhen
@@ -114,11 +118,11 @@ class RepositoryObjects(
     }
 
     //Auslesen der Datenbank von Firebase
-    fun readDatabase(){
-        firebaseRepository.readDatabase()
+    fun checkDatabaseForMyAds(){
+        firebaseRepository.checkDatabaseForMyAds()
     }
 
-    val allAdvertises = firebaseRepository.allAdvertises
+    val allMyAdvertises = firebaseRepository.allMyAdvertises
 
 //Funktion für die Schnellsuche über Postleitzahl===================================================
 

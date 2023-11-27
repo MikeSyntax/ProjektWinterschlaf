@@ -2,41 +2,32 @@ package com.example.modulabschlussandroid.ui
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterObjects
-import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentHomeBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
-import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: ViewModelObjects by activityViewModels()
-    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,9 +68,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Intanz des Firestores erstellen
-        firestore = FirebaseFirestore.getInstance()
-
         //Live Date mit Objekten
         val objectList = viewModel.objectList
 
@@ -89,10 +77,18 @@ class HomeFragment : Fragment() {
         //feste Größe für die Performance
         recView.setHasFixedSize(true)
 
+//Prüfen ob der User schon einmal angemeldet war, und falls nicht weiterleitung ====================
+
+        //zuerst die User Id aktualisieren
+        viewModel.showCurrentUserId()
+        //Intanz der uId erstellen
+        val uId = viewModel.uId
         //Um zu erkennen ob der User neu ist, wird  hier abgefragt ob in der Profilseite
         // bei dem Namen noch nichts steht, und dann öffnet sich das Dialogfenster
-        checkUserDataComplete()
-
+        viewModel.checkUserDateComplete(uId.value.toString())
+            .addOnSuccessListener {
+                showNewUserDialog()
+            }
 
 //LiveData Objekte überwachen=======================================================================
 
@@ -124,12 +120,12 @@ class HomeFragment : Fragment() {
         //NEU Schnellsuche für die Postleitzahl
         binding.textInputEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-            override fun afterTextChanged(p0: Editable?) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                viewModel.updateInputText(p0.toString())
-            }
+                viewModel.updateInputText(p0.toString())}
+            override fun afterTextChanged(p0: Editable?) {}
         })
 
+//Navigation über die BottomBar
         //Zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
             val navController = binding.cvFavorite.findNavController()
@@ -147,8 +143,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-    //Dialog Feld Eingabe für die Preis=================================================================
+//Dialog Feld Eingabe für die Preis=================================================================
     private fun showNewUserDialog() {
         //Objekt newUserDialog erstellen
         val newUserDialog = Dialog(requireContext())
@@ -179,7 +174,17 @@ class HomeFragment : Fragment() {
         //Dialog anzeigen
         newUserDialog.show()
     }
+}
 
+
+
+
+
+
+
+
+
+/*
     //Falls der User neu ist, zeige den Dialog für die Datenerfassung
     private fun checkUserDataComplete() {
         //zuerst die User Id aktualisieren
@@ -206,5 +211,4 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-    }
-}
+    }*/

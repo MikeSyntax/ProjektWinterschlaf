@@ -151,6 +151,11 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.saveItemToDatabase(advertisement)
     }
 
+
+    fun checkUserDateComplete(uId: String) :Task<String>{
+        return repository.checkUserDataComplete(uId)
+    }
+
     //Counter für alle Anzeigen online==================================================================
 
     //Anzahl meiner bisheriger Anzeigen erhöhen
@@ -164,11 +169,11 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.countAdvertises()
     }
 
-    //Zählen aller Inserate die von allen Usern gerade online sind
+    //Zählen aller Inserate die von dem eingeloggten User gerade online sind
     //Auslesen der Datenbank von Firebase
-    val allAdvertises = repository.allAdvertises
-    fun readDatabase(){
-        repository.readDatabase()
+    val allMyAdvertises = repository.allMyAdvertises
+    fun checkDatabaseForMyAds(){
+        repository.checkDatabaseForMyAds()
     }
 
     //Ein einzelnes Objekt löschen

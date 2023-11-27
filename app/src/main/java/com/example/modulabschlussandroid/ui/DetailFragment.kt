@@ -206,12 +206,6 @@ class DetailFragment : Fragment() {
                 //Hier werden die Koordinaten des eigenen Standortes in die Variablen gespeichert für Entfernungsabfrage
                 lat1 = it.latitude.toString()
                 lon1 = it.longitude.toString()
-
-                     /* Toast.makeText(
-                          requireContext(),
-                          "Ziel Koordinaten \n${it.latitude} ${it.longitude}",
-                          Toast.LENGTH_SHORT
-                      ).show()*/
             }
         }
     }

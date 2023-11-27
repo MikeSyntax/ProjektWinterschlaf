@@ -47,7 +47,7 @@ class AdapterObjects(
         binding.ivObject.setImageResource(thisObject.image1Resource)
         binding.tvObject.text = thisObject.objectdescription
         binding.tvCity.text = thisObject.city
-        binding.tvPrice.text = "${thisObject.price.toString()}€"
+        binding.tvPrice.text = "${thisObject.price.toString()} €"
         binding.tvDescription.text = thisObject.description
         binding.tvDistance.text = "PLZ ${thisObject.zipCode}"
 

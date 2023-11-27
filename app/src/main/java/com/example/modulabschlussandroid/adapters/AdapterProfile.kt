@@ -35,7 +35,7 @@ class AdapterProfile(
 
         binding.tvObject.text = myAdvertisement.title
         binding.tvCity.text = myAdvertisement.city
-        binding.tvPrice.text = myAdvertisement.price
+        binding.tvPrice.text = "${myAdvertisement.price} €"
         binding.tvDescription.text = myAdvertisement.description
         binding.tvDistance.text = "PLZ ${myAdvertisement.zipCode}"
     }

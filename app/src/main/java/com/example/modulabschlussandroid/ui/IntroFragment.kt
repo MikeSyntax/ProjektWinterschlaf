@@ -10,11 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
-import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentIntroBinding
 
 
 class IntroFragment : Fragment() {
+
     private lateinit var binding: FragmentIntroBinding
 
     override fun onCreateView(
