@@ -67,12 +67,21 @@ class InsertFragment : Fragment() {
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
+
             showCategorieDialog()
         }
 //Übergabe der Uid als Parameter um die Postleitzahl unter Uid des Users zu speichern===============
         binding.cvZipCode.setOnClickListener {
-            showZipCodeDialog()
+     //       val tvZip = binding.editZipCode.text.toString()
+            showZipCodeDialog(/*tvZip*/)
         }
+/*
+        val textMessage: TextView = if (tvZip.text.isNotEmpty()){
+            tvZip
+        }else {
+            zipCodeDialog.findViewById(R.id.edit_text_zipcode)
+        }*/
+
 //Übergabe der Uid als Parameter um die Stadt unter Uid des Users zu speichern======================
         binding.cvCity.setOnClickListener {
             showCityDialog()
@@ -92,6 +101,10 @@ class InsertFragment : Fragment() {
         binding.cvPrice.setOnClickListener {
             showPriceDialog()
         }
+
+
+
+
 
 //Inserieren eines neuen Advertisements bzw. einer neuen Anzeige ===================================
         binding.btnFloatingAction.setOnClickListener {
@@ -257,8 +270,10 @@ class InsertFragment : Fragment() {
         zipCodeDialog.setCancelable(false)
         zipCodeDialog.setContentView(R.layout.zipcode_dialog)
         zipCodeDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         //Initialisieren aller Switch´s und Button auf dem Dialog der Kategorien
         val saveBtn: Button = zipCodeDialog.findViewById(R.id.btn_save)
+
         val textMessage: TextView = zipCodeDialog.findViewById(R.id.edit_text_zipcode)
 
         //Um eine Tastatur einzublenden

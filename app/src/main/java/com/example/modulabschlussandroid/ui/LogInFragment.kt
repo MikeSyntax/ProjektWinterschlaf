@@ -47,7 +47,7 @@ class LogInFragment : Fragment() {
         viewModel.currentAppUserLogged()
         //Prüfung ob ein User eingeloggt ist, falls ja dann erfolgt die Weiterleitung
         viewModel.currentAppUser.observe(viewLifecycleOwner) {
-            if (it == "success") {
+            if (it == "loggedIn") {
                 val navController = findNavController()
                 navController.navigate(LogInFragmentDirections.actionLogInFragmentToHomeFragment())
             }

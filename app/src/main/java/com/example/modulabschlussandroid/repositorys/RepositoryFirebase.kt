@@ -49,7 +49,7 @@ class RepositoryFirebase(
 //Funktion um Festzustellen, ob ein User eingeloggt ist oder nicht==================================
     fun currentAppUserLogged(){
         if ( firebaseAuth.currentUser != null){
-            _currentAppUser.value = "success"
+            _currentAppUser.value = "loggedIn"
         }
     }
 
@@ -229,9 +229,9 @@ class RepositoryFirebase(
         _currentAppUser.value = null
     }
 
-//Firebase Database=================================================================================
+//Firebase Realtime Database========================================================================
 
-    //Das erstellte Objekt soll an die Firebase Datenbank gesendet werden
+    //Das erstellte Objekt soll an die Firebase Realtime Datenbank (alte Version, sorry) gesendet werden
     fun saveItemToDatabase(advertisement: Advertisement) {
 
         //und eine Reference setzten in der Kategorie myObjects
@@ -307,13 +307,11 @@ class RepositoryFirebase(
 
 //Falls der User neu ist, zeige den Dialog für die Datenerfassung===================================
     fun checkUserDataComplete(uId: String) : Task<String>{
-        //Intanz der uId erstellen
-        val loggeUId = uId
         val completionSource = TaskCompletionSource<String>()
         //Abfrage Firestore
         fireStoreDatabase.collection("user")
             //ob dieses Document mit der Id
-            .document(loggeUId)
+            .document(uId)
             //suchen
             .get()
             //Listener
@@ -322,7 +320,7 @@ class RepositoryFirebase(
                 if (task.isSuccessful) {
                     //Resultat der Abfrage
                     val document = task.result
-                    Log.d("success Home", "uId $loggeUId task result ${task.result}")
+                    Log.d("success Home", "uId $uId task result ${task.result}")
                     //wenn diese Id bzw. dieses Document NICHT existiert
                     if (!document.exists()) {
                         // dann zeige den Dialog für die User Daten vervollständigung
