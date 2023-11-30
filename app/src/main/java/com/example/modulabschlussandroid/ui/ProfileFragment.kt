@@ -5,10 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterProfile
 import com.example.modulabschlussandroid.databinding.FragmentProfileBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
@@ -58,6 +64,14 @@ class ProfileFragment : Fragment() {
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
             binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
+          /*  //Profilfoto aus dem Storage laden
+            if (user.profileImage != null){
+                Glide.with(requireContext()).load(user.profileImage).into(binding.ivProfileImage)
+                //falls keins vorhanden ist nimm den Platzhalter
+            }else{
+                binding.ivProfileImage.setImageResource(R.drawable.projekt_winterschlaf_logo)
+            }*/
+
         }
 
 //Setzen des Adapter im Profil Fragment mit Anzeige meiner Inserte und Anzahl online================

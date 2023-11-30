@@ -1,21 +1,18 @@
 package com.example.modulabschlussandroid.repositorys
 
-import android.accessibilityservice.AccessibilityService.TakeScreenshotCallback
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
-import com.example.modulabschlussandroid.ui.LogInFragmentDirections
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 
 class RepositoryFirebase(
@@ -24,9 +21,9 @@ class RepositoryFirebase(
 
     private var firebaseAuth = FirebaseAuth.getInstance()
 
-    private var database = FirebaseDatabase.getInstance()
-
     private var fireStoreDatabase = FirebaseFirestore.getInstance()
+
+    private var firebaseStorage = FirebaseStorage.getInstance()
 
 //Firebase Firestore================================================================================
 
@@ -44,24 +41,45 @@ class RepositoryFirebase(
     //Um festzustellen, ob ein User bereits eingeloggt ist
     private var _currentAppUser: MutableLiveData<String?> = MutableLiveData(null)
     val currentAppUser: MutableLiveData<String?>
-        get () = _currentAppUser
+        get() = _currentAppUser
 
-//Funktion um Festzustellen, ob ein User eingeloggt ist oder nicht==================================
-    fun currentAppUserLogged(){
-        if ( firebaseAuth.currentUser != null){
+    //Funktion um Festzustellen, ob ein User eingeloggt ist oder nicht==================================
+    fun currentAppUserLogged() {
+        if (firebaseAuth.currentUser != null) {
             _currentAppUser.value = "loggedIn"
         }
     }
 
-//Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen und auf der Profilseite anzuzeigen
+    //Funktion um Profilbilder in das Storage hochzuladen=====================================================
+    fun uploadImagetoStorage(uri: Uri) {
+        val ref = firebaseStorage.reference.child("imageProfile/${firebaseAuth.currentUser!!.uid}")
+        ref.putFile(uri)
+        _currentUser.value?.copy(profileImage = uri.toString())?.let { updateUser(it) }
+    }
+
+    //Funktion um den User nach Änderungen upzudaten
+    fun updateUser(user: PersonalData) {
+        fireStoreDatabase.collection("user")
+            .document(firebaseAuth.currentUser?.uid!!)
+            .set(
+                //mit der Funktion aus der der Datenklasse PersonalData!!
+                user.toFirebase()
+            ).addOnSuccessListener {
+                Log.d("fireRepo", "udateUser Profile done $it")
+                _currentUser.postValue(user)
+            }.addOnFailureListener {
+                Log.d("fireRepo", "udateUser Profile failed $it")
+            }
+    }
+
+
+    //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen und auf der Profilseite anzuzeigen
     fun updateCurrentUserFromFirestore() {
         fireStoreDatabase.collection("user").document(uId.value.toString())
             .get()
+
             .addOnSuccessListener { thisUser ->
-                Log.d(
-                    "Firebase Repo Store",
-                    "SuccesListener FireStore done - Id ${uId.value.toString()} "
-                )
+               // Log.d("Firebase Repo Store", "SuccesListener FireStore done - Id ${uId.value.toString()} ")
                 _currentUser.value = PersonalData(
                     thisUser.id,
                     thisUser.data?.get("cityName").toString(),
@@ -76,15 +94,14 @@ class RepositoryFirebase(
                     thisUser.data?.get("userName").toString(),
                     thisUser.data?.get("zipCode").toString(),
                 )
-                Log.d(
-                    "Firebase Repo Add",
-                    "User items Done?? ${currentUser.value}"
-                )
+                //Log.d("Firebase Repo Add", "User items Done?? ${currentUser.value}")
                 // Log.e("Repo", " User Data set failed in firestore")
-            }.addOnFailureListener { Log.e("Firebase Repo Store", "FailureListener $it") }
+            }.addOnFailureListener {
+              //  Log.e("Firebase Repo Store", "FailureListener $it")
+            }
     }
 
-//Hinzufügen eines weiteren Inserats bei der Zahl "Meine bisherigen.." bei einem bestimmten User====
+    //Hinzufügen eines weiteren Inserats bei der Zahl "Meine bisherigen.." bei einem bestimmten User====
     fun addCounterForAdvertises(personalData: PersonalData) {
         // Überprüfen, ob itemsDone nicht null ist
         if (personalData.itemsDone != null) {
@@ -108,44 +125,43 @@ class RepositoryFirebase(
                             .document(uId.value.toString())
                             .update(setCounter)
                             .addOnSuccessListener {
-                                Log.d("Repo Firebase", "Anzahl bisheriger Inserate $countSize")
+                               // Log.d("Repo Firebase", "Anzahl bisheriger Inserate $countSize")
                                 personalData.itemsDone = countSize.toString()
                             }
                             .addOnFailureListener { error ->
-                                Log.e("Repo Firebase", "Error adding counter $error")
+                              //  Log.e("Repo Firebase", "Error adding counter $error")
                             }
                     } else {
-                        Log.e("Repo Firebase", "Dokument enthält kein itemsDone-Feld.")
+                       // Log.e("Repo Firebase", "Dokument enthält kein itemsDone-Feld.")
                     }
                 }
                 .addOnFailureListener { error ->
-                    Log.e("Repo Firebase", "Error getting document $error")
+                   // Log.e("Repo Firebase", "Error getting document $error")
                 }
         } else {
-            Log.e("Repo Firebase", "itemsDone ist null.")
+           // Log.e("Repo Firebase", "itemsDone ist null.")
             // Handle den Fall, dass itemsDone null ist
         }
     }
 
 
-
-//Funktion um einen neuen User im Firestore anzulegen (EditProfile)=================================
+    //Funktion um einen neuen User im Firestore anzulegen (EditProfile)=================================
     fun newUserDataFirstSignIn(personalData: PersonalData) {
         fireStoreDatabase.collection("user")
             //Hier wird die User Id aus der Auth übergeben, da sonst eine autogenerated Id übergeben wird
             .document(uId.value.toString())
             .set(personalData)
             .addOnSuccessListener { documentRef ->
-                Log.d("Repo Firebase", "DocumentSnapshot added $documentRef")
+              //  Log.d("Repo Firebase", "DocumentSnapshot added $documentRef")
             }
             .addOnFailureListener { error ->
-                Log.e("Repo Firebase", "Error adding document $error")
+               // Log.e("Repo Firebase", "Error adding document $error")
             }
     }
 
 //Firebase Authentication===========================================================================
 
-//Funktion für den Login ===========================================================================
+    //Funktion für den Login ===========================================================================
     //Da die Funktion im Repository ist, muss hier falls der Login erfolgreich ist und nicht sofort
     // weitergeleitet werden kann , eine Task als String "succes" (oder was auch immer) übergeben
     // werden und so kann im Fragment dann ein OnSuccessListener installiert werden
@@ -178,8 +194,13 @@ class RepositoryFirebase(
         return completionSource.task
     }
 
-//Registrierung eines neuen Users mit Erfolgsübergabe um die Weiterleitung zu ermöglichen===========
-    fun register(email: String, password: String, passConfirmation: String, context: Context): Task<String> {
+    //Registrierung eines neuen Users mit Erfolgsübergabe um die Weiterleitung zu ermöglichen===========
+    fun register(
+        email: String,
+        password: String,
+        passConfirmation: String,
+        context: Context
+    ): Task<String> {
         val completionSource = TaskCompletionSource<String>()
         //Prüfung der Eingaben
         if (email.isNotEmpty() && password.isNotEmpty() && passConfirmation.isNotEmpty()) {
@@ -219,7 +240,7 @@ class RepositoryFirebase(
     fun showCurrentUserId() {
         val user = firebaseAuth.currentUser?.uid.toString()
         _uId.value = user
-        Log.d("Firebase Repo 3 Punkte", "_uId ${_uId.value} user $user uId ${uId.value}")
+       // Log.d("Firebase Repo 3 Punkte", "_uId ${_uId.value} user $user uId ${uId.value}")
     }
 
     //Ausloggen des aktuellen Users
@@ -229,27 +250,17 @@ class RepositoryFirebase(
         _currentAppUser.value = null
     }
 
-//Firebase Realtime Database========================================================================
+//Firebase Firestore Erstellen eines Inserates======================================================
 
-    //Das erstellte Objekt soll an die Firebase Realtime Datenbank (alte Version, sorry) gesendet werden
     fun saveItemToDatabase(advertisement: Advertisement) {
-
-        //und eine Reference setzten in der Kategorie myObjects
-        val ref = database.getReference("objectsOnline")
-        // Log.d("Firebase Repo Data", "Reference $ref")
-
-        //Hier wird jedesmal wenn es aufgerufen wird eine Id gesetzt
-        val objectId = ref.push().key
-        // Log.d("Firebase Repo Data", "objectId $objectId")
-
-        //hier wird in der Database das Objekt gesetzt bzw. erschaffen und noch ein CompleteListener zum überprüfen
-        ref.child(objectId!!).setValue(advertisement)
-            //Erfolgreich???
+        fireStoreDatabase.collection("objectsOnline")
+            .document().set(
+                advertisement
+            )
             .addOnSuccessListener {
-                //  Log.d("Firebase Repo Data", "Data inserted successfully")
-                //Fehler???
+              //  Log.d("Savetodatabase", advertisement.toString())
             }.addOnFailureListener {
-                //   Log.e("Firebase Repo Data", "inserted failed $it")
+            //    Log.e("Savetodatabse", it.toString())
             }
     }
 
@@ -262,10 +273,10 @@ class RepositoryFirebase(
 
     //Funktion zur Abfrage der aktuellen Inserate der ganzen Community
     fun countAdvertises() {
+
         //und eine Reference setzten in der Kategorie objectsOnline
-        val ref = database.getReference("objectsOnline")
-        ref.get().addOnSuccessListener {
-            _countAdvertises.postValue("Anzahl aller Inserate ${it.childrenCount}")
+        fireStoreDatabase.collection("objectsOnline").get().addOnSuccessListener {
+            _countAdvertises.postValue("Anzahl aller Inserate ${it.size()}")
         }
     }
 
@@ -276,37 +287,32 @@ class RepositoryFirebase(
     val allMyAdvertises: LiveData<List<Advertisement>>
         get() = _allMyAdvertises
 
-    //Prüfen aller Inserate welche von dem eingeloggten User gerade online sind
+    //Prüfen aller Inserate welche von dem eingeloggten User gerade online sind und anzeigen
     fun checkDatabaseForMyAds() {
         //Leere Liste für die Advertises
         val advertise: MutableList<Advertisement> = mutableListOf()
         //und eine Reference setzten in der Kategorie objectsOnline
-        val ref = database.getReference("objectsOnline")
-        //Log.d("Firebase Repo Data", "Reference $ref")
-        //bekomme einen SuccessListener für jeden ....
-        ref.get().addOnSuccessListener {
-            //Log.d("Firebase Repo Data", "Success $it")
-            //For Schleife also für jedes children in der Datenbank...
-            for (snapshot in it.children) {
-                //Log.d("Firebase Repo Data Schleife", "Alle id´s ${snapshot.child("objectId").value}")
-                //Füge dieses ausgelesene der advertise Lise hinzu
-                advertise.add(Advertisement(snapshot))
-                //filtere die Liste nach der UserId und füge die in Übereinstimmung der neuen Liste hinzu
-                val filteredAds = advertise.filter { myAds ->
-                    //vergleiche die Ids
-                    myAds.userId == uId.value
+        fireStoreDatabase.collection("objectsOnline")
+            .get().addOnSuccessListener {
+                it.documents.forEach { doc ->
+                    //Füge dieses ausgelesene der advertise Lise hinzu
+                    advertise.add(Advertisement(doc))
+                    //filtere die Liste nach der UserId und füge die in Übereinstimmung der neuen Liste hinzu
+                    val filteredAds = advertise.filter { myAds ->
+                        //vergleiche die Ids
+                        myAds.userId == uId.value
+                    }
+                    //die gefilterte Liste mit dem Live Data setzen
+                    _allMyAdvertises.value = filteredAds
+                    //  Log.d("Firebase Repo Data Schleife", "Alle id´s ${allAdvertises.value}")
                 }
-                //die gefilterte Liste mit dem Live Data setzen
-                _allMyAdvertises.value = filteredAds
-                //  Log.d("Firebase Repo Data Schleife", "Alle id´s ${allAdvertises.value}")
+            }.addOnFailureListener {
+                //Log.d("Firebase Repo Data", "Error $it")
             }
-        }.addOnFailureListener {
-            //Log.d("Firebase Repo Data", "Error $it")
-        }
     }
 
-//Falls der User neu ist, zeige den Dialog für die Datenerfassung===================================
-    fun checkUserDataComplete(uId: String) : Task<String>{
+    //Falls der User neu ist, zeige den Dialog für die Datenerfassung===================================
+    fun checkUserDataComplete(uId: String): Task<String> {
         val completionSource = TaskCompletionSource<String>()
         //Abfrage Firestore
         fireStoreDatabase.collection("user")
@@ -320,7 +326,7 @@ class RepositoryFirebase(
                 if (task.isSuccessful) {
                     //Resultat der Abfrage
                     val document = task.result
-                    Log.d("success Home", "uId $uId task result ${task.result}")
+                   // Log.d("success Home", "uId $uId task result ${task.result}")
                     //wenn diese Id bzw. dieses Document NICHT existiert
                     if (!document.exists()) {
                         // dann zeige den Dialog für die User Daten vervollständigung

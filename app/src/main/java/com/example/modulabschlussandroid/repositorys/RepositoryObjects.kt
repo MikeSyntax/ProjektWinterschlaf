@@ -1,6 +1,7 @@
 package com.example.modulabschlussandroid.repositorys
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -48,6 +49,17 @@ class RepositoryObjects(
     val zipObjects: LiveData<List<Objects>?>
         get() = _zipObjects
 
+
+//Funktion um Bilder in das Firebase Storage hochzuladen=====================================================
+    fun uploadImagetoStorage(uri: Uri){
+       firebaseRepository.uploadImagetoStorage(uri)
+    }
+
+//Funktion um den User nach Änderungen upzudaten====================================================
+    fun updateUser(user: PersonalData){
+       firebaseRepository.updateUser(user)
+    }
+
 //Firebase Firestore Userdaten (Name Adresse Benutzer usw.==========================================
 
     //Verbindung zum Firebase Repository
@@ -69,6 +81,7 @@ class RepositoryObjects(
     fun currentAppUserLogged(){
         firebaseRepository.currentAppUserLogged()
     }
+
 
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
     fun updateCurrentUserFromFirestore() {
@@ -100,7 +113,7 @@ class RepositoryObjects(
     //Funktion um den aktuellen User anhand seiner Id zu identifizieren aus der Authentication
     fun showCurrentUserId(){
        firebaseRepository.showCurrentUserId()
-        Log.d("Repo Objects", "User Id ${uId.value}")
+       // Log.d("Repo Objects", "User Id ${uId.value}")
 
     }
 

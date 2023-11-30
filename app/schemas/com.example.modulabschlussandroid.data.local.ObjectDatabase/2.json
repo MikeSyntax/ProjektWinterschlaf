@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "701612cd3fe644f72047518e319936d1",
+    "identityHash": "efe9815c76f0e0593c1bd3afeb97cbf7",
     "entities": [
       {
         "tableName": "Objects",
@@ -224,7 +224,7 @@
       },
       {
         "tableName": "PersonalData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT, `countInsertedItems` TEXT, `itemsDone` TEXT, `name` TEXT, `preName` TEXT, `registered` TEXT, `streetName` TEXT, `streetNumber` TEXT, `telNumber` TEXT, `userName` TEXT, `zipCode` TEXT, `showTelNumber` INTEGER NOT NULL, `showStreet` INTEGER NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT, `countInsertedItems` TEXT, `itemsDone` TEXT, `name` TEXT, `preName` TEXT, `registered` TEXT, `streetName` TEXT, `streetNumber` TEXT, `telNumber` TEXT, `userName` TEXT, `zipCode` TEXT, `profileImage` TEXT, `showTelNumber` INTEGER NOT NULL, `showStreet` INTEGER NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
         "fields": [
           {
             "fieldPath": "userId",
@@ -299,6 +299,12 @@
             "notNull": false
           },
           {
+            "fieldPath": "profileImage",
+            "columnName": "profileImage",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "showTelNumber",
             "columnName": "showTelNumber",
             "affinity": "INTEGER",
@@ -330,7 +336,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '701612cd3fe644f72047518e319936d1')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'efe9815c76f0e0593c1bd3afeb97cbf7')"
     ]
   }
 }

@@ -99,4 +99,7 @@ dependencies {
 
     //Longitude und Latitude
     implementation("com.google.android.gms:play-services-location:19.0.1")
+
+    //Von externen Links Bilder setzen
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

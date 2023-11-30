@@ -1,6 +1,6 @@
 package com.example.modulabschlussandroid.data.datamodels
 
-import com.google.firebase.database.DataSnapshot
+import com.google.firebase.firestore.DocumentSnapshot
 
 data class Advertisement(
 
@@ -31,13 +31,13 @@ data class Advertisement(
 
 
 ) {
-    constructor(dataSnapshot: DataSnapshot) : this() {
-        objectId = dataSnapshot.child("objectId").value.toString()
-        zipCode = dataSnapshot.child("zipCode").value.toString()
-        city = dataSnapshot.child("city").value.toString()
-        title = dataSnapshot.child("title").value.toString()
-        userId = dataSnapshot.child("userId").value.toString()
-        description = dataSnapshot.child("description").value.toString()
-        price = dataSnapshot.child("price").value.toString()
+    constructor(dataSnapshot: DocumentSnapshot) : this() {
+        objectId = dataSnapshot["objectId"].toString()
+        zipCode = dataSnapshot["zipCode"].toString()
+        city = dataSnapshot["city"].toString()
+        title = dataSnapshot["title"].toString()
+        userId = dataSnapshot["userId"].toString()
+        description = dataSnapshot["description"].toString()
+        price = dataSnapshot["price"].toString()
     }
 }

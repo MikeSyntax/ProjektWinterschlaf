@@ -2,6 +2,7 @@ package com.example.modulabschlussandroid.viewmodels
 
 import android.app.Application
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -106,7 +107,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Für die Suche auf der Home wird hier der Text aus dem LiveData übergeben
     fun updateInputText(text: String) {
         viewModelScope.launch {
-        _inputText.value = text
+            _inputText.value = text
         }
     }
 
@@ -117,80 +118,101 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-//NEU Update der aktuellen User Id  TODO!!!!!!!!!
-    fun showCurrentUserId(){
-    viewModelScope.launch {
-        repository.showCurrentUserId()
-    Log.d("viewModel", "User Id ${uId.value}")
-    }
-    }
-
-    //Neuer User muss erst seine Benutzerdaten eingeben
-    fun newUserDataFirstSignIn(personalData: PersonalData){
+//Funktion um Bilder in das Firebase Storage hochzuladen============================================
+    fun uploadImagetoStorage(uri: Uri) {
         viewModelScope.launch {
-        //Aufruf der Funktion einen neuen User anzulegen
-        repository.newUserDataFirstSignIn(personalData)
+            repository.uploadImagetoStorage(uri)
         }
     }
 
-//NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
-    fun updateCurrentUserFromFirestore(){
-    viewModelScope.launch {
-        repository.updateCurrentUserFromFirestore()
+//Funktion um den User nach Änderungen upzudaten====================================================
+    fun updateUser(user: PersonalData) {
+        viewModelScope.launch {
+        repository.updateUser(user)
+        }
     }
+
+    //NEU Update der aktuellen User Id  TODO!!!!!!!!!
+    fun showCurrentUserId() {
+        viewModelScope.launch {
+            repository.showCurrentUserId()
+            Log.d("viewModel", "User Id ${uId.value}")
+        }
     }
+
+    //Neuer User muss erst seine Benutzerdaten eingeben
+    fun newUserDataFirstSignIn(personalData: PersonalData) {
+        viewModelScope.launch {
+            //Aufruf der Funktion einen neuen User anzulegen
+            repository.newUserDataFirstSignIn(personalData)
+        }
+    }
+
+
+    //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
+    fun updateCurrentUserFromFirestore() {
+        viewModelScope.launch {
+            repository.updateCurrentUserFromFirestore()
+        }
+    }
+
 
     fun login(email: String, password: String, context: Context): Task<String> {
-       return repository.login(email, password, context)
+        return repository.login(email, password, context)
     }
 
-    fun register(email: String, password: String, passConfirmation: String, context: Context): Task<String> {
-        return repository.register(email,password,passConfirmation,context)
+    fun register(
+        email: String,
+        password: String,
+        passConfirmation: String,
+        context: Context
+    ): Task<String> {
+        return repository.register(email, password, passConfirmation, context)
     }
 
     //Ausloggen des aktuellen Users
-    fun signOutUser(){
+    fun signOutUser() {
         viewModelScope.launch {
-        //Ausloggen
-        repository.signOutUser()
+            //Ausloggen
+            repository.signOutUser()
         }
     }
 
     //Inserieren eines neuen Advertisments (Objekt)
     fun saveItemToDatabase(advertisement: Advertisement) {
         viewModelScope.launch {
-        repository.saveItemToDatabase(advertisement)
+            repository.saveItemToDatabase(advertisement)
         }
     }
 
 
-    fun checkUserDateComplete(uId: String) :Task<String>{
+    fun checkUserDateComplete(uId: String): Task<String> {
         return repository.checkUserDataComplete(uId)
     }
 
     //Counter für alle Anzeigen online==================================================================
 
     //Anzahl meiner bisheriger Anzeigen erhöhen
-    fun addCounterForAdvertises(personalData: PersonalData){
+    fun addCounterForAdvertises(personalData: PersonalData) {
         viewModelScope.launch {
-        repository.addCounterForAdvertises(personalData)
+            repository.addCounterForAdvertises(personalData)
         }
     }
 
     //Zählen meiner jetzigen Inserate, die online sind
     val countAdvertises = repository.countAdvertises
-    fun countAdvertises(){
+    fun countAdvertises() {
         viewModelScope.launch {
-        repository.countAdvertises()
+            repository.countAdvertises()
         }
     }
 
     //Zählen aller Inserate die von dem eingeloggten User gerade online sind
     //Auslesen der Datenbank von Firebase
     val allMyAdvertises = repository.allMyAdvertises
-    fun checkDatabaseForMyAds(){
+    fun checkDatabaseForMyAds() {
         viewModelScope.launch {
-        repository.checkDatabaseForMyAds()
+            repository.checkDatabaseForMyAds()
         }
     }
 
@@ -198,7 +220,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     var currentAppUser = repository.currentAppUser
 
     //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData
-    fun currentAppUserLogged(){
+    fun currentAppUserLogged() {
         repository.currentAppUserLogged()
     }
 
