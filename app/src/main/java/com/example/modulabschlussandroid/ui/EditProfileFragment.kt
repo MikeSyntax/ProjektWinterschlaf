@@ -1,10 +1,15 @@
 package com.example.modulabschlussandroid.ui
 
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.registerForActivityResult
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -19,6 +24,20 @@ class EditProfileFragment : Fragment() {
     private val viewModel: ViewModelObjects by activityViewModels()
 
     private lateinit var personalData: PersonalData
+
+    private lateinit var imageUri: Uri
+
+    private val imagePicker = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) {
+        binding.ivProfileImage.setImageURI(it)
+        if (it != null) {
+            imageUri = it
+            Log.d("editProfile", "imageUri = $imageUri oder it $it")
+            viewModel.uploadImagetoStorage(it)
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,10 +86,19 @@ class EditProfileFragment : Fragment() {
             personalData.streetName = binding.tvStreetname.text.toString()
             personalData.streetNumber = binding.tvStreetnumber.text.toString()
             personalData.telNumber = binding.tvPhoneNumber.text.toString()
+            personalData.profileImage = binding.ivProfileImage.setImageURI(imageUri).toString()
 
             //Aufruf der Funktion zum speichern aus dem FirebaseRepository
             viewModel.newUserDataFirstSignIn(personalData)
             findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
+        }
+
+        binding.ivProfileImage.setOnClickListener {
+            imagePicker.launch("image/*")
+        }
+
+        binding.tvChangeProfileImage.setOnClickListener {
+            imagePicker.launch("image/*")
         }
 
         binding.cvBack.setOnClickListener {

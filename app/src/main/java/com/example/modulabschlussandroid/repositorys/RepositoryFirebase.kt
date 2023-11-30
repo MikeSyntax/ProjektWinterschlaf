@@ -93,6 +93,7 @@ class RepositoryFirebase(
                     thisUser.data?.get("telNumber").toString(),
                     thisUser.data?.get("userName").toString(),
                     thisUser.data?.get("zipCode").toString(),
+                    thisUser.data?.get("profileImage").toString(),
                 )
                 //Log.d("Firebase Repo Add", "User items Done?? ${currentUser.value}")
                 // Log.e("Repo", " User Data set failed in firestore")

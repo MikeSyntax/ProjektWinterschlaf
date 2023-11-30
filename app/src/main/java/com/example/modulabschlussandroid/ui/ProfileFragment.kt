@@ -1,6 +1,7 @@
 package com.example.modulabschlussandroid.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,13 +65,14 @@ class ProfileFragment : Fragment() {
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
             binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
-          /*  //Profilfoto aus dem Storage laden
+            //Profilfoto aus dem Storage laden
             if (user.profileImage != null){
                 Glide.with(requireContext()).load(user.profileImage).into(binding.ivProfileImage)
                 //falls keins vorhanden ist nimm den Platzhalter
+                Log.d("profileFragment", "user image ${user.profileImage}")
             }else{
                 binding.ivProfileImage.setImageResource(R.drawable.projekt_winterschlaf_logo)
-            }*/
+            }
 
         }
 
