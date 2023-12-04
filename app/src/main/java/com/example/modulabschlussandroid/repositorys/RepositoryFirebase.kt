@@ -54,11 +54,11 @@ class RepositoryFirebase(
     fun uploadImagetoStorage(uri: Uri) {
         val ref = firebaseStorage.reference.child("imageProfile/${firebaseAuth.currentUser!!.uid}")
         ref.putFile(uri)
-        _currentUser.value?.copy(profileImage = uri.toString())?.let { updateUser(it) }
+        _currentUser.value?.copy(profileImage = uri.toString())?.let { saveChangesUser(it) }
     }
 
     //Funktion um den User nach Änderungen upzudaten
-    fun updateUser(personalData: PersonalData) {
+    fun saveChangesUser(personalData: PersonalData) {
         fireStoreDatabase.collection("user")
             .document(firebaseAuth.currentUser?.uid!!)
             .set(

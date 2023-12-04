@@ -126,9 +126,9 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
 //Funktion um den User nach Änderungen upzudaten====================================================
-    fun updateUser(user: PersonalData) {
+    fun saveChangesUser(user: PersonalData) {
         viewModelScope.launch {
-        repository.updateUser(user)
+        repository.saveChangesUser(user)
         }
     }
 

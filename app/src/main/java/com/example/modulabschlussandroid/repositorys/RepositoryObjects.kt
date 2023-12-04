@@ -56,8 +56,8 @@ class RepositoryObjects(
     }
 
 //Funktion um den User nach Änderungen upzudaten====================================================
-    fun updateUser(user: PersonalData){
-       firebaseRepository.updateUser(user)
+    fun saveChangesUser(user: PersonalData){
+       firebaseRepository.saveChangesUser(user)
     }
 
 //Firebase Firestore Userdaten (Name Adresse Benutzer usw.==========================================
