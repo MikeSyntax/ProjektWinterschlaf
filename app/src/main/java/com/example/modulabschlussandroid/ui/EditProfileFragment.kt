@@ -10,9 +10,12 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.registerForActivityResult
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentEditProfileBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
@@ -25,15 +28,14 @@ class EditProfileFragment : Fragment() {
 
     private lateinit var personalData: PersonalData
 
-    private lateinit var imageUri: Uri
+    private var imageUri: Uri? = null
 
     private val imagePicker = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) {
         binding.ivProfileImage.setImageURI(it)
         if (it != null) {
-            imageUri = it
-            Log.d("editProfile", "imageUri = $imageUri oder it $it")
+            imageUri = it.toString().toUri()
             viewModel.uploadImagetoStorage(it)
         }
     }
@@ -62,11 +64,32 @@ class EditProfileFragment : Fragment() {
         //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
 
-        //Zeige die aktuellen Daten des eingeloggten Users
-        val currentUser = viewModel.currentUser
-
         //Objekt der User Id erstellen
         val uId = viewModel.uId
+
+        //Zeige die aktuellen Daten des eingeloggten Users mit LiveData
+        val currentUser = viewModel.currentUser
+
+//Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore==========================
+        currentUser.observe(viewLifecycleOwner) { user ->
+            viewModel.updateCurrentUserFromFirestore()
+
+            binding.tvLastLoggedUsername.text = user.userName
+            binding.tvLastLoggedName.text = user.name
+            binding.tvLastLoggedPrename.text = user.preName
+            binding.tvLastLoggedPhoneNumber.text = user.telNumber
+            binding.tvLastLoggedStreetname.text = user.streetName
+            binding.tvLastLoggedStreetnumber.text = user.streetNumber
+            binding.tvLastLoggedZipCode.text = user.zipCode
+            binding.tvLastLoggedCity.text = user.cityName
+            //Profilfoto aus dem Storage laden
+            if (user.profileImage != null){
+                Glide.with(requireContext()).load(user.profileImage).into(binding.ivProfileImage)
+                //falls keins vorhanden ist nimm den Platzhalter
+            }else{
+                binding.ivProfileImage.setImageResource(R.drawable.projekt_winterschlaf_logo)
+            }
+        }
 
 //Mit der Firebase Database Abfrage verbunden=======================================================
 
@@ -87,7 +110,6 @@ class EditProfileFragment : Fragment() {
             personalData.streetNumber = binding.tvStreetnumber.text.toString()
             personalData.telNumber = binding.tvPhoneNumber.text.toString()
             personalData.profileImage = binding.ivProfileImage.setImageURI(imageUri).toString()
-
             //Aufruf der Funktion zum speichern aus dem FirebaseRepository
             viewModel.newUserDataFirstSignIn(personalData)
             findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())

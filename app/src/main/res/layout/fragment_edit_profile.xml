@@ -122,16 +122,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="Profilbild ändern"
-        android:textSize="14sp"
         android:textColor="@color/primary_dark_green"
-        app:layout_constraintBottom_toTopOf="@+id/ll_profile"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/llayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_profile_image"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/ll_profile"
-        android:layout_width="wrap_content"
+        android:id="@+id/llayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:orientation="vertical"
@@ -139,104 +139,277 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_profile_image">
 
-        <EditText
-            android:id="@+id/tv_logged_username"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:maxLength="20"
-            android:hint="@string/user_name"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/tv_prename"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/tv_logged_username"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="@string/user_name"
+                android:inputType="text"
+                android:maxLength="20"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_last_logged_username"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="@string/user_name"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:maxLength="20"
-            android:hint="Vorname eingeben"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/tv_name"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/tv_prename"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="Vorname eingeben"
+                android:inputType="text"
+                android:maxLength="20"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_last_logged_prename"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Vorname"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:maxLength="20"
-            android:hint="Nachname eingeben"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/tv_zipCode"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/tv_name"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="Nachname eingeben"
+                android:inputType="text"
+                android:maxLength="20"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_last_logged_name"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Nachname"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:maxLength="5"
-            android:inputType="number"
-            android:hint="Postleitzahl eingeben"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/tv_city"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/tv_zipCode"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="@string/enterzipcode"
+                android:inputType="number"
+                android:maxLength="5"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_last_logged_zipCode"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Postleitzahl"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:maxLength="25"
-            android:hint="Ortsname eingeben"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/tv_streetname"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/tv_city"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="Ortsname eingeben"
+                android:inputType="text"
+                android:maxLength="25"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_last_logged_city"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Ortsname"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:maxLength="25"
-            android:hint="Straße eingeben"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/tv_streetnumber"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+            <EditText
+                android:id="@+id/tv_streetname"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="Straße eingeben"
+                android:inputType="text"
+                android:maxLength="25"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_last_logged_streetname"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Straße"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
+            android:orientation="horizontal">
 
-            android:maxLength="4"
-            android:hint="Hausnummer eingeben"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            <EditText
+                android:id="@+id/tv_streetnumber"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="@string/enter_street_number"
+                android:inputType="text"
+                android:maxLength="4"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
 
-        <EditText
-            android:id="@+id/tv_phone_number"
-            style="@style/textSmall"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_last_logged_streetnumber"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Hausnummer"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:maxLength="20"
-            android:inputType="phone"
-            android:hint="Telefonnummer eingeben"
-            android:textColor="@color/primary_dark_green"
-            android:textStyle="italic" />
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/tv_phone_number"
+                style="@style/textSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:hint="Telefonnummer eingeben"
+                android:inputType="phone"
+                android:maxLength="20"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tv_last_logged_phone_number"
+                style="@style/textSuperSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:text="Telefonnummer"
+                android:textAlignment="textEnd"
+                android:textColor="@color/primary_dark_green"
+                android:textStyle="italic" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <com.google.android.material.divider.MaterialDivider
@@ -457,6 +630,6 @@
         android:text="@string/save"
         android:textColor="@color/primary_light_green"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/llayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,4 +32,6 @@
     <string name="input_password">Passwort eingeben</string>
     <string name="input_password_confirm">Passwort wiederholen</string>
     <string name="tv_forward">Nach Eingabe bitte rechts oben auf weiter klicken, viel Spaß</string>
+    <string name="enterzipcode">Postleitzahl eingeben</string>
+    <string name="enter_street_number">Hausnummer eingeben</string>
 </resources>

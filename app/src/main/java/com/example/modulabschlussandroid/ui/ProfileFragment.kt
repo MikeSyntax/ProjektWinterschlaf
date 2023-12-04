@@ -65,11 +65,13 @@ class ProfileFragment : Fragment() {
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
             binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
+
+
             //Profilfoto aus dem Storage laden
             if (user.profileImage != null){
                 Glide.with(requireContext()).load(user.profileImage).into(binding.ivProfileImage)
                 //falls keins vorhanden ist nimm den Platzhalter
-                Log.d("profileFragment", "user image ${user.profileImage}")
+             //   Log.d("profileFragment", "user image ${user.profileImage}")
             }else{
                 binding.ivProfileImage.setImageResource(R.drawable.projekt_winterschlaf_logo)
             }
