@@ -110,6 +110,7 @@ class EditProfileFragment : Fragment() {
             personalData.streetNumber = binding.tvStreetnumber.text.toString()
             personalData.telNumber = binding.tvPhoneNumber.text.toString()
             personalData.profileImage = binding.ivProfileImage.setImageURI(imageUri).toString()
+            Log.d("editImageUri", "imageUri ${imageUri.toString()}")
             //Aufruf der Funktion zum speichern aus dem FirebaseRepository
             viewModel.newUserDataFirstSignIn(personalData)
             findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())

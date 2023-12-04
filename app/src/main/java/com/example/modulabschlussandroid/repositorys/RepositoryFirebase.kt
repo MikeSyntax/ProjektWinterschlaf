@@ -58,15 +58,15 @@ class RepositoryFirebase(
     }
 
     //Funktion um den User nach Änderungen upzudaten
-    fun updateUser(user: PersonalData) {
+    fun updateUser(personalData: PersonalData) {
         fireStoreDatabase.collection("user")
             .document(firebaseAuth.currentUser?.uid!!)
             .set(
                 //mit der Funktion aus der der Datenklasse PersonalData!!
-                user.toFirebase()
+                personalData.toFirebase()
             ).addOnSuccessListener {
                 Log.d("fireRepo", "udateUser Profile done $it")
-                _currentUser.postValue(user)
+                _currentUser.postValue(personalData)
             }.addOnFailureListener {
                 Log.d("fireRepo", "udateUser Profile failed $it")
             }
