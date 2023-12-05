@@ -24,10 +24,4 @@ interface UserDataDao {
         @Query("DELETE FROM PersonalData WHERE userName = :userName")
         suspend fun deleteById(userName: String)
 
-        //Zeige den LoginStatus des Users
-        @Query("SELECT * FROM PersonalData WHERE loggedIn = 1")
-        fun logInStatusUser(): LiveData<PersonalData>
-
-
-
     }

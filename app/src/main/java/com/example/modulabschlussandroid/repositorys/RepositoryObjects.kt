@@ -55,11 +55,13 @@ class RepositoryObjects(
        firebaseRepository.uploadImagetoStorage(uri)
     }
 
+    /*
 //Funktion um den User nach Änderungen upzudaten====================================================
     fun saveChangesUser(user: PersonalData){
        firebaseRepository.saveChangesUser(user)
     }
 
+    */
 //Firebase Firestore Userdaten (Name Adresse Benutzer usw.==========================================
 
     //Verbindung zum Firebase Repository
@@ -88,8 +90,9 @@ class RepositoryObjects(
        firebaseRepository.updateCurrentUserFromFirestore()
     }
 
-    fun newUserDataFirstSignIn(personalData: PersonalData){
-        firebaseRepository.newUserDataFirstSignIn(personalData)
+
+    fun saveUserData(personalData: PersonalData){
+        firebaseRepository.saveUserData(personalData)
     }
 
 //Firebase Authentication User ID (integer) ========================================================

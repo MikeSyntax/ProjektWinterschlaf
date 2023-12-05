@@ -367,7 +367,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="horizontal"
-        android:padding="2dp"
+        android:padding="1dp"
         android:weightSum="5"
         app:layout_constraintTop_toBottomOf="@id/cv_price">
 

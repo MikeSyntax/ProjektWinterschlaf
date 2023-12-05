@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "efe9815c76f0e0593c1bd3afeb97cbf7",
+    "identityHash": "0baf4f8ce7fe8358a8e5d0493169098f",
     "entities": [
       {
         "tableName": "Objects",
@@ -224,7 +224,7 @@
       },
       {
         "tableName": "PersonalData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT, `countInsertedItems` TEXT, `itemsDone` TEXT, `name` TEXT, `preName` TEXT, `registered` TEXT, `streetName` TEXT, `streetNumber` TEXT, `telNumber` TEXT, `userName` TEXT, `zipCode` TEXT, `profileImage` TEXT, `showTelNumber` INTEGER NOT NULL, `showStreet` INTEGER NOT NULL, `loggedIn` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT, `itemsDone` TEXT NOT NULL, `name` TEXT, `preName` TEXT, `streetName` TEXT, `streetNumber` TEXT, `telNumber` TEXT, `userName` TEXT, `zipCode` TEXT, `profileImage` TEXT, `userDataComplete` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
         "fields": [
           {
             "fieldPath": "userId",
@@ -239,16 +239,10 @@
             "notNull": false
           },
           {
-            "fieldPath": "countInsertedItems",
-            "columnName": "countInsertedItems",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
             "fieldPath": "itemsDone",
             "columnName": "itemsDone",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "name",
@@ -259,12 +253,6 @@
           {
             "fieldPath": "preName",
             "columnName": "preName",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "registered",
-            "columnName": "registered",
             "affinity": "TEXT",
             "notNull": false
           },
@@ -305,20 +293,8 @@
             "notNull": false
           },
           {
-            "fieldPath": "showTelNumber",
-            "columnName": "showTelNumber",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "showStreet",
-            "columnName": "showStreet",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "loggedIn",
-            "columnName": "loggedIn",
+            "fieldPath": "userDataComplete",
+            "columnName": "userDataComplete",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -336,7 +312,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'efe9815c76f0e0593c1bd3afeb97cbf7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0baf4f8ce7fe8358a8e5d0493169098f')"
     ]
   }
 }

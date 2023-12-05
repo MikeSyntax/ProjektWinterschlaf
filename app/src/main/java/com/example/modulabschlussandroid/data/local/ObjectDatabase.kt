@@ -40,7 +40,7 @@ abstract class ObjectDatabase: RoomDatabase(){
                         "Objects"
                     )
                         //Hier wird die komplette Datenbank zurückgesetzt, falls sich in der Struktur etwas verändert hat
-                       .fallbackToDestructiveMigration()
+                      // .fallbackToDestructiveMigration()
                         .build()
                 }
                 return INSTANCE

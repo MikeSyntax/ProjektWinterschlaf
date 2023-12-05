@@ -26,20 +26,14 @@ class EditProfileFragment : Fragment() {
 
     private val viewModel: ViewModelObjects by activityViewModels()
 
-    private lateinit var personalData: PersonalData
-
-    private var imageUri: Uri? = null
-
     private val imagePicker = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) {
         binding.ivProfileImage.setImageURI(it)
         if (it != null) {
-            imageUri = it.toString().toUri()
             viewModel.uploadImagetoStorage(it)
         }
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,19 +47,10 @@ class EditProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Objekt der personal Data erstellen
-        personalData = PersonalData()
-
-        //NEU Zeige die aktuelle Id des eingeloggten Users
-        viewModel.showCurrentUserId()
-
 //Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
 
         //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
-
-        //Objekt der User Id erstellen
-        val uId = viewModel.uId
 
         //Zeige die aktuellen Daten des eingeloggten Users mit LiveData
         val currentUser = viewModel.currentUser
@@ -82,37 +67,63 @@ class EditProfileFragment : Fragment() {
             binding.tvLastLoggedStreetnumber.text = user.streetNumber
             binding.tvLastLoggedZipCode.text = user.zipCode
             binding.tvLastLoggedCity.text = user.cityName
+
             //Profilfoto aus dem Storage laden
-            if (user.profileImage != null){
-                Glide.with(requireContext()).load(user.profileImage).into(binding.ivProfileImage)
-                //falls keins vorhanden ist nimm den Platzhalter
-            }else{
-                binding.ivProfileImage.setImageResource(R.drawable.projekt_winterschlaf_logo)
-            }
+            Glide.with(requireContext()).load(user.profileImage)
+                .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivProfileImage)
+            //falls keins vorhanden ist nimm den Platzhalter
         }
 
 //Mit der Firebase Database Abfrage verbunden=======================================================
 
         //zum speichern der Userdaten btnSave klicken
         binding.btnSave.setOnClickListener {
-            //Aktualisieren der UserId und anzeigen
-            viewModel.showCurrentUserId()
-            //alle Edittexte werden ausgelesen und als personal Data gespeichert und im Profil Fragment angezeigt
-            personalData.userId = uId.value.toString()
-            // Log.d("editProfile", "uId ${uId.value} personalData ${personalData.userId}")
 
-            personalData.userName = binding.tvLoggedUsername.text.toString()
-            personalData.preName = binding.tvPrename.text.toString()
-            personalData.name = binding.tvName.text.toString()
-            personalData.zipCode = binding.tvZipCode.text.toString()
-            personalData.cityName = binding.tvCity.text.toString()
-            personalData.streetName = binding.tvStreetname.text.toString()
-            personalData.streetNumber = binding.tvStreetnumber.text.toString()
-            personalData.telNumber = binding.tvPhoneNumber.text.toString()
-            personalData.profileImage = binding.ivProfileImage.setImageURI(imageUri).toString()
-            Log.d("editImageUri", "imageUri ${imageUri.toString()}")
-            //Aufruf der Funktion zum speichern aus dem FirebaseRepository
-            viewModel.newUserDataFirstSignIn(personalData)
+            //erstellt ein Kopie des aktuellen Users
+            val newUser = currentUser.value?.copy()
+
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvLoggedUsername.text.isNotEmpty()) {
+                newUser?.userName = binding.tvLoggedUsername.text.toString()
+            }
+
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvPrename.text.isNotEmpty()) {
+                newUser?.preName = binding.tvPrename.text.toString()
+            }
+
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvName.text.isNotEmpty()) {
+                newUser?.name = binding.tvName.text.toString()
+            }
+
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvZipCode.text.isNotEmpty()) {
+                newUser?.zipCode = binding.tvZipCode.text.toString()
+            }
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvCity.text.isNotEmpty()) {
+                newUser?.cityName = binding.tvCity.text.toString()
+            }
+
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvStreetname.text.isNotEmpty()) {
+                newUser?.streetName = binding.tvStreetname.text.toString()
+            }
+
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvStreetnumber.text.isNotEmpty()) {
+                newUser?.streetNumber = binding.tvStreetnumber.text.toString()
+            }
+
+            //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
+            if (binding.tvPhoneNumber.text.isNotEmpty()) {
+                newUser?.telNumber = binding.tvPhoneNumber.text.toString()
+            }
+
+            //Aufruf der Funktion zum speichern im Firestore aus dem FirebaseRepository
+            viewModel.saveUserData(newUser!!)
+
             findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToProfileFragment())
         }
 

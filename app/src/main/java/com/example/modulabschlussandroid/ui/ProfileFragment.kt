@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterProfile
+import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentProfileBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import kotlinx.coroutines.delay
@@ -43,9 +44,6 @@ class ProfileFragment : Fragment() {
 
 //Übergabe und Ermittlung des aktuellen User =======================================================
 
-        //Zeige die aktuelle Id des eingeloggten Users
-        viewModel.showCurrentUserId()
-
         //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
 
@@ -66,15 +64,10 @@ class ProfileFragment : Fragment() {
             binding.tvUserCity.text = user.cityName
             binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
 
-
             //Profilfoto aus dem Storage laden
-            if (user.profileImage != null){
-                Glide.with(requireContext()).load(user.profileImage).into(binding.ivProfileImage)
-                //falls keins vorhanden ist nimm den Platzhalter
-             //   Log.d("profileFragment", "user image ${user.profileImage}")
-            }else{
-                binding.ivProfileImage.setImageResource(R.drawable.projekt_winterschlaf_logo)
-            }
+            Glide.with(requireContext()).load(user.profileImage)
+                .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivProfileImage)
+            //falls keins vorhanden ist nimm den Platzhalter
 
         }
 

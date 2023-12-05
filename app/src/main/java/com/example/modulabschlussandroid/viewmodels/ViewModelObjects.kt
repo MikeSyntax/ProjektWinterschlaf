@@ -125,13 +125,6 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-//Funktion um den User nach Änderungen upzudaten====================================================
-    fun saveChangesUser(user: PersonalData) {
-        viewModelScope.launch {
-        repository.saveChangesUser(user)
-        }
-    }
-
     //NEU Update der aktuellen User Id  TODO!!!!!!!!!
     fun showCurrentUserId() {
         viewModelScope.launch {
@@ -141,13 +134,12 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
     //Neuer User muss erst seine Benutzerdaten eingeben
-    fun newUserDataFirstSignIn(personalData: PersonalData) {
+    fun saveUserData(personalData: PersonalData) {
         viewModelScope.launch {
             //Aufruf der Funktion einen neuen User anzulegen
-            repository.newUserDataFirstSignIn(personalData)
+            repository.saveUserData(personalData)
         }
     }
-
 
     //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
     fun updateCurrentUserFromFirestore() {

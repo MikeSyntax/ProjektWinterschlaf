@@ -40,7 +40,7 @@ class InsertFragment : Fragment() {
 
     private lateinit var advertisement: Advertisement
 
-    private lateinit var personalData: PersonalData
+   // private lateinit var personalData: PersonalData
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,25 +62,17 @@ class InsertFragment : Fragment() {
         //Erstellen eines Objektes der MyObject Klasse für die Firebase Datenbank mit den abrufbaren Objekten
         advertisement = Advertisement()
         //Erstellen eines Objektes der PersonalData Klasse
-        personalData = PersonalData()
-
+        //personalData = PersonalData()
+        val currentUser = viewModel.currentUser
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
-
             showCategorieDialog()
         }
 //Übergabe der Uid als Parameter um die Postleitzahl unter Uid des Users zu speichern===============
         binding.cvZipCode.setOnClickListener {
-     //       val tvZip = binding.editZipCode.text.toString()
-            showZipCodeDialog(/*tvZip*/)
+            showZipCodeDialog()
         }
-/*
-        val textMessage: TextView = if (tvZip.text.isNotEmpty()){
-            tvZip
-        }else {
-            zipCodeDialog.findViewById(R.id.edit_text_zipcode)
-        }*/
 
 //Übergabe der Uid als Parameter um die Stadt unter Uid des Users zu speichern======================
         binding.cvCity.setOnClickListener {
@@ -102,10 +94,6 @@ class InsertFragment : Fragment() {
             showPriceDialog()
         }
 
-
-
-
-
 //Inserieren eines neuen Advertisements bzw. einer neuen Anzeige ===================================
         binding.btnFloatingAction.setOnClickListener {
             //Auslesen der Eingabefelder ( die Switches der Kategoriefelder, werden in der nächsten Funktion gesetzt
@@ -118,7 +106,7 @@ class InsertFragment : Fragment() {
             advertisement.price = binding.editPrice.text.toString()
 
             //Aufruf der Funktion für den Counter aller Inserate +1 also 2+1 = bisherige Inserate3
-            viewModel.addCounterForAdvertises(personalData)
+            viewModel.addCounterForAdvertises(currentUser.value!!)
 
             //Aufruf der Funktion aus dem Firebase Repository
             viewModel.saveItemToDatabase(advertisement)
