@@ -30,7 +30,6 @@ class EditProfileFragment : Fragment() {
         ActivityResultContracts.GetContent()
     ) {
         binding.ivProfileImage.setImageURI(it)
-        Log.d("edit", "imageUri $it")
         if (it != null) {
             viewModel.uploadImagetoStorage(it)
         }
