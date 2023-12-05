@@ -30,6 +30,7 @@ class EditProfileFragment : Fragment() {
         ActivityResultContracts.GetContent()
     ) {
         binding.ivProfileImage.setImageURI(it)
+        Log.d("edit", "imageUri $it")
         if (it != null) {
             viewModel.uploadImagetoStorage(it)
         }
@@ -57,7 +58,6 @@ class EditProfileFragment : Fragment() {
 
 //Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore==========================
         currentUser.observe(viewLifecycleOwner) { user ->
-            viewModel.updateCurrentUserFromFirestore()
 
             binding.tvLastLoggedUsername.text = user.userName
             binding.tvLastLoggedName.text = user.name
@@ -68,10 +68,10 @@ class EditProfileFragment : Fragment() {
             binding.tvLastLoggedZipCode.text = user.zipCode
             binding.tvLastLoggedCity.text = user.cityName
 
-          /*  //Profilfoto aus dem Storage laden
+            //Profilfoto aus dem Storage laden
             Glide.with(requireContext()).load(user.profileImage)
+            //falls keins vorhanden ist nimm den Platzhalter
                 .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivProfileImage)
-            //falls keins vorhanden ist nimm den Platzhalter*/
         }
 
 //Mit der Firebase Database Abfrage verbunden=======================================================
@@ -82,7 +82,7 @@ class EditProfileFragment : Fragment() {
             //erstellt ein Kopie des aktuellen Users
             val newUser = currentUser.value?.copy()
 
-            if (newUser?.itemsDone == null){
+            if (newUser?.itemsDone == "null" || newUser?.itemsDone == null){
                 newUser?.itemsDone = "0"
             }
 

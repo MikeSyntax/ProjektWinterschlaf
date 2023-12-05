@@ -42,6 +42,10 @@ class ReadyLoginFragment() : Fragment() {
             }
         }
 
+        binding.cvBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         //Registrieren
         binding.tvPleaseRegister.setOnClickListener {
             val navController = findNavController()

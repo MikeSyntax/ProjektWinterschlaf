@@ -24,7 +24,7 @@ class AdapterProfile(
     }
 
     override fun getItemCount(): Int {
-        Log.d("adapter", "Dataset size ${dataset.size}")
+      //  Log.d("adapter", "Dataset size ${dataset.size}")
         return dataset.size
     }
 
@@ -43,6 +43,6 @@ class AdapterProfile(
     fun update(list: List<Advertisement>){
         dataset = list
         notifyDataSetChanged()
-        Log.d("adapter", "Dataset new size ${dataset.size}")
+      //  Log.d("adapter", "Dataset new size ${dataset.size}")
     }
 }

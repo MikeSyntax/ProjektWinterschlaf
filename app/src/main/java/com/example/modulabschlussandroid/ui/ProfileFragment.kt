@@ -45,14 +45,12 @@ class ProfileFragment : Fragment() {
 
         //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
-        binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${if(viewModel.currentUser.value?.itemsDone == null) 0 else viewModel.currentUser.value?.itemsDone}"
 
         //Zeige die aktuellen Daten des eingeloggten Users mit LiveData
         val currentUser = viewModel.currentUser
 
 //Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore==========================
         currentUser.observe(viewLifecycleOwner) { user ->
-            viewModel.updateCurrentUserFromFirestore()
 
             binding.tvLoggedUsername.text = user.userName
             binding.tvUserRealName.text = user.name
@@ -62,7 +60,7 @@ class ProfileFragment : Fragment() {
             binding.tvUserStreetNumber.text = user.streetNumber
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
-            binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${if(user.itemsDone == null) 0 else user.itemsDone}"
+            binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
             Log.d("profil", "itemsDone ${user.itemsDone} ")
            //Profilfoto aus dem Storage laden
             Glide.with(requireContext()).load(user.profileImage)
