@@ -11,7 +11,7 @@ data class PersonalData(
     @PrimaryKey(autoGenerate = false)
     var userId: String = "",
     var cityName: String? = null,
-    var itemsDone: String = "0",
+    var itemsDone: String? = null,
     var name: String? = null,
     var preName: String? = null,
     var streetName: String? = null,

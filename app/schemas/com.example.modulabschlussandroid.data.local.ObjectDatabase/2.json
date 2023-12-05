@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "0baf4f8ce7fe8358a8e5d0493169098f",
+    "identityHash": "e00c78c7370acb4eace54bebde0d30c5",
     "entities": [
       {
         "tableName": "Objects",
@@ -224,7 +224,7 @@
       },
       {
         "tableName": "PersonalData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT, `itemsDone` TEXT NOT NULL, `name` TEXT, `preName` TEXT, `streetName` TEXT, `streetNumber` TEXT, `telNumber` TEXT, `userName` TEXT, `zipCode` TEXT, `profileImage` TEXT, `userDataComplete` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` TEXT NOT NULL, `cityName` TEXT, `itemsDone` TEXT, `name` TEXT, `preName` TEXT, `streetName` TEXT, `streetNumber` TEXT, `telNumber` TEXT, `userName` TEXT, `zipCode` TEXT, `profileImage` TEXT, `userDataComplete` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
         "fields": [
           {
             "fieldPath": "userId",
@@ -242,7 +242,7 @@
             "fieldPath": "itemsDone",
             "columnName": "itemsDone",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "name",
@@ -312,7 +312,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0baf4f8ce7fe8358a8e5d0493169098f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'e00c78c7370acb4eace54bebde0d30c5')"
     ]
   }
 }

@@ -68,10 +68,10 @@ class EditProfileFragment : Fragment() {
             binding.tvLastLoggedZipCode.text = user.zipCode
             binding.tvLastLoggedCity.text = user.cityName
 
-            //Profilfoto aus dem Storage laden
+          /*  //Profilfoto aus dem Storage laden
             Glide.with(requireContext()).load(user.profileImage)
                 .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivProfileImage)
-            //falls keins vorhanden ist nimm den Platzhalter
+            //falls keins vorhanden ist nimm den Platzhalter*/
         }
 
 //Mit der Firebase Database Abfrage verbunden=======================================================
@@ -81,6 +81,10 @@ class EditProfileFragment : Fragment() {
 
             //erstellt ein Kopie des aktuellen Users
             val newUser = currentUser.value?.copy()
+
+            if (newUser?.itemsDone == null){
+                newUser?.itemsDone = "0"
+            }
 
             //Wenn das Eingabefeld leer bleibt, dann übernimm die alte Angabe aus dem Last Feld in das Editfeld
             if (binding.tvLoggedUsername.text.isNotEmpty()) {

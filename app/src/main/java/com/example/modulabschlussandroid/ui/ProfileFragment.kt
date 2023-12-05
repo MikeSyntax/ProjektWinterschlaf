@@ -41,11 +41,11 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 //Übergabe und Ermittlung des aktuellen User =======================================================
 
         //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
+        binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${if(viewModel.currentUser.value?.itemsDone == null) 0 else viewModel.currentUser.value?.itemsDone}"
 
         //Zeige die aktuellen Daten des eingeloggten Users mit LiveData
         val currentUser = viewModel.currentUser
@@ -62,9 +62,9 @@ class ProfileFragment : Fragment() {
             binding.tvUserStreetNumber.text = user.streetNumber
             binding.tvUserZipCode.text = user.zipCode
             binding.tvUserCity.text = user.cityName
-            binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${user.itemsDone}"
-
-            //Profilfoto aus dem Storage laden
+            binding.tvUserItemsDone.text = "Meine bisherigen Inserate ${if(user.itemsDone == null) 0 else user.itemsDone}"
+            Log.d("profil", "itemsDone ${user.itemsDone} ")
+           //Profilfoto aus dem Storage laden
             Glide.with(requireContext()).load(user.profileImage)
                 .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivProfileImage)
             //falls keins vorhanden ist nimm den Platzhalter

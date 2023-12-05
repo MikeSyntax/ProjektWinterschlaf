@@ -91,7 +91,7 @@ class RepositoryFirebase(
                 .addOnSuccessListener { documentSnapshot ->
                     // Überprüfe, ob das Dokument Daten enthält und das itemsDone-Feld existiert
                     if (documentSnapshot.exists() && documentSnapshot.contains("itemsDone")) {
-                        val currentCount = documentSnapshot["itemsDone"].toString().toInt()
+                        val currentCount = documentSnapshot["itemsDone"].toString().toIntOrNull()?:0
 
                         // Addiere die Anzahl für jedes weitere Inserat
                         val countSize = currentCount + 1
@@ -185,9 +185,9 @@ class RepositoryFirebase(
                 firebaseAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            val personalData = PersonalData()
+                          /*  val personalData = PersonalData()
                             personalData.userId = it.result.user!!.uid
-                            saveUserData(personalData)
+                            saveUserData(personalData)*/
                             completionSource.setResult("success")
                         } else {
                             Toast.makeText(
@@ -309,6 +309,7 @@ class RepositoryFirebase(
                    // Log.d("success Home", "uId $uId task result ${task.result}")
                     //wenn diese Id bzw. dieses Document NICHT existiert
                     if (!document.exists()) {
+                   //     if (document.getBoolean("userDataComplete") == false) {
                         // dann zeige den Dialog für die User Daten vervollständigung
                         //showNewUserDialog()
                         completionSource.setResult("not existing")
