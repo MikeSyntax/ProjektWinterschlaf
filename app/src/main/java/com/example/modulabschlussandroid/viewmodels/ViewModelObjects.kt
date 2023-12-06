@@ -96,25 +96,14 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-    //Insert eines bestimmten Objektes mit allen Daten
-    fun insertObject(objects: Objects) {
-        viewModelScope.launch {
-            repository.insertObject(objects)
-        }
-    }
-
     //Anzeige des aktuellen Objektes (Room)
     fun setCurrentObject(objects: Objects) {
-        viewModelScope.launch {
-            _currentObject.postValue(objects)
-        }
+            _currentObject.value = objects
     }
 
     //Anzeigen des aktuellen Advertisments (Firebase)
     fun setCurrentAdvertisment(advertisement: Advertisement){
-        viewModelScope.launch {
-            _currentAdvertisment.postValue(advertisement)
-        }
+            _currentAdvertisment.value = advertisement
     }
 
     //Für die Suche auf der Home wird hier der Text aus dem LiveData übergeben
