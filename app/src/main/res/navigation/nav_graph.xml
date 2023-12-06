@@ -103,6 +103,9 @@
         <action
             android:id="@+id/action_detailFragment_to_insertFragment"
             app:destination="@id/insertFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_profileFragment2"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -142,6 +145,9 @@
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
     <fragment
         android:id="@+id/insertFragment"

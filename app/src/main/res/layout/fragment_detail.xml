@@ -100,6 +100,7 @@
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:backgroundTint="@color/primary_light_green"
+        android:scrollbars="vertical"
         app:cardCornerRadius="10dp"
         app:cardElevation="5dp"
         app:layout_constraintBottom_toTopOf="@+id/materialDividerBottom"
@@ -113,6 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -206,15 +208,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="5dp">
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_distance"
-                        android:layout_marginLeft="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
                         android:layout_weight="30"
                         android:text="Koordinaten" />
 
@@ -228,10 +230,10 @@
 
                     <TextView
                         android:id="@+id/tv_longitude"
-                        android:layout_marginRight="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
                         android:layout_weight="30"
                         android:text="Longitude" />
 
@@ -241,31 +243,29 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="0dp">
+                    android:layout_margin="0dp"
+                    android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_get_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        app:cornerRadius="10dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="100"
+                        android:text="Entfernung anzeigen"
                         android:textColor="@color/primary_light_green"
-                        android:text="Entfernung anzeigen"/>
-
+                        app:cornerRadius="10dp" />
 
 
                 </LinearLayout>
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
                     android:layout_weight="10"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -277,53 +277,91 @@
                         android:orientation="vertical">
 
 
-                    <TextView
-                        android:id="@+id/tv_detail_description"
-                        style="@style/textSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:layout_margin="10dp"
-                        android:layout_marginStart="3dp"
-                        android:text="Description" />
-
                         <ImageView
                             android:id="@+id/iv_in_bigsize"
                             android:layout_width="match_parent"
                             android:layout_height="250dp"
-                            android:layout_margin="10dp"
-                            android:src="@drawable/lagerhalle"/>
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/lagerhalle" />
+
+                        <TextView
+                            android:id="@+id/tv_detail_description"
+                            style="@style/textSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:text="Description" />
+
+                        <com.google.android.material.divider.MaterialDivider
+                            android:id="@+id/materialDividerMiddle"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            app:dividerColor="@color/primary_dark_green"
+                            app:layout_constraintBottom_toBottomOf="@+id/toolbar"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="10dp"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <ImageButton
+                                android:id="@+id/iv_detail_liked"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/primary_light_green"
+                                android:src="@drawable/star_unlike" />
+
+                            <ImageButton
+                                android:id="@+id/iv_detail_delete"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/primary_light_green"
+                                android:src="@drawable/delete" />
+
+
+                            <TextView
+                                android:id="@+id/tv_ads_user_name"
+                                style="@style/textSuperSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/primary_light_green"
+                                android:src="@drawable/projekt_winterschlaf_logo"
+                                android:text="Anbieter"
+                                android:textColor="@color/primary_dark_green" />
+
+                            <ImageView
+                                android:id="@+id/iv_user"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/primary_light_green"
+                                android:src="@drawable/projekt_winterschlaf_logo" />
+
+                        </LinearLayout>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_message"
+                            style="@style/textSmall"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:text="Schreibe eine Nachricht"
+                            android:textColor="@color/primary_light_green"
+                            app:cornerRadius="10dp" />
 
                     </LinearLayout>
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="30dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_gravity="end">
-
-                        <ImageButton
-                            android:id="@+id/iv_detail_liked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:backgroundTint="@color/primary_light_green"
-                            android:src="@drawable/star_unlike"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageButton
-                            android:id="@+id/iv_detail_delete"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="1dp"
-                            android:backgroundTint="@color/primary_light_green"
-                            android:src="@drawable/delete"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
 
@@ -527,8 +565,8 @@
                             android:text=" Profil " />
 
                     </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
 
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 

@@ -81,7 +81,7 @@ class ProfileFragment : Fragment() {
 
         //Adapter setzten und mit LiveData überwachen
         viewModel.allMyAdvertises.observe(viewLifecycleOwner) {
-            val adapter = AdapterProfile(it)
+            val adapter = AdapterProfile(it, viewModel)
             adapter.update(it)
             recView.adapter = adapter
             //Anzeige der Anzahl meiner online Inserate

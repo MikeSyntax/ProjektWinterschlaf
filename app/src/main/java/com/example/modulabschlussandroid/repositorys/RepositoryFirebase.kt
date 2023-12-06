@@ -55,13 +55,16 @@ class RepositoryFirebase(
     fun uploadImagetoStorage(uri: Uri) {
         val ref = firebaseStorage.reference.child("imageProfile/${firebaseAuth.currentUser!!.uid}")
         ref.putFile(uri).addOnSuccessListener { Task ->
-          //  val imageUri =
-               // "https://firebasestorage.googleapis.com/v0/b/modulabschlussandroid.appspot.com/o/imageProfile%2F${currentUser.value?.userId}?alt=media&token=2e8d0300-933a-4bab-b763-1f650e8d9842"
-          //  Log.d("Repos", "imageUri $imageUri")
-            _currentUser.value?.copy(profileImage = /*imageUri oder*/ uri.toString())?.let { saveUserData(it) }
+            ref.downloadUrl.addOnSuccessListener { Uri ->
+                // Log.d("repositr...", "Uri $Uri")
+                if (Uri.toString() != currentUser.value?.profileImage) {
+                    _currentUser.value?.copy(profileImage = Uri.toString())
+                        .let { saveUserData(it!!) }
+                }
+            }.addOnFailureListener {
+                //     Log.d("repositr...", "Error bild nicht hochgeladen")
+            }
         }
-       // https://firebasestorage.googleapis.com/v0/b/modulabschlussandroid.appspot.com/o/imageProfile%2FHqZJsVj80FhdWHLcbN1C8tHFMSM2?alt=media&token=296952b6-3f5d-4ed1-be05-1582adcc579c
-      //  https://firebasestorage.googleapis.com/v0/b/modulabschlussandroid.appspot.com/o/imageProfile%2Fm9D2aAXhZ9MH8b8DKupcjfMFgPu1?alt=media&token=b18eae93-8efb-4916-aef6-0bb138bd59b6
     }
 
     //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen und auf der Profilseite anzuzeigen

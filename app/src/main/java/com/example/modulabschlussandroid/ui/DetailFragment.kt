@@ -55,6 +55,7 @@ class DetailFragment : Fragment() {
         fusedLocationProviderClient = LocationServices
             .getFusedLocationProviderClient(requireContext())
 
+//Observer der Room Datenbank=======================================================================
         //Observer des aktuellen angeklickten Objekts
         viewModel.currentObject.observe(viewLifecycleOwner) { thisObject ->
             //Setzen der errechneten Entfernung zwischen Start und Ziel
@@ -107,6 +108,35 @@ class DetailFragment : Fragment() {
             }
         }
 
+//Observer der Firebase Datenbank=======================================================================
+        //Observer des aktuellen angeklickten Objekts
+        viewModel.currentAdvertisement.observe(viewLifecycleOwner) { thisAdvertisment ->
+            //Setzen der errechneten Entfernung zwischen Start und Ziel
+            _textDistance.value = "Entfernung zum Ziel"
+            binding.btnGetDistance.text = textDistance.value
+            //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
+            binding.tvDetailCity.text = thisAdvertisment.city
+            binding.tvDetailDescription.text = thisAdvertisment.description
+            binding.tvDetailObject.text = thisAdvertisment.title
+            binding.tvDetailPrice.text = "${thisAdvertisment.price.toString()}€"
+            binding.tvDistance.text = "PLZ ${thisAdvertisment.zipCode}"
+
+            //Verbinden der Detailansicht mit den GeoDaten für das Ziel
+            geoObserver() //Ziel
+            //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt für den Start
+            location()  //Start
+
+            //Durch Klicken des Button wird die Entfernung zwischen beiden Koordinaten ermittelt und angezeigt
+            //Verbinden der Detailansicht mit den Distance Daten
+            binding.btnGetDistance.setOnClickListener {
+                // und die aktuellen Koordinaten werden an die zweite Api übergebenk um die Entfernung darzustellen
+                viewModel.getDistanceData("$lat1,$lon1", "$lat2,$lon2")
+                //Der in der getDistance Abfrage ermittelte Wert für die Entfernung wird ausgelesen und angezeigt
+                distanceObserver()
+            }
+        }
+
+
         //Zurück zum Homescreen
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()
@@ -114,7 +144,7 @@ class DetailFragment : Fragment() {
 
         //Zurück zum Homescreen
         binding.cvHome.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToHomeFragment())
         }
 
         //Löschen eines Eintrags in der Datenbank und zurück navigieren

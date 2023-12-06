@@ -56,10 +56,16 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     val inputText: LiveData<String>
         get() = _inputText
 
-    //Erstellen einer LivaData mit dem aktuellen Objekt
+    //Erstellen einer LivaData mit dem aktuellen Objekt (Room Datenbank)
     private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
     val currentObject: LiveData<Objects>
         get() = _currentObject
+
+    //Erstellen einer LivaData mit dem aktuellen Advertisments (Firebase Datenbank)
+    private val _currentAdvertisment: MutableLiveData<Advertisement> = MutableLiveData()
+    val currentAdvertisement: LiveData<Advertisement>
+        get() = _currentAdvertisment
+
 
     //Erste Befüllung der Datenbank
     init {
@@ -97,10 +103,17 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-    //Anzeige des aktuellen Objektes
+    //Anzeige des aktuellen Objektes (Room)
     fun setCurrentObject(objects: Objects) {
         viewModelScope.launch {
             _currentObject.postValue(objects)
+        }
+    }
+
+    //Anzeigen des aktuellen Advertisments (Firebase)
+    fun setCurrentAdvertisment(advertisement: Advertisement){
+        viewModelScope.launch {
+            _currentAdvertisment.postValue(advertisement)
         }
     }
 
