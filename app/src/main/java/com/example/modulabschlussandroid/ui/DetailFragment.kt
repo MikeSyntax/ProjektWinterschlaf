@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
@@ -58,81 +59,95 @@ class DetailFragment : Fragment() {
 //Observer der Room Datenbank=======================================================================
         //Observer des aktuellen angeklickten Objekts
         viewModel.currentObject.observe(viewLifecycleOwner) { thisObject ->
-            //Setzen der errechneten Entfernung zwischen Start und Ziel
-            _textDistance.value = "Entfernung zum Ziel"
-            binding.btnGetDistance.text = textDistance.value
-            //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
-            binding.tvDetailCity.text = thisObject.city
-            binding.tvDetailDescription.text = thisObject.description
-            binding.tvDetailObject.text = thisObject.objectdescription
-            binding.tvDetailPrice.text = "${thisObject.price.toString()}€"
-            binding.ivDetailObject1.setImageResource(thisObject.image1Resource)
-            binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
-            binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
-            binding.tvDistance.text = "PLZ ${thisObject.zipCode}"
+            if (viewModel.homeFragment) {
 
-            //Verbinden der Detailansicht mit den GeoDaten für das Ziel
-            geoObserver() //Ziel
-            //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt für den Start
-            location()  //Start
 
-            //Durch Klicken des Button wird die Entfernung zwischen beiden Koordinaten ermittelt und angezeigt
-            //Verbinden der Detailansicht mit den Distance Daten
-            binding.btnGetDistance.setOnClickListener {
-               // und die aktuellen Koordinaten werden an die zweite Api übergebenk um die Entfernung darzustellen
-                viewModel.getDistanceData("$lat1,$lon1", "$lat2,$lon2")
-                //Der in der getDistance Abfrage ermittelte Wert für die Entfernung wird ausgelesen und angezeigt
-                distanceObserver()
-            }
+                //Setzen der errechneten Entfernung zwischen Start und Ziel
+                _textDistance.value = "Entfernung zum Ziel"
+                binding.btnGetDistance.text = textDistance.value
+                //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
+                binding.tvDetailCity.text = thisObject.city
+                binding.tvDetailDescription.text = thisObject.description
+                binding.tvDetailObject.text = thisObject.objectdescription
+                binding.tvDetailPrice.text = "${thisObject.price.toString()}€"
+                binding.ivDetailObject1.setImageResource(thisObject.image1Resource)
+                binding.ivDetailObject2.setImageResource(thisObject.image2Resource)
+                binding.ivDetailObject3.setImageResource(thisObject.image3Resource)
+                binding.tvDistance.text = "PLZ ${thisObject.zipCode}"
 
-            //Hier werden die Objekte geliked und auf in der Datenbank gespeichert
-            if (thisObject.liked) {
-                binding.ivDetailLiked.setImageResource(R.drawable.star_like)
-            } else {
-                binding.ivDetailLiked.setImageResource(R.drawable.star_unlike)
-            }
+                //Verbinden der Detailansicht mit den GeoDaten für das Ziel
+                geoObserver() //Ziel
+                //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt für den Start
+                location()  //Start
 
-            binding.ivDetailLiked.setOnClickListener {
-                if (thisObject != null) {
-                    thisObject.liked = !thisObject.liked
-                    if (!thisObject.liked) {
-                        binding.ivDetailLiked.setImageResource(R.drawable.star_unlike)
-                        thisObject.liked = false
-                        viewModel.updateObjects(thisObject)
-                    } else {
-                        binding.ivDetailLiked.setImageResource(R.drawable.star_like)
-                        thisObject.liked = true
-                        viewModel.updateObjects(thisObject)
+                //Durch Klicken des Button wird die Entfernung zwischen beiden Koordinaten ermittelt und angezeigt
+                //Verbinden der Detailansicht mit den Distance Daten
+                binding.btnGetDistance.setOnClickListener {
+                    // und die aktuellen Koordinaten werden an die zweite Api übergebenk um die Entfernung darzustellen
+                    viewModel.getDistanceData("$lat1,$lon1", "$lat2,$lon2")
+                    //Der in der getDistance Abfrage ermittelte Wert für die Entfernung wird ausgelesen und angezeigt
+                    distanceObserver()
+                }
+
+                //Hier werden die Objekte geliked und auf in der Datenbank gespeichert
+                if (thisObject.liked) {
+                    binding.ivDetailLiked.setImageResource(R.drawable.star_like)
+                } else {
+                    binding.ivDetailLiked.setImageResource(R.drawable.star_unlike)
+                }
+
+                binding.ivDetailLiked.setOnClickListener {
+                    if (thisObject != null) {
+                        thisObject.liked = !thisObject.liked
+                        if (!thisObject.liked) {
+                            binding.ivDetailLiked.setImageResource(R.drawable.star_unlike)
+                            thisObject.liked = false
+                            viewModel.updateObjects(thisObject)
+                        } else {
+                            binding.ivDetailLiked.setImageResource(R.drawable.star_like)
+                            thisObject.liked = true
+                            viewModel.updateObjects(thisObject)
+                        }
                     }
                 }
             }
         }
 
-//Observer der Firebase Datenbank=======================================================================
+//Observer der Firebase Datenbank===================================================================
         //Observer des aktuellen angeklickten Objekts
         viewModel.currentAdvertisement.observe(viewLifecycleOwner) { thisAdvertisment ->
-            //Setzen der errechneten Entfernung zwischen Start und Ziel
-            _textDistance.value = "Entfernung zum Ziel"
-            binding.btnGetDistance.text = textDistance.value
-            //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
-            binding.tvDetailCity.text = thisAdvertisment.city
-            binding.tvDetailDescription.text = thisAdvertisment.description
-            binding.tvDetailObject.text = thisAdvertisment.title
-            binding.tvDetailPrice.text = "${thisAdvertisment.price.toString()}€"
-            binding.tvDistance.text = "PLZ ${thisAdvertisment.zipCode}"
+            if (!viewModel.homeFragment) {
 
-            //Verbinden der Detailansicht mit den GeoDaten für das Ziel
-            geoObserver() //Ziel
-            //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt für den Start
-            location()  //Start
 
-            //Durch Klicken des Button wird die Entfernung zwischen beiden Koordinaten ermittelt und angezeigt
-            //Verbinden der Detailansicht mit den Distance Daten
-            binding.btnGetDistance.setOnClickListener {
-                // und die aktuellen Koordinaten werden an die zweite Api übergebenk um die Entfernung darzustellen
-                viewModel.getDistanceData("$lat1,$lon1", "$lat2,$lon2")
-                //Der in der getDistance Abfrage ermittelte Wert für die Entfernung wird ausgelesen und angezeigt
-                distanceObserver()
+                //Setzen der errechneten Entfernung zwischen Start und Ziel
+                _textDistance.value = "Entfernung zum Ziel"
+                binding.btnGetDistance.text = textDistance.value
+                //Setzen der einzelnen Textfelder mit dem Inhalb der für dieses Object hinterlegten Daten
+                binding.tvDetailCity.text = thisAdvertisment.city
+                binding.tvDetailDescription.text = thisAdvertisment.description
+                binding.tvDetailObject.text = thisAdvertisment.title
+                binding.tvDetailPrice.text = "${thisAdvertisment.price.toString()}€"
+                binding.tvDistance.text = "PLZ ${thisAdvertisment.zipCode}"
+                binding.tvAdsUserName.text = "Ersteller: ${thisAdvertisment.ownerOfThisAd}"
+                //Profilfoto aus dem Storage laden
+                Glide.with(requireContext()).load(thisAdvertisment.profileImageForAd)
+                    .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivUser)
+                    Log.d("Detail", "Bild Ersteller ${thisAdvertisment.profileImageForAd}")
+                //falls keins vorhanden ist nimm den Platzhalter
+
+                //Verbinden der Detailansicht mit den GeoDaten für das Ziel
+                geoObserver() //Ziel
+                //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt für den Start
+                location()  //Start
+
+                //Durch Klicken des Button wird die Entfernung zwischen beiden Koordinaten ermittelt und angezeigt
+                //Verbinden der Detailansicht mit den Distance Daten
+                binding.btnGetDistance.setOnClickListener {
+                    // und die aktuellen Koordinaten werden an die zweite Api übergebenk um die Entfernung darzustellen
+                    viewModel.getDistanceData("$lat1,$lon1", "$lat2,$lon2")
+                    //Der in der getDistance Abfrage ermittelte Wert für die Entfernung wird ausgelesen und angezeigt
+                    distanceObserver()
+                }
             }
         }
 

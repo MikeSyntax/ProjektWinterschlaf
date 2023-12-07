@@ -28,6 +28,8 @@ data class Advertisement(
     var openSpace: Boolean = false,                         //Freifläche
     var barn: Boolean = false,                              //Scheune
     var yard: Boolean = false,                              //Hof
+    var profileImageForAd: String? = "",
+    var ownerOfThisAd: String? = "",
 
 
 ) {
@@ -39,5 +41,7 @@ data class Advertisement(
         userId = dataSnapshot["userId"].toString()
         description = dataSnapshot["description"].toString()
         price = dataSnapshot["price"].toString()
+        profileImageForAd = dataSnapshot["profileImageForAd"].toString()
+        ownerOfThisAd = dataSnapshot["ownerOfThisAd"].toString()
     }
 }

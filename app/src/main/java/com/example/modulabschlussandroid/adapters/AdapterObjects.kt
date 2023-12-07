@@ -60,6 +60,7 @@ class AdapterObjects(
 
             //Navigation auf das  aktuelle Objekt welches angeklickt wurde
             viewModel.setCurrentObject(thisObject)
+            viewModel.homeFragment = true
             val navController = binding.cvItemObject.findNavController()
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
         }

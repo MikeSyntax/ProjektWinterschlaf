@@ -55,6 +55,7 @@ class AdapterProfile(
 
             //Navigation auf das  aktuelle Objekt welches angeklickt wurde
             viewModel.setCurrentAdvertisment(myAdvertisement)
+            viewModel.homeFragment = false
             val navController = binding.cvItemObject.findNavController()
             navController.navigate(ProfileFragmentDirections.actionProfileFragmentToDetailFragment())
         }

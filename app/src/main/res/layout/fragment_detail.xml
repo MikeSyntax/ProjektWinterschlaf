@@ -335,6 +335,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="1"
+                                android:textStyle="italic"
                                 android:backgroundTint="@color/primary_light_green"
                                 android:src="@drawable/projekt_winterschlaf_logo"
                                 android:text="Anbieter"
@@ -345,8 +346,7 @@
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_weight="1"
-                                android:backgroundTint="@color/primary_light_green"
-                                android:src="@drawable/projekt_winterschlaf_logo" />
+                                android:backgroundTint="@color/primary_light_green" />
 
                         </LinearLayout>
 

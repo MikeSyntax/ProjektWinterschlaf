@@ -40,8 +40,6 @@ class InsertFragment : Fragment() {
 
     private lateinit var advertisement: Advertisement
 
-   // private lateinit var personalData: PersonalData
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,16 +52,19 @@ class InsertFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.showCurrentUserId()
-        //Erstellen der Uid aus der Authentication
-        val uId = viewModel.uId
+
         //Erstellen eines Objektes der Object Klasse
         thisObject = Objects()
         //Erstellen eines Objektes der MyObject Klasse für die Firebase Datenbank mit den abrufbaren Objekten
         advertisement = Advertisement()
-        //Erstellen eines Objektes der PersonalData Klasse
-        //personalData = PersonalData()
+        //Aufruf der Funktion
+        viewModel.showCurrentUserId()
+        //Erstellen der Uid aus der Authentication
+        val uId = viewModel.uId
+        //Erstellen eines currentUsers
         val currentUser = viewModel.currentUser
+        //User Updaten bzw. laden um die Inserieren Funktion nicht als NullpointerException enden zu lassen
+        viewModel.updateCurrentUserFromFirestore()
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
@@ -104,6 +105,9 @@ class InsertFragment : Fragment() {
             advertisement.title = binding.editTitle.text.toString()
             advertisement.description = binding.editDescription.text.toString()
             advertisement.price = binding.editPrice.text.toString()
+            //Hinzufügen einer Quelle für Bilddatei des Ausstellers
+            advertisement.profileImageForAd = currentUser.value?.profileImage.toString()
+            advertisement.ownerOfThisAd = currentUser.value?.userName
 
             //Aufruf der Funktion für den Counter aller Inserate +1 also 2+1 = bisherige Inserate3
             viewModel.addCounterForAdvertises(currentUser.value!!)

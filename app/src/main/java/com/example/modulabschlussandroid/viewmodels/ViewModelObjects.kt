@@ -27,7 +27,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     private val database = ObjectDatabase.getDatabase(application)
     private val repository = RepositoryObjects(database, GeoCoderApiObject, DistanceApiObject)
-    //private val repository = RepositoryObjects(database, LocationApiObject)
+
+    var homeFragment: Boolean = false
 
     //Hier wird die Objekt-Liste aus dem Repository eingeschleift
     var objectList = repository.objectList
