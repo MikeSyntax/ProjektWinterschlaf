@@ -15,6 +15,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.modulabschlussandroid.R
+import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Result
@@ -29,6 +30,7 @@ class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
     private val viewModel: ViewModelObjects by activityViewModels()
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var advertisement: Advertisement
 
     //für die Weitergabe der Koordinaten an den Distance Api Call
     private var lat1: String = ""
@@ -181,6 +183,17 @@ class DetailFragment : Fragment() {
         //zum inserieren navigieren
         binding.cvInsert.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToInsertFragment())
+        }
+
+
+//NEU
+        //zum chatten bzw. Nachrichten schreiben navigieren
+        binding.btnMessage.setOnClickListener {
+            advertisement = Advertisement()
+            viewModel.getAdvertismentId(advertisement)
+
+           // findNavController().navigate(DetailFragmentDirections
+              //  .actionDetailFragmentToMessageFragment(advertismentId = "OtuXpM6VAMvUxuHZfAZS"))
         }
     }
 

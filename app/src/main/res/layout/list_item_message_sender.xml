@@ -47,7 +47,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/timeStamp_Receiver"
+        android:id="@+id/timeStamp_Sender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primary_dark_green"

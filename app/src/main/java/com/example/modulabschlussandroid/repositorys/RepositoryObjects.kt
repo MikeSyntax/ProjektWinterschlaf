@@ -5,16 +5,19 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
+import com.example.modulabschlussandroid.data.datamodels.chat.Message
 import com.example.modulabschlussandroid.data.exampledata.ObjectsExampleData
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.google.android.gms.tasks.Task
+import kotlinx.coroutines.launch
 
 //Repository Pattern nur eine Datenquelle für die ganze App um immer die gleichen Daten zu haben====
 //Das Repository ist das Modell von MVVM
@@ -140,6 +143,16 @@ class RepositoryObjects(
     //Inserieren eines neuen Advertisments (Objekt)
     fun saveItemToDatabase(advertisement: Advertisement) {
         firebaseRepository.saveItemToDatabase(advertisement)
+    }
+
+    //Erstellen einer neuen Chat Nachricht
+    fun saveMessageToDatabase(message: Message) {
+            firebaseRepository.saveMessageToDatabase(message)
+    }
+
+    //Erkennen der AdvertismentId
+    fun getAdvertismentId(advertisment: Advertisement) {
+        firebaseRepository.getAdvertismentId(advertisment)
     }
 
     //Auslesen der Datenbank von Firebase

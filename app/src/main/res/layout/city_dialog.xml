@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_popUp_city"
@@ -31,7 +31,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/white"
-                    android:text="Speichern"
+                    android:text="@string/save"
                     android:textColor="@color/primary_dark_green"
                     android:textSize="20sp"
                     app:strokeColor="@color/primary_light_green"
@@ -53,13 +53,14 @@
                         <EditText
                             android:id="@+id/edit_text_city"
                             style="@style/textSmall"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_weight="10"
                             android:paddingStart="16dp"
+                            android:paddingEnd="16dp"
                             android:maxLength="20"
-                            android:hint="Stadt eingeben"
+                            android:hint="@string/enterCity"
                             android:text=""
                             android:textColor="@color/primary_dark_green" />
                     </LinearLayout>

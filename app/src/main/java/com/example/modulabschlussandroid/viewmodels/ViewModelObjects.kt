@@ -13,6 +13,7 @@ import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.data.datamodels.apicall.distance.DistanceMatrix
 import com.example.modulabschlussandroid.data.datamodels.apicall.geo.Geo
+import com.example.modulabschlussandroid.data.datamodels.chat.Message
 import com.example.modulabschlussandroid.data.local.ObjectDatabase
 import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
@@ -28,6 +29,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     private val database = ObjectDatabase.getDatabase(application)
     private val repository = RepositoryObjects(database, GeoCoderApiObject, DistanceApiObject)
 
+    //Für die Navigation auf die Detailseite, da sowohl aus Home und Profil unterschiedliche Datenbanken
     var homeFragment: Boolean = false
 
     //Hier wird die Objekt-Liste aus dem Repository eingeschleift
@@ -178,6 +180,18 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
             repository.saveItemToDatabase(advertisement)
         }
+    }
+
+    //Erstellen einer neuen Chat Nachricht
+    fun saveMessageToDatabase(message: Message) {
+        viewModelScope.launch {
+            repository.saveMessageToDatabase(message)
+        }
+    }
+
+    //Erkennen der AdvertismentId
+    fun getAdvertismentId(advertisment: Advertisement) {
+        repository.getAdvertismentId(advertisment)
     }
 
 

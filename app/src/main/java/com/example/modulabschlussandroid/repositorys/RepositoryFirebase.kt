@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.PersonalData
+import com.example.modulabschlussandroid.data.datamodels.chat.Message
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.auth.FirebaseAuth
@@ -51,7 +52,7 @@ class RepositoryFirebase(
         }
     }
 
-    //Funktion um Profilbilder in das Storage hochzuladen=====================================================
+    //Funktion um Profilbilder in das Storage hochzuladen===============================================
     fun uploadImagetoStorage(uri: Uri) {
         val ref = firebaseStorage.reference.child("imageProfile/${firebaseAuth.currentUser!!.uid}")
         ref.putFile(uri).addOnSuccessListener { Task ->
@@ -116,7 +117,7 @@ class RepositoryFirebase(
             }
     }
 
-//Firebase Authentication===========================================================================
+//==================================================================================================
 
     //Funktion für den Login ===========================================================================
     //Da die Funktion im Repository ist, muss hier falls der Login erfolgreich ist und nicht sofort
@@ -221,6 +222,48 @@ class RepositoryFirebase(
                 //  Log.d("Savetodatabase", advertisement.toString())
             }.addOnFailureListener {
                 //    Log.e("Savetodatabse", it.toString())
+            }
+    }
+
+//Firebase Firestore Nachricht aus dem MessageFragment speichern NOCH NICHT WEITERGEMACHT===========
+
+    fun saveMessageToDatabase(message: Message) {
+        fireStoreDatabase.collection("chat")
+            .document().set(
+                message
+            )
+            .addOnSuccessListener {
+                Log.d("Repo", "Message erfolgreich gespeichert $message")
+            }
+            .addOnFailureListener {
+                Log.d("Repo", "Message NICHT gespeichert $it")
+            }
+    }
+
+//Funktion im die Advertisment Id in einer Variablen zu speichern und im Chat zu nutzen=============
+    fun getAdvertismentId(advertisement: Advertisement) {
+        var path: String
+        fireStoreDatabase.collection("objectsOnline")
+            // .document().set(advertisement)
+            .add(
+                advertisement
+            )
+            .addOnSuccessListener {
+                path = it.id
+                Log.d("Repo", "Advertisment Id $path")
+            }.addOnFailureListener {
+                Log.e("Repo", it.toString())
+            }
+    }
+
+//Funktion um die ObjectId in dem erstellten Advertisment zu updaten================================
+    fun updateAdId (path: String){
+        val setAdId = hashMapOf<String, Any>("objectId" to path)
+        fireStoreDatabase.collection("objectsOnline")
+            .document(path)
+            .update(setAdId)
+            .addOnSuccessListener {
+                Log.d("Repo", "$setAdId")
             }
     }
 

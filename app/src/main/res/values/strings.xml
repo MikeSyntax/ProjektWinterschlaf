@@ -34,4 +34,14 @@
     <string name="tv_forward">Nach Eingabe bitte rechts oben auf weiter klicken, viel Spaß</string>
     <string name="enterzipcode">Postleitzahl eingeben</string>
     <string name="enter_street_number">Hausnummer eingeben</string>
+    <string name="enterCity">Stadt eingeben</string>
+    <string name="garage">Garage</string>
+    <string name="off">off</string>
+    <string name="on">on</string>
+    <string name="camperParkInside">Hallenstellplatz</string>
+    <string name="camperParkOutside">Aussenstellplatz</string>
+    <string name="parkingSpot">Parkplatz</string>
+    <string name="underGroundParking">Tiefgarage</string>
+    <string name="carport">Carport</string>
+    <string name="storage">Lager</string>
 </resources>

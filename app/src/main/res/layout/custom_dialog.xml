@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_popUp_categories"
@@ -32,7 +32,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:backgroundTint="@color/white"
-                    android:text="Speichern"
+                    android:text="@string/save"
                     android:textColor="@color/primary_dark_green"
                     android:textSize="20sp"
                     app:strokeColor="@color/primary_light_green"
@@ -58,7 +58,8 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Garage"
+                            android:paddingEnd="16dp"
+                            android:text="@string/garage"
                             android:textColor="@color/primary_dark_green" />
 
                         <TextView
@@ -66,7 +67,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -83,8 +84,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -110,14 +111,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Hallenstellplatz" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/camperParkInside" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -134,8 +136,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -161,14 +163,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Aussenstellplatz" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/camperParkOutside" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -185,8 +188,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -212,14 +215,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Parkplatz" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/parkingSpot" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -236,8 +240,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -265,14 +269,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Tiefgarage" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/underGroundParking" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -289,8 +294,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -316,14 +321,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Carport" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/carport" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -340,8 +346,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -367,14 +373,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Lager" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/storage" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -391,8 +398,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
