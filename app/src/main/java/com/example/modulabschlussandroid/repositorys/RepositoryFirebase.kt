@@ -241,26 +241,28 @@ class RepositoryFirebase(
     }
 
 //Funktion im die Advertisment Id in einer Variablen zu speichern und im Chat zu nutzen=============
-    fun getAdvertismentId(advertisement: Advertisement) {
-        var path: String
+
+    fun getAdvertismentId() {
+        var objectId: String
         fireStoreDatabase.collection("objectsOnline")
-            // .document().set(advertisement)
-            .add(
-                advertisement
-            )
-            .addOnSuccessListener {
-                path = it.id
-                Log.d("Repo", "Advertisment Id $path")
+            .get()
+            //.add(advertisement)
+            .addOnSuccessListener {result ->
+                for (document in result){
+                    objectId = document.id
+                    updateAdId(objectId)
+                Log.d("Repo", "$objectId")
+                }
             }.addOnFailureListener {
                 Log.e("Repo", it.toString())
             }
     }
 
 //Funktion um die ObjectId in dem erstellten Advertisment zu updaten================================
-    fun updateAdId (path: String){
-        val setAdId = hashMapOf<String, Any>("objectId" to path)
+    private fun updateAdId(objectId: String) {
+        val setAdId = hashMapOf<String, Any>("objectId" to objectId)
         fireStoreDatabase.collection("objectsOnline")
-            .document(path)
+            .document(objectId)
             .update(setAdId)
             .addOnSuccessListener {
                 Log.d("Repo", "$setAdId")

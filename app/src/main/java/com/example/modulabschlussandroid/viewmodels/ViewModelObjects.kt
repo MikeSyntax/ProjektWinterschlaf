@@ -49,7 +49,6 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     //Hier wird die LiveData der Geo API Abfrage aus dem Repository eingeschleift
     var geoResult: LiveData<Geo> = repository.geoResult
-    //var geoResult: LiveData<Location> = repository.geoResult
 
     //Hier wird die LiveData der Distance Api Abfrage aus dem Repository eingeschleift
     var distanceData: LiveData<DistanceMatrix> = repository.distanceData
@@ -68,7 +67,6 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     private val _currentAdvertisment: MutableLiveData<Advertisement> = MutableLiveData()
     val currentAdvertisement: LiveData<Advertisement>
         get() = _currentAdvertisment
-
 
     //Erste Befüllung der Datenbank
     init {
@@ -190,8 +188,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
     //Erkennen der AdvertismentId
-    fun getAdvertismentId(advertisment: Advertisement) {
-        repository.getAdvertismentId(advertisment)
+    fun getAdvertismentId() {
+        repository.getAdvertismentId()
     }
 
 

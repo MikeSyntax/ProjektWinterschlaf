@@ -136,7 +136,7 @@ class DetailFragment : Fragment() {
                     .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivUser)
                     Log.d("Detail", "Bild Ersteller ${thisAdvertisment.profileImageForAd}")
                 //falls keins vorhanden ist nimm den Platzhalter
-
+                advertisement = thisAdvertisment
                 //Verbinden der Detailansicht mit den GeoDaten für das Ziel
                 geoObserver() //Ziel
                 //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt für den Start
@@ -189,8 +189,7 @@ class DetailFragment : Fragment() {
 //NEU
         //zum chatten bzw. Nachrichten schreiben navigieren
         binding.btnMessage.setOnClickListener {
-            advertisement = Advertisement()
-            viewModel.getAdvertismentId(advertisement)
+            viewModel.getAdvertismentId()
 
            // findNavController().navigate(DetailFragmentDirections
               //  .actionDetailFragmentToMessageFragment(advertismentId = "OtuXpM6VAMvUxuHZfAZS"))

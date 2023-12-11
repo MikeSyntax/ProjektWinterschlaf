@@ -151,8 +151,8 @@ class RepositoryObjects(
     }
 
     //Erkennen der AdvertismentId
-    fun getAdvertismentId(advertisment: Advertisement) {
-        firebaseRepository.getAdvertismentId(advertisment)
+    fun getAdvertismentId() {
+        firebaseRepository.getAdvertismentId()
     }
 
     //Auslesen der Datenbank von Firebase
