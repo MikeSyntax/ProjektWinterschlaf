@@ -54,6 +54,8 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Hier wird die aktuelle AdvertismentId mit LiveData verfolgt um beim Chat verwendet zu werden
+        val currentAdvertisementId = viewModel.currentAdvertisementId
         //Provider für die Ermittlung des eigenen Standortes
         fusedLocationProviderClient = LocationServices
             .getFusedLocationProviderClient(requireContext())
@@ -134,14 +136,15 @@ class DetailFragment : Fragment() {
                 //Profilfoto aus dem Storage laden
                 Glide.with(requireContext()).load(thisAdvertisment.profileImageForAd)
                     .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivUser)
-                    Log.d("Detail", "Bild Ersteller ${thisAdvertisment.profileImageForAd}")
+             //   Log.d("Detail", "Bild Ersteller ${thisAdvertisment.profileImageForAd}")
                 //falls keins vorhanden ist nimm den Platzhalter
                 advertisement = thisAdvertisment
                 //Verbinden der Detailansicht mit den GeoDaten für das Ziel
                 geoObserver() //Ziel
                 //Hier wird durch den FusedLocation Manager der eigene Standort ermittelt für den Start
                 location()  //Start
-
+                //Erkennen der aktuellen AdvertismentId mit LiveData
+                viewModel.getAdvertisementId(advertisement)
                 //Durch Klicken des Button wird die Entfernung zwischen beiden Koordinaten ermittelt und angezeigt
                 //Verbinden der Detailansicht mit den Distance Daten
                 binding.btnGetDistance.setOnClickListener {
@@ -189,10 +192,11 @@ class DetailFragment : Fragment() {
 //NEU
         //zum chatten bzw. Nachrichten schreiben navigieren
         binding.btnMessage.setOnClickListener {
-            viewModel.getAdvertismentId()
-
-           // findNavController().navigate(DetailFragmentDirections
-              //  .actionDetailFragmentToMessageFragment(advertismentId = "OtuXpM6VAMvUxuHZfAZS"))
+         //   Log.d("Detail", "AdvertismentId ${currentAdvertisementId.value.toString()}")
+            findNavController().navigate(
+                DetailFragmentDirections
+                    //mit Übergabe der aktuellen Advertisment Id als Argument
+                    .actionDetailFragmentToMessageFragment(currentAdvertisementId.value.toString()))
         }
     }
 
@@ -201,13 +205,13 @@ class DetailFragment : Fragment() {
         viewModel.distanceData.observe(viewLifecycleOwner) {
             //Einbinden der DistanceMatrix Klasse
                 distanceMatrix: DistanceMatrix? ->
-            Log.d("success Detail", "$distanceMatrix distanceObserver für die Api der Entfernung")
+            //Log.d("success Detail", "$distanceMatrix distanceObserver für die Api der Entfernung")
             //von der distanceMatrix über rows-Klasse zur element-Klasse bis zum Ziel distance-Klasse und dort das Textfeld mit den Kilometern
             distanceMatrix?.rows?.firstOrNull()?.elements?.firstOrNull()?.distance?.text?.let { distanceText ->
                 //Verbinden des Textfeldes auf dem Button mit der Kilometerangabe
                 _textDistance.value = "$distanceText bis zum Ziel"
                 binding.btnGetDistance.text = textDistance.value
-                Log.d("success Detail", "${binding.btnGetDistance.text} Text im Button")
+              //  Log.d("success Detail", "${binding.btnGetDistance.text} Text im Button")
             }
         }
     }
@@ -225,7 +229,7 @@ class DetailFragment : Fragment() {
                     // Hier kann man auf einzelne "Result"-Objekte zugreifen, z.B. result.latitude, result.longitude, result.name, usw.
                     binding.tvLatitude.text = "${thisGeo.latitude.toString()} lat"
                     binding.tvLongitude.text = "${thisGeo.longitude.toString()} lon"
-                    Log.d("success geoObserver", "${thisGeo.longitude} Ziel Longitude")
+                //    Log.d("success geoObserver", "${thisGeo.longitude} Ziel Longitude")
                     //Hier werden die Koordinaten des Zieles in die Variablen gespeichert für Entfernungsabfrage
                     lat2 = thisGeo.latitude.toString()
                     lon2 = thisGeo.longitude.toString()
@@ -258,7 +262,7 @@ class DetailFragment : Fragment() {
             return
         }
         task.addOnSuccessListener {
-            Log.d("success SuccessListener", "${it.longitude} Start Longitude")
+        //    Log.d("success SuccessListener", "${it.longitude} Start Longitude")
             if (it != null) {
                 //Hier werden die Koordinaten des eigenen Standortes in die Variablen gespeichert für Entfernungsabfrage
                 lat1 = it.latitude.toString()

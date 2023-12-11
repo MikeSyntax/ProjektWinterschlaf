@@ -118,6 +118,9 @@ class InsertFragment : Fragment() {
             //Den User Updaten nach der Änderung
             viewModel.updateCurrentUserFromFirestore()
 
+            //Die fehlende ObjektId als update nachtragen in Firebase, da diese erst bei Erstellung  generiert wird
+            viewModel.getAllAdId()
+
             //Nach dem Inserieren erfolgt die Weiterleitung zur Profilseite
             val navController = binding.btnFloatingAction.findNavController()
             navController.navigate(InsertFragmentDirections.actionInsertFragmentToProfileFragment())

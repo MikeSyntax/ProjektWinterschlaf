@@ -45,6 +45,11 @@ class RepositoryFirebase(
     val currentAppUser: MutableLiveData<String?>
         get() = _currentAppUser
 
+    //Um festzustellen, welches Inserat gerade geöffnet ist, wird hier die ObjectId als LiveData gespeichert
+    private var _currentAdvertismentId: MutableLiveData<String?> = MutableLiveData(null)
+    val currentAdvertisementId: MutableLiveData<String?>
+        get() = _currentAdvertismentId
+
     //Funktion um Festzustellen, ob ein User eingeloggt ist oder nicht==================================
     fun currentAppUserLogged() {
         if (firebaseAuth.currentUser != null) {
@@ -241,20 +246,18 @@ class RepositoryFirebase(
     }
 
 //Funktion im die Advertisment Id in einer Variablen zu speichern und im Chat zu nutzen=============
-
-    fun getAdvertismentId() {
+    fun getAllAdId() {
         var objectId: String
         fireStoreDatabase.collection("objectsOnline")
             .get()
-            //.add(advertisement)
             .addOnSuccessListener {result ->
                 for (document in result){
                     objectId = document.id
                     updateAdId(objectId)
-                Log.d("Repo", "$objectId")
+               // Log.d("Repo", "$objectId")
                 }
             }.addOnFailureListener {
-                Log.e("Repo", it.toString())
+               // Log.e("Repo", it.toString())
             }
     }
 
@@ -265,7 +268,21 @@ class RepositoryFirebase(
             .document(objectId)
             .update(setAdId)
             .addOnSuccessListener {
-                Log.d("Repo", "$setAdId")
+            //    Log.d("Repo", "$setAdId")
+            }
+    }
+
+//Funktion um die aktuelle Advertisment Id in einer Variablen zu speichern und im Chat zu nutzen=============
+    fun getAdvertisementId(advertisement: Advertisement) {
+        fireStoreDatabase.collection("objectsOnline")
+            .document()
+            .get()
+            .addOnSuccessListener {
+                _currentAdvertismentId.value = advertisement.objectId
+                  Log.d("Repo", " currentAdId ${currentAdvertisementId.value}")
+                }
+            .addOnFailureListener {
+                // Log.e("Repo", it.toString())
             }
     }
 

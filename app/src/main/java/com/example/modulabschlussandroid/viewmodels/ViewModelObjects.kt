@@ -188,10 +188,15 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     }
 
     //Erkennen der AdvertismentId
-    fun getAdvertismentId() {
-        repository.getAdvertismentId()
+    fun getAllAdId() {
+        repository.getAllAdId()
     }
 
+    //Erkennen der aktuellen AdvertismentId mit LiveData
+    val currentAdvertisementId = repository.currentAdvertisementId
+    fun getAdvertisementId(advertisement: Advertisement){
+        repository.getAdvertisementId(advertisement)
+    }
 
     fun checkUserDateComplete(uId: String): Task<String> {
         return repository.checkUserDataComplete(uId)

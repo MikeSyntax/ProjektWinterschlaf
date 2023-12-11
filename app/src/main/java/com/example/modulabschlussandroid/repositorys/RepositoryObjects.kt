@@ -150,9 +150,15 @@ class RepositoryObjects(
             firebaseRepository.saveMessageToDatabase(message)
     }
 
-    //Erkennen der AdvertismentId
-    fun getAdvertismentId() {
-        firebaseRepository.getAdvertismentId()
+    //Erkennen aller AdvertismentIds
+    fun getAllAdId() {
+        firebaseRepository.getAllAdId()
+    }
+
+    //Erkennen der aktuellen AdvertismentId mit LiveData
+    val currentAdvertisementId = firebaseRepository.currentAdvertisementId
+    fun getAdvertisementId(advertisement: Advertisement){
+        firebaseRepository.getAdvertisementId(advertisement)
     }
 
     //Auslesen der Datenbank von Firebase
