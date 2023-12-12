@@ -26,8 +26,9 @@ class RepositoryFirebase(
 
     private var firebaseStorage = FirebaseStorage.getInstance()
 
-//Firebase Firestore================================================================================
-
+//==================================================================================================
+//Firebase LiveData=================================================================================
+//==================================================================================================
 
     //Live Data des aktuellen Users Id
     private var _uId: MutableLiveData<String> = MutableLiveData()
@@ -39,92 +40,38 @@ class RepositoryFirebase(
     val currentUser: LiveData<PersonalData>
         get() = _currentUser
 
-
-    //Um festzustellen, ob ein User bereits eingeloggt ist
+    //LiveData um festzustellen, ob ein User bereits eingeloggt ist
     private var _currentAppUser: MutableLiveData<String?> = MutableLiveData(null)
     val currentAppUser: MutableLiveData<String?>
         get() = _currentAppUser
 
-    //Um festzustellen, welches Inserat gerade geöffnet ist, wird hier die ObjectId als LiveData gespeichert
+    //Live Data für die ausgelesenenen Advertisments
+    private var _allMyAdvertises: MutableLiveData<List<Advertisement>> = MutableLiveData()
+    val allMyAdvertises: LiveData<List<Advertisement>>
+        get() = _allMyAdvertises
+
+    //LiveData für den aktuellen user und alle Daten über den User
+    private var _countAdvertises: MutableLiveData<String> = MutableLiveData()
+    val countAdvertises: LiveData<String>
+        get() = _countAdvertises
+
+    //LiveData um festzustellen, welches Inserat gerade geöffnet ist, wird hier die ObjectId als LiveData gespeichert
     private var _currentAdvertismentId: MutableLiveData<String?> = MutableLiveData(null)
     val currentAdvertisementId: MutableLiveData<String?>
         get() = _currentAdvertismentId
 
-    //Funktion um Festzustellen, ob ein User eingeloggt ist oder nicht==================================
+//==================================================================================================
+//Firebase Authentication===========================================================================
+//==================================================================================================
+
+//Funktion um Festzustellen, ob ein User eingeloggt ist oder nicht==================================
     fun currentAppUserLogged() {
         if (firebaseAuth.currentUser != null) {
             _currentAppUser.value = "loggedIn"
         }
     }
 
-    //Funktion um Profilbilder in das Storage hochzuladen===============================================
-    fun uploadImagetoStorage(uri: Uri) {
-        val ref = firebaseStorage.reference.child("imageProfile/${firebaseAuth.currentUser!!.uid}")
-        ref.putFile(uri).addOnSuccessListener { Task ->
-            ref.downloadUrl.addOnSuccessListener { Uri ->
-                // Log.d("repositr...", "Uri $Uri")
-                if (Uri.toString() != currentUser.value?.profileImage) {
-                    _currentUser.value?.copy(profileImage = Uri.toString())
-                        .let { saveUserData(it!!) }
-                }
-            }.addOnFailureListener {
-                //     Log.d("repositr...", "Error bild nicht hochgeladen")
-            }
-        }
-    }
-
-    //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen und auf der Profilseite anzuzeigen
-    fun updateCurrentUserFromFirestore() {
-        fireStoreDatabase.collection("user").document(uId.value.toString())
-            .get()
-            .addOnSuccessListener { thisUser ->
-                _currentUser.value = PersonalData(
-                    thisUser.id,
-                    thisUser.data?.get("cityName").toString(),
-                    thisUser.data?.get("itemsDone").toString(),
-                    thisUser.data?.get("name").toString(),
-                    thisUser.data?.get("preName").toString(),
-                    thisUser.data?.get("streetName").toString(),
-                    thisUser.data?.get("streetNumber").toString(),
-                    thisUser.data?.get("telNumber").toString(),
-                    thisUser.data?.get("userName").toString(),
-                    thisUser.data?.get("zipCode").toString(),
-                    thisUser.data?.get("profileImage").toString(),
-                )
-            }.addOnFailureListener {
-                //  Log.e("Firebase Repo Store", "FailureListener $it")
-            }
-    }
-
-    //Hinzufügen eines weiteren Inserats bei der Zahl "Meine bisherigen.." bei einem bestimmten User====
-    fun addCounterForAdvertises(personalData: PersonalData) {
-        personalData.itemsDone = personalData.itemsDone?.toInt()?.plus(1).toString()
-        fireStoreDatabase.collection("user")
-            .document(personalData.userId)
-            .set(personalData)
-            .addOnSuccessListener {
-                _currentUser.postValue(personalData)
-            }
-    }
-
-    //Funktion um einen neuen User im Firestore anzulegen (EditProfile)=================================
-    fun saveUserData(personalData: PersonalData) {
-        fireStoreDatabase.collection("user")
-            //Hier wird die User Id aus der Auth übergeben, da sonst eine autogenerated Id übergeben wird
-            .document(uId.value.toString())
-            .set(personalData)
-            .addOnSuccessListener { documentRef ->
-                _currentUser.postValue(personalData)
-                //  Log.d("Repo Firebase", "DocumentSnapshot added $documentRef")
-            }
-            .addOnFailureListener { error ->
-                // Log.e("Repo Firebase", "Error adding document $error")
-            }
-    }
-
-//==================================================================================================
-
-    //Funktion für den Login ===========================================================================
+//Funktion für den Login ===========================================================================
     //Da die Funktion im Repository ist, muss hier falls der Login erfolgreich ist und nicht sofort
     // weitergeleitet werden kann , eine Task als String "succes" (oder was auch immer) übergeben
     // werden und so kann im Fragment dann ein OnSuccessListener installiert werden
@@ -157,7 +104,7 @@ class RepositoryFirebase(
         return completionSource.task
     }
 
-    //Registrierung eines neuen Users mit Erfolgsübergabe um die Weiterleitung zu ermöglichen===========
+//Registrierung eines neuen Users mit Erfolgsübergabe um die Weiterleitung zu ermöglichen===========
     fun register(
         email: String,
         password: String,
@@ -202,19 +149,94 @@ class RepositoryFirebase(
         return completionSource.task
     }
 
-    //Update der aktuellen Users Id
+//Update der aktuellen Users Id=====================================================================
     fun showCurrentUserId() {
         val user = firebaseAuth.currentUser?.uid.toString()
         _uId.value = user
         // Log.d("Firebase Repo 3 Punkte", "_uId ${_uId.value} user $user uId ${uId.value}")
     }
 
-    //Ausloggen des aktuellen Users
+//Ausloggen des aktuellen Users=====================================================================
+
     fun signOutUser() {
         //Ausloggen
         firebaseAuth.signOut()
         _currentAppUser.value = null
     }
+
+//==================================================================================================
+//Firebase Storage==================================================================================
+//==================================================================================================
+
+//Funktion um Profilbilder in das Storage hochzuladen===============================================
+    fun uploadImagetoStorage(uri: Uri) {
+        val ref = firebaseStorage.reference.child("imageProfile/${firebaseAuth.currentUser!!.uid}")
+        ref.putFile(uri).addOnSuccessListener { Task ->
+            ref.downloadUrl.addOnSuccessListener { Uri ->
+                // Log.d("repositr...", "Uri $Uri")
+                if (Uri.toString() != currentUser.value?.profileImage) {
+                    _currentUser.value?.copy(profileImage = Uri.toString())
+                        .let { saveUserData(it!!) }
+                }
+            }.addOnFailureListener {
+                //     Log.d("repositr...", "Error bild nicht hochgeladen")
+            }
+        }
+    }
+
+//==================================================================================================
+//Firebase Firestore================================================================================
+//==================================================================================================
+
+//Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen und auf der Profilseite anzuzeigen
+    fun updateCurrentUserFromFirestore() {
+        fireStoreDatabase.collection("user").document(uId.value.toString())
+            .get()
+            .addOnSuccessListener { thisUser ->
+                _currentUser.value = PersonalData(
+                    thisUser.id,
+                    thisUser.data?.get("cityName").toString(),
+                    thisUser.data?.get("itemsDone").toString(),
+                    thisUser.data?.get("name").toString(),
+                    thisUser.data?.get("preName").toString(),
+                    thisUser.data?.get("streetName").toString(),
+                    thisUser.data?.get("streetNumber").toString(),
+                    thisUser.data?.get("telNumber").toString(),
+                    thisUser.data?.get("userName").toString(),
+                    thisUser.data?.get("zipCode").toString(),
+                    thisUser.data?.get("profileImage").toString(),
+                )
+            }.addOnFailureListener {
+                //  Log.e("Firebase Repo Store", "FailureListener $it")
+            }
+    }
+
+//Hinzufügen eines weiteren Inserats bei der Zahl "Meine bisherigen.." bei einem bestimmten User====
+    fun addCounterForAdvertises(personalData: PersonalData) {
+        personalData.itemsDone = personalData.itemsDone?.toInt()?.plus(1).toString()
+        fireStoreDatabase.collection("user")
+            .document(personalData.userId)
+            .set(personalData)
+            .addOnSuccessListener {
+                _currentUser.postValue(personalData)
+            }
+    }
+
+//Funktion um einen neuen User im Firestore anzulegen (EditProfile)=================================
+    fun saveUserData(personalData: PersonalData) {
+        fireStoreDatabase.collection("user")
+            //Hier wird die User Id aus der Auth übergeben, da sonst eine autogenerated Id übergeben wird
+            .document(uId.value.toString())
+            .set(personalData)
+            .addOnSuccessListener { documentRef ->
+                _currentUser.postValue(personalData)
+                //  Log.d("Repo Firebase", "DocumentSnapshot added $documentRef")
+            }
+            .addOnFailureListener { error ->
+                // Log.e("Repo Firebase", "Error adding document $error")
+            }
+    }
+
 
 //Firebase Firestore Erstellen eines Inserates======================================================
 
@@ -288,11 +310,6 @@ class RepositoryFirebase(
 
 //Abfrage in der Firebase Database wieviele Anzeigen von ALLEN im Moment online sind================
 
-    //LiveData für den aktuellen user und alle Daten über den User
-    private var _countAdvertises: MutableLiveData<String> = MutableLiveData()
-    val countAdvertises: LiveData<String>
-        get() = _countAdvertises
-
     //Funktion zur Abfrage der aktuellen Inserate der ganzen Community
     fun countAdvertises() {
         //und eine Reference setzten in der Kategorie objectsOnline
@@ -302,12 +319,6 @@ class RepositoryFirebase(
     }
 
 //Abfrage in der Firebase Database aller MEINER Anzeigen gerade online sind=========================
-
-    //Live Data für die ausgelesenenen Advertisments
-    private var _allMyAdvertises: MutableLiveData<List<Advertisement>> = MutableLiveData()
-    val allMyAdvertises: LiveData<List<Advertisement>>
-        get() = _allMyAdvertises
-
 
     //Prüfen aller Inserate welche von dem eingeloggten User gerade online sind und anzeigen============
     fun checkDatabaseForMyAds() {
@@ -333,7 +344,7 @@ class RepositoryFirebase(
             }
     }
 
-    //Falls der User neu ist, zeige den Dialog für die Datenerfassung===================================
+//Falls der User neu ist, zeige den Dialog für die Datenerfassung===================================
     fun checkUserDataComplete(uId: String): Task<String> {
         val completionSource = TaskCompletionSource<String>()
         //Abfrage Firestore
@@ -361,4 +372,7 @@ class RepositoryFirebase(
         return completionSource.task
     }
 }
+
+//==================================================================================================
+//Ende===================================Ende===============================Ende====================
 //==================================================================================================

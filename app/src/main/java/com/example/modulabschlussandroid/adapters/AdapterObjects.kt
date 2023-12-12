@@ -58,7 +58,7 @@ class AdapterObjects(
             val city: String = thisObject.city
             viewModel.getGeoResult(city)
 
-            //Navigation auf das  aktuelle Objekt welches angeklickt wurde
+            //Navigation auf das aktuelle Objekt welches angeklickt wurde
             viewModel.setCurrentObject(thisObject)
             viewModel.homeFragment = true
             val navController = binding.cvItemObject.findNavController()
