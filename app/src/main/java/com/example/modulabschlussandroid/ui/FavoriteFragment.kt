@@ -17,6 +17,10 @@ class FavoriteFragment : Fragment() {
     private lateinit var binding: FragmentFavoriteBinding
     private val viewModel: ViewModelObjects by activityViewModels()
 
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,6 +29,10 @@ class FavoriteFragment : Fragment() {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,6 +49,9 @@ class FavoriteFragment : Fragment() {
 
         }
 
+//==================================================================================================
+//Diverse setOnClickListener========================================================================
+//==================================================================================================
 
         //Zum Home Screen navigieren
         binding.cvHome.setOnClickListener {
@@ -65,3 +76,6 @@ class FavoriteFragment : Fragment() {
         }
     }
 }
+//==================================================================================================
+//Ende================================Ende=================================Ende=====================
+//==================================================================================================

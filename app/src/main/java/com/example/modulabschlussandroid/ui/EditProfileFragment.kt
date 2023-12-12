@@ -26,6 +26,11 @@ class EditProfileFragment : Fragment() {
 
     private val viewModel: ViewModelObjects by activityViewModels()
 
+//==================================================================================================
+//Foto Auswahl aus dem Handyspeicher================================================================
+//==================================================================================================
+
+    //Images vom Handyspeicher auswählen und mit der upload Funktion hochladen
     private val imagePicker = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) {
@@ -34,6 +39,10 @@ class EditProfileFragment : Fragment() {
             viewModel.uploadImagetoStorage(it)
         }
     }
+
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,10 +53,14 @@ class EditProfileFragment : Fragment() {
         return binding.root
     }
 
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//Übergabe und Ermittlung des aktuellen Users aus dem Firestore=====================================
+    //Übergabe und Ermittlung des aktuellen Users aus dem Firestore
 
         //Update aller User Daten aus dem Firestore
         viewModel.updateCurrentUserFromFirestore()
@@ -55,7 +68,11 @@ class EditProfileFragment : Fragment() {
         //Zeige die aktuellen Daten des eingeloggten Users mit LiveData
         val currentUser = viewModel.currentUser
 
-//Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore==========================
+//==================================================================================================
+//Oberserver des aktuellen Users====================================================================
+//==================================================================================================
+
+    //Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore
         currentUser.observe(viewLifecycleOwner) { user ->
 
             binding.tvLastLoggedUsername.text = user.userName
@@ -143,3 +160,6 @@ class EditProfileFragment : Fragment() {
         }
     }
 }
+//==================================================================================================
+//Ende================================Ende=================================Ende=====================
+//==================================================================================================
