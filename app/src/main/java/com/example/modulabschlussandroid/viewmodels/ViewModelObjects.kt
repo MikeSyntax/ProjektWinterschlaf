@@ -81,6 +81,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //LiveData für die Nachrichten einer bestimmten Advertisement Id
     val myMessage = repository.myMessage
 
+    //LiveData für alle Inserte der gesamten User
+    val allUserAdvertisements = repository.allUserAdvertisements
 //==================================================================================================
 //Init Block========================================================================================
 //==================================================================================================
@@ -244,6 +246,11 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         viewModelScope.launch {
         repository.checkMessages()
         }
+    }
+
+    //Anzeigen aller Inserate auf dem HomeFragmentzeigen, sobald Room Datenbank erledigt ist
+    fun showAllUserAdvertisements() {
+        repository.showAllUserAdvertisements()
     }
 
     //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData

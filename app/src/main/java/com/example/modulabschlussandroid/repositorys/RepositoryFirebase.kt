@@ -72,6 +72,11 @@ class RepositoryFirebase(
     val myMessage: LiveData<List<Message>>
         get() = _myMessages
 
+    //LiveData für alle Inserte der gesamten User
+    private var _allUserAdvertisements: MutableLiveData<List<Advertisement>> = MutableLiveData()
+    val allUserAdvertisements: LiveData<List<Advertisement>>
+        get() = _allUserAdvertisements
+
 //==================================================================================================
 //Firebase Authentication===========================================================================
 //==================================================================================================
@@ -386,6 +391,27 @@ class RepositoryFirebase(
                 //Log.d("Firebase Repo Data", "Error $it")
             }
     }
+
+    //Anzeigen aller Inserate auf dem HomeFragmentzeigen, sobald Room Datenbank erledigt ist
+    fun showAllUserAdvertisements() {
+        //Leere Liste für die Advertises
+        val allAdvertise: MutableList<Advertisement> = mutableListOf()
+        //und eine Reference setzten in der Kategorie objectsOnline
+        fireStoreDatabase.collection("objectsOnline")
+            .get().addOnSuccessListener {
+                it.documents.forEach { doc ->
+                    //Füge dieses ausgelesene der advertise Lise hinzu
+                    allAdvertise.add(Advertisement(doc))
+                }
+                //die gefilterte Liste mit dem Live Data setzen
+                _allUserAdvertisements.postValue(allAdvertise)
+                 //Log.d("Fire Repo", "Alle id´s ${allMyAdvertises.value}")
+            }
+            .addOnFailureListener {
+                //Log.d("Firebase Repo Data", "Error $it")
+            }
+    }
+
 
     //Falls der User neu ist, zeige den Dialog für die Datenerfassung===================================
     fun checkUserDataComplete(uId: String): Task<String> {

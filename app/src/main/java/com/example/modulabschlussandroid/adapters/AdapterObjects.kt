@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.modulabschlussandroid.R
+import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.ListItemSleepBinding
 import com.example.modulabschlussandroid.ui.HomeFragmentDirections
@@ -14,7 +15,10 @@ import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 //Der Adapter organisiert mit Hilfe der Viewholder das Recycling der Items
 class AdapterObjects(
 
-    private var dataset: List<Objects>,
+    //für die Room Datenbank
+    //private var dataset: List<Objects>,
+    //für die Firebase Datenbank
+    private var dataset: List<Advertisement>,
     private var viewModel: ViewModelObjects
 
 ) : RecyclerView.Adapter<AdapterObjects.ItemViewHolder>() {
@@ -44,8 +48,8 @@ class AdapterObjects(
         val binding = holder.binding
 
         //Befüllen der ViewHolder
-        binding.ivObject.setImageResource(thisObject.image1Resource)
-        binding.tvObject.text = thisObject.objectdescription
+       // binding.ivObject.setImageResource(thisObject.image1Resource)
+       // binding.tvObject.text = thisObject.objectdescription
         binding.tvCity.text = thisObject.city
         binding.tvPrice.text = "${thisObject.price.toString()} €"
         binding.tvDescription.text = thisObject.description
@@ -55,11 +59,13 @@ class AdapterObjects(
         binding.cvItemObject.setOnClickListener {
 
             //API Call wird gestartet mit Übergabe der Stadt
-            val city: String = thisObject.city
-            viewModel.getGeoResult(city)
+            val city: String? = thisObject.city
+            if (city != null) {
+                viewModel.getGeoResult(city)
+            }
 
             //Navigation auf das aktuelle Objekt welches angeklickt wurde
-            viewModel.setCurrentObject(thisObject)
+           // viewModel.setCurrentObject(thisObject)
             viewModel.homeFragment = true
             val navController = binding.cvItemObject.findNavController()
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())

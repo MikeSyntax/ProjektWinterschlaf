@@ -65,6 +65,10 @@ class RepositoryObjects(
     //LiveData für die Nachrichten einer bestimmten Advertisement Id
     val myMessage = firebaseRepository.myMessage
 
+    //LiveData für alle Inserte der gesamten User
+    val allUserAdvertisements = firebaseRepository.allUserAdvertisements
+
+
 //==================================================================================================
 //LiveData==========================================================================================
 //==================================================================================================
@@ -227,6 +231,11 @@ class RepositoryObjects(
     //Abfrage in der Firebase Database aller MEINER Nachrichten
     fun checkMessages() {
         firebaseRepository.checkMessages()
+    }
+
+    //Anzeigen aller Inserate auf dem HomeFragmentzeigen, sobald Room Datenbank erledigt ist
+    fun showAllUserAdvertisements() {
+        firebaseRepository.showAllUserAdvertisements()
     }
 
 //==================================================================================================

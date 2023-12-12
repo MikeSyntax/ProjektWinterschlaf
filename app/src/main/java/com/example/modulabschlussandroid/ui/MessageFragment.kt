@@ -83,11 +83,12 @@ class MessageFragment : Fragment() {
         //Adapter setzten und mit LiveData überwachen
         viewModel.myMessage.observe(viewLifecycleOwner) {
 
+            //Sortierung der Liste über den Zeitstempel
             val sortedList = it.sortedBy { Timestamp.now() }
+            //Setzen des Adapters
             val adapter = AdapterMessages(sortedList, viewModel)
-
             recView.adapter = adapter
-
+            //Udaten der Message Liste
             adapter.updateMessagesAdapter(it)
         }
 

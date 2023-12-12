@@ -68,8 +68,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Live Date mit Objekten
+        //LiveData mit Objekten aus der Room Datenbank
         val objectList = viewModel.objectList
+
+        viewModel.showAllUserAdvertisements()
+
+        //LiveData mit Objekten aus der Firebase Datenbank
+        val allUserAdvertisements = viewModel.allUserAdvertisements
 
         //RecyclerView
         val recView = binding.rvRentableObjects
@@ -90,23 +95,29 @@ class HomeFragment : Fragment() {
                 showNewUserDialog()
             }
 
-//LiveData Objekte überwachen=======================================================================
-
+//LiveData Objekte überwachen aus der Room Datenbank================================================
+/*
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
         objectList.observe(viewLifecycleOwner) { objects ->
             //Parameter objectList(it) und ViewModel
             recView.adapter = AdapterObjects(objects, viewModel)
         }
+*/
+//LiveData Advertisements überwachen aus der Firbase Firestore Datenbank============================
+
+        allUserAdvertisements.observe(viewLifecycleOwner){advertisements ->
+            recView.adapter = AdapterObjects(advertisements, viewModel)
+        }
 
 //Gefilterte Objekte überwachen=====================================================================
-
+/*
         //NEU Schnellsuche alle gefilterten Objekte landen in dieser List
         viewModel.zipObjects.observe(viewLifecycleOwner) { objectSearch ->
             //Parameter objectList(it) nullable und ViewModel
             recView.adapter = AdapterObjects(objectSearch!!, viewModel)
             Log.d("success Home", "$objectSearch zipObjects für Suche")
         }
-
+*/
 //Suchtext überwachen===============================================================================
 
         //NEU Schnellsuche der Inputtext wird weitergegeben bis zur Objekt Dao Funktion
