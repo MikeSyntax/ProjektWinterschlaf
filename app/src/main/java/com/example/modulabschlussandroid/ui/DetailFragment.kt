@@ -38,9 +38,15 @@ class DetailFragment : Fragment() {
     private var lat2: String = ""
     private var lon2: String = ""
 
+    //LiveData für die API Call Abfrage der Entfernung
+
     private var _textDistance: MutableLiveData<String> = MutableLiveData()
     val textDistance: LiveData<String>
         get() = _textDistance
+
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,16 +57,24 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         //Hier wird die aktuelle AdvertismentId mit LiveData verfolgt um beim Chat verwendet zu werden
         val currentAdvertisementId = viewModel.currentAdvertisementId
+
         //Provider für die Ermittlung des eigenen Standortes
         fusedLocationProviderClient = LocationServices
             .getFusedLocationProviderClient(requireContext())
 
+//==================================================================================================
 //Observer der Room Datenbank=======================================================================
+//==================================================================================================
+
         //Observer des aktuellen angeklickten Objekts
         viewModel.currentObject.observe(viewLifecycleOwner) { thisObject ->
             if (viewModel.homeFragment) {
@@ -117,7 +131,10 @@ class DetailFragment : Fragment() {
             }
         }
 
+//==================================================================================================
 //Observer der Firebase Datenbank===================================================================
+//==================================================================================================
+
         //Observer des aktuellen angeklickten Objekts
         viewModel.currentAdvertisement.observe(viewLifecycleOwner) { thisAdvertisment ->
             if (!viewModel.homeFragment) {
@@ -157,6 +174,9 @@ class DetailFragment : Fragment() {
             }
         }
 
+//==================================================================================================
+//Diverse OnClickListener===========================================================================
+//==================================================================================================
 
         //Zurück zum Homescreen
         binding.cvBack.setOnClickListener {
@@ -189,7 +209,6 @@ class DetailFragment : Fragment() {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToInsertFragment())
         }
 
-
 //NEU
         //zum chatten bzw. Nachrichten schreiben navigieren
         binding.btnMessage.setOnClickListener {
@@ -200,6 +219,10 @@ class DetailFragment : Fragment() {
                     .actionDetailFragmentToMessageFragment(currentAdvertisementId.value.toString()))
         }
     }
+
+//==================================================================================================
+//Observer für den Entfernungs API Call=============================================================
+//==================================================================================================
 
     //Einbinden der ermittelten Entfernung zwischen Start und Ziel
     private fun distanceObserver() {
@@ -216,6 +239,10 @@ class DetailFragment : Fragment() {
             }
         }
     }
+
+//==================================================================================================
+//Observer für den Koordinaten API Call=============================================================
+//==================================================================================================
 
     //Einbinden der ermittelten GeoDaten des Ziels
     private fun geoObserver() {
@@ -238,6 +265,10 @@ class DetailFragment : Fragment() {
             }
         }
     }
+
+//==================================================================================================
+//Feststellen der eigenen Location abhängig vom letzten Standort====================================
+//==================================================================================================
 
     // über den fusedLocation Manager wird der eigene Standort ermittelt also der Startpunkt,
     // hier in diesem Fall wird der letzte also lastLocation ermittelt,
@@ -272,3 +303,7 @@ class DetailFragment : Fragment() {
         }
     }
 }
+
+//==================================================================================================
+//Ende================================Ende===================================Ende===================
+//==================================================================================================

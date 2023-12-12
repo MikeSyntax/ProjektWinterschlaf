@@ -34,18 +34,20 @@ private val client = OkHttpClient
         //und bauen
     }.build()
 
+//Umwandlung der Kotlin Anfrage in Json Format
 private val moshi: Moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
     .build()
 
-
+//Umwandlung der zurückgegebenen Json-Datei in Kotlin Code
 private val retroFit: Retrofit = Retrofit.Builder()
     .client(client)
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .baseUrl(BASE_URL3)
     .build()
 
-
+// retrofit2 ein Paket, das zu der Retrofit-Bibliothek gehört, die normalerweise für die Erstellung von HTTP-Anfragen in Android-Anwendungen verwendet wird.
+// Das @retrofit2.http.Query ist eine Annotation aus diesem Paket und wird verwendet, um Abfrageparameter für HTTP-Anfragen zu deklarieren.
 interface DistanceApiService {
     @GET("json")
     suspend fun getDistance(
@@ -55,6 +57,7 @@ interface DistanceApiService {
     ): DistanceMatrix
 }
 
+//Erstellen eines Objektes
 object DistanceApiObject {
     val retrofitService3: DistanceApiService by lazy {
         retroFit.create(DistanceApiService::class.java)
