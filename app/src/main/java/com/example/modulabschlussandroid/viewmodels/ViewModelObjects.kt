@@ -78,6 +78,9 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Zählen aller Inserate die von dem eingeloggten User gerade online sind
     val allMyAdvertises = repository.allMyAdvertises
 
+    //LiveData für die Nachrichten einer bestimmten Advertisement Id
+    val myMessage = repository.myMessage
+
 //==================================================================================================
 //Init Block========================================================================================
 //==================================================================================================
@@ -229,6 +232,11 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Zählen aller Inserate die von dem eingeloggten User gerade online sind
     fun checkDatabaseForMyAds() {
         repository.checkDatabaseForMyAds()
+    }
+
+    //Abfrage in der Firebase Database aller MEINER Nachrichten
+    fun checkMessages() {
+        repository.checkMessages()
     }
 
     //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData

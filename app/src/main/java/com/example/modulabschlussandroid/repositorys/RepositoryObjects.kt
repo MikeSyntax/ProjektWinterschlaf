@@ -53,10 +53,14 @@ class RepositoryObjects(
     //Live Data des aktuellen Users dessen Id
     var uId = firebaseRepository.uId
 
-    //Erkennen der aktuellen AdvertismentId mit LiveData
+    //LiveData erkennen der aktuellen AdvertismentId
     val currentAdvertisementId = firebaseRepository.currentAdvertisementId
 
+    //LiveData alle meine eigenen Inserate
     val allMyAdvertises = firebaseRepository.allMyAdvertises
+
+    //LiveData für die Nachrichten einer bestimmten Advertisement Id
+    val myMessage = firebaseRepository.myMessage
 
 //==================================================================================================
 //LiveData==========================================================================================
@@ -210,6 +214,11 @@ class RepositoryObjects(
     //Auslesen der Datenbank von Firebase
     fun checkDatabaseForMyAds() {
         firebaseRepository.checkDatabaseForMyAds()
+    }
+
+    //Abfrage in der Firebase Database aller MEINER Nachrichten
+    fun checkMessages() {
+        firebaseRepository.checkMessages()
     }
 
 //==================================================================================================

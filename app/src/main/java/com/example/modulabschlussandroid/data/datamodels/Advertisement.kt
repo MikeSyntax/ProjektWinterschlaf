@@ -1,5 +1,6 @@
 package com.example.modulabschlussandroid.data.datamodels
 
+import com.example.modulabschlussandroid.data.datamodels.chat.Message
 import com.google.firebase.firestore.DocumentSnapshot
 
 data class Advertisement(
@@ -30,7 +31,7 @@ data class Advertisement(
     var yard: Boolean = false,                              //Hof
     var profileImageForAd: String? = "",
     var ownerOfThisAd: String? = "",
-
+    val messageHistory: MutableList<Message> = mutableListOf()
 
 ) {
     constructor(dataSnapshot: DocumentSnapshot) : this() {

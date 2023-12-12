@@ -60,6 +60,11 @@ class RepositoryFirebase(
     val currentAdvertisementId: MutableLiveData<String?>
         get() = _currentAdvertismentId
 
+    //LiveData für die Nachrichten einer bestimmten Advertisement Id
+    private var _myMessages: MutableLiveData<List<Message>> = MutableLiveData()
+    val myMessage: LiveData<List<Message>>
+        get() = _myMessages
+
 //==================================================================================================
 //Firebase Authentication===========================================================================
 //==================================================================================================
@@ -188,7 +193,7 @@ class RepositoryFirebase(
 //Firebase Firestore================================================================================
 //==================================================================================================
 
-//Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen und auf der Profilseite anzuzeigen
+    //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen und auf der Profilseite anzuzeigen
     fun updateCurrentUserFromFirestore() {
         fireStoreDatabase.collection("user").document(uId.value.toString())
             .get()
@@ -272,14 +277,14 @@ class RepositoryFirebase(
         var objectId: String
         fireStoreDatabase.collection("objectsOnline")
             .get()
-            .addOnSuccessListener {result ->
-                for (document in result){
+            .addOnSuccessListener { result ->
+                for (document in result) {
                     objectId = document.id
                     updateAdId(objectId)
-               // Log.d("Repo", "$objectId")
+                    // Log.d("Repo", "$objectId")
                 }
             }.addOnFailureListener {
-               // Log.e("Repo", it.toString())
+                // Log.e("Repo", it.toString())
             }
     }
 
@@ -290,19 +295,36 @@ class RepositoryFirebase(
             .document(objectId)
             .update(setAdId)
             .addOnSuccessListener {
-            //    Log.d("Repo", "$setAdId")
+                //    Log.d("Repo", "$setAdId")
             }
     }
 
-//Funktion um die aktuelle Advertisment Id in einer Variablen zu speichern und im Chat zu nutzen=============
+//Abfrage in der Firebase Database aller meiner Nachrichten=========================================
+    fun checkMessages() {
+        val messages: MutableList<Message> = mutableListOf()
+        fireStoreDatabase.collection("chat")
+            .get()
+            .addOnSuccessListener {
+                it.documents.forEach { message ->
+                    messages.add(Message(message))
+                    val filteredMessages = messages.filter { thisMessages ->
+                        thisMessages.advertisementId == currentAdvertisementId.value
+                    }
+                    _myMessages.value = filteredMessages
+                }
+            }
+    }
+
+
+//Funktion um die aktuelle Advertisment Id in einer Variablen zu speichern und im Chat zu nutzen====
     fun getAdvertisementId(advertisement: Advertisement) {
         fireStoreDatabase.collection("objectsOnline")
             .document()
             .get()
             .addOnSuccessListener {
                 _currentAdvertismentId.value = advertisement.objectId
-                  Log.d("Repo", " currentAdId ${currentAdvertisementId.value}")
-                }
+                Log.d("Repo", " currentAdId ${currentAdvertisementId.value}")
+            }
             .addOnFailureListener {
                 // Log.e("Repo", it.toString())
             }
@@ -318,9 +340,7 @@ class RepositoryFirebase(
         }
     }
 
-//Abfrage in der Firebase Database aller MEINER Anzeigen gerade online sind=========================
-
-    //Prüfen aller Inserate welche von dem eingeloggten User gerade online sind und anzeigen============
+//Prüfen aller Inserate welche von dem eingeloggten User gerade online sind und anzeigen============
     fun checkDatabaseForMyAds() {
         //Leere Liste für die Advertises
         val advertise: MutableList<Advertisement> = mutableListOf()
