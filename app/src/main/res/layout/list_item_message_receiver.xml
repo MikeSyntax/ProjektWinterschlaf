@@ -40,7 +40,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Receiver Message" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

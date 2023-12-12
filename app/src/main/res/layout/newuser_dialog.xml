@@ -6,7 +6,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_popUp_titel"
@@ -47,7 +47,7 @@
                             android:layout_weight="10"
                             android:padding="16dp"
                             android:textStyle="bold"
-                            android:text="Herzlich Willkommen bei Projekt Winterschlaf.\n\nDu musst zuerst deine Daten im Profil ergänzen.\n\nKlicke auf den Button \n-Verstanden -"
+                            android:text="@string/text_first_login"
                             android:textColor="@color/primary_dark_green" />
 
                         <Button
@@ -57,7 +57,7 @@
                             android:layout_gravity="center"
                             android:layout_margin="20dp"
                             android:backgroundTint="@color/white"
-                            android:text="Verstanden"
+                            android:text="@string/gotit"
                             android:layout_weight="1"
                             android:textColor="@color/primary_dark_green"
                             android:textSize="20sp"
@@ -70,7 +70,7 @@
                             android:layout_height="30dp"
                             android:layout_weight="1"
                             android:padding="0dp"
-                            android:text="X"
+                            android:text="@string/clear"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:backgroundTint="@color/primary_dark_green"

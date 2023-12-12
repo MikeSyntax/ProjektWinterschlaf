@@ -21,12 +21,10 @@
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,7 +33,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
 
                 <ImageView
                     android:id="@+id/iv_object"
@@ -99,6 +96,7 @@
                         android:layout_marginStart="5dp"
                         android:text="@string/item_zip_code"
                         android:textColor="@color/primary_dark_green" />
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -116,7 +114,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-
                     <TextView
                         android:id="@+id/tv_description"
                         style="@style/textSuperSmall"
@@ -126,7 +123,6 @@
                         android:maxLines="5"
                         android:layout_margin="5dp"
                         android:text="@string/item_description" />
-
 
             </LinearLayout>
 

@@ -120,4 +120,8 @@
     <string name="enter_password">Passwort eingeben</string>
     <string name="text_goOn">Nach Eingabe bitte rechts oben auf \nweiter klicken, viel Spaß</string>
     <string name="user_no_account">Noch keinen Account\nhier registrieren</string>
+    <string name="text_first_login">Herzlich Willkommen bei Projekt Winterschlaf.\n\nDu musst zuerst deine Daten im Profil ergänzen.\n\nKlicke auf den Button \n-Verstanden -</string>
+    <string name="gotit">Verstanden</string>
+    <string name="clear">X</string>
+    <string name="enter_price">Preis eingeben</string>
 </resources>
