@@ -51,8 +51,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:paddingStart="0dp"
                     android:paddingEnd="5dp"
-                    android:text="zurück" />
+                    android:text="@string/back" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -86,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Neues Inserat"
+        android:text="@string/new_ad"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -121,7 +122,8 @@
                 android:layout_weight="9"
                 android:paddingStart="16dp"
                 android:paddingTop="11dp"
-                android:text="1 - Kategorien auswählen"
+                android:paddingEnd="0dp"
+                android:text="@string/enter_categorie"
                 android:textAlignment="viewStart" />
 
             <ImageView
@@ -129,6 +131,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="0dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/edit" />
@@ -165,7 +168,8 @@
                 android:layout_weight="9"
                 android:paddingStart="16dp"
                 android:paddingTop="11dp"
-                android:text="2 - Postleitzahl hinzufügen"
+                android:paddingEnd="0dp"
+                android:text="@string/new_enter_zipcode"
                 android:textAlignment="viewStart" />
 
             <ImageView
@@ -173,6 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="0dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/edit" />
@@ -208,7 +213,8 @@
                 android:layout_weight="9"
                 android:paddingStart="16dp"
                 android:paddingTop="11dp"
-                android:text="3 - Stadt hinzufügen"
+                android:paddingEnd="0dp"
+                android:text="@string/new_enter_city"
                 android:textAlignment="viewStart" />
 
             <ImageView
@@ -216,6 +222,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="0dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/edit" />
@@ -251,7 +258,8 @@
                 android:layout_weight="9"
                 android:paddingStart="16dp"
                 android:paddingTop="11dp"
-                android:text="4 - Überschrift hinzufügen"
+                android:paddingEnd="0dp"
+                android:text="@string/new_enter_title"
                 android:textAlignment="viewStart" />
 
             <ImageView
@@ -259,6 +267,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="0dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/edit" />
@@ -294,7 +303,8 @@
                 android:layout_weight="9"
                 android:paddingStart="16dp"
                 android:paddingTop="11dp"
-                android:text="5 - Beschreibung hinzufügen"
+                android:paddingEnd="0dp"
+                android:text="@string/new_enter_description"
                 android:textAlignment="viewStart" />
 
             <ImageView
@@ -302,6 +312,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="0dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/edit" />
@@ -345,7 +356,8 @@
                 android:layout_weight="9"
                 android:paddingStart="16dp"
                 android:paddingTop="11dp"
-                android:text="6 - Preis hinzufügen"
+                android:paddingEnd="0dp"
+                android:text="@string/new_enter_price"
                 android:textAlignment="viewStart" />
 
             <ImageView
@@ -353,6 +365,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:paddingStart="0dp"
                 android:paddingTop="13dp"
                 android:paddingEnd="8dp"
                 android:src="@drawable/edit" />
@@ -378,7 +391,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
             app:cardElevation="0dp"
@@ -396,7 +409,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:text="Foto" />
+                    android:text="@string/new_enter_pic1" />
 
                 <ImageView
                     android:id="@+id/pic1_edit"
@@ -414,7 +427,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
             app:cardElevation="0dp"
@@ -432,7 +445,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:text="Foto" />
+                    android:text="@string/new_enter_pic2" />
 
                 <ImageView
                     android:id="@+id/pic2_edit"
@@ -450,7 +463,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
             app:cardElevation="0dp"
@@ -468,7 +481,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:text="Foto" />
+                    android:text="@string/new_enter_pic3" />
 
                 <ImageView
                     android:id="@+id/pic3_edit"
@@ -486,7 +499,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:layout_marginRight="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:backgroundTint="@color/primary_light_green"
             app:cardElevation="0dp"
@@ -504,7 +517,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:text="Foto" />
+                    android:text="@string/new_enter_pic4" />
 
                 <ImageView
                     android:id="@+id/pic4_edit"
@@ -539,7 +552,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_horizontal"
-                    android:text="Foto" />
+                    android:text="@string/new_enter_pic5" />
 
                 <ImageView
                     android:id="@+id/pic5_edit"
@@ -552,7 +565,6 @@
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/btn_floating_action"
         android:layout_width="80dp"
@@ -560,7 +572,7 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/primary_dark_green"
         android:elevation="5dp"
-        android:text="Los"
+        android:text="@string/go"
         android:textColor="@color/primary_light_green"
         android:textSize="20sp"
         android:visibility="invisible"
@@ -629,7 +641,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Home"
+                            android:text="@string/navbar_home"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -663,7 +675,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Favoriten" />
+                            android:text="@string/navbar_favorite" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -696,7 +708,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Inserieren"
+                            android:text="@string/navbar_insert"
                             android:textColor="@color/white" />
 
                     </LinearLayout>
@@ -730,7 +742,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="  Chat  " />
+                            android:text="@string/navbar_chat" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -739,7 +751,7 @@
                     android:id="@+id/cv_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_weight="20"
                     android:backgroundTint="@color/primary_light_green"
                     app:strokeWidth="0dp">
@@ -765,7 +777,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text=" Profil "
+                            android:text="@string/navbar_profile"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>

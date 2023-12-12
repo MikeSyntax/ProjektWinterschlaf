@@ -89,4 +89,23 @@
     <string name="quicksearch_zipcode">Schnellsuche PLZ</string>
     <string name="more_infos">Mehr Infos</string>
     <string name="info_text">Projekt Winterschlaf ist eine App zum schnellen Finden von Garagen, Stellplätzen und Lagern in Deiner Nähe.\n\nAlle Plätze sind sofort verfügbar und in Abstimmung mit dem Vermieter online oder vorOrt zu mieten.\n\nFür Vermieter ist das Inserieren völlig kostenfrei und durch die intuitive Menüführung in wenigen Minuten erldedigt.\n\nTeile erstellte oder gerade gefundene Objekte mit deinen Freunden oder Geschäftspartnern.\n\nViel Spaß</string>
+    <string name="new_ad">Neues Inserat</string>
+    <string name="enter_categorie">1 - Kategorien auswählen</string>
+    <string name="new_enter_zipcode">2 - Postleitzahl hinzufügen</string>
+    <string name="new_enter_city">3 - Stadt hinzufügen</string>
+    <string name="new_enter_title">4 - Überschrift hinzufügen</string>
+    <string name="new_enter_description">5 - Beschreibung hinzufügen</string>
+    <string name="new_enter_price">6 - Preis hinzufügen</string>
+    <string name="new_enter_pic1">Foto</string>
+    <string name="new_enter_pic2">Foto</string>
+    <string name="new_enter_pic3">Foto</string>
+    <string name="new_enter_pic4">Foto</string>
+    <string name="new_enter_pic5">Foto</string>
+    <string name="go">Los</string>
+    <string name="wellcome">Willkommen</string>
+    <string name="loading">wird geladen...</string>
+    <string name="login">Login</string>
+    <string name="no_account_please_register">Noch keinen Account, hier registrieren</string>
+    <string name="register">Registrieren</string>
+    <string name="message">Message</string>
 </resources>
