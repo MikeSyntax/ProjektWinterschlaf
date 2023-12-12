@@ -234,9 +234,16 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.checkDatabaseForMyAds()
     }
 
+    //Konvertieren der Uhrzeit von Milli und Nanosekunden, zu normaler Uhrzeit
+    fun convertTimestampToDateTime(timestamp: com.google.firebase.Timestamp): String {
+        return repository.convertTimestampToDateTime(timestamp)
+    }
+
     //Abfrage in der Firebase Database aller MEINER Nachrichten
     fun checkMessages() {
+        viewModelScope.launch {
         repository.checkMessages()
+        }
     }
 
     //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData

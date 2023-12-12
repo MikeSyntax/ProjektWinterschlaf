@@ -18,6 +18,9 @@ import com.example.modulabschlussandroid.data.remote.DistanceApiObject
 import com.example.modulabschlussandroid.data.remote.GeoCoderApiObject
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 //Repository Pattern nur eine Datenquelle für die ganze App um immer die gleichen Daten zu haben====
 //Das Repository ist das Modell von MVVM
@@ -214,6 +217,11 @@ class RepositoryObjects(
     //Auslesen der Datenbank von Firebase
     fun checkDatabaseForMyAds() {
         firebaseRepository.checkDatabaseForMyAds()
+    }
+
+    //Konvertieren der Uhrzeit von Milli und Nanosekunden, zu normaler Uhrzeit
+    fun convertTimestampToDateTime(timestamp: com.google.firebase.Timestamp): String {
+        return firebaseRepository.convertTimestampToDateTime(timestamp)
     }
 
     //Abfrage in der Firebase Database aller MEINER Nachrichten

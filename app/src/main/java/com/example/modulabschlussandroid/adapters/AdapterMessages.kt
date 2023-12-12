@@ -8,10 +8,12 @@ import androidx.viewbinding.ViewBinding
 import com.example.modulabschlussandroid.data.datamodels.chat.Message
 import com.example.modulabschlussandroid.databinding.ListItemMessageReceiverBinding
 import com.example.modulabschlussandroid.databinding.ListItemMessageSenderBinding
+import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
 class AdapterMessages(
 
     private var dataset: List<Message>,
+    private var viewModel: ViewModelObjects
 
 ) : RecyclerView.Adapter<ViewHolder>() {
 
@@ -45,10 +47,10 @@ class AdapterMessages(
         val thisMessage = dataset[position]
         if (holder is MessageReceiverViewHolder){
             holder.binding.tvMessageReceiver.text = thisMessage.message
-            holder.binding.timeStampReceiver.text = thisMessage.timestamp.toString()
+            holder.binding.timeStampReceiver.text = viewModel.convertTimestampToDateTime(thisMessage.timestamp)
         } else if (holder is MessageSenderViewHolder){
             holder.binding.tvMessageTextSender.text = thisMessage.message
-            holder.binding.timeStampSender.text = thisMessage.timestamp.toString()
+            holder.binding.timeStampSender.text = viewModel.convertTimestampToDateTime(thisMessage.timestamp)
         }
     }
 
