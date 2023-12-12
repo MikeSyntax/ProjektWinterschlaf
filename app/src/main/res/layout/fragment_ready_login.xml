@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,8 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingEnd="5dp"
-                    android:text="zurück" />
+                    android:paddingStart="0dp"
+                    android:text="@string/back" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -66,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Projekt Winterschlaf"
+            android:text="@string/title"
             android:textStyle="bold" />
 
         <com.google.android.material.card.MaterialCardView
@@ -89,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingStart="5dp"
-                    android:text="weiter" />
+                    android:paddingEnd="0dp"
+                    android:text="@string/forward" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -123,7 +125,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Anmeldedaten eingeben"
+        android:text="@string/login_screen"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
@@ -134,7 +136,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_margin="16dp"
-        android:text="Zur Anmeldung bitte deine Email und \ndein Passwort eingeben, falls Du noch keinen Account hast, gehe bitte zurück und registriere dich zuerst"
+        android:text="@string/text_user_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -145,7 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Email eingeben"
+        android:hint="@string/enter_email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description">
@@ -161,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Passwort eingeben"
+        android:hint="@string/enter_password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +182,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_margin="16dp"
-        android:text="Nach Eingabe bitte rechts oben auf \nweiter klicken, viel Spaß"
+        android:text="@string/text_goOn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tfield_password"
@@ -197,7 +199,7 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:paddingBottom="6dp"
-        android:text="Noch keinen Account\nhier registrieren"
+        android:text="@string/user_no_account"
         android:textColor="@color/primary_light_green"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -108,4 +108,16 @@
     <string name="no_account_please_register">Noch keinen Account, hier registrieren</string>
     <string name="register">Registrieren</string>
     <string name="message">Message</string>
+    <string name="edit">editieren</string>
+    <string name="profile">Profil</string>
+    <string name="my_ads">Meine Inserate</string>
+    <string name="zero">0</string>
+    <string name="number_old_ads">Meine bisherigen Inserate</string>
+    <string name="all_ads_online">Alle Inserate online 0</string>
+    <string name="login_screen">Anmeldedaten eingeben</string>
+    <string name="text_user_login">Zur Anmeldung bitte deine Email und \ndein Passwort eingeben, falls Du noch keinen Account hast, gehe bitte zurück und registriere dich zuerst</string>
+    <string name="enter_email">Email eingeben</string>
+    <string name="enter_password">Passwort eingeben</string>
+    <string name="text_goOn">Nach Eingabe bitte rechts oben auf \nweiter klicken, viel Spaß</string>
+    <string name="user_no_account">Noch keinen Account\nhier registrieren</string>
 </resources>
