@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterMessages
+import com.example.modulabschlussandroid.adapters.AdapterProfile
 import com.example.modulabschlussandroid.data.datamodels.chat.Message
 import com.example.modulabschlussandroid.databinding.FragmentMessageBinding
 import com.example.modulabschlussandroid.databinding.ListItemMessageSenderBinding
@@ -52,29 +53,39 @@ class MessageFragment : Fragment() {
 
         message = Message()
         val uId = viewModel.uId
-        //val chatProgress = viewModel.currentAdvertisementId
-        val currentAdvertisement = viewModel.currentAdvertisement
-        val messageAdapter = AdapterMessages(currentAdvertisement.value!!.messageHistory)
-        binding.rvMessages.adapter = messageAdapter
 
-        currentAdvertisement.observe(viewLifecycleOwner) {
-            binding.btnSend.setOnClickListener {
-                message.incomingMessage = false
-                message.advertisementId = advertismentId
-                message.senderId = uId.value.toString()
-                message.message = binding.textInputSender.text.toString()
-                message.timestamp = Timestamp.now()
-                viewModel.saveMessageToDatabase(message)
-                messageAdapter.updateMessagesAdapter(currentAdvertisement.value!!.messageHistory)
-                binding.textInputSender.setText("")
-            }
+        binding.btnSend.setOnClickListener {
+            message.incomingMessage = false
+            message.advertisementId = advertismentId
+            message.senderId = uId.value.toString()
+            message.message = binding.textInputSender.text.toString()
+            message.timestamp = Timestamp.now()
+            viewModel.saveMessageToDatabase(message)
+            binding.textInputSender.setText("")
+        }
+
+        //Setzen des Adapter im Message Fragment
+        val recView = binding.rvMessages
+        recView.setHasFixedSize(true)
+
+
+        //Funktion Nachrichten bezüglich einer bestimmten Advertisement Id
+        viewModel.checkMessages()
+
+        //Adapter setzten und mit LiveData überwachen
+        viewModel.myMessage.observe(viewLifecycleOwner) {
+
+            val adapter = AdapterMessages(it)
+
+            recView.adapter = adapter
+
+            adapter.updateMessagesAdapter(it)
+
         }
 
         binding.cvBack.setOnClickListener {
             findNavController().navigateUp()
         }
-
     }
-
-
 }
+

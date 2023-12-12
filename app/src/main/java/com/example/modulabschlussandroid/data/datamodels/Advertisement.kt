@@ -31,7 +31,6 @@ data class Advertisement(
     var yard: Boolean = false,                              //Hof
     var profileImageForAd: String? = "",
     var ownerOfThisAd: String? = "",
-    val messageHistory: MutableList<Message> = mutableListOf()
 
 ) {
     constructor(dataSnapshot: DocumentSnapshot) : this() {

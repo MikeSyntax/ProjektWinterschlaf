@@ -260,8 +260,9 @@ class RepositoryFirebase(
 //Firebase Firestore Nachricht aus dem MessageFragment speichern NOCH NICHT WEITERGEMACHT===========
 
     fun saveMessageToDatabase(message: Message) {
-        fireStoreDatabase.collection("chat")
-            .document().set(
+        fireStoreDatabase.collection("objectsOnline")
+            .document(currentAdvertisementId.value.toString())
+            .collection("chat").add(
                 message
             )
             .addOnSuccessListener {
@@ -302,7 +303,9 @@ class RepositoryFirebase(
 //Abfrage in der Firebase Database aller meiner Nachrichten=========================================
     fun checkMessages() {
         val messages: MutableList<Message> = mutableListOf()
-        fireStoreDatabase.collection("chat")
+        fireStoreDatabase.collection("objectsOnline")
+            .document(currentAdvertisementId.value.toString())
+            .collection("chat")
             .get()
             .addOnSuccessListener {
                 it.documents.forEach { message ->
