@@ -241,6 +241,19 @@ class RepositoryObjects(
                 database.objectDao.insertObject(data.object9)
                 database.objectDao.insertObject(data.object10)
                 database.objectDao.insertObject(data.object11)
+                database.objectDao.insertObject(data.object12)
+                database.objectDao.insertObject(data.object13)
+                database.objectDao.insertObject(data.object14)
+                database.objectDao.insertObject(data.object15)
+                database.objectDao.insertObject(data.object16)
+                database.objectDao.insertObject(data.object17)
+                database.objectDao.insertObject(data.object18)
+                database.objectDao.insertObject(data.object19)
+                database.objectDao.insertObject(data.object20)
+                database.objectDao.insertObject(data.object21)
+                database.objectDao.insertObject(data.object22)
+                database.objectDao.insertObject(data.object23)
+
             }
         } catch (e: Exception) {
            // Log.e("Repository", "$e loadAllObjects failed")

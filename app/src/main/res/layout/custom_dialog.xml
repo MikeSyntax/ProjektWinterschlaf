@@ -425,14 +425,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Lagerhalle" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/storagehall" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -449,8 +450,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -476,14 +477,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Lagerraum" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/storageroom" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -500,8 +502,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -527,14 +529,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Lagerbox" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/storagebox" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -551,8 +554,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -578,14 +581,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Container" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/container" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -602,8 +606,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -629,14 +633,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Keller" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/basement" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -653,8 +658,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -680,14 +685,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Scheune" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/barn" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -704,8 +710,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -731,14 +737,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Freifläche" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/openspace" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -755,8 +762,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -782,14 +789,15 @@
                             android:layout_gravity="center_vertical"
                             android:layout_weight="9"
                             android:paddingStart="16dp"
-                            android:text="Hof" />
+                            android:paddingEnd="16dp"
+                            android:text="@string/yard" />
 
                         <TextView
                             style="@style/textSuperSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="off"
+                            android:text="@string/off"
                             android:textColor="@color/primary_dark_green" />
 
                         <Switch
@@ -806,8 +814,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:layout_marginRight="5dp"
-                            android:text="on"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/on"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>

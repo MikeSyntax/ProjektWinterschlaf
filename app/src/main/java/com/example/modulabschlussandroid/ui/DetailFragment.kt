@@ -132,7 +132,8 @@ class DetailFragment : Fragment() {
                 binding.tvDetailObject.text = thisAdvertisment.title
                 binding.tvDetailPrice.text = "${thisAdvertisment.price.toString()}€"
                 binding.tvDistance.text = "PLZ ${thisAdvertisment.zipCode}"
-                binding.tvAdsUserName.text = "Ersteller: ${thisAdvertisment.ownerOfThisAd}"
+                binding.tvAdsUserName.textSize = 20f
+                binding.tvAdsUserName.text = "Autor: ${thisAdvertisment.ownerOfThisAd}"
                 //Profilfoto aus dem Storage laden
                 Glide.with(requireContext()).load(thisAdvertisment.profileImageForAd)
                     .placeholder(R.drawable.projekt_winterschlaf_logo).into(binding.ivUser)
@@ -192,7 +193,7 @@ class DetailFragment : Fragment() {
 //NEU
         //zum chatten bzw. Nachrichten schreiben navigieren
         binding.btnMessage.setOnClickListener {
-         //   Log.d("Detail", "AdvertismentId ${currentAdvertisementId.value.toString()}")
+            Log.d("Detail", "AdvertismentId ${currentAdvertisementId.value.toString()}")
             findNavController().navigate(
                 DetailFragmentDirections
                     //mit Übergabe der aktuellen Advertisment Id als Argument

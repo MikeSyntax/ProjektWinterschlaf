@@ -54,7 +54,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingEnd="5dp"
-                    android:text="zurück" />
+                    android:paddingStart="0dp"
+                    android:text="@string/back" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -88,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Nachrichten"
+        android:text="@string/chatnews"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -163,7 +164,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Home"
+                            android:text="@string/navbar_home"
                             android:textColor="@color/primary_dark_green" />
 
                     </LinearLayout>
@@ -197,7 +198,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Favoriten" />
+                            android:text="@string/navbar_favorite" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -230,7 +231,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Inserieren" />
+                            android:text="@string/navbar_insert" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -263,7 +264,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="  Chat  " />
+                            android:text="@string/navbar_chat" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -272,7 +273,7 @@
                     android:id="@+id/cv_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_weight="20"
                     android:backgroundTint="@color/primary_light_green"
                     app:strokeWidth="0dp">
@@ -298,7 +299,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text=" Profil "
+                            android:text="@string/nabar_profile"
                             android:textColor="@color/white" />
 
                     </LinearLayout>

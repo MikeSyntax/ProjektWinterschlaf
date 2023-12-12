@@ -41,7 +41,7 @@ object ObjectsExampleData {
         true,
         "Lagerplatz mit ganz viel Fläche und Stauraum",
         true,
-        "76133",
+        "04732",
         true,
     )
 
@@ -60,7 +60,7 @@ object ObjectsExampleData {
         true,
         "Sicherer Garagenstellplatz in zentraler Lage.",
         true,
-        "76229",
+        "12345",
         true,
     )
 
@@ -79,7 +79,7 @@ object ObjectsExampleData {
         true,
         "Überdachter Stellplatz für Ihr Auto.",
         true,
-        "76185",
+        "21634",
         true,
     )
 
@@ -98,7 +98,7 @@ object ObjectsExampleData {
         true,
         "Großer Gewerbepark mit vielseitigen Lagermöglichkeiten.",
         true,
-        "76131",
+        "81344",
         true,
     )
 
@@ -117,7 +117,7 @@ object ObjectsExampleData {
         true,
         "Sichere Garage in ruhiger Nachbarschaft.",
         true,
-        "76187",
+        "56345",
         true,
     )
 
@@ -136,7 +136,7 @@ object ObjectsExampleData {
         true,
         "Zugang zu einem bequemen Stellplatz in der Innenstadt.",
         true,
-        "76477",
+        "61275",
         true,
     )
 
@@ -155,7 +155,7 @@ object ObjectsExampleData {
         true,
         "Klimatisierter Lagerplatz für empfindliche Waren.",
         true,
-        "76287",
+        "48734",
         true,
     )
 
@@ -174,7 +174,7 @@ object ObjectsExampleData {
         true,
         "Gemütliche Garage für Motorräder und Hobbyprojekte.",
         true,
-        "76327",
+        "70372",
         true,
     )
 
@@ -193,26 +193,255 @@ object ObjectsExampleData {
         true,
         "Überdachter Stellplatz für Ihr Fahrzeug.",
         true,
-        "76133",
+        "03467",
         true,
     )
 
     val object11 = Objects(
         id = 0,
+        R.drawable.bild_park,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
         R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Berlin",
+        true,
+        "Tiefgaragenplatz",
+        true,
+        120.00,
+        true,
+        "Schöner Tiefgaragenplatz in zentraler Lage",
+        true,
+        "10115",
+        true,
+    )
+
+    val object12 = Objects(
+        id = 0,
+        R.drawable.bild_warehouse,
         R.drawable.bild_doppelgarage,
-        R.drawable.bild_parkplat,
+        R.drawable.bild_lagerhalle,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Hamburg",
+        true,
+        "Lagerhalle",
+        true,
+        200.00,
+        true,
+        "Große Lagerhalle mit Laderampe",
+        true,
+        "20095",
+        true,
+    )
+
+    val object13 = Objects(
+        id = 0,
+        R.drawable.bild_park,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_parkhaus,
+        R.drawable.bild_halle,
+        "München",
+        true,
+        "Parkplatz",
+        true,
+        35.00,
+        true,
+        "Zentral gelegener Parkplatz in der Innenstadt",
+        true,
+        "80331",
+        true,
+    )
+
+    val object14 = Objects(
+        id = 0,
+        R.drawable.bild_park,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Stuttgart",
+        true,
+        "Freifläche",
+        true,
+        80.00,
+        true,
+        "Große Freifläche für verschiedene Nutzungsmöglichkeiten",
+        true,
+        "70173",
+        true,
+    )
+
+    val object15 = Objects(
+        id = 0,
+        R.drawable.bild_parkhaus,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Frankfurt",
+        true,
+        "Parkhaus",
+        true,
+        150.00,
+        true,
+        "Modernes Parkhaus mit automatischem Parksystem",
+        true,
+        "60306",
+        true,
+    )
+
+    val object16 = Objects(
+        id = 0,
+        R.drawable.bild_park,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Düsseldorf",
+        true,
+        "Garten",
+        true,
+        90.00,
+        true,
+        "Gepflegter Garten mit Sitzmöglichkeiten",
+        true,
+        "40213",
+        true,
+    )
+
+    val object17 = Objects(
+        id = 0,
+        R.drawable.bild_park,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_parkhaus,
+        R.drawable.bild_halle,
+        "Dresden",
+        true,
+        "Parkplatz",
+        true,
+        45.00,
+        true,
+        "Parkplatz in der Nähe von Einkaufszentrum",
+        true,
+        "01067",
+        true,
+    )
+
+    val object18 = Objects(
+        id = 0,
+        R.drawable.bild_warehouse,
+        R.drawable.bild_doppelgarage,
+        R.drawable.bild_lagerhalle,
         R.drawable.bild_halle,
         R.drawable.bild_halle,
         "Nürnberg",
         true,
-        "Lagerplatz",
+        "Lagerhalle",
         true,
-        45.00,
+        180.00,
         true,
-        "Praktische Lagerräume in einem gesicherten Gebäudekomplex.",
+        "Moderne Lagerhalle mit Bürobereich",
         true,
-        "76229",
-        true
+        "90402",
+        true,
     )
+
+    val object19 = Objects(
+        id = 0,
+        R.drawable.bild_parkhaus,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Hannover",
+        true,
+        "Parkhaus",
+        true,
+        130.00,
+        true,
+        "Zentrales Parkhaus mit vielen Stellplätzen",
+        true,
+        "30159",
+        true,
+    )
+
+    val object20 = Objects(
+        id = 0,
+        R.drawable.bild_park,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Bremen",
+        true,
+        "Garten",
+        true,
+        75.00,
+        true,
+        "Gepflegter Garten mit Spielbereich für Kinder",
+        true,
+        "28195",
+        true,
+    )
+
+    val object21 = Objects(
+        id = 0,
+        R.drawable.bild_park,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_parkhaus,
+        R.drawable.bild_halle,
+        "Essen",
+        true,
+        "Parkplatz",
+        true,
+        40.00,
+        true,
+        "Bequemer Parkplatz in der Nähe von Restaurants",
+        true,
+        "45127",
+        true,
+    )
+
+    val object22 = Objects(
+        id = 0,
+        R.drawable.bild_warehouse,
+        R.drawable.bild_doppelgarage,
+        R.drawable.bild_lagerhalle,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Köln",
+        true,
+        "Lagerhalle",
+        true,
+        160.00,
+        true,
+        "Geräumige Lagerhalle mit Rolltor",
+        true,
+        "50667",
+        true,
+    )
+
+    val object23 = Objects(
+        id = 0,
+        R.drawable.bild_parkhaus,
+        R.drawable.bild_carport,
+        R.drawable.bild_parkplatz,
+        R.drawable.bild_halle,
+        R.drawable.bild_halle,
+        "Dortmund",
+        true,
+        "Parkhaus",
+        true,
+        110.00,
+        true,
+        "Parkhaus mit schnellem Zugang zur Autobahn",
+        true,
+        "44135",
+        true,
+    )
+
 }

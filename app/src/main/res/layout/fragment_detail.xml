@@ -55,7 +55,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:paddingEnd="5dp"
-                    android:text="zurück" />
+                    android:paddingStart="0dp"
+                    android:text="@string/back" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -65,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Projekt Winterschlaf"
+            android:text="@string/title"
             android:textStyle="bold" />
 
 
@@ -90,7 +91,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="78dp"
-        android:text="Detailansicht"
+        android:text="@string/detailview"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -138,7 +139,7 @@
                         android:id="@+id/iv_detail_object1"
                         android:layout_width="85dp"
                         android:layout_height="84dp"
-                        android:layout_marginRight="3dp"
+                        android:layout_marginEnd="3dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/bild_halle" />
@@ -148,7 +149,7 @@
                         android:id="@+id/iv_detail_object2"
                         android:layout_width="85dp"
                         android:layout_height="84dp"
-                        android:layout_marginRight="3dp"
+                        android:layout_marginEnd="3dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
                         android:src="@drawable/bild_halle" />
@@ -175,7 +176,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
-                            android:text="Ort" />
+                            android:text="@string/detail_city" />
 
                         <TextView
                             android:id="@+id/tv_detail_object"
@@ -184,7 +185,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
-                            android:text="Objekt" />
+                            android:text="@string/detail_title" />
 
                         <TextView
                             android:id="@+id/tv_detail_price"
@@ -193,7 +194,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
-                            android:text="Preis"
+                            android:text="@string/detail_price"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -216,9 +217,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="30"
-                        android:text="Koordinaten" />
+                        android:text="@string/detail_koordinates" />
 
                     <TextView
                         android:id="@+id/tv_latitude"
@@ -226,16 +227,16 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="30"
-                        android:text="Latitude" />
+                        android:text="@string/detail_latitude" />
 
                     <TextView
                         android:id="@+id/tv_longitude"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginEnd="5dp"
                         android:layout_weight="30"
-                        android:text="Longitude" />
+                        android:text="@string/detail_longitude" />
 
 
                 </LinearLayout>
@@ -248,12 +249,12 @@
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_get_distance"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_weight="100"
-                        android:text="Entfernung anzeigen"
+                        android:text="@string/detail_showdistance"
                         android:textColor="@color/primary_light_green"
                         app:cornerRadius="10dp" />
 
@@ -263,7 +264,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="10"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -271,7 +272,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="11"
                         android:orientation="vertical">
@@ -293,7 +294,7 @@
                             android:layout_gravity="start"
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="10dp"
-                            android:text="Description" />
+                            android:text="@string/detail_description" />
 
                         <com.google.android.material.divider.MaterialDivider
                             android:id="@+id/materialDividerMiddle"
@@ -338,7 +339,7 @@
                                 android:textStyle="italic"
                                 android:backgroundTint="@color/primary_light_green"
                                 android:src="@drawable/projekt_winterschlaf_logo"
-                                android:text="Anbieter"
+                                android:text="@string/detail_author"
                                 android:textColor="@color/primary_dark_green" />
 
                             <ImageView
@@ -357,7 +358,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:text="Schreibe eine Nachricht"
+                            android:text="@string/detail_sendmessage"
                             android:textColor="@color/primary_light_green"
                             app:cornerRadius="10dp" />
 
@@ -428,7 +429,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Home"
+                            android:text="@string/navbar_home"
                             android:textColor="@color/white" />
 
                     </LinearLayout>
@@ -462,7 +463,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Favoriten" />
+                            android:text="@string/navbar_favorite" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -495,7 +496,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Inserieren" />
+                            android:text="@string/navbar_insert" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -528,7 +529,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="  Chat  " />
+                            android:text="@string/navbar_chat" />
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -537,7 +538,7 @@
                     android:id="@+id/cv_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_weight="20"
                     android:backgroundTint="@color/primary_light_green"
                     app:strokeWidth="0dp">
@@ -562,7 +563,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text=" Profil " />
+                            android:text="@string/navbar_profile" />
 
                     </LinearLayout>
 
