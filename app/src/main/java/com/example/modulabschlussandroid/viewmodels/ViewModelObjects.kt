@@ -29,6 +29,10 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     private val database = ObjectDatabase.getDatabase(application)
     private val repository = RepositoryObjects(database, GeoCoderApiObject, DistanceApiObject)
 
+//==================================================================================================
+//Alle Daten aus dem Repository übergeben MVVM======================================================
+//==================================================================================================
+
     //Für die Navigation auf die Detailseite, da sowohl aus Home und Profil unterschiedliche Datenbanken
     var homeFragment: Boolean = false
 
@@ -53,20 +57,31 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
     //Hier wird die LiveData der Distance Api Abfrage aus dem Repository eingeschleift
     var distanceData: LiveData<DistanceMatrix> = repository.distanceData
 
-    //Eingegebener Text für die Suche als LiveData
-    private val _inputText = MutableLiveData<String>()
-    val inputText: LiveData<String>
-        get() = _inputText
+    //Hier wird die LiveData der Postleitzahlensuche aus dem Repository übergeben
+    var inputText = repository.inputText
 
     //Erstellen einer LivaData mit dem aktuellen Objekt (Room Datenbank)
-    private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
-    val currentObject: LiveData<Objects>
-        get() = _currentObject
+    var currentObject = repository.currentObject
 
     //Erstellen einer LivaData mit dem aktuellen Advertisments (Firebase Datenbank)
-    private val _currentAdvertisment: MutableLiveData<Advertisement> = MutableLiveData()
-    val currentAdvertisement: LiveData<Advertisement>
-        get() = _currentAdvertisment
+    var currentAdvertisement = repository.currentAdvertisement
+
+    //LiveData des aktuellen Users eingeloggt oder nicht
+    var currentAppUser = repository.currentAppUser
+
+    //Erkennen der aktuellen AdvertismentId mit LiveData
+    val currentAdvertisementId = repository.currentAdvertisementId
+
+    //Zählen meiner jetzigen Inserate, die online sind
+    val countAdvertises = repository.countAdvertises
+
+    //Zählen aller Inserate die von dem eingeloggten User gerade online sind
+    val allMyAdvertises = repository.allMyAdvertises
+
+//==================================================================================================
+//Init Block========================================================================================
+//==================================================================================================
+
 
     //Erste Befüllung der Datenbank
     init {
@@ -75,6 +90,10 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
             repository.loadAllObjects()
         }
     }
+
+//==================================================================================================
+//Alle Funktionen aus dem Repository MVVM===========================================================
+//==================================================================================================
 
     //GeoDaten der jeweiligen Objekte holen
     fun getGeoResult(city: String) {
@@ -99,29 +118,27 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     //Anzeige des aktuellen Objektes (Room)
     fun setCurrentObject(objects: Objects) {
-            _currentObject.value = objects
+        repository.setCurrentObject(objects)
     }
 
     //Anzeigen des aktuellen Advertisments (Firebase)
-    fun setCurrentAdvertisment(advertisement: Advertisement){
-            _currentAdvertisment.value = advertisement
+    fun setCurrentAdvertisement(advertisement: Advertisement) {
+        repository.setCurrentAdvertisement(advertisement)
     }
 
     //Für die Suche auf der Home wird hier der Text aus dem LiveData übergeben
     fun updateInputText(text: String) {
-        viewModelScope.launch {
-            _inputText.value = text
-        }
+        repository.updateInputText(text)
     }
 
     fun getZipCodeObject(zip: String) {
         viewModelScope.launch {
             repository.getZipCodeObject(zip)
-            Log.d("success ViewModel", "$zip input Text")
+            //  Log.d("success ViewModel", "$zip input Text")
         }
     }
 
-//Funktion um Bilder in das Firebase Storage hochzuladen============================================
+    //Funktion um Bilder in das Firebase Storage hochzuladen
     fun uploadImagetoStorage(uri: Uri) {
         viewModelScope.launch {
             repository.uploadImagetoStorage(uri)
@@ -130,10 +147,8 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
 
     //NEU Update der aktuellen User Id  TODO!!!!!!!!!
     fun showCurrentUserId() {
-        viewModelScope.launch {
-            repository.showCurrentUserId()
-            Log.d("viewModel", "User Id ${uId.value}")
-        }
+        repository.showCurrentUserId()
+        //     Log.d("viewModel", "User Id ${uId.value}")
     }
 
     //Neuer User muss erst seine Benutzerdaten eingeben
@@ -144,18 +159,19 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-    //NEU Update aller Userdaten mit einer bestimmten Id aus der Firestore Database=====================
+    //Update aller Userdaten mit einer bestimmten Id aus der Firestore Database
     fun updateCurrentUserFromFirestore() {
         viewModelScope.launch {
             repository.updateCurrentUserFromFirestore()
         }
     }
 
-
+    //Login in Firebase Authentication
     fun login(email: String, password: String, context: Context): Task<String> {
         return repository.login(email, password, context)
     }
 
+    //Registrierung in Firebase Authentication
     fun register(
         email: String,
         password: String,
@@ -165,12 +181,10 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         return repository.register(email, password, passConfirmation, context)
     }
 
-    //Ausloggen des aktuellen Users
+    //Ausloggen des aktuellen Users in Firebase Authentication
     fun signOutUser() {
-        viewModelScope.launch {
-            //Ausloggen
-            repository.signOutUser()
-        }
+        //Ausloggen
+        repository.signOutUser()
     }
 
     //Inserieren eines neuen Advertisments (Objekt)
@@ -180,7 +194,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 
-    //Erstellen einer neuen Chat Nachricht
+    //Erstellen einer neuen Chat Nachricht NOCH NICHT IN BENUTZUNG
     fun saveMessageToDatabase(message: Message) {
         viewModelScope.launch {
             repository.saveMessageToDatabase(message)
@@ -192,54 +206,40 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.getAllAdId()
     }
 
-    //Erkennen der aktuellen AdvertismentId mit LiveData
-    val currentAdvertisementId = repository.currentAdvertisementId
-    fun getAdvertisementId(advertisement: Advertisement){
+    //Entsprechende Id des aktuellen Advertisements erhalten zur Weitergabe an Chat
+    fun getAdvertisementId(advertisement: Advertisement) {
         repository.getAdvertisementId(advertisement)
     }
 
+    //Bei Erstanmelung wird kontrolliet ob die Userdaten komplett sind
     fun checkUserDateComplete(uId: String): Task<String> {
         return repository.checkUserDataComplete(uId)
     }
 
-    //Counter für alle Anzeigen online==================================================================
-
-    //Anzahl meiner bisheriger Anzeigen erhöhen
+    //Anzahl meiner bisherigen Anzeigen erhöhen
     fun addCounterForAdvertises(personalData: PersonalData) {
-        viewModelScope.launch {
-            repository.addCounterForAdvertises(personalData)
-        }
+        repository.addCounterForAdvertises(personalData)
     }
 
-    //Zählen meiner jetzigen Inserate, die online sind
-    val countAdvertises = repository.countAdvertises
+    //Counter für alle Anzeigen online
     fun countAdvertises() {
-        viewModelScope.launch {
-            repository.countAdvertises()
-        }
+        repository.countAdvertises()
     }
 
     //Zählen aller Inserate die von dem eingeloggten User gerade online sind
-    //Auslesen der Datenbank von Firebase
-    val allMyAdvertises = repository.allMyAdvertises
     fun checkDatabaseForMyAds() {
-        viewModelScope.launch {
-            repository.checkDatabaseForMyAds()
-        }
+        repository.checkDatabaseForMyAds()
     }
-
-    //LiveData des aktuellen Users eingeloggt oder nicht
-    var currentAppUser = repository.currentAppUser
 
     //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData
     fun currentAppUserLogged() {
         repository.currentAppUserLogged()
     }
 
-    //Ein einzelnes Objekt löschen
+    //Ein einzelnes Objekt aus der Room Datenbank löschen
     fun deleteById() {
         viewModelScope.launch {
-            val thisObject = _currentObject.value
+            val thisObject = currentObject.value
             if (thisObject != null) {
                 val id = thisObject.id
                 viewModelScope.launch {
@@ -249,3 +249,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         }
     }
 }
+
+//==================================================================================================
+//Ende====================================Ende===================================Ende===============
+//==================================================================================================

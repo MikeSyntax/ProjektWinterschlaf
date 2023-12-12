@@ -35,76 +35,86 @@ class RepositoryObjects(
 
     ) {
 
-//LiveData ObjectList===============================================================================
-
-    //Alle Objekte in der Datenbank als LiveData anzeigen
-    val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
-
-//Geliked Objects===================================================================================
-
-    //Alle favorisierten Objekte in der Datenbank als LiveData anzeigen
-    val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
-
-//Postleitzahlensuche Objekte als LiveData==========================================================
-
-    //Nullable LiveData der _zipObjects
-    private var _zipObjects: MutableLiveData<List<Objects>?> = MutableLiveData()
-    val zipObjects: LiveData<List<Objects>?>
-        get() = _zipObjects
-
-
-//Funktion um Bilder in das Firebase Storage hochzuladen=====================================================
-    fun uploadImagetoStorage(uri: Uri){
-       firebaseRepository.uploadImagetoStorage(uri)
-    }
-
-    /*
-//Funktion um den User nach Änderungen upzudaten====================================================
-    fun saveChangesUser(user: PersonalData){
-       firebaseRepository.saveChangesUser(user)
-    }
-
-    */
-//Firebase Firestore Userdaten (Name Adresse Benutzer usw.==========================================
+//==================================================================================================
+//LiveData Verbindung zum Firebase Repository=======================================================
+//==================================================================================================
 
     //Verbindung zum Firebase Repository
     private val firebaseRepository = RepositoryFirebase()
 
     val countAdvertises = firebaseRepository.countAdvertises
-    fun countAdvertises(){
-        firebaseRepository.countAdvertises()
-    }
 
     //LiveData des aktuellen Users
     var currentUser = firebaseRepository.currentUser
 
-
     //LiveData des aktuellen Users ob er eingeloggt ist oder nicht
     var currentAppUser = firebaseRepository.currentAppUser
-
-    //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData
-    fun currentAppUserLogged(){
-        firebaseRepository.currentAppUserLogged()
-    }
-
-
-    //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
-    fun updateCurrentUserFromFirestore() {
-       firebaseRepository.updateCurrentUserFromFirestore()
-    }
-
-
-    fun saveUserData(personalData: PersonalData){
-        firebaseRepository.saveUserData(personalData)
-    }
-
-//Firebase Authentication User ID (integer) ========================================================
 
     //Live Data des aktuellen Users dessen Id
     var uId = firebaseRepository.uId
 
+    //Erkennen der aktuellen AdvertismentId mit LiveData
+    val currentAdvertisementId = firebaseRepository.currentAdvertisementId
+
+    val allMyAdvertises = firebaseRepository.allMyAdvertises
+
+//==================================================================================================
+//LiveData==========================================================================================
+//==================================================================================================
+
+    //Alle Objekte in der Datenbank als LiveData anzeigen
+    val objectList: LiveData<List<Objects>> = database.objectDao.showALL()
+
+    //LiveData Geliked Objects
+    //Alle favorisierten Objekte in der Datenbank als LiveData anzeigen
+    val likedObjects: LiveData<List<Objects>> = database.objectDao.showALLLikedObjects()
+
+    //LiveData Postleitzahlensuche Objekte
+    //Nullable LiveData der _zipObjects
+    private var _zipObjects: MutableLiveData<List<Objects>?> = MutableLiveData()
+    val zipObjects: LiveData<List<Objects>?>
+        get() = _zipObjects
+
+    //LiveData Eingegebener Text für die Postleitzahlen Suche
+    private val _inputText = MutableLiveData<String>()
+    val inputText: LiveData<String>
+        get() = _inputText
+
+    //LiveData mit dem aktuellen Objekt (Room Datenbank)
+    private val _currentObject: MutableLiveData<Objects> = MutableLiveData()
+    val currentObject: LiveData<Objects>
+        get() = _currentObject
+
+    //LivaData mit dem aktuellen Advertisments (Firebase Datenbank)
+    private val _currentAdvertisment: MutableLiveData<Advertisement> = MutableLiveData()
+    val currentAdvertisement: LiveData<Advertisement>
+        get() = _currentAdvertisment
+
+    //LiveData der GeoDaten Abfrage über einen API Call
+    private val _geoResult: MutableLiveData<Geo> = MutableLiveData()
+    val geoResult: LiveData<Geo>
+        get() = _geoResult
+
+    //LiveData der DistanceData Abfrage über einen Api Call
+    private val _distanceData: MutableLiveData<DistanceMatrix> = MutableLiveData()
+    val distanceData: LiveData<DistanceMatrix>
+        get() = _distanceData
+
+//==================================================================================================
+//Firebase Storage Funktionen aus dem Repository MVVM================================================
+//==================================================================================================
+
+    //Funktion um Bilder in das Firebase Storage hochzuladen========================================
+    fun uploadImagetoStorage(uri: Uri) {
+        firebaseRepository.uploadImagetoStorage(uri)
+    }
+
+//==================================================================================================
+//Firebase Authentication User Funktionen aus dem Repository MVVM===================================
+//==================================================================================================
+
     fun login(email: String, password: String, context: Context): Task<String> {
-         return firebaseRepository.login(email, password, context)
+        return firebaseRepository.login(email, password, context)
     }
 
     fun register(
@@ -113,30 +123,67 @@ class RepositoryObjects(
         passConfirmation: String,
         context: Context
     ): Task<String> {
-        return firebaseRepository.register(email,password,passConfirmation,context)
+        return firebaseRepository.register(email, password, passConfirmation, context)
     }
 
     //Funktion um den aktuellen User anhand seiner Id zu identifizieren aus der Authentication
-    fun showCurrentUserId(){
-       firebaseRepository.showCurrentUserId()
-       // Log.d("Repo Objects", "User Id ${uId.value}")
-
+    fun showCurrentUserId() {
+        firebaseRepository.showCurrentUserId()
+        // Log.d("Repo Objects", "User Id ${uId.value}")
     }
 
     //Ausloggen des aktuellen Users
-    fun signOutUser(){
+    fun signOutUser() {
         //Ausloggen
-       firebaseRepository.signOutUser()
+        firebaseRepository.signOutUser()
     }
 
-    fun checkUserDataComplete(uId: String) :Task<String>{
-       return firebaseRepository.checkUserDataComplete(uId)
+    //Prüfen ob der User schon alle Angaben ausgefüllt hat
+    fun checkUserDataComplete(uId: String): Task<String> {
+        return firebaseRepository.checkUserDataComplete(uId)
     }
 
-//Firebase Database ================================================================================
+//==================================================================================================
+//Firebase Database Funktionen aus dem Repository MVVM==============================================
+//==================================================================================================
+
+    //Firebase Firestore zählen der Advertisements
+    fun countAdvertises() {
+        firebaseRepository.countAdvertises()
+    }
+
+    //Funktion des aktuellen Userstatus ermitteln, eingeloogt und setzten der LiveData
+    fun currentAppUserLogged() {
+        firebaseRepository.currentAppUserLogged()
+    }
+
+    //Funktion um den aktuellen User upzudaten und die Daten aus dem Firestore zu holen
+    fun updateCurrentUserFromFirestore() {
+        firebaseRepository.updateCurrentUserFromFirestore()
+    }
+
+    //Daten des neuen Users oder bei Änderung speichern
+    fun saveUserData(personalData: PersonalData) {
+        firebaseRepository.saveUserData(personalData)
+    }
+
+    //Anzeige des aktuellen Objektes (Room)
+    fun setCurrentObject(objects: Objects) {
+        _currentObject.value = objects
+    }
+
+    //Anzeigen des aktuellen Advertisments (Firebase)
+    fun setCurrentAdvertisement(advertisement: Advertisement) {
+        _currentAdvertisment.value = advertisement
+    }
+
+    //Für die Suche auf der Home wird hier der Text aus dem LiveData übergeben
+    fun updateInputText(text: String) {
+        _inputText.value = text
+    }
 
     //Anzahl bisheriger Anzeigen erhöhen
-    fun addCounterForAdvertises(personalData: PersonalData){
+    fun addCounterForAdvertises(personalData: PersonalData) {
         firebaseRepository.addCounterForAdvertises(personalData)
     }
 
@@ -147,28 +194,27 @@ class RepositoryObjects(
 
     //Erstellen einer neuen Chat Nachricht
     fun saveMessageToDatabase(message: Message) {
-            firebaseRepository.saveMessageToDatabase(message)
+        firebaseRepository.saveMessageToDatabase(message)
     }
 
-    //Erkennen aller AdvertismentIds
+    //Erkennen aller Advertisement Ids
     fun getAllAdId() {
         firebaseRepository.getAllAdId()
     }
 
     //Erkennen der aktuellen AdvertismentId mit LiveData
-    val currentAdvertisementId = firebaseRepository.currentAdvertisementId
-    fun getAdvertisementId(advertisement: Advertisement){
+    fun getAdvertisementId(advertisement: Advertisement) {
         firebaseRepository.getAdvertisementId(advertisement)
     }
 
     //Auslesen der Datenbank von Firebase
-    fun checkDatabaseForMyAds(){
+    fun checkDatabaseForMyAds() {
         firebaseRepository.checkDatabaseForMyAds()
     }
 
-    val allMyAdvertises = firebaseRepository.allMyAdvertises
-
+//==================================================================================================
 //Funktion für die Schnellsuche über Postleitzahl===================================================
+//==================================================================================================
 
     //Anzeige aller Objekte mit einer bestimmten Postleitzahl
     fun getZipCodeObject(zip: String) {
@@ -184,17 +230,16 @@ class RepositoryObjects(
             }
             //Log.d("success Repo", "$zip input Text - ${_zipObjects.value} zipObjects - $zipResults zipObjects")
         } catch (e: Exception) {
-           // Log.e("Repository", "getZipCodeObject failed")
+            // Log.e("Repository", "getZipCodeObject failed")
             _zipObjects.value = emptyList()
         }
     }
 
-//GEOdata===========================================================================================
+//==================================================================================================
+//API Call Zielkoordinaten und 2. Call Entfernung zum Ziel =========================================
+//==================================================================================================
 
-    //LiveData der GeoDaten Abfrage über einen API Call
-    private val _geoResult: MutableLiveData<Geo> = MutableLiveData()
-    val geoResult: LiveData<Geo>
-        get() = _geoResult
+//GEOdata===========================================================================================
 
     //API Call starten
     suspend fun getGeoResult(city: String) {
@@ -208,20 +253,19 @@ class RepositoryObjects(
     }
 //DistanceApiData===================================================================================
 
-    //LiveData der DistanceData Abfrage über einen Api Call
-    private val _distanceData: MutableLiveData<DistanceMatrix> = MutableLiveData()
-    val distanceData: LiveData<DistanceMatrix>
-        get() = _distanceData
-
     suspend fun getDistanceData(origins: String, destinations: String) {
         try {
             val data = apiDistance.retrofitService3.getDistance(origins, destinations)
             //Log.d("success Repository", "$destinations für Ziel, $origins für Start")
             _distanceData.value = data
         } catch (e: Exception) {
-           // Log.e("Repository", "$e - getDistance API Call failed")
+            // Log.e("Repository", "$e - getDistance API Call failed")
         }
     }
+
+//==================================================================================================
+//Room Datenbank====================================================================================
+//==================================================================================================
 
 //Datenbank anlegen=================================================================================
 
@@ -256,7 +300,7 @@ class RepositoryObjects(
 
             }
         } catch (e: Exception) {
-           // Log.e("Repository", "$e loadAllObjects failed")
+            // Log.e("Repository", "$e loadAllObjects failed")
         }
     }
 
@@ -265,26 +309,29 @@ class RepositoryObjects(
         try {
             database.objectDao.updateObject(objects)
         } catch (e: Exception) {
-           // Log.e("Repository", "updateObject failed")
+            // Log.e("Repository", "updateObject failed")
         }
     }
-
-    //Einfügen eines Objektes
-    suspend fun insertObject(objects: Objects) {
-        try {
-            database.objectDao.insertObject(objects)
-        } catch (e: Exception) {
-          //  Log.e("Repository", "insertObject failed")
-        }
-    }
-
 
     //Löschen eines einzigen Objektes mit Kennung der id
     suspend fun deleteById(id: Long) {
         try {
             database.objectDao.deleteById(id)
         } catch (e: Exception) {
-           // Log.e("Repository", "deleteById failed")
+            // Log.e("Repository", "deleteById failed")
+        }
+    }
+
+//==================================================================================================
+//Noch ungenutzte Funktionen========================================================================
+//==================================================================================================
+
+    //Einfügen eines Objektes
+    suspend fun insertObject(objects: Objects) {
+        try {
+            database.objectDao.insertObject(objects)
+        } catch (e: Exception) {
+            //  Log.e("Repository", "insertObject failed")
         }
     }
 
@@ -293,18 +340,16 @@ class RepositoryObjects(
         try {
             database.objectDao.deleteALL()
         } catch (e: Exception) {
-          //  Log.e("Repository", "deleteAll failed")
+            //  Log.e("Repository", "deleteAll failed")
         }
     }
-
-//==================================================================================================
 
     //Update eines Objektes mit Änderungen
     suspend fun updatePersonalData(personalData: PersonalData) {
         try {
             database.userDataDao.updateUser(personalData)
         } catch (e: Exception) {
-           // Log.e("Repository", "updateObject failed")
+            // Log.e("Repository", "updateObject failed")
         }
     }
 
@@ -312,7 +357,10 @@ class RepositoryObjects(
         try {
             database.userDataDao.insertUserData(personalData)
         } catch (e: Exception) {
-           // Log.e("Repository", "updateObject failed")
+            // Log.e("Repository", "updateObject failed")
         }
     }
 }
+//==================================================================================================
+//Ende====================================Ende===================================Ende===============
+//==================================================================================================
