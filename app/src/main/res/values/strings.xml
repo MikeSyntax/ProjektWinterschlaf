@@ -124,4 +124,6 @@
     <string name="gotit">Verstanden</string>
     <string name="clear">X</string>
     <string name="enter_price">Preis eingeben</string>
+    <string name="enter_title">Überschrift eingeben</string>
+    <string name="enter_zipCode">Postleitzahl eingeben</string>
 </resources>
