@@ -1,5 +1,8 @@
 package com.example.modulabschlussandroid.ui
 
+//==================================================================================================
+//****************************         Info Fragment          **************************************
+//==================================================================================================
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,5 +31,4 @@ class InfoFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
-
 }

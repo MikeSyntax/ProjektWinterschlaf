@@ -1,4 +1,7 @@
 package com.example.modulabschlussandroid.ui
+//==================================================================================================
+//****************************       Message Fragment         **************************************
+//==================================================================================================
 
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +27,10 @@ class MessageFragment : Fragment() {
 
     private var advertisementId: String = "0"
 
+//==================================================================================================
+//onCreate==========================================================================================
+//==================================================================================================
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +41,10 @@ class MessageFragment : Fragment() {
         }
     }
 
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,14 +54,21 @@ class MessageFragment : Fragment() {
         return binding.root
     }
 
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        message = Message()
-        val uId = viewModel.uId
+//==================================================================================================
+//Nachricht eingeben und absenden===================================================================
+//==================================================================================================
 
         binding.btnSend.setOnClickListener {
-            //wenn die Id des aktuellen Users die gleich wie die uId ist,
+            message = Message()
+            val uId = viewModel.uId
+            //wenn die Id des aktuellen Users die gleiche wie die uId ist,
             // dann ist es der Verfasser des Inserats und incoming muss auf false stehen
             if (viewModel.currentUser.value?.userId == uId.value) {
                 message.incomingMessage = false
@@ -58,6 +76,7 @@ class MessageFragment : Fragment() {
                 message.senderId = uId.value.toString()
                 message.message = binding.textInputSender.text.toString()
                 message.timestamp = Timestamp.now()
+                //Speicherung erfolgt in Firebase
                 viewModel.saveMessageToDatabase(message)
                 binding.textInputSender.setText("")
                 viewModel.checkMessages()
@@ -67,11 +86,16 @@ class MessageFragment : Fragment() {
                 message.senderId = uId.value.toString()
                 message.message = binding.textInputSender.text.toString()
                 message.timestamp = Timestamp.now()
+                //Speicherung erfolgt in Firebase
                 viewModel.saveMessageToDatabase(message)
                 binding.textInputSender.setText("")
                 viewModel.checkMessages()
             }
         }
+
+//==================================================================================================
+//Adapter setzen====================================================================================
+//==================================================================================================
 
         //Setzen des Adapter im Message Fragment
         val recView = binding.rvMessages
@@ -97,4 +121,7 @@ class MessageFragment : Fragment() {
         }
     }
 }
+//==================================================================================================
+//Ende===============================Ende=======================================Ende================
+//==================================================================================================
 

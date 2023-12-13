@@ -1,5 +1,8 @@
 package com.example.modulabschlussandroid.ui
 
+//==================================================================================================
+//****************************         Home Fragment          **************************************
+//==================================================================================================
 import android.app.AlertDialog
 import android.app.Dialog
 import android.graphics.Color
@@ -32,7 +35,9 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+//==================================================================================================
 //Dieser Abschnitt unterbindet ein zurücksringen auf den Login Screen===============================
+//==================================================================================================
 
         val callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -51,6 +56,10 @@ class HomeFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
+
 //Aufbau der Ansicht, Objekte und Design erstellen==================================================
 
     override fun onCreateView(
@@ -63,8 +72,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-//Beginn der Ansicht und befüllen===================================================================
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
 
+//Beginn der Ansicht und befüllen===================================================================
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -81,8 +93,9 @@ class HomeFragment : Fragment() {
 
         //feste Größe für die Performance
         recView.setHasFixedSize(true)
-
+//==================================================================================================
 //Prüfen ob der User schon einmal angemeldet war, und falls nicht weiterleitung ====================
+//==================================================================================================
 
         //zuerst die User Id aktualisieren
         viewModel.showCurrentUserId()
@@ -95,7 +108,10 @@ class HomeFragment : Fragment() {
                 showNewUserDialog()
             }
 
+
+//==================================================================================================
 //LiveData Objekte überwachen aus der Room Datenbank================================================
+//==================================================================================================
 
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
         objectList.observe(viewLifecycleOwner) { objects ->
@@ -109,6 +125,11 @@ class HomeFragment : Fragment() {
             recView.adapter = AdapterObjects(advertisements, viewModel)
         }
 */
+
+//==================================================================================================
+//Postleitzahlen Suche==============================================================================
+//==================================================================================================
+
 //Gefilterte Objekte überwachen=====================================================================
 
         //NEU Schnellsuche alle gefilterten Objekte landen in dieser List
@@ -136,6 +157,11 @@ class HomeFragment : Fragment() {
             override fun afterTextChanged(p0: Editable?) {}
         })
 
+//==================================================================================================
+//Navigation========================================================================================
+//==================================================================================================
+
+
 //Navigation über die BottomBar
         //Zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
@@ -154,7 +180,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-//Dialog Feld Eingabe für die Preis=================================================================
+//==================================================================================================
+//Dialog Feld Eingabe für die erste Anmeldung und Ausfüllen der Userdaten===========================
+//==================================================================================================
     private fun showNewUserDialog() {
         //Objekt newUserDialog erstellen
         val newUserDialog = Dialog(requireContext())
@@ -186,3 +214,6 @@ class HomeFragment : Fragment() {
         newUserDialog.show()
     }
 }
+//==================================================================================================
+//Ende==================================Ende====================================Ende================
+//==================================================================================================

@@ -1,5 +1,7 @@
 package com.example.modulabschlussandroid.ui
-
+//==================================================================================================
+//****************************        Insert Fragment         **************************************
+//==================================================================================================
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
@@ -24,7 +26,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
-import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentInsertBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import kotlinx.coroutines.delay
@@ -40,6 +41,10 @@ class InsertFragment : Fragment() {
 
     private lateinit var advertisement: Advertisement
 
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -48,6 +53,10 @@ class InsertFragment : Fragment() {
         binding = FragmentInsertBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +74,10 @@ class InsertFragment : Fragment() {
         val currentUser = viewModel.currentUser
         //User Updaten bzw. laden um die Inserieren Funktion nicht als NullpointerException enden zu lassen
         viewModel.updateCurrentUserFromFirestore()
+
+//==================================================================================================
+//Aufruf der Dialog Fenster für die User Eingabe====================================================
+//==================================================================================================
 
 //Übergabe der Uid als Parameter um die Kategeorien unter Uid des Users zu speichern================
         binding.cvCategories.setOnClickListener {
@@ -95,7 +108,9 @@ class InsertFragment : Fragment() {
             showPriceDialog()
         }
 
+//==================================================================================================
 //Inserieren eines neuen Advertisements bzw. einer neuen Anzeige ===================================
+//==================================================================================================
         binding.btnFloatingAction.setOnClickListener {
             //Auslesen der Eingabefelder ( die Switches der Kategoriefelder, werden in der nächsten Funktion gesetzt
             advertisement.userId = uId.value
@@ -125,8 +140,11 @@ class InsertFragment : Fragment() {
             val navController = binding.btnFloatingAction.findNavController()
             navController.navigate(InsertFragmentDirections.actionInsertFragmentToProfileFragment())
         }
+//==================================================================================================
+//Navigation========================================================================================
+//==================================================================================================
 
-//Bottom Nav BAR ===================================================================================
+        //Bottom Nav BAR
         //Zu den Favoriten navigieren
         binding.cvFavorite.setOnClickListener {
             val navController = binding.cvFavorite.findNavController()
@@ -149,7 +167,11 @@ class InsertFragment : Fragment() {
         }
     }
 
-//Beginn der Dialogfelder zum Inserieren einer neuen Anzeig=========================================
+//==================================================================================================
+//Dialog Fenster====================================================================================
+//==================================================================================================
+
+    //Beginn der Dialogfelder zum Inserieren einer neuen Anzeig=========================================
     //Funktion zur Anzeige des Dialogs für die Kategorienauswahl mit den entsprechenden gewünschten Ausführungen
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private fun showCategorieDialog() {
@@ -256,7 +278,7 @@ class InsertFragment : Fragment() {
         dialog.show()
     }
 
-    //Dialog Feld Eingabe für die Postleitzahl==========================================================
+//Dialog Feld Eingabe für die Postleitzahl==========================================================
     private fun showZipCodeDialog() {
         //Objekt zipCodeDialog erstellen
         val zipCodeDialog = Dialog(requireContext())
@@ -306,7 +328,7 @@ class InsertFragment : Fragment() {
         zipCodeDialog.show()
     }
 
-    //Dialog Feld Eingabe für die Stadt=================================================================
+//Dialog Feld Eingabe für die Stadt=================================================================
     private fun showCityDialog() {
         //Objekt cityDialog erstellen
         val cityDialog = Dialog(requireContext())
@@ -356,7 +378,7 @@ class InsertFragment : Fragment() {
         cityDialog.show()
     }
 
-    //Dialog Feld Eingabe für die Titel=================================================================
+//Dialog Feld Eingabe für die Titel=================================================================
     private fun showTitleDialog() {
         //Objekt TitelDialog erstellen
         val titelDialog = Dialog(requireContext())
@@ -405,7 +427,7 @@ class InsertFragment : Fragment() {
         titelDialog.show()
     }
 
-    //Dialog Feld Eingabe für die Beschreibung==========================================================
+//Dialog Feld Eingabe für die Beschreibung==========================================================
     private fun showDescriptionDialog() {
         //Objekt descriptionDialog erstellen
         val descriptionDialog = Dialog(requireContext())
@@ -454,7 +476,7 @@ class InsertFragment : Fragment() {
         descriptionDialog.show()
     }
 
-    //Dialog Feld Eingabe für die Preis=================================================================
+//Dialog Feld Eingabe für die Preis=================================================================
     private fun showPriceDialog() {
         //Objekt PriceDialog erstellen
         val priceDialog = Dialog(requireContext())
@@ -503,7 +525,10 @@ class InsertFragment : Fragment() {
         priceDialog.show()
     }
 
-    //Der Floating Action Button soll sichtbar werden, sobald alle Felder ausgefüllt sind
+//==================================================================================================
+//Der Floating Action Button soll sichtbar werden, sobald alle Felder ausgefüllt sind===============
+//==================================================================================================
+
     private fun showFloationActionButton() {
         if (
             thisObject.doneCategoryChoice &&
@@ -516,7 +541,9 @@ class InsertFragment : Fragment() {
             binding.btnFloatingAction.isVisible = true
         }
     }
-//==================================================================================================
 }
+//==================================================================================================
+//Ende===========================Ende====================================Ende=======================
+//==================================================================================================
 
 

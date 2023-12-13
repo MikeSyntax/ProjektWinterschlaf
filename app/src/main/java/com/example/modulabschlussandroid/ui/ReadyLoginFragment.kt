@@ -1,4 +1,7 @@
 package com.example.modulabschlussandroid.ui
+//==================================================================================================
+//****************************      ReadyLogin Fragment       **************************************
+//==================================================================================================
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +13,15 @@ import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.databinding.FragmentReadyLoginBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 
-//
 class ReadyLoginFragment() : Fragment() {
 
     private lateinit var binding: FragmentReadyLoginBinding
 
     private val viewModel: ViewModelObjects by activityViewModels()
+
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,10 +32,15 @@ class ReadyLoginFragment() : Fragment() {
         return binding.root
     }
 
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//==================================================================================================
 //NEU Firebase Authentification ====================================================================
+//==================================================================================================
 
         //Einloggen
         binding.cvForward.setOnClickListener {
@@ -53,3 +64,6 @@ class ReadyLoginFragment() : Fragment() {
         }
     }
 }
+//==================================================================================================
+//Ende==================================Ende=======================================Ende=============
+//==================================================================================================

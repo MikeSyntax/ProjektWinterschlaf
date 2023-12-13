@@ -1,4 +1,7 @@
 package com.example.modulabschlussandroid.ui
+//==================================================================================================
+//****************************        Profil Fragment         **************************************
+//==================================================================================================
 
 import android.os.Bundle
 import android.util.Log
@@ -6,10 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,18 +16,20 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.adapters.AdapterProfile
-import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentProfileBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
     private val viewModel: ViewModelObjects by activityViewModels()
+
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +39,10 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +54,9 @@ class ProfileFragment : Fragment() {
         //Zeige die aktuellen Daten des eingeloggten Users mit LiveData
         val currentUser = viewModel.currentUser
 
+//==================================================================================================
 //Überwache den aktuellen User mit allen Daten aus der Datenbank Firestore==========================
+//==================================================================================================
         currentUser.observe(viewLifecycleOwner) { user ->
 
             binding.tvLoggedUsername.text = user.userName
@@ -68,8 +75,9 @@ class ProfileFragment : Fragment() {
             //falls keins vorhanden ist nimm den Platzhalter
 
         }
-
+//==================================================================================================
 //Setzen des Adapter im Profil Fragment mit Anzeige meiner Inserte und Anzahl online================
+//==================================================================================================
 
         val recView = binding.rvMyAdvertises
         recView.setHasFixedSize(true)
@@ -100,7 +108,10 @@ class ProfileFragment : Fragment() {
         countAdvertises.observe(viewLifecycleOwner) {
             binding.tvUserCountInserted.text = it
         }
-//Verschiedene Klicklistener========================================================================
+
+//==================================================================================================
+//Navigation========================================================================================
+//==================================================================================================
 
         //zum HomeScreen navigieren
         binding.cvHome.setOnClickListener {
@@ -126,6 +137,10 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment())
         }
 
+//==================================================================================================
+//Logout des Users==================================================================================
+//==================================================================================================
+
         //Ausloggen mit Wartevorgang und Toast Bestätigung bevor die Weiterleitung beginnt
         binding.cvLogout.setOnClickListener {
             Toast.makeText(requireContext(), "Logout erfolgreich", Toast.LENGTH_SHORT).show()
@@ -140,3 +155,6 @@ class ProfileFragment : Fragment() {
         }
     }
 }
+//==================================================================================================
+//Ende=================================Ende===================================Ende==================
+//==================================================================================================

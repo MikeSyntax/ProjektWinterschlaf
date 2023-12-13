@@ -1,23 +1,27 @@
 package com.example.modulabschlussandroid.ui
-
+//==================================================================================================
+//****************************        Login Fragment          **************************************
+//==================================================================================================
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.modulabschlussandroid.R
 import com.example.modulabschlussandroid.databinding.FragmentLogInBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
-import com.google.firebase.auth.FirebaseAuth
 
 
 class LogInFragment : Fragment() {
 
     private lateinit var binding: FragmentLogInBinding
-    private lateinit var firebaseAuth: FirebaseAuth
     private val viewModel: ViewModelObjects by activityViewModels()
+
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +31,10 @@ class LogInFragment : Fragment() {
         binding = FragmentLogInBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,6 +51,10 @@ class LogInFragment : Fragment() {
             findNavController().navigate(R.id.registerFragment)
         }
 
+//==================================================================================================
+//User noch eingeloggt, die Prüfung erfolgt über einen Task=========================================
+//==================================================================================================
+
         //Ist der aktuelle User noch eingeloggt?
         viewModel.currentAppUserLogged()
         //Prüfung ob ein User eingeloggt ist, falls ja dann erfolgt die Weiterleitung
@@ -54,6 +66,10 @@ class LogInFragment : Fragment() {
         }
     }
 }
+//==================================================================================================
+//Ende==================================Ende===============================Ende=====================
+//==================================================================================================
+
 
 
 

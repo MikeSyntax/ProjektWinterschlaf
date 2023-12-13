@@ -1,4 +1,7 @@
 package com.example.modulabschlussandroid.ui
+//==================================================================================================
+//****************************       Register Fragment        **************************************
+//==================================================================================================
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +10,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.modulabschlussandroid.data.datamodels.PersonalData
 import com.example.modulabschlussandroid.databinding.FragmentRegisterBinding
 import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
-
 
 class RegisterFragment : Fragment() {
 
@@ -18,6 +19,10 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
 
     private val viewModel: ViewModelObjects by activityViewModels()
+
+//==================================================================================================
+//onCreatedView=====================================================================================
+//==================================================================================================
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +32,10 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+//==================================================================================================
+//onViewCreated=====================================================================================
+//==================================================================================================
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,9 +59,13 @@ class RegisterFragment : Fragment() {
         }
     }
 }
+//==================================================================================================
+//Ende=====================================Ende======================================Ende===========
+//==================================================================================================
 
 
-/*
+
+/*  ========== ALTE ERSTE VERSION FÜR DIE AUTHORISATION UND ANMELDUNG NOCH VOR FIREBASE ===========
 
         //bei Klicken auf den Button bzw. auf die Cardview prüfe ...
         binding.cvForward.setOnClickListener {
