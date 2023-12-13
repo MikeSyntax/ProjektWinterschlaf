@@ -31,9 +31,10 @@ class AdapterMessages(
        return dataset.size
     }
 
-    //Das entsprechende Item verwenden je nach dem ob Sender oder Receiver
+    //Bau der ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ViewBinding?
+    //Das entsprechende Item verwenden je nach dem ob Sender oder Receiver
         return if (viewType == 1) {
             binding = ListItemMessageSenderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             MessageSenderViewHolder(binding)
@@ -43,6 +44,7 @@ class AdapterMessages(
         }
     }
 
+    //Setzen der ViewHolder bzw. befüllen
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val thisMessage = dataset[position]
         if (holder is MessageReceiverViewHolder){
@@ -54,6 +56,7 @@ class AdapterMessages(
         }
     }
 
+    //Update nachdem sich die Liste verändert hat
     fun updateMessagesAdapter(list: List<Message>){
         dataset = list
         notifyDataSetChanged()

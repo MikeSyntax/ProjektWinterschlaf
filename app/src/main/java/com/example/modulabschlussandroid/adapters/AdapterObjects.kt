@@ -1,12 +1,9 @@
 package com.example.modulabschlussandroid.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.modulabschlussandroid.R
-import com.example.modulabschlussandroid.data.datamodels.Advertisement
 import com.example.modulabschlussandroid.data.datamodels.Objects
 import com.example.modulabschlussandroid.databinding.ListItemSleepBinding
 import com.example.modulabschlussandroid.ui.HomeFragmentDirections
@@ -68,7 +65,9 @@ class AdapterObjects(
 
             //Navigation auf das aktuelle Objekt welches angeklickt wurde
             viewModel.setCurrentObject(thisObject)
+            //ob die Navigation von Home oder Profil erfolgt, da Home Room und Profil Firebase
             viewModel.homeFragment = true
+            //Navigieren
             val navController = binding.cvItemObject.findNavController()
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
         }
