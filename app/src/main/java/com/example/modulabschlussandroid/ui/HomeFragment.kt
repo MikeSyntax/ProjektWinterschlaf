@@ -71,10 +71,10 @@ class HomeFragment : Fragment() {
         //LiveData mit Objekten aus der Room Datenbank
         val objectList = viewModel.objectList
 
-        viewModel.showAllUserAdvertisements()
+        //viewModel.showAllUserAdvertisements()
 
         //LiveData mit Objekten aus der Firebase Datenbank
-        val allUserAdvertisements = viewModel.allUserAdvertisements
+        //val allUserAdvertisements = viewModel.allUserAdvertisements
 
         //RecyclerView
         val recView = binding.rvRentableObjects
@@ -96,34 +96,34 @@ class HomeFragment : Fragment() {
             }
 
 //LiveData Objekte überwachen aus der Room Datenbank================================================
-/*
+
         //Überwachen aller aktuellen Objekte und setzen des Adapter mit Observer
         objectList.observe(viewLifecycleOwner) { objects ->
             //Parameter objectList(it) und ViewModel
             recView.adapter = AdapterObjects(objects, viewModel)
         }
-*/
-//LiveData Advertisements überwachen aus der Firbase Firestore Datenbank============================
 
+//LiveData Advertisements überwachen aus der Firbase Firestore Datenbank============================
+/*
         allUserAdvertisements.observe(viewLifecycleOwner){advertisements ->
             recView.adapter = AdapterObjects(advertisements, viewModel)
         }
-
+*/
 //Gefilterte Objekte überwachen=====================================================================
-/*
+
         //NEU Schnellsuche alle gefilterten Objekte landen in dieser List
         viewModel.zipObjects.observe(viewLifecycleOwner) { objectSearch ->
             //Parameter objectList(it) nullable und ViewModel
             recView.adapter = AdapterObjects(objectSearch!!, viewModel)
-            Log.d("success Home", "$objectSearch zipObjects für Suche")
+         //   Log.d("success Home", "$objectSearch zipObjects für Suche")
         }
-*/
+
 //Suchtext überwachen===============================================================================
 
         //NEU Schnellsuche der Inputtext wird weitergegeben bis zur Objekt Dao Funktion
         viewModel.inputText.observe(viewLifecycleOwner) { textInput ->
             viewModel.getZipCodeObject(textInput)
-            Log.d("success Home", "$textInput input Text")
+         //   Log.d("success Home", "$textInput input Text")
         }
 
 //Für die Suche einen TextchangedListener===========================================================

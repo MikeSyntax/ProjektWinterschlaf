@@ -328,19 +328,15 @@ class RepositoryFirebase(
                 .document(currentAdvertisementId.value.toString())
                 .collection("chat")
                 .get()
-                .addOnSuccessListener {
-                    it.documents.forEach { message ->
-                        messages.add(Message(message))
-                        val filteredMessages = messages.filter { thisMessages ->
-                            //Der Suchfilter, wenn diese beiden Ids gleich sind
-                            thisMessages.advertisementId == currentAdvertisementId.value
-                        }
-                        val sortedMessageList = filteredMessages.sortedBy { Timestamp.now() }
-                        _myMessages.postValue(sortedMessageList)
+                .addOnSuccessListener {snapshot ->
+                    messages.clear()
+                    snapshot.documents.forEach { thisMessage ->
+                        messages.add(Message(thisMessage))
                     }
+                        _myMessages.postValue(messages.sortedByDescending { it.timestamp })
                 }
         } catch (e: Exception) {
-            // Handle exceptions if necessary
+          //  Log.e("Repo", "Error checkMessages $e")
         }
     }
 
@@ -351,7 +347,7 @@ class RepositoryFirebase(
             .get()
             .addOnSuccessListener {
                 _currentAdvertismentId.value = advertisement.objectId
-                Log.d("Repo", " currentAdId ${currentAdvertisementId.value}")
+                //Log.d("Repo", " currentAdId ${currentAdvertisementId.value}")
             }
             .addOnFailureListener {
                 // Log.e("Repo", it.toString())
@@ -405,7 +401,7 @@ class RepositoryFirebase(
                 }
                 //die gefilterte Liste mit dem Live Data setzen
                 _allUserAdvertisements.postValue(allAdvertise)
-                 //Log.d("Fire Repo", "Alle id´s ${allMyAdvertises.value}")
+                //Log.d("Fire Repo", "Alle id´s ${allMyAdvertises.value}")
             }
             .addOnFailureListener {
                 //Log.d("Firebase Repo Data", "Error $it")

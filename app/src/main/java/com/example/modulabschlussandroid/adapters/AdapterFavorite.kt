@@ -43,12 +43,13 @@ class AdapterFavorite(
         binding.tvFavoriteObject.text = favoriteObjects.objectdescription
         binding.tvFavoritePrice.text = favoriteObjects.price.toString()
         binding.tvDistance.text = "PLZ ${favoriteObjects.zipCode}"
-
+        //Auslesen aus der Datenbank, ob das Objekt bereits geliked wurde oder nicht
         if (favoriteObjects.liked) {
             binding.ivFavoriteLiked.setImageResource(R.drawable.star_like)
         } else {
             binding.ivFavoriteLiked.setImageResource(R.drawable.star_unlike)
         }
+        //Je nachdem ob geliked oder nicht, ändert sich der Zustand durch den Klick auf das Herz
         binding.ivFavoriteLiked.setOnClickListener {
             if (favoriteObjects != null) {
                 favoriteObjects.liked = !favoriteObjects.liked

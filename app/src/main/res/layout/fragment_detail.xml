@@ -174,6 +174,7 @@
                             style="@style/textSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:maxLines="1"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
                             android:text="@string/detail_city" />
@@ -184,6 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
+                            android:maxLines="1"
                             android:layout_marginEnd="10dp"
                             android:text="@string/detail_title" />
 
@@ -194,6 +196,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
+                            android:maxLines="1"
                             android:text="@string/detail_price"
                             android:textColor="@color/white"
                             android:textStyle="bold" />

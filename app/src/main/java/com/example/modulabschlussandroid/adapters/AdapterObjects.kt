@@ -16,9 +16,11 @@ import com.example.modulabschlussandroid.viewmodels.ViewModelObjects
 class AdapterObjects(
 
     //für die Room Datenbank
-    //private var dataset: List<Objects>,
+    private var dataset: List<Objects>,
+
     //für die Firebase Datenbank
-    private var dataset: List<Advertisement>,
+    //private var dataset: List<Advertisement>,
+
     private var viewModel: ViewModelObjects
 
 ) : RecyclerView.Adapter<AdapterObjects.ItemViewHolder>() {
@@ -48,8 +50,8 @@ class AdapterObjects(
         val binding = holder.binding
 
         //Befüllen der ViewHolder
-       // binding.ivObject.setImageResource(thisObject.image1Resource)
-       // binding.tvObject.text = thisObject.objectdescription
+        binding.ivObject.setImageResource(thisObject.image1Resource)
+        binding.tvObject.text = thisObject.objectdescription
         binding.tvCity.text = thisObject.city
         binding.tvPrice.text = "${thisObject.price.toString()} €"
         binding.tvDescription.text = thisObject.description
@@ -65,7 +67,7 @@ class AdapterObjects(
             }
 
             //Navigation auf das aktuelle Objekt welches angeklickt wurde
-           // viewModel.setCurrentObject(thisObject)
+            viewModel.setCurrentObject(thisObject)
             viewModel.homeFragment = true
             val navController = binding.cvItemObject.findNavController()
             navController.navigate(HomeFragmentDirections.actionHomeFragmentToDetailFragment())
