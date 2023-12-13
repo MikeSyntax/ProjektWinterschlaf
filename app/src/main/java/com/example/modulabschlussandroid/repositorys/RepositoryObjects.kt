@@ -68,7 +68,6 @@ class RepositoryObjects(
     //LiveData für alle Inserte der gesamten User
     val allUserAdvertisements = firebaseRepository.allUserAdvertisements
 
-
 //==================================================================================================
 //LiveData==========================================================================================
 //==================================================================================================
@@ -112,7 +111,7 @@ class RepositoryObjects(
         get() = _distanceData
 
 //==================================================================================================
-//Firebase Storage Funktionen aus dem Repository MVVM================================================
+//Firebase Storage Funktionen aus dem Repository MVVM===============================================
 //==================================================================================================
 
     //Funktion um Bilder in das Firebase Storage hochzuladen========================================
