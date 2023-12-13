@@ -216,7 +216,7 @@ class ViewModelObjects(application: Application) : AndroidViewModel(application)
         repository.getAdvertisementId(advertisement)
     }
 
-    //Bei Erstanmelung wird kontrolliet ob die Userdaten komplett sind
+    //Bei Erstanmelung wird kontrolliet ob die Userdaten komplett sind,
     fun checkUserDateComplete(uId: String): Task<String> {
         return repository.checkUserDataComplete(uId)
     }
