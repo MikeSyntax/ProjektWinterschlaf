@@ -8,13 +8,12 @@ import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import com.example.projektwinterschlaf.API_KEY2
 
 const val BASE_URL2 = "https://api.openweathermap.org/geo/1.0/"
 
 //TODO Der Städtename muss sich ändern aber wie
 const val ZIP_CODE = "76477"
-
-const val API_KEY2 = "Api248358c1a32881e0e7ddbffec8c8658c"
 
 //Falls eine Api Token gebraucht wird, muss ein Client gesetzt werden
 private val client1 = OkHttpClient

@@ -9,12 +9,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import com.example.projektwinterschlaf.API_KEY3
 
 //erster Teil der Api AnforderungsAdresse
 const val BASE_URL3 = "https://api.distancematrix.ai/maps/api/distancematrix/"
 
-//das ist der geforderte Api Token
-const val API_KEY3 = "ApiqgQ99hz5t2QHFUsoRlsatZMcI9ZZxlgvMEHaGdw7L7byRBC99xVC7GuAvUVlev11"
+
 
 //Falls eine Api Token gebraucht wird, muss ein Client gesetzt werden
 private val client = OkHttpClient
