@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.modulabschlussandroid"
+    namespace = "com.example.projektwinterschlaf"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.modulabschlussandroid"
+        applicationId = "com.example.projektwinterschlaf"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
@@ -64,6 +64,8 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.0")
 
     //Firestore
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+
     implementation("com.google.firebase:firebase-firestore:24.9.1")
 
     //Storage zur Speicherung von User und Collections

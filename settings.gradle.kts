@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ModulabschlussAndroid"
+rootProject.name = "ProjektWinterschlaf"
 include(":app")

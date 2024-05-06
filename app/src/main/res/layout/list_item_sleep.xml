@@ -40,7 +40,7 @@
                     android:layout_height="87dp"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bild_halle" />
+                    android:src="@drawable/bild_garten" />
 
                 <LinearLayout
                     android:layout_width="89dp"

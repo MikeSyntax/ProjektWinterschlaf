@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.example.modulabschlussandroid.ui.IntroFragment"
+        android:name="com.example.projektwinterschlaf.ui.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.modulabschlussandroid.ui.LogInFragment"
+        android:name="com.example.projektwinterschlaf.ui.LogInFragment"
         android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/infoFragment"
-        android:name="com.example.modulabschlussandroid.ui.InfoFragment"
+        android:name="com.example.projektwinterschlaf.ui.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/readyLoginFragment"
-        android:name="com.example.modulabschlussandroid.ui.ReadyLoginFragment"
+        android:name="com.example.projektwinterschlaf.ui.ReadyLoginFragment"
         android:label="ReadyLoginFragment"
         tools:layout="@layout/fragment_ready_login">
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.modulabschlussandroid.ui.RegisterFragment"
+        android:name="com.example.projektwinterschlaf.ui.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -67,7 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.modulabschlussandroid.ui.HomeFragment"
+        android:name="com.example.projektwinterschlaf.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.modulabschlussandroid.ui.DetailFragment"
+        android:name="com.example.projektwinterschlaf.ui.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action
@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.modulabschlussandroid.ui.FavoriteFragment"
+        android:name="com.example.projektwinterschlaf.ui.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
@@ -127,7 +127,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.modulabschlussandroid.ui.ProfileFragment"
+        android:name="com.example.projektwinterschlaf.ui.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
@@ -154,7 +154,7 @@
     </fragment>
     <fragment
         android:id="@+id/insertFragment"
-        android:name="com.example.modulabschlussandroid.ui.InsertFragment"
+        android:name="com.example.projektwinterschlaf.ui.InsertFragment"
         android:label="fragment_insert"
         tools:layout="@layout/fragment_insert" >
         <action
@@ -169,7 +169,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.modulabschlussandroid.ui.EditProfileFragment"
+        android:name="com.example.projektwinterschlaf.ui.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
@@ -178,12 +178,12 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.example.modulabschlussandroid.ui.ChatFragment"
+        android:name="com.example.projektwinterschlaf.ui.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/messageFragment"
-        android:name="com.example.modulabschlussandroid.ui.MessageFragment"
+        android:name="com.example.projektwinterschlaf.ui.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" >
         <argument

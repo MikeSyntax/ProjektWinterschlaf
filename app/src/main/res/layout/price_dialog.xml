@@ -62,7 +62,7 @@
                             android:maxLength="5"
                             android:hint="@string/enter_price"
                             android:text=""
-                            android:inputType="numberDecimal"
+                            android:inputType="number"
                             android:textColor="@color/primary_dark_green" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>

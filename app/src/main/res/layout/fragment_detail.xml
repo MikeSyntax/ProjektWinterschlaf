@@ -54,8 +54,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingEnd="5dp"
                     android:paddingStart="0dp"
+                    android:paddingEnd="5dp"
                     android:text="@string/back" />
 
             </LinearLayout>
@@ -142,7 +142,7 @@
                         android:layout_marginEnd="3dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/bild_halle" />
+                        android:src="@drawable/bild_carport" />
 
 
                     <ImageView
@@ -160,7 +160,7 @@
                         android:layout_height="84dp"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/bild_halle" />
+                        android:src="@drawable/bild_garten" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -174,9 +174,9 @@
                             style="@style/textSmall"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:layout_gravity="end"
                             android:layout_marginEnd="10dp"
+                            android:maxLines="1"
                             android:text="@string/detail_city" />
 
                         <TextView
@@ -185,8 +185,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end"
-                            android:maxLines="1"
                             android:layout_marginEnd="10dp"
+                            android:maxLines="1"
                             android:text="@string/detail_title" />
 
                         <TextView
@@ -274,8 +274,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="11"
                         android:orientation="vertical">
@@ -289,22 +293,25 @@
                             android:layout_marginEnd="10dp"
                             android:src="@drawable/lagerhalle" />
 
-                        <TextView
-                            android:id="@+id/tv_detail_description"
-                            style="@style/textSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="start"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:text="@string/detail_description" />
+
+                            <TextView
+                                android:id="@+id/tv_detail_description"
+                                style="@style/textSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:text="@string/detail_description" />
+
+
 
                         <com.google.android.material.divider.MaterialDivider
                             android:id="@+id/materialDividerMiddle"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             app:dividerColor="@color/primary_dark_green"
-                            app:layout_constraintBottom_toBottomOf="@+id/toolbar"/>
+                            app:layout_constraintBottom_toBottomOf="@+id/toolbar" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -339,11 +346,11 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="1"
-                                android:textStyle="italic"
                                 android:backgroundTint="@color/primary_light_green"
                                 android:src="@drawable/projekt_winterschlaf_logo"
                                 android:text="@string/detail_author"
-                                android:textColor="@color/primary_dark_green" />
+                                android:textColor="@color/primary_dark_green"
+                                android:textStyle="italic" />
 
                             <ImageView
                                 android:id="@+id/iv_user"
@@ -365,7 +372,10 @@
                             android:textColor="@color/primary_light_green"
                             app:cornerRadius="10dp" />
 
+
                     </LinearLayout>
+
+                        </ScrollView>
 
                 </LinearLayout>
 

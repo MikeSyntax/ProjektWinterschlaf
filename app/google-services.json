@@ -1,16 +1,35 @@
 {
   "project_info": {
     "project_number": "1031071633481",
-    "firebase_url": "https://modulabschlussandroid-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "modulabschlussandroid",
-    "storage_bucket": "modulabschlussandroid.appspot.com"
+    "firebase_url": "https://projektwinterschlaf-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "projektwinterschlaf",
+    "storage_bucket": "projektwinterschlaf.appspot.com"
   },
   "client": [
     {
       "client_info": {
         "mobilesdk_app_id": "1:1031071633481:android:9d872e863c84b3d5462f98",
         "android_client_info": {
-          "package_name": "com.example.modulabschlussandroid"
+          "package_name": "com.example.projektwinterschlaf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX7Qamhh5hjKFWQHyjVpdFzzEjveRRl7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031071633481:android:c124d6732945a594462f98",
+        "android_client_info": {
+          "package_name": "com.example.projektwinterschlaf"
         }
       },
       "oauth_client": [],
